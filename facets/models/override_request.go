@@ -20,6 +20,9 @@ type OverrideRequest struct {
 	// change log
 	ChangeLog string `json:"changeLog,omitempty"`
 
+	// overrides
+	Overrides interface{} `json:"overrides,omitempty"`
+
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`
 

@@ -49830,6 +49830,9 @@
         },
         "resourceType": {
           "type": "string"
+        },
+        "overrides": {
+          "type": "object"
         }
       },
       "title": "OverrideRequest"
