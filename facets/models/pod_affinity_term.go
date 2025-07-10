@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodAffinityTerm PodAffinityTerm
+// PodAffinityTerm pod affinity term
 //
 // swagger:model PodAffinityTerm
 type PodAffinityTerm struct {

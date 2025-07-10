@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CinderVolumeSource CinderVolumeSource
+// CinderVolumeSource cinder volume source
 //
 // swagger:model CinderVolumeSource
 type CinderVolumeSource struct {

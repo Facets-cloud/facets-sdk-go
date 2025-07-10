@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretKeySelector SecretKeySelector
+// SecretKeySelector secret key selector
 //
 // swagger:model SecretKeySelector
 type SecretKeySelector struct {

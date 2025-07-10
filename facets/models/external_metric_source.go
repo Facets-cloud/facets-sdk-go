@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ExternalMetricSource ExternalMetricSource
+// ExternalMetricSource external metric source
 //
 // swagger:model ExternalMetricSource
 type ExternalMetricSource struct {

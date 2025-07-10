@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AccountAssociationInfo AccountAssociationInfo
+// AccountAssociationInfo account association info
 //
 // swagger:model AccountAssociationInfo
 type AccountAssociationInfo struct {

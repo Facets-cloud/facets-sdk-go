@@ -12,9 +12,10 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// IntentRequestDTO IntentRequestDTO
+// IntentRequestDTO intent request d t o
 //
 // swagger:model IntentRequestDTO
 type IntentRequestDTO struct {
@@ -23,7 +24,8 @@ type IntentRequestDTO struct {
 	Description string `json:"description,omitempty"`
 
 	// display name
-	DisplayName string `json:"displayName,omitempty"`
+	// Required: true
+	DisplayName *string `json:"displayName"`
 
 	// icon Url
 	IconURL string `json:"iconUrl,omitempty"`
@@ -35,23 +37,46 @@ type IntentRequestDTO struct {
 	IntentOutputs []*IntentOutput `json:"intentOutputs"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// type
-	Type string `json:"type,omitempty"`
+	// Required: true
+	Type *string `json:"type"`
 }
 
 // Validate validates this intent request d t o
 func (m *IntentRequestDTO) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDisplayName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateIntentOutputs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IntentRequestDTO) validateDisplayName(formats strfmt.Registry) error {
+
+	if err := validate.Required("displayName", "body", m.DisplayName); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -76,6 +101,24 @@ func (m *IntentRequestDTO) validateIntentOutputs(formats strfmt.Registry) error 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *IntentRequestDTO) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IntentRequestDTO) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
 	}
 
 	return nil

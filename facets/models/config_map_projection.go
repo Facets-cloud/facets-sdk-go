@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ConfigMapProjection ConfigMapProjection
+// ConfigMapProjection config map projection
 //
 // swagger:model ConfigMapProjection
 type ConfigMapProjection struct {

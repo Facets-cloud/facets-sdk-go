@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerPort ContainerPort
+// ContainerPort container port
 //
 // swagger:model ContainerPort
 type ContainerPort struct {

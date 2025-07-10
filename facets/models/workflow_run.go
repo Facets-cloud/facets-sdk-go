@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// WorkflowRun WorkflowRun
+// WorkflowRun workflow run
 //
 // swagger:model WorkflowRun
 type WorkflowRun struct {

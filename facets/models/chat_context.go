@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ChatContext ChatContext
+// ChatContext chat context
 //
 // swagger:model ChatContext
 type ChatContext struct {

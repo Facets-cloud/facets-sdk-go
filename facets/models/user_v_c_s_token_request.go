@@ -8,30 +8,79 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// UserVCSTokenRequest UserVCSTokenRequest
+// UserVCSTokenRequest user v c s token request
 //
 // swagger:model UserVCSTokenRequest
 type UserVCSTokenRequest struct {
 
 	// host name
-	HostName string `json:"hostName,omitempty"`
+	// Required: true
+	HostName *string `json:"hostName"`
 
 	// id
 	ID string `json:"id,omitempty"`
 
 	// personal access token
-	PersonalAccessToken string `json:"personalAccessToken,omitempty"`
+	// Required: true
+	PersonalAccessToken *string `json:"personalAccessToken"`
 
 	// user name
-	UserName string `json:"userName,omitempty"`
+	// Required: true
+	UserName *string `json:"userName"`
 }
 
 // Validate validates this user v c s token request
 func (m *UserVCSTokenRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateHostName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePersonalAccessToken(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *UserVCSTokenRequest) validateHostName(formats strfmt.Registry) error {
+
+	if err := validate.Required("hostName", "body", m.HostName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserVCSTokenRequest) validatePersonalAccessToken(formats strfmt.Registry) error {
+
+	if err := validate.Required("personalAccessToken", "body", m.PersonalAccessToken); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserVCSTokenRequest) validateUserName(formats strfmt.Registry) error {
+
+	if err := validate.Required("userName", "body", m.UserName); err != nil {
+		return err
+	}
+
 	return nil
 }
 

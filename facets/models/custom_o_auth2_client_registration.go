@@ -15,35 +15,42 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CustomOAuth2ClientRegistration CustomOAuth2ClientRegistration
+// CustomOAuth2ClientRegistration custom o auth2 client registration
 //
 // swagger:model CustomOAuth2ClientRegistration
 type CustomOAuth2ClientRegistration struct {
 
 	// client Id
-	ClientID string `json:"clientId,omitempty"`
+	// Required: true
+	ClientID *string `json:"clientId"`
 
 	// client secret
-	ClientSecret string `json:"clientSecret,omitempty"`
+	// Required: true
+	ClientSecret *string `json:"clientSecret"`
 
 	// is system configured
-	IsSystemConfigured bool `json:"isSystemConfigured,omitempty"`
+	// Read Only: true
+	IsSystemConfigured *bool `json:"isSystemConfigured,omitempty"`
 
 	// issuer Url
 	IssuerURL string `json:"issuerUrl,omitempty"`
 
 	// login button text
-	LoginButtonText string `json:"loginButtonText,omitempty"`
+	// Required: true
+	LoginButtonText *string `json:"loginButtonText"`
 
 	// provider
+	// Required: true
 	// Enum: ["GOOGLE","OKTA","ONE_LOGIN","AZURE_AD","JUMP_CLOUD","OPEN_ID"]
-	Provider string `json:"provider,omitempty"`
+	Provider *string `json:"provider"`
 
 	// registration Id
-	RegistrationID string `json:"registrationId,omitempty"`
+	// Required: true
+	RegistrationID *string `json:"registrationId"`
 
 	// scope
-	Scope string `json:"scope,omitempty"`
+	// Required: true
+	Scope *string `json:"scope"`
 
 	// secrets Uid
 	SecretsUID string `json:"secretsUid,omitempty"`
@@ -56,13 +63,60 @@ type CustomOAuth2ClientRegistration struct {
 func (m *CustomOAuth2ClientRegistration) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClientID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClientSecret(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLoginButtonText(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateProvider(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRegistrationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScope(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *CustomOAuth2ClientRegistration) validateClientID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clientId", "body", m.ClientID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomOAuth2ClientRegistration) validateClientSecret(formats strfmt.Registry) error {
+
+	if err := validate.Required("clientSecret", "body", m.ClientSecret); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomOAuth2ClientRegistration) validateLoginButtonText(formats strfmt.Registry) error {
+
+	if err := validate.Required("loginButtonText", "body", m.LoginButtonText); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -108,20 +162,57 @@ func (m *CustomOAuth2ClientRegistration) validateProviderEnum(path, location str
 }
 
 func (m *CustomOAuth2ClientRegistration) validateProvider(formats strfmt.Registry) error {
-	if swag.IsZero(m.Provider) { // not required
-		return nil
+
+	if err := validate.Required("provider", "body", m.Provider); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateProviderEnum("provider", "body", m.Provider); err != nil {
+	if err := m.validateProviderEnum("provider", "body", *m.Provider); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this custom o auth2 client registration based on context it is used
+func (m *CustomOAuth2ClientRegistration) validateRegistrationID(formats strfmt.Registry) error {
+
+	if err := validate.Required("registrationId", "body", m.RegistrationID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomOAuth2ClientRegistration) validateScope(formats strfmt.Registry) error {
+
+	if err := validate.Required("scope", "body", m.Scope); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this custom o auth2 client registration based on the context it is used
 func (m *CustomOAuth2ClientRegistration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIsSystemConfigured(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CustomOAuth2ClientRegistration) contextValidateIsSystemConfigured(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "isSystemConfigured", "body", m.IsSystemConfigured); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ECRAuthorizationData ECRAuthorizationData
+// ECRAuthorizationData e c r authorization data
 //
 // swagger:model ECRAuthorizationData
 type ECRAuthorizationData struct {

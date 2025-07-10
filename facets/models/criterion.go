@@ -15,39 +15,64 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Criterion Criterion
+// Criterion criterion
 //
 // swagger:model Criterion
 type Criterion struct {
 
 	// metadata key
-	MetadataKey string `json:"metadataKey,omitempty"`
+	// Required: true
+	MetadataKey *string `json:"metadataKey"`
 
 	// operator
+	// Required: true
 	// Enum: ["EQUALS","STARTS_WITH","ENDS_WITH","CONTAINS"]
-	Operator string `json:"operator,omitempty"`
+	Operator *string `json:"operator"`
 
 	// priority
 	Priority int32 `json:"priority,omitempty"`
 
 	// route to
-	RouteTo string `json:"routeTo,omitempty"`
+	// Required: true
+	RouteTo *string `json:"routeTo"`
 
 	// value
-	Value string `json:"value,omitempty"`
+	// Required: true
+	Value *string `json:"value"`
 }
 
 // Validate validates this criterion
 func (m *Criterion) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateMetadataKey(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOperator(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRouteTo(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValue(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Criterion) validateMetadataKey(formats strfmt.Registry) error {
+
+	if err := validate.Required("metadataKey", "body", m.MetadataKey); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -87,12 +112,31 @@ func (m *Criterion) validateOperatorEnum(path, location string, value string) er
 }
 
 func (m *Criterion) validateOperator(formats strfmt.Registry) error {
-	if swag.IsZero(m.Operator) { // not required
-		return nil
+
+	if err := validate.Required("operator", "body", m.Operator); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateOperatorEnum("operator", "body", m.Operator); err != nil {
+	if err := m.validateOperatorEnum("operator", "body", *m.Operator); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Criterion) validateRouteTo(formats strfmt.Registry) error {
+
+	if err := validate.Required("routeTo", "body", m.RouteTo); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Criterion) validateValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("value", "body", m.Value); err != nil {
 		return err
 	}
 

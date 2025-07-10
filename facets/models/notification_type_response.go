@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NotificationTypeResponse NotificationTypeResponse
+// NotificationTypeResponse notification type response
 //
 // swagger:model NotificationTypeResponse
 type NotificationTypeResponse struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PolicyTemplateDTO PolicyTemplateDTO
+// PolicyTemplateDTO policy template d t o
 //
 // swagger:model PolicyTemplateDTO
 type PolicyTemplateDTO struct {
@@ -24,7 +24,7 @@ type PolicyTemplateDTO struct {
 	Flavours []string `json:"flavours"`
 
 	// input data
-	InputData interface{} `json:"inputData,omitempty"`
+	InputData map[string]interface{} `json:"inputData,omitempty"`
 
 	// resource types
 	ResourceTypes []string `json:"resourceTypes"`

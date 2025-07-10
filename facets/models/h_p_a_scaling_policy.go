@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HPAScalingPolicy HPAScalingPolicy
+// HPAScalingPolicy h p a scaling policy
 //
 // swagger:model HPAScalingPolicy
 type HPAScalingPolicy struct {

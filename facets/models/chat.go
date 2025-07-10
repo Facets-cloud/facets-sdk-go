@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Chat Chat
+// Chat chat
 //
 // swagger:model Chat
 type Chat struct {

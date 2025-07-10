@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HorizontalPodAutoscaler HorizontalPodAutoscaler
+// HorizontalPodAutoscaler horizontal pod autoscaler
 //
 // swagger:model HorizontalPodAutoscaler
 type HorizontalPodAutoscaler struct {

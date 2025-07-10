@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AzureDiskVolumeSource AzureDiskVolumeSource
+// AzureDiskVolumeSource azure disk volume source
 //
 // swagger:model AzureDiskVolumeSource
 type AzureDiskVolumeSource struct {

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NotificationChannel NotificationChannel
+// NotificationChannel notification channel
 //
 // swagger:model NotificationChannel
 type NotificationChannel struct {

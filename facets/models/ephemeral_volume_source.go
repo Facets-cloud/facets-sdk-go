@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EphemeralVolumeSource EphemeralVolumeSource
+// EphemeralVolumeSource ephemeral volume source
 //
 // swagger:model EphemeralVolumeSource
 type EphemeralVolumeSource struct {

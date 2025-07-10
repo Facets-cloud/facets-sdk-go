@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ExecutionTime ExecutionTime
+// ExecutionTime execution time
 //
 // swagger:model ExecutionTime
 type ExecutionTime struct {

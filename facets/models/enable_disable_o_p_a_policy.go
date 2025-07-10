@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnableDisableOPAPolicy EnableDisableOPAPolicy
+// EnableDisableOPAPolicy enable disable o p a policy
 //
 // swagger:model EnableDisableOPAPolicy
 type EnableDisableOPAPolicy struct {

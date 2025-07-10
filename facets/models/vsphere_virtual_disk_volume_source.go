@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VsphereVirtualDiskVolumeSource VsphereVirtualDiskVolumeSource
+// VsphereVirtualDiskVolumeSource vsphere virtual disk volume source
 //
 // swagger:model VsphereVirtualDiskVolumeSource
 type VsphereVirtualDiskVolumeSource struct {

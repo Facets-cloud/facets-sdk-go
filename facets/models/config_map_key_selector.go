@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ConfigMapKeySelector ConfigMapKeySelector
+// ConfigMapKeySelector config map key selector
 //
 // swagger:model ConfigMapKeySelector
 type ConfigMapKeySelector struct {

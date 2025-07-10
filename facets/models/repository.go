@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Repository Repository
+// Repository repository
 //
 // swagger:model Repository
 type Repository struct {

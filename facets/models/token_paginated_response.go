@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TokenPaginatedResponse TokenPaginatedResponse
+// TokenPaginatedResponse token paginated response
 //
 // swagger:model TokenPaginatedResponse
 type TokenPaginatedResponse struct {

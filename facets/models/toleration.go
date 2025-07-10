@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Toleration Toleration
+// Toleration toleration
 //
 // swagger:model Toleration
 type Toleration struct {

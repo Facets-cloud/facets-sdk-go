@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VolumeDevice VolumeDevice
+// VolumeDevice volume device
 //
 // swagger:model VolumeDevice
 type VolumeDevice struct {

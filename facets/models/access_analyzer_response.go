@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AccessAnalyzerResponse AccessAnalyzerResponse
+// AccessAnalyzerResponse access analyzer response
 //
 // swagger:model AccessAnalyzerResponse
 type AccessAnalyzerResponse struct {

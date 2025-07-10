@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IDName IdName
+// IDName Id name
 //
 // swagger:model IdName
 type IDName struct {

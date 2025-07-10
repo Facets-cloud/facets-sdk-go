@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EventSeries EventSeries
+// EventSeries event series
 //
 // swagger:model EventSeries
 type EventSeries struct {

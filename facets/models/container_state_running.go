@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerStateRunning ContainerStateRunning
+// ContainerStateRunning container state running
 //
 // swagger:model ContainerStateRunning
 type ContainerStateRunning struct {

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -15,9 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TFModuleLiteDTO TFModuleLiteDTO
-//
-// # Lightweight DTO for TF Modules providing minimal details
+// TFModuleLiteDTO Lightweight DTO for TF Modules providing minimal details
 //
 // swagger:model TFModuleLiteDTO
 type TFModuleLiteDTO struct {
@@ -27,11 +26,16 @@ type TFModuleLiteDTO struct {
 
 	// Supported cloud providers
 	// Example: ["aws","azure"]
+	// Unique: true
 	Clouds []string `json:"clouds"`
 
 	// Flavor of the TF Module
 	// Example: small
 	Flavor string `json:"flavor,omitempty"`
+
+	// iac tool
+	// Unique: true
+	IacTool []string `json:"iacTool"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -46,6 +50,10 @@ type TFModuleLiteDTO struct {
 	// intent type
 	IntentType string `json:"intentType,omitempty"`
 
+	// Maximum allowed length for resource names using this module
+	// Example: 40
+	NameLengthLimit int32 `json:"nameLengthLimit,omitempty"`
+
 	// Source of the TF Module
 	// Enum: ["BUILT_IN","CUSTOM"]
 	Source string `json:"source,omitempty"`
@@ -56,6 +64,7 @@ type TFModuleLiteDTO struct {
 
 	// Tags associated with the module
 	// Example: ["tag1","tag2"]
+	// Unique: true
 	Tags []string `json:"tags"`
 
 	// Version of the TF Module
@@ -66,6 +75,14 @@ type TFModuleLiteDTO struct {
 // Validate validates this t f module lite d t o
 func (m *TFModuleLiteDTO) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateClouds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIacTool(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateInputs(formats); err != nil {
 		res = append(res, err)
@@ -79,9 +96,65 @@ func (m *TFModuleLiteDTO) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *TFModuleLiteDTO) validateClouds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Clouds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("clouds", "body", m.Clouds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var tFModuleLiteDTOIacToolItemsEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["TERRAFORM","OPENTOFU"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		tFModuleLiteDTOIacToolItemsEnum = append(tFModuleLiteDTOIacToolItemsEnum, v)
+	}
+}
+
+func (m *TFModuleLiteDTO) validateIacToolItemsEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, tFModuleLiteDTOIacToolItemsEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *TFModuleLiteDTO) validateIacTool(formats strfmt.Registry) error {
+	if swag.IsZero(m.IacTool) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("iacTool", "body", m.IacTool); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.IacTool); i++ {
+
+		// value enum
+		if err := m.validateIacToolItemsEnum("iacTool"+"."+strconv.Itoa(i), "body", m.IacTool[i]); err != nil {
+			return err
+		}
+
+	}
+
 	return nil
 }
 
@@ -189,6 +262,18 @@ func (m *TFModuleLiteDTO) validateStage(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateStageEnum("stage", "body", m.Stage); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TFModuleLiteDTO) validateTags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Tags) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("tags", "body", m.Tags); err != nil {
 		return err
 	}
 

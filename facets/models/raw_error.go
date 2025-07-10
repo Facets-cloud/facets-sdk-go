@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RawError RawError
+// RawError raw error
 //
 // swagger:model RawError
 type RawError struct {

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodDNSConfig PodDNSConfig
+// PodDNSConfig pod DNS config
 //
 // swagger:model PodDNSConfig
 type PodDNSConfig struct {

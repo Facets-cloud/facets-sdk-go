@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretEnvSource SecretEnvSource
+// SecretEnvSource secret env source
 //
 // swagger:model SecretEnvSource
 type SecretEnvSource struct {

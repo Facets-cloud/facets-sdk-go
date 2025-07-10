@@ -12,9 +12,10 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ResourceInfo ResourceInfo
+// ResourceInfo resource info
 //
 // swagger:model ResourceInfo
 type ResourceInfo struct {
@@ -23,7 +24,8 @@ type ResourceInfo struct {
 	Resources []*ResourceList `json:"resources"`
 
 	// stack name
-	StackName string `json:"stackName,omitempty"`
+	// Required: true
+	StackName *string `json:"stackName"`
 }
 
 // Validate validates this resource info
@@ -31,6 +33,10 @@ func (m *ResourceInfo) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateResources(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -61,6 +67,15 @@ func (m *ResourceInfo) validateResources(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *ResourceInfo) validateStackName(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackName", "body", m.StackName); err != nil {
+		return err
 	}
 
 	return nil

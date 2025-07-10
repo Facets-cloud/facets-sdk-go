@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerDTO ContainerDTO
+// ContainerDTO container d t o
 //
 // swagger:model ContainerDTO
 type ContainerDTO struct {

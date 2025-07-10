@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ConfigMapDTO ConfigMapDTO
+// ConfigMapDTO config map d t o
 //
 // swagger:model ConfigMapDTO
 type ConfigMapDTO struct {
@@ -21,6 +23,7 @@ type ConfigMapDTO struct {
 	Age int64 `json:"age,omitempty"`
 
 	// keys
+	// Unique: true
 	Keys []string `json:"keys"`
 
 	// name
@@ -29,6 +32,27 @@ type ConfigMapDTO struct {
 
 // Validate validates this config map d t o
 func (m *ConfigMapDTO) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateKeys(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ConfigMapDTO) validateKeys(formats strfmt.Registry) error {
+	if swag.IsZero(m.Keys) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("keys", "body", m.Keys); err != nil {
+		return err
+	}
+
 	return nil
 }
 

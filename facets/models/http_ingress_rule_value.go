@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HTTPIngressRuleValue HTTPIngressRuleValue
+// HTTPIngressRuleValue HTTP ingress rule value
 //
 // swagger:model HTTPIngressRuleValue
 type HTTPIngressRuleValue struct {

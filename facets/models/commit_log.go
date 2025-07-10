@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CommitLog CommitLog
+// CommitLog commit log
 //
 // swagger:model CommitLog
 type CommitLog struct {

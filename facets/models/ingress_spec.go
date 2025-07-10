@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressSpec IngressSpec
+// IngressSpec ingress spec
 //
 // swagger:model IngressSpec
 type IngressSpec struct {

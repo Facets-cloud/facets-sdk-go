@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CiArtifactResponse CiArtifactResponse
+// CiArtifactResponse ci artifact response
 //
 // swagger:model CiArtifactResponse
 type CiArtifactResponse struct {

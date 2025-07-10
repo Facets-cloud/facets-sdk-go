@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ReleaseStream ReleaseStream
+// ReleaseStream release stream
 //
 // swagger:model ReleaseStream
 type ReleaseStream struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MigrationScriptMetadata MigrationScriptMetadata
+// MigrationScriptMetadata migration script metadata
 //
 // swagger:model MigrationScriptMetadata
 type MigrationScriptMetadata struct {

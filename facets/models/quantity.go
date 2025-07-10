@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Quantity Quantity
+// Quantity quantity
 //
 // swagger:model Quantity
 type Quantity struct {

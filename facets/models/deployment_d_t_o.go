@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DeploymentDTO DeploymentDTO
+// DeploymentDTO deployment d t o
 //
 // swagger:model DeploymentDTO
 type DeploymentDTO struct {

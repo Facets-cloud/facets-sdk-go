@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// FCVolumeSource FCVolumeSource
+// FCVolumeSource f c volume source
 //
 // swagger:model FCVolumeSource
 type FCVolumeSource struct {

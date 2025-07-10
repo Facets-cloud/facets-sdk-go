@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AddOnDTO AddOnDTO
+// AddOnDTO add on d t o
 //
 // swagger:model AddOnDTO
 type AddOnDTO struct {

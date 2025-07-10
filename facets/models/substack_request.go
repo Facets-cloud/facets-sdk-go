@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SubstackRequest SubstackRequest
+// SubstackRequest substack request
 //
 // swagger:model SubstackRequest
 type SubstackRequest struct {

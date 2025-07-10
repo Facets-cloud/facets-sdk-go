@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SeccompProfile SeccompProfile
+// SeccompProfile seccomp profile
 //
 // swagger:model SeccompProfile
 type SeccompProfile struct {

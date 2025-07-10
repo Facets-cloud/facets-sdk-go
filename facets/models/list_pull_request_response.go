@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ListPullRequestResponse ListPullRequestResponse
+// ListPullRequestResponse list pull request response
 //
 // swagger:model ListPullRequestResponse
 type ListPullRequestResponse struct {

@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// GitHubAccount GitHubAccount
+// GitHubAccount git hub account
 //
 // swagger:model GitHubAccount
 type GitHubAccount struct {

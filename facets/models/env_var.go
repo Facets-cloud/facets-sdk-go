@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnvVar EnvVar
+// EnvVar env var
 //
 // swagger:model EnvVar
 type EnvVar struct {

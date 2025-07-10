@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Selectors Selectors
+// Selectors selectors
 //
 // swagger:model Selectors
 type Selectors struct {

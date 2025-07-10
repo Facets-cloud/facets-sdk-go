@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceFieldSelector ResourceFieldSelector
+// ResourceFieldSelector resource field selector
 //
 // swagger:model ResourceFieldSelector
 type ResourceFieldSelector struct {

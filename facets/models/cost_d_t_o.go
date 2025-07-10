@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CostDTO CostDTO
+// CostDTO cost d t o
 //
 // swagger:model CostDTO
 type CostDTO struct {

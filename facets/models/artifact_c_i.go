@@ -15,13 +15,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ArtifactCI ArtifactCI
+// ArtifactCI artifact c i
 //
 // swagger:model ArtifactCI
 type ArtifactCI struct {
 
 	// ci name
-	CiName string `json:"ciName,omitempty"`
+	// Required: true
+	CiName *string `json:"ciName"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -38,8 +39,9 @@ type ArtifactCI struct {
 	ID string `json:"id,omitempty"`
 
 	// integration type
+	// Required: true
 	// Enum: ["EXTERNAL"]
-	IntegrationType string `json:"integrationType,omitempty"`
+	IntegrationType *string `json:"integrationType"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
@@ -52,8 +54,9 @@ type ArtifactCI struct {
 	PromotionWorkflowID string `json:"promotionWorkflowId,omitempty"`
 
 	// registration type
+	// Required: true
 	// Enum: ["ENVIRONMENT","RELEASE_STREAM","HYBRID"]
-	RegistrationType string `json:"registrationType,omitempty"`
+	RegistrationType *string `json:"registrationType"`
 
 	// rule Id
 	RuleID string `json:"ruleId,omitempty"`
@@ -65,6 +68,10 @@ type ArtifactCI struct {
 // Validate validates this artifact c i
 func (m *ArtifactCI) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateCiName(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
@@ -89,6 +96,15 @@ func (m *ArtifactCI) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ArtifactCI) validateCiName(formats strfmt.Registry) error {
+
+	if err := validate.Required("ciName", "body", m.CiName); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -194,12 +210,13 @@ func (m *ArtifactCI) validateIntegrationTypeEnum(path, location string, value st
 }
 
 func (m *ArtifactCI) validateIntegrationType(formats strfmt.Registry) error {
-	if swag.IsZero(m.IntegrationType) { // not required
-		return nil
+
+	if err := validate.Required("integrationType", "body", m.IntegrationType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateIntegrationTypeEnum("integrationType", "body", m.IntegrationType); err != nil {
+	if err := m.validateIntegrationTypeEnum("integrationType", "body", *m.IntegrationType); err != nil {
 		return err
 	}
 
@@ -251,12 +268,13 @@ func (m *ArtifactCI) validateRegistrationTypeEnum(path, location string, value s
 }
 
 func (m *ArtifactCI) validateRegistrationType(formats strfmt.Registry) error {
-	if swag.IsZero(m.RegistrationType) { // not required
-		return nil
+
+	if err := validate.Required("registrationType", "body", m.RegistrationType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateRegistrationTypeEnum("registrationType", "body", m.RegistrationType); err != nil {
+	if err := m.validateRegistrationTypeEnum("registrationType", "body", *m.RegistrationType); err != nil {
 		return err
 	}
 

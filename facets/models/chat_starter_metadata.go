@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ChatStarterMetadata ChatStarterMetadata
+// ChatStarterMetadata chat starter metadata
 //
 // swagger:model ChatStarterMetadata
 type ChatStarterMetadata struct {

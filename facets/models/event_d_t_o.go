@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EventDTO EventDTO
+// EventDTO event d t o
 //
 // swagger:model EventDTO
 type EventDTO struct {

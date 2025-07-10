@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ArtifactRoutingRuleRequest ArtifactRoutingRuleRequest
+// ArtifactRoutingRuleRequest artifact routing rule request
 //
 // swagger:model ArtifactRoutingRuleRequest
 type ArtifactRoutingRuleRequest struct {
@@ -26,6 +26,7 @@ type ArtifactRoutingRuleRequest struct {
 	CiSystem string `json:"ciSystem,omitempty"`
 
 	// criteria
+	// Required: true
 	Criteria []*Criterion `json:"criteria"`
 
 	// id
@@ -35,14 +36,17 @@ type ArtifactRoutingRuleRequest struct {
 	IsDefault bool `json:"isDefault,omitempty"`
 
 	// registration type
+	// Required: true
 	// Enum: ["ENVIRONMENT","RELEASE_STREAM","HYBRID"]
-	RegistrationType string `json:"registrationType,omitempty"`
+	RegistrationType *string `json:"registrationType"`
 
 	// rule name
-	RuleName string `json:"ruleName,omitempty"`
+	// Required: true
+	RuleName *string `json:"ruleName"`
 
 	// stack name
-	StackName string `json:"stackName,omitempty"`
+	// Required: true
+	StackName *string `json:"stackName"`
 }
 
 // Validate validates this artifact routing rule request
@@ -58,6 +62,14 @@ func (m *ArtifactRoutingRuleRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRegistrationType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRuleName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,8 +125,9 @@ func (m *ArtifactRoutingRuleRequest) validateCiSystem(formats strfmt.Registry) e
 }
 
 func (m *ArtifactRoutingRuleRequest) validateCriteria(formats strfmt.Registry) error {
-	if swag.IsZero(m.Criteria) { // not required
-		return nil
+
+	if err := validate.Required("criteria", "body", m.Criteria); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Criteria); i++ {
@@ -171,12 +184,31 @@ func (m *ArtifactRoutingRuleRequest) validateRegistrationTypeEnum(path, location
 }
 
 func (m *ArtifactRoutingRuleRequest) validateRegistrationType(formats strfmt.Registry) error {
-	if swag.IsZero(m.RegistrationType) { // not required
-		return nil
+
+	if err := validate.Required("registrationType", "body", m.RegistrationType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateRegistrationTypeEnum("registrationType", "body", m.RegistrationType); err != nil {
+	if err := m.validateRegistrationTypeEnum("registrationType", "body", *m.RegistrationType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactRoutingRuleRequest) validateRuleName(formats strfmt.Registry) error {
+
+	if err := validate.Required("ruleName", "body", m.RuleName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactRoutingRuleRequest) validateStackName(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackName", "body", m.StackName); err != nil {
 		return err
 	}
 

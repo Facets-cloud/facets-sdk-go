@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ClusterOverview ClusterOverview
+// ClusterOverview cluster overview
 //
 // swagger:model ClusterOverview
 type ClusterOverview struct {

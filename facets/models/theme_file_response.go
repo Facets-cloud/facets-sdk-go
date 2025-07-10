@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ThemeFileResponse ThemeFileResponse
+// ThemeFileResponse theme file response
 //
 // swagger:model ThemeFileResponse
 type ThemeFileResponse struct {

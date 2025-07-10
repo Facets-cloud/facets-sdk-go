@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceAccountTokenProjection ServiceAccountTokenProjection
+// ServiceAccountTokenProjection service account token projection
 //
 // swagger:model ServiceAccountTokenProjection
 type ServiceAccountTokenProjection struct {

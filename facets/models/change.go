@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Change Change
+// Change change
 //
 // swagger:model Change
 type Change struct {

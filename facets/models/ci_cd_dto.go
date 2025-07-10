@@ -16,9 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CiCdDto CiCdDto
-//
-// Details required for configuring CI/CD for a project.
+// CiCdDto Details required for configuring CI/CD for a project.
 //
 // swagger:model CiCdDto
 type CiCdDto struct {

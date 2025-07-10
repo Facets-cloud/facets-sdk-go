@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// VCSOrganizationsRequest VCSOrganizationsRequest
+// VCSOrganizationsRequest v c s organizations request
 //
 // swagger:model VCSOrganizationsRequest
 type VCSOrganizationsRequest struct {

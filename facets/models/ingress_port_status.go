@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressPortStatus IngressPortStatus
+// IngressPortStatus ingress port status
 //
 // swagger:model IngressPortStatus
 type IngressPortStatus struct {

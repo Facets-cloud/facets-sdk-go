@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodReadinessGate PodReadinessGate
+// PodReadinessGate pod readiness gate
 //
 // swagger:model PodReadinessGate
 type PodReadinessGate struct {

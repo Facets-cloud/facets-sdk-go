@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TestNotificationRequest TestNotificationRequest
+// TestNotificationRequest test notification request
 //
 // swagger:model TestNotificationRequest
 type TestNotificationRequest struct {

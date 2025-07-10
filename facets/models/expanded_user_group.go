@@ -12,9 +12,10 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ExpandedUserGroup ExpandedUserGroup
+// ExpandedUserGroup expanded user group
 //
 // swagger:model ExpandedUserGroup
 type ExpandedUserGroup struct {
@@ -26,6 +27,7 @@ type ExpandedUserGroup struct {
 	AccessibleEnvironments []*EnvInfo `json:"accessibleEnvironments"`
 
 	// accessible projects
+	// Unique: true
 	AccessibleProjects []string `json:"accessibleProjects"`
 
 	// associated resource groups
@@ -53,6 +55,10 @@ func (m *ExpandedUserGroup) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAccessibleEnvironments(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAccessibleProjects(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -121,6 +127,18 @@ func (m *ExpandedUserGroup) validateAccessibleEnvironments(formats strfmt.Regist
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *ExpandedUserGroup) validateAccessibleProjects(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessibleProjects) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("accessibleProjects", "body", m.AccessibleProjects); err != nil {
+		return err
 	}
 
 	return nil

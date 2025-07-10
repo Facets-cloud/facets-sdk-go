@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnvSpecificAccess EnvSpecificAccess
+// EnvSpecificAccess env specific access
 //
 // swagger:model EnvSpecificAccess
 type EnvSpecificAccess struct {

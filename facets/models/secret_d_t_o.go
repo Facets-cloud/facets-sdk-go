@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// SecretDTO SecretDTO
+// SecretDTO secret d t o
 //
 // swagger:model SecretDTO
 type SecretDTO struct {
@@ -24,6 +26,7 @@ type SecretDTO struct {
 	DataCount int32 `json:"dataCount,omitempty"`
 
 	// data key set
+	// Unique: true
 	DataKeySet []string `json:"dataKeySet"`
 
 	// name
@@ -35,6 +38,27 @@ type SecretDTO struct {
 
 // Validate validates this secret d t o
 func (m *SecretDTO) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDataKeySet(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SecretDTO) validateDataKeySet(formats strfmt.Registry) error {
+	if swag.IsZero(m.DataKeySet) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("dataKeySet", "body", m.DataKeySet); err != nil {
+		return err
+	}
+
 	return nil
 }
 

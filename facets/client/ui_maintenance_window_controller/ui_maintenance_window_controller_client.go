@@ -54,98 +54,34 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EnableDisableUsingPUT(params *EnableDisableUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDisableUsingPUTOK, *EnableDisableUsingPUTCreated, error)
+	EnableDisable(params *EnableDisableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDisableOK, error)
 
-	GetByClusterIDUsingGET(params *GetByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByClusterIDUsingGETOK, error)
+	GetByClusterID(params *GetByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByClusterIDOK, error)
 
-	UpdateUsingPUT(params *UpdateUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUsingPUTOK, *UpdateUsingPUTCreated, error)
+	Update2(params *Update2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Update2OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-EnableDisableUsingPUT enables disable
+EnableDisable enable disable API
 */
-func (a *Client) EnableDisableUsingPUT(params *EnableDisableUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDisableUsingPUTOK, *EnableDisableUsingPUTCreated, error) {
+func (a *Client) EnableDisable(params *EnableDisableParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EnableDisableOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEnableDisableUsingPUTParams()
+		params = NewEnableDisableParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "enableDisableUsingPUT",
+		ID:                 "enableDisable",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/maintenance-window/{clusterId}/enable-disable",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EnableDisableUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *EnableDisableUsingPUTOK:
-		return value, nil, nil
-	case *EnableDisableUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_maintenance_window_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetByClusterIDUsingGET gets by cluster Id
-*/
-func (a *Client) GetByClusterIDUsingGET(params *GetByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByClusterIDUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetByClusterIDUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getByClusterIdUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/maintenance-window/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetByClusterIDUsingGETReader{formats: a.formats},
+		Reader:             &EnableDisableReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -158,33 +94,33 @@ func (a *Client) GetByClusterIDUsingGET(params *GetByClusterIDUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetByClusterIDUsingGETOK)
+	success, ok := result.(*EnableDisableOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getByClusterIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for enableDisable: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateUsingPUT updates
+GetByClusterID get by cluster Id API
 */
-func (a *Client) UpdateUsingPUT(params *UpdateUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUsingPUTOK, *UpdateUsingPUTCreated, error) {
+func (a *Client) GetByClusterID(params *GetByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByClusterIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateUsingPUTParams()
+		params = NewGetByClusterIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/maintenance-window",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "getByClusterId",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/maintenance-window/{clusterId}",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateUsingPUTReader{formats: a.formats},
+		Reader:             &GetByClusterIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -195,16 +131,54 @@ func (a *Client) UpdateUsingPUT(params *UpdateUsingPUTParams, authInfo runtime.C
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateUsingPUTOK:
-		return value, nil, nil
-	case *UpdateUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetByClusterIDOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_maintenance_window_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getByClusterId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+Update2 update 2 API
+*/
+func (a *Client) Update2(params *Update2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Update2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdate2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "update_2",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/maintenance-window",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &Update2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Update2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for update_2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

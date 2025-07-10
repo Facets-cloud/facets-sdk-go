@@ -54,66 +54,42 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddArtifactRoutingRuleUsingPOST(params *AddArtifactRoutingRuleUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddArtifactRoutingRuleUsingPOSTOK, *AddArtifactRoutingRuleUsingPOSTCreated, error)
+	AddArtifactRoutingRule(params *AddArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddArtifactRoutingRuleOK, error)
 
-	DeleteArtifactRoutingRuleUsingDELETE(params *DeleteArtifactRoutingRuleUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactRoutingRuleUsingDELETEOK, *DeleteArtifactRoutingRuleUsingDELETENoContent, error)
+	DeleteArtifactRoutingRule(params *DeleteArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactRoutingRuleOK, error)
 
-	GetAllArtifactRoutingRulesUsingGET(params *GetAllArtifactRoutingRulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactRoutingRulesUsingGETOK, error)
+	GetAllArtifactRoutingRules(params *GetAllArtifactRoutingRulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactRoutingRulesOK, error)
 
-	GetAllOperatorsUsingGET(params *GetAllOperatorsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOperatorsUsingGETOK, error)
+	GetAllOperators(params *GetAllOperatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOperatorsOK, error)
 
-	GetArtifactRoutingRuleUsingGET(params *GetArtifactRoutingRuleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactRoutingRuleUsingGETOK, error)
+	GetArtifactRoutingRule(params *GetArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactRoutingRuleOK, error)
 
-	TestRuleForBranchNameUsingPOST(params *TestRuleForBranchNameUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestRuleForBranchNameUsingPOSTOK, *TestRuleForBranchNameUsingPOSTCreated, error)
+	TestRuleForBranchName(params *TestRuleForBranchNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestRuleForBranchNameOK, error)
 
-	UpdateArtifactRoutingRuleUsingPUT(params *UpdateArtifactRoutingRuleUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArtifactRoutingRuleUsingPUTOK, *UpdateArtifactRoutingRuleUsingPUTCreated, error)
+	UpdateArtifactRoutingRule(params *UpdateArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArtifactRoutingRuleOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddArtifactRoutingRuleUsingPOST adds artifact routing rule
+AddArtifactRoutingRule add artifact routing rule API
 */
-func (a *Client) AddArtifactRoutingRuleUsingPOST(params *AddArtifactRoutingRuleUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddArtifactRoutingRuleUsingPOSTOK, *AddArtifactRoutingRuleUsingPOSTCreated, error) {
+func (a *Client) AddArtifactRoutingRule(params *AddArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddArtifactRoutingRuleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddArtifactRoutingRuleUsingPOSTParams()
+		params = NewAddArtifactRoutingRuleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addArtifactRoutingRuleUsingPOST",
+		ID:                 "addArtifactRoutingRule",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddArtifactRoutingRuleUsingPOSTReader{formats: a.formats},
+		Reader:             &AddArtifactRoutingRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -124,76 +100,35 @@ func (a *Client) AddArtifactRoutingRuleUsingPOST(params *AddArtifactRoutingRuleU
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AddArtifactRoutingRuleUsingPOSTOK:
-		return value, nil, nil
-	case *AddArtifactRoutingRuleUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*AddArtifactRoutingRuleOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifact_routing_rule_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addArtifactRoutingRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteArtifactRoutingRuleUsingDELETE deletes artifact routing rule
+DeleteArtifactRoutingRule delete artifact routing rule API
 */
-func (a *Client) DeleteArtifactRoutingRuleUsingDELETE(params *DeleteArtifactRoutingRuleUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactRoutingRuleUsingDELETEOK, *DeleteArtifactRoutingRuleUsingDELETENoContent, error) {
+func (a *Client) DeleteArtifactRoutingRule(params *DeleteArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactRoutingRuleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteArtifactRoutingRuleUsingDELETEParams()
+		params = NewDeleteArtifactRoutingRuleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteArtifactRoutingRuleUsingDELETE",
+		ID:                 "deleteArtifactRoutingRule",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule/{ruleId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteArtifactRoutingRuleUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteArtifactRoutingRuleUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteArtifactRoutingRuleUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifact_routing_rule_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllArtifactRoutingRulesUsingGET gets all artifact routing rules
-*/
-func (a *Client) GetAllArtifactRoutingRulesUsingGET(params *GetAllArtifactRoutingRulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactRoutingRulesUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllArtifactRoutingRulesUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllArtifactRoutingRulesUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/artifact-routing-rule",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllArtifactRoutingRulesUsingGETReader{formats: a.formats},
+		Reader:             &DeleteArtifactRoutingRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,33 +141,72 @@ func (a *Client) GetAllArtifactRoutingRulesUsingGET(params *GetAllArtifactRoutin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllArtifactRoutingRulesUsingGETOK)
+	success, ok := result.(*DeleteArtifactRoutingRuleOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllArtifactRoutingRulesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteArtifactRoutingRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllOperatorsUsingGET gets all operators
+GetAllArtifactRoutingRules get all artifact routing rules API
 */
-func (a *Client) GetAllOperatorsUsingGET(params *GetAllOperatorsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOperatorsUsingGETOK, error) {
+func (a *Client) GetAllArtifactRoutingRules(params *GetAllArtifactRoutingRulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactRoutingRulesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllOperatorsUsingGETParams()
+		params = NewGetAllArtifactRoutingRulesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllOperatorsUsingGET",
+		ID:                 "getAllArtifactRoutingRules",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/artifact-routing-rule",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllArtifactRoutingRulesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllArtifactRoutingRulesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllArtifactRoutingRules: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllOperators get all operators API
+*/
+func (a *Client) GetAllOperators(params *GetAllOperatorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOperatorsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllOperatorsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllOperators",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule/operators",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllOperatorsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllOperatorsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -245,33 +219,33 @@ func (a *Client) GetAllOperatorsUsingGET(params *GetAllOperatorsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllOperatorsUsingGETOK)
+	success, ok := result.(*GetAllOperatorsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllOperatorsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllOperators: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactRoutingRuleUsingGET gets artifact routing rule
+GetArtifactRoutingRule get artifact routing rule API
 */
-func (a *Client) GetArtifactRoutingRuleUsingGET(params *GetArtifactRoutingRuleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactRoutingRuleUsingGETOK, error) {
+func (a *Client) GetArtifactRoutingRule(params *GetArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactRoutingRuleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactRoutingRuleUsingGETParams()
+		params = NewGetArtifactRoutingRuleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactRoutingRuleUsingGET",
+		ID:                 "getArtifactRoutingRule",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule/{ruleId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactRoutingRuleUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactRoutingRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -284,33 +258,33 @@ func (a *Client) GetArtifactRoutingRuleUsingGET(params *GetArtifactRoutingRuleUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactRoutingRuleUsingGETOK)
+	success, ok := result.(*GetArtifactRoutingRuleOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactRoutingRuleUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactRoutingRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-TestRuleForBranchNameUsingPOST tests rule for branch name
+TestRuleForBranchName test rule for branch name API
 */
-func (a *Client) TestRuleForBranchNameUsingPOST(params *TestRuleForBranchNameUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestRuleForBranchNameUsingPOSTOK, *TestRuleForBranchNameUsingPOSTCreated, error) {
+func (a *Client) TestRuleForBranchName(params *TestRuleForBranchNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestRuleForBranchNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewTestRuleForBranchNameUsingPOSTParams()
+		params = NewTestRuleForBranchNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "testRuleForBranchNameUsingPOST",
+		ID:                 "testRuleForBranchName",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule/test",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &TestRuleForBranchNameUsingPOSTReader{formats: a.formats},
+		Reader:             &TestRuleForBranchNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -321,36 +295,35 @@ func (a *Client) TestRuleForBranchNameUsingPOST(params *TestRuleForBranchNameUsi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *TestRuleForBranchNameUsingPOSTOK:
-		return value, nil, nil
-	case *TestRuleForBranchNameUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*TestRuleForBranchNameOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifact_routing_rule_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for testRuleForBranchName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateArtifactRoutingRuleUsingPUT updates artifact routing rule
+UpdateArtifactRoutingRule update artifact routing rule API
 */
-func (a *Client) UpdateArtifactRoutingRuleUsingPUT(params *UpdateArtifactRoutingRuleUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArtifactRoutingRuleUsingPUTOK, *UpdateArtifactRoutingRuleUsingPUTCreated, error) {
+func (a *Client) UpdateArtifactRoutingRule(params *UpdateArtifactRoutingRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateArtifactRoutingRuleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateArtifactRoutingRuleUsingPUTParams()
+		params = NewUpdateArtifactRoutingRuleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateArtifactRoutingRuleUsingPUT",
+		ID:                 "updateArtifactRoutingRule",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/artifact-routing-rule",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateArtifactRoutingRuleUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateArtifactRoutingRuleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -361,16 +334,15 @@ func (a *Client) UpdateArtifactRoutingRuleUsingPUT(params *UpdateArtifactRouting
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateArtifactRoutingRuleUsingPUTOK:
-		return value, nil, nil
-	case *UpdateArtifactRoutingRuleUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateArtifactRoutingRuleOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifact_routing_rule_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateArtifactRoutingRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

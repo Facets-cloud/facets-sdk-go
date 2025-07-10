@@ -61,10 +61,7 @@ GetClusterUsingGET2Params contains all the parameters to send to the API endpoin
 */
 type GetClusterUsingGET2Params struct {
 
-	/* ClusterID.
-
-	   clusterId
-	*/
+	// ClusterID.
 	ClusterID string
 
 	timeout    time.Duration

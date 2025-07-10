@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// BranchUpdateRequest BranchUpdateRequest
+// BranchUpdateRequest branch update request
 //
 // swagger:model BranchUpdateRequest
 type BranchUpdateRequest struct {

@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// IntentResponseDTO IntentResponseDTO
+// IntentResponseDTO intent response d t o
 //
 // swagger:model IntentResponseDTO
 type IntentResponseDTO struct {

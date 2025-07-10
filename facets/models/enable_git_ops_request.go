@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnableGitOpsRequest EnableGitOpsRequest
+// EnableGitOpsRequest enable git ops request
 //
 // swagger:model EnableGitOpsRequest
 type EnableGitOpsRequest struct {

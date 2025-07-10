@@ -12,14 +12,16 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ModuleInputDTO ModuleInputDTO
+// ModuleInputDTO module input d t o
 //
 // swagger:model ModuleInputDTO
 type ModuleInputDTO struct {
 
 	// compatible resources
+	// Unique: true
 	CompatibleResources []*InputOutputResource `json:"compatibleResources"`
 
 	// description
@@ -52,6 +54,10 @@ func (m *ModuleInputDTO) Validate(formats strfmt.Registry) error {
 func (m *ModuleInputDTO) validateCompatibleResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.CompatibleResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("compatibleResources", "body", m.CompatibleResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.CompatibleResources); i++ {

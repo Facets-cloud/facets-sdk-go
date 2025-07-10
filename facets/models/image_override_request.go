@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ImageOverrideRequest ImageOverrideRequest
+// ImageOverrideRequest image override request
 //
 // swagger:model ImageOverrideRequest
 type ImageOverrideRequest struct {
@@ -47,10 +47,12 @@ type ImageOverrideRequest struct {
 	RepositoryName string `json:"repositoryName,omitempty"`
 
 	// resource name
-	ResourceName string `json:"resourceName,omitempty"`
+	// Required: true
+	ResourceName *string `json:"resourceName"`
 
 	// resource type
-	ResourceType string `json:"resourceType,omitempty"`
+	// Required: true
+	ResourceType *string `json:"resourceType"`
 
 	// tag
 	Tag string `json:"tag,omitempty"`
@@ -65,6 +67,14 @@ func (m *ImageOverrideRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRegistrationType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -155,6 +165,24 @@ func (m *ImageOverrideRequest) validateRegistrationType(formats strfmt.Registry)
 
 	// value enum
 	if err := m.validateRegistrationTypeEnum("registrationType", "body", m.RegistrationType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ImageOverrideRequest) validateResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceName", "body", m.ResourceName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ImageOverrideRequest) validateResourceType(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceType", "body", m.ResourceType); err != nil {
 		return err
 	}
 

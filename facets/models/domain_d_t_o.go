@@ -8,27 +8,62 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// DomainDTO DomainDTO
+// DomainDTO domain d t o
 //
 // swagger:model DomainDTO
 type DomainDTO struct {
 
 	// alias
-	Alias string `json:"alias,omitempty"`
+	// Required: true
+	Alias *string `json:"alias"`
 
 	// certificate reference
 	CertificateReference string `json:"certificateReference,omitempty"`
 
 	// domain
-	Domain string `json:"domain,omitempty"`
+	// Required: true
+	Domain *string `json:"domain"`
 }
 
 // Validate validates this domain d t o
 func (m *DomainDTO) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAlias(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDomain(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DomainDTO) validateAlias(formats strfmt.Registry) error {
+
+	if err := validate.Required("alias", "body", m.Alias); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DomainDTO) validateDomain(formats strfmt.Registry) error {
+
+	if err := validate.Required("domain", "body", m.Domain); err != nil {
+		return err
+	}
+
 	return nil
 }
 

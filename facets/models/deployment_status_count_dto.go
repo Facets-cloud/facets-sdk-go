@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DeploymentStatusCountDto DeploymentStatusCountDto
+// DeploymentStatusCountDto deployment status count dto
 //
 // swagger:model DeploymentStatusCountDto
 type DeploymentStatusCountDto struct {

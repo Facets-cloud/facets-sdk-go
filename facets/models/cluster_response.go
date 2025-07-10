@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ClusterResponse ClusterResponse
+// ClusterResponse cluster response
 //
 // swagger:model ClusterResponse
 type ClusterResponse struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OutputReference OutputReference
+// OutputReference output reference
 //
 // swagger:model OutputReference
 type OutputReference struct {

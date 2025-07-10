@@ -16,15 +16,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ProjectTypeRequest ProjectTypeRequest
-//
-// Request model for Project Type operations.
+// ProjectTypeRequest Request model for Project Type operations.
 //
 // swagger:model ProjectTypeRequest
 type ProjectTypeRequest struct {
 
 	// Set of allowed clouds
 	// Required: true
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// Base project name
@@ -35,7 +34,16 @@ type ProjectTypeRequest struct {
 	// Example: This is a sample project type
 	Description string `json:"description,omitempty"`
 
+	// IAC tool used for the project
+	// Required: true
+	// Enum: ["TERRAFORM","OPENTOFU"]
+	IacTool *string `json:"iacTool"`
+
+	// iac tool version
+	IacToolVersion string `json:"iacToolVersion,omitempty"`
+
 	// Allowed modules for the project
+	// Unique: true
 	MappedResources []*ProjectTypeMappedResource `json:"mappedResources"`
 
 	// Name of the project type
@@ -43,7 +51,7 @@ type ProjectTypeRequest struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Details of the Git template used by the project type
+	// template git details
 	// Required: true
 	TemplateGitDetails *TemplateGitDetails `json:"templateGitDetails"`
 
@@ -57,6 +65,10 @@ func (m *ProjectTypeRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAllowedClouds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIacTool(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,6 +115,10 @@ func (m *ProjectTypeRequest) validateAllowedClouds(formats strfmt.Registry) erro
 		return err
 	}
 
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
+	}
+
 	for i := 0; i < len(m.AllowedClouds); i++ {
 
 		// value enum
@@ -115,9 +131,56 @@ func (m *ProjectTypeRequest) validateAllowedClouds(formats strfmt.Registry) erro
 	return nil
 }
 
+var projectTypeRequestTypeIacToolPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["TERRAFORM","OPENTOFU"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		projectTypeRequestTypeIacToolPropEnum = append(projectTypeRequestTypeIacToolPropEnum, v)
+	}
+}
+
+const (
+
+	// ProjectTypeRequestIacToolTERRAFORM captures enum value "TERRAFORM"
+	ProjectTypeRequestIacToolTERRAFORM string = "TERRAFORM"
+
+	// ProjectTypeRequestIacToolOPENTOFU captures enum value "OPENTOFU"
+	ProjectTypeRequestIacToolOPENTOFU string = "OPENTOFU"
+)
+
+// prop value enum
+func (m *ProjectTypeRequest) validateIacToolEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, projectTypeRequestTypeIacToolPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ProjectTypeRequest) validateIacTool(formats strfmt.Registry) error {
+
+	if err := validate.Required("iacTool", "body", m.IacTool); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateIacToolEnum("iacTool", "body", *m.IacTool); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ProjectTypeRequest) validateMappedResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.MappedResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("mappedResources", "body", m.MappedResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.MappedResources); i++ {

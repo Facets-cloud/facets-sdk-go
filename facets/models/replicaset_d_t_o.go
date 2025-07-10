@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ReplicasetDTO ReplicasetDTO
+// ReplicasetDTO replicaset d t o
 //
 // swagger:model ReplicasetDTO
 type ReplicasetDTO struct {

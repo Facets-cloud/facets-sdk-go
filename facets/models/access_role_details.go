@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AccessRoleDetails AccessRoleDetails
+// AccessRoleDetails access role details
 //
 // swagger:model AccessRoleDetails
 type AccessRoleDetails struct {

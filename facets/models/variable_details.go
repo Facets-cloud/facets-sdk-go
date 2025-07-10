@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VariableDetails VariableDetails
+// VariableDetails variable details
 //
 // swagger:model VariableDetails
 type VariableDetails struct {

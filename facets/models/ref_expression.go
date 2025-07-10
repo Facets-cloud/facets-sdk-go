@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RefExpression RefExpression
+// RefExpression ref expression
 //
 // swagger:model RefExpression
 type RefExpression struct {

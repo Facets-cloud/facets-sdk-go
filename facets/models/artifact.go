@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Artifact Artifact
+// Artifact artifact
 //
 // swagger:model Artifact
 type Artifact struct {
@@ -43,6 +43,9 @@ type Artifact struct {
 
 	// build Id
 	BuildID string `json:"buildId,omitempty"`
+
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
 
 	// classified
 	Classified bool `json:"classified,omitempty"`
@@ -91,7 +94,7 @@ type Artifact struct {
 	ReleaseStream string `json:"releaseStream,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
 
 	// repository name
@@ -219,7 +222,7 @@ var artifactTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -267,6 +270,15 @@ const (
 
 	// ArtifactReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	ArtifactReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// ArtifactReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	ArtifactReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// ArtifactReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	ArtifactReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// ArtifactReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	ArtifactReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum

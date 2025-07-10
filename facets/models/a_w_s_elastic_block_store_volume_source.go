@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AWSElasticBlockStoreVolumeSource AWSElasticBlockStoreVolumeSource
+// AWSElasticBlockStoreVolumeSource a w s elastic block store volume source
 //
 // swagger:model AWSElasticBlockStoreVolumeSource
 type AWSElasticBlockStoreVolumeSource struct {

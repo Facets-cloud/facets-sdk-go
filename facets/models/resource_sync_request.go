@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceSyncRequest ResourceSyncRequest
+// ResourceSyncRequest resource sync request
 //
 // swagger:model ResourceSyncRequest
 type ResourceSyncRequest struct {

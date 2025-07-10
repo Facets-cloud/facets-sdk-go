@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AzureClusterRequest AzureClusterRequest
+// AzureClusterRequest azure cluster request
 //
 // swagger:model AzureClusterRequest
 type AzureClusterRequest struct {
@@ -91,7 +91,7 @@ type AzureClusterRequest struct {
 	TenantID string `json:"tenantId,omitempty"`
 
 	// tz
-	Tz *TimeZone `json:"tz,omitempty"`
+	Tz *AzureClusterRequestTz `json:"tz,omitempty"`
 
 	// vnet name
 	VnetName string `json:"vnetName,omitempty"`
@@ -234,6 +234,52 @@ func (m *AzureClusterRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *AzureClusterRequest) UnmarshalBinary(b []byte) error {
 	var res AzureClusterRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// AzureClusterRequestTz azure cluster request tz
+//
+// swagger:model AzureClusterRequestTz
+type AzureClusterRequestTz struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this azure cluster request tz
+func (m *AzureClusterRequestTz) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this azure cluster request tz based on context it is used
+func (m *AzureClusterRequestTz) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *AzureClusterRequestTz) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *AzureClusterRequestTz) UnmarshalBinary(b []byte) error {
+	var res AzureClusterRequestTz
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

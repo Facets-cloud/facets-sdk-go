@@ -54,142 +54,38 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateContentFileUsingPOST(params *CreateContentFileUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateContentFileUsingPOSTOK, *CreateContentFileUsingPOSTCreated, error)
+	CreateContentFile(params *CreateContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateContentFileOK, error)
 
-	DeleteContentFileUsingDELETE(params *DeleteContentFileUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteContentFileUsingDELETEOK, *DeleteContentFileUsingDELETENoContent, error)
+	DeleteContentFile(params *DeleteContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteContentFileOK, error)
 
-	GetContentFilesBySelectorsUsingGET(params *GetContentFilesBySelectorsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetContentFilesBySelectorsUsingGETOK, error)
+	GetContentFilesBySelectors(params *GetContentFilesBySelectorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetContentFilesBySelectorsOK, error)
 
-	RenderContentUsingPOST(params *RenderContentUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenderContentUsingPOSTOK, *RenderContentUsingPOSTCreated, error)
+	RenderContent(params *RenderContentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenderContentOK, error)
 
-	UpdateContentFileUsingPUT(params *UpdateContentFileUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateContentFileUsingPUTOK, *UpdateContentFileUsingPUTCreated, error)
+	UpdateContentFile(params *UpdateContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateContentFileOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateContentFileUsingPOST creates content file
+CreateContentFile create content file API
 */
-func (a *Client) CreateContentFileUsingPOST(params *CreateContentFileUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateContentFileUsingPOSTOK, *CreateContentFileUsingPOSTCreated, error) {
+func (a *Client) CreateContentFile(params *CreateContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateContentFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateContentFileUsingPOSTParams()
+		params = NewCreateContentFileParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createContentFileUsingPOST",
+		ID:                 "createContentFile",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/content/files",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateContentFileUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateContentFileUsingPOSTOK:
-		return value, nil, nil
-	case *CreateContentFileUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_content_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteContentFileUsingDELETE deletes content file
-*/
-func (a *Client) DeleteContentFileUsingDELETE(params *DeleteContentFileUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteContentFileUsingDELETEOK, *DeleteContentFileUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteContentFileUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteContentFileUsingDELETE",
-		Method:             "DELETE",
-		PathPattern:        "/cc-ui/v1/content/files/{contentId}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteContentFileUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteContentFileUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteContentFileUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_content_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetContentFilesBySelectorsUsingGET gets content files by selectors
-*/
-func (a *Client) GetContentFilesBySelectorsUsingGET(params *GetContentFilesBySelectorsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetContentFilesBySelectorsUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetContentFilesBySelectorsUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getContentFilesBySelectorsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/content/files/selectors/{contentType}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetContentFilesBySelectorsUsingGETReader{formats: a.formats},
+		Reader:             &CreateContentFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,33 +98,111 @@ func (a *Client) GetContentFilesBySelectorsUsingGET(params *GetContentFilesBySel
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetContentFilesBySelectorsUsingGETOK)
+	success, ok := result.(*CreateContentFileOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getContentFilesBySelectorsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createContentFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RenderContentUsingPOST renders content
+DeleteContentFile delete content file API
 */
-func (a *Client) RenderContentUsingPOST(params *RenderContentUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenderContentUsingPOSTOK, *RenderContentUsingPOSTCreated, error) {
+func (a *Client) DeleteContentFile(params *DeleteContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteContentFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRenderContentUsingPOSTParams()
+		params = NewDeleteContentFileParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "renderContentUsingPOST",
+		ID:                 "deleteContentFile",
+		Method:             "DELETE",
+		PathPattern:        "/cc-ui/v1/content/files/{contentId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteContentFileReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteContentFileOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteContentFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetContentFilesBySelectors get content files by selectors API
+*/
+func (a *Client) GetContentFilesBySelectors(params *GetContentFilesBySelectorsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetContentFilesBySelectorsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetContentFilesBySelectorsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getContentFilesBySelectors",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/content/files/selectors/{contentType}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetContentFilesBySelectorsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetContentFilesBySelectorsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getContentFilesBySelectors: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RenderContent render content API
+*/
+func (a *Client) RenderContent(params *RenderContentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenderContentOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRenderContentParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "renderContent",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/content/files/{contentId}/render",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RenderContentUsingPOSTReader{formats: a.formats},
+		Reader:             &RenderContentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -239,36 +213,35 @@ func (a *Client) RenderContentUsingPOST(params *RenderContentUsingPOSTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RenderContentUsingPOSTOK:
-		return value, nil, nil
-	case *RenderContentUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RenderContentOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_content_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for renderContent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateContentFileUsingPUT updates content file
+UpdateContentFile update content file API
 */
-func (a *Client) UpdateContentFileUsingPUT(params *UpdateContentFileUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateContentFileUsingPUTOK, *UpdateContentFileUsingPUTCreated, error) {
+func (a *Client) UpdateContentFile(params *UpdateContentFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateContentFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateContentFileUsingPUTParams()
+		params = NewUpdateContentFileParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateContentFileUsingPUT",
+		ID:                 "updateContentFile",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/content/files/{contentId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateContentFileUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateContentFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -279,16 +252,15 @@ func (a *Client) UpdateContentFileUsingPUT(params *UpdateContentFileUsingPUTPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateContentFileUsingPUTOK:
-		return value, nil, nil
-	case *UpdateContentFileUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateContentFileOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_content_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateContentFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

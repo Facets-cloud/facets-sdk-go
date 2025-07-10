@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerStatus ContainerStatus
+// ContainerStatus container status
 //
 // swagger:model ContainerStatus
 type ContainerStatus struct {

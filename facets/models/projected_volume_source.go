@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProjectedVolumeSource ProjectedVolumeSource
+// ProjectedVolumeSource projected volume source
 //
 // swagger:model ProjectedVolumeSource
 type ProjectedVolumeSource struct {

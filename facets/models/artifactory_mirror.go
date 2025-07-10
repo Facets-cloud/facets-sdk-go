@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ArtifactoryMirror ArtifactoryMirror
+// ArtifactoryMirror artifactory mirror
 //
 // swagger:model ArtifactoryMirror
 type ArtifactoryMirror struct {

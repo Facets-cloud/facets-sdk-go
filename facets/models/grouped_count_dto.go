@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GroupedCountDto GroupedCountDto
+// GroupedCountDto grouped count dto
 //
 // swagger:model GroupedCountDto
 type GroupedCountDto struct {

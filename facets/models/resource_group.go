@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ResourceGroup ResourceGroup
+// ResourceGroup resource group
 //
 // swagger:model ResourceGroup
 type ResourceGroup struct {

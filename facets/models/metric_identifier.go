@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MetricIdentifier MetricIdentifier
+// MetricIdentifier metric identifier
 //
 // swagger:model MetricIdentifier
 type MetricIdentifier struct {

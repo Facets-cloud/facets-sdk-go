@@ -54,54 +54,30 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetAuditLogsUsingGET(params *GetAuditLogsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogsUsingGETOK, error)
+	GetAuditLogs(params *GetAuditLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetAuditLogsUsingGET gets audit logs
+GetAuditLogs get audit logs API
 */
-func (a *Client) GetAuditLogsUsingGET(params *GetAuditLogsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogsUsingGETOK, error) {
+func (a *Client) GetAuditLogs(params *GetAuditLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAuditLogsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAuditLogsUsingGETParams()
+		params = NewGetAuditLogsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAuditLogsUsingGET",
+		ID:                 "getAuditLogs",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/audit-logs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAuditLogsUsingGETReader{formats: a.formats},
+		Reader:             &GetAuditLogsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -114,13 +90,13 @@ func (a *Client) GetAuditLogsUsingGET(params *GetAuditLogsUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAuditLogsUsingGETOK)
+	success, ok := result.(*GetAuditLogsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAuditLogsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAuditLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

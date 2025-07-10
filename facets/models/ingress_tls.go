@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressTLS IngressTLS
+// IngressTLS ingress TLS
 //
 // swagger:model IngressTLS
 type IngressTLS struct {

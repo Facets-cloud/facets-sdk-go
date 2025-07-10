@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodsMetricStatus PodsMetricStatus
+// PodsMetricStatus pods metric status
 //
 // swagger:model PodsMetricStatus
 type PodsMetricStatus struct {

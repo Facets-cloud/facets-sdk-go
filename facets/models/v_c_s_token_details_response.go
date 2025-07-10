@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// VCSTokenDetailsResponse VCSTokenDetailsResponse
+// VCSTokenDetailsResponse v c s token details response
 //
 // swagger:model VCSTokenDetailsResponse
 type VCSTokenDetailsResponse struct {

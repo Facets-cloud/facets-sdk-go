@@ -8,27 +8,76 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ProjectTypeMappedResource ProjectTypeMappedResource
+// ProjectTypeMappedResource Allowed modules for the project
 //
 // swagger:model ProjectTypeMappedResource
 type ProjectTypeMappedResource struct {
 
 	// flavor
-	Flavor string `json:"flavor,omitempty"`
+	// Required: true
+	Flavor *string `json:"flavor"`
 
 	// intent
-	Intent string `json:"intent,omitempty"`
+	// Required: true
+	Intent *string `json:"intent"`
 
 	// intent type
-	IntentType string `json:"intentType,omitempty"`
+	// Required: true
+	IntentType *string `json:"intentType"`
 }
 
 // Validate validates this project type mapped resource
 func (m *ProjectTypeMappedResource) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateFlavor(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIntent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIntentType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ProjectTypeMappedResource) validateFlavor(formats strfmt.Registry) error {
+
+	if err := validate.Required("flavor", "body", m.Flavor); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ProjectTypeMappedResource) validateIntent(formats strfmt.Registry) error {
+
+	if err := validate.Required("intent", "body", m.Intent); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ProjectTypeMappedResource) validateIntentType(formats strfmt.Registry) error {
+
+	if err := validate.Required("intentType", "body", m.IntentType); err != nil {
+		return err
+	}
+
 	return nil
 }
 

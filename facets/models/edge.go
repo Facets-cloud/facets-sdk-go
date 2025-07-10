@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Edge Edge
+// Edge edge
 //
 // swagger:model Edge
 type Edge struct {
@@ -28,6 +28,9 @@ type Edge struct {
 
 	// is input
 	IsInput bool `json:"isInput,omitempty"`
+
+	// output name
+	OutputName string `json:"outputName,omitempty"`
 
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`

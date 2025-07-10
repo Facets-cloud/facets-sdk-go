@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ValidationError ValidationError
+// ValidationError validation error
 //
 // swagger:model ValidationError
 type ValidationError struct {

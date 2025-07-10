@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HistoryMetadata HistoryMetadata
+// HistoryMetadata history metadata
 //
 // swagger:model HistoryMetadata
 type HistoryMetadata struct {

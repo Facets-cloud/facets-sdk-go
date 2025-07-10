@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HostAlias HostAlias
+// HostAlias host alias
 //
 // swagger:model HostAlias
 type HostAlias struct {

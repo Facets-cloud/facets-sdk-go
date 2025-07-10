@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Response Response
+// Response response
 //
 // swagger:model Response
 type Response struct {

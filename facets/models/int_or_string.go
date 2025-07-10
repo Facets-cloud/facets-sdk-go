@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IntOrString IntOrString
+// IntOrString int or string
 //
 // swagger:model IntOrString
 type IntOrString struct {

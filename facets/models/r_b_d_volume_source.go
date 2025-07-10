@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RBDVolumeSource RBDVolumeSource
+// RBDVolumeSource r b d volume source
 //
 // swagger:model RBDVolumeSource
 type RBDVolumeSource struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// LocalObjectReference LocalObjectReference
+// LocalObjectReference local object reference
 //
 // swagger:model LocalObjectReference
 type LocalObjectReference struct {

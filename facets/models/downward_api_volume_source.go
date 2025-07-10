@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DownwardAPIVolumeSource DownwardAPIVolumeSource
+// DownwardAPIVolumeSource downward API volume source
 //
 // swagger:model DownwardAPIVolumeSource
 type DownwardAPIVolumeSource struct {

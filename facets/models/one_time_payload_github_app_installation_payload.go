@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadGithubAppInstallationPayload OneTimePayload«GithubAppInstallationPayload»
+// OneTimePayloadGithubAppInstallationPayload one time payload github app installation payload
 //
-// swagger:model OneTimePayload«GithubAppInstallationPayload»
+// swagger:model OneTimePayloadGithubAppInstallationPayload
 type OneTimePayloadGithubAppInstallationPayload struct {
 
 	// payload

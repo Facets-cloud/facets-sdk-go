@@ -54,224 +54,40 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddGenericOAuthIntegrationUsingPOST(params *AddGenericOAuthIntegrationUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddGenericOAuthIntegrationUsingPOSTOK, *AddGenericOAuthIntegrationUsingPOSTCreated, error)
+	AddGenericOAuthIntegration(params *AddGenericOAuthIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddGenericOAuthIntegrationOK, error)
 
-	AddIntegrationsUsingPOST(params *AddIntegrationsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddIntegrationsUsingPOSTOK, *AddIntegrationsUsingPOSTCreated, error)
+	AddIntegrations(params *AddIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddIntegrationsOK, error)
 
-	DeleteIntegrationsUsingDELETE(params *DeleteIntegrationsUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationsUsingDELETEOK, *DeleteIntegrationsUsingDELETENoContent, error)
+	DeleteIntegrations(params *DeleteIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationsOK, error)
 
-	EditGenericOAuthIntegrationUsingPUT(params *EditGenericOAuthIntegrationUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditGenericOAuthIntegrationUsingPUTOK, *EditGenericOAuthIntegrationUsingPUTCreated, error)
+	EditGenericOAuthIntegration(params *EditGenericOAuthIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditGenericOAuthIntegrationOK, error)
 
-	GetAllIntegrationsUsingGET(params *GetAllIntegrationsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIntegrationsUsingGETOK, error)
+	GetAllIntegrations(params *GetAllIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIntegrationsOK, error)
 
-	UpdateIntegrationsUsingPUT(params *UpdateIntegrationsUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationsUsingPUTOK, *UpdateIntegrationsUsingPUTCreated, error)
+	UpdateIntegrations(params *UpdateIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddGenericOAuthIntegrationUsingPOST adds generic o auth integration
+AddGenericOAuthIntegration add generic o auth integration API
 */
-func (a *Client) AddGenericOAuthIntegrationUsingPOST(params *AddGenericOAuthIntegrationUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddGenericOAuthIntegrationUsingPOSTOK, *AddGenericOAuthIntegrationUsingPOSTCreated, error) {
+func (a *Client) AddGenericOAuthIntegration(params *AddGenericOAuthIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddGenericOAuthIntegrationOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddGenericOAuthIntegrationUsingPOSTParams()
+		params = NewAddGenericOAuthIntegrationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addGenericOAuthIntegrationUsingPOST",
+		ID:                 "addGenericOAuthIntegration",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/oauth/generic-oauth-integration",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddGenericOAuthIntegrationUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *AddGenericOAuthIntegrationUsingPOSTOK:
-		return value, nil, nil
-	case *AddGenericOAuthIntegrationUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_o_auth_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-AddIntegrationsUsingPOST adds integrations
-*/
-func (a *Client) AddIntegrationsUsingPOST(params *AddIntegrationsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddIntegrationsUsingPOSTOK, *AddIntegrationsUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewAddIntegrationsUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "addIntegrationsUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/oauth",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &AddIntegrationsUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *AddIntegrationsUsingPOSTOK:
-		return value, nil, nil
-	case *AddIntegrationsUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_o_auth_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteIntegrationsUsingDELETE deletes integrations
-*/
-func (a *Client) DeleteIntegrationsUsingDELETE(params *DeleteIntegrationsUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationsUsingDELETEOK, *DeleteIntegrationsUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteIntegrationsUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteIntegrationsUsingDELETE",
-		Method:             "DELETE",
-		PathPattern:        "/cc-ui/v1/oauth/{registrationId}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteIntegrationsUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteIntegrationsUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteIntegrationsUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_o_auth_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-EditGenericOAuthIntegrationUsingPUT edits generic o auth integration
-*/
-func (a *Client) EditGenericOAuthIntegrationUsingPUT(params *EditGenericOAuthIntegrationUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditGenericOAuthIntegrationUsingPUTOK, *EditGenericOAuthIntegrationUsingPUTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEditGenericOAuthIntegrationUsingPUTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "editGenericOAuthIntegrationUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/oauth/generic-oauth-integration",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &EditGenericOAuthIntegrationUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *EditGenericOAuthIntegrationUsingPUTOK:
-		return value, nil, nil
-	case *EditGenericOAuthIntegrationUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_o_auth_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllIntegrationsUsingGET gets all integrations
-*/
-func (a *Client) GetAllIntegrationsUsingGET(params *GetAllIntegrationsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIntegrationsUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllIntegrationsUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllIntegrationsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/oauth",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllIntegrationsUsingGETReader{formats: a.formats},
+		Reader:             &AddGenericOAuthIntegrationReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -284,33 +100,33 @@ func (a *Client) GetAllIntegrationsUsingGET(params *GetAllIntegrationsUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllIntegrationsUsingGETOK)
+	success, ok := result.(*AddGenericOAuthIntegrationOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllIntegrationsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addGenericOAuthIntegration: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateIntegrationsUsingPUT updates integrations
+AddIntegrations add integrations API
 */
-func (a *Client) UpdateIntegrationsUsingPUT(params *UpdateIntegrationsUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationsUsingPUTOK, *UpdateIntegrationsUsingPUTCreated, error) {
+func (a *Client) AddIntegrations(params *AddIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddIntegrationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateIntegrationsUsingPUTParams()
+		params = NewAddIntegrationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateIntegrationsUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/oauth/{registrationId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "addIntegrations",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/oauth",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateIntegrationsUsingPUTReader{formats: a.formats},
+		Reader:             &AddIntegrationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -321,16 +137,171 @@ func (a *Client) UpdateIntegrationsUsingPUT(params *UpdateIntegrationsUsingPUTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateIntegrationsUsingPUTOK:
-		return value, nil, nil
-	case *UpdateIntegrationsUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*AddIntegrationsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_o_auth_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addIntegrations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteIntegrations delete integrations API
+*/
+func (a *Client) DeleteIntegrations(params *DeleteIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteIntegrations",
+		Method:             "DELETE",
+		PathPattern:        "/cc-ui/v1/oauth/{registrationId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteIntegrations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EditGenericOAuthIntegration edit generic o auth integration API
+*/
+func (a *Client) EditGenericOAuthIntegration(params *EditGenericOAuthIntegrationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditGenericOAuthIntegrationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEditGenericOAuthIntegrationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "editGenericOAuthIntegration",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/oauth/generic-oauth-integration",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &EditGenericOAuthIntegrationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EditGenericOAuthIntegrationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for editGenericOAuthIntegration: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllIntegrations get all integrations API
+*/
+func (a *Client) GetAllIntegrations(params *GetAllIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllIntegrations",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/oauth",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllIntegrations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateIntegrations update integrations API
+*/
+func (a *Client) UpdateIntegrations(params *UpdateIntegrationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateIntegrationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateIntegrationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateIntegrations",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/oauth/{registrationId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateIntegrationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateIntegrationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateIntegrations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

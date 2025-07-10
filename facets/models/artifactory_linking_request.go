@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ArtifactoryLinkingRequest ArtifactoryLinkingRequest
+// ArtifactoryLinkingRequest artifactory linking request
 //
 // swagger:model ArtifactoryLinkingRequest
 type ArtifactoryLinkingRequest struct {

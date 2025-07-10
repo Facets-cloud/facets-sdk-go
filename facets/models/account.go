@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Account Account
+// Account account
 //
 // swagger:model Account
 type Account struct {

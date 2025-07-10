@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceReleaseImpact ResourceReleaseImpact
+// ResourceReleaseImpact resource release impact
 //
 // swagger:model ResourceReleaseImpact
 type ResourceReleaseImpact struct {

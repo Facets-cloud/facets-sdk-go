@@ -12,13 +12,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OpaPolicyExecutionResult OpaPolicyExecutionResult
+// OpaPolicyExecutionResult opa policy execution result
 //
 // swagger:model OpaPolicyExecutionResult
 type OpaPolicyExecutionResult struct {
 
 	// error details
-	ErrorDetails interface{} `json:"errorDetails,omitempty"`
+	ErrorDetails map[string]interface{} `json:"errorDetails,omitempty"`
 
 	// server response
 	ServerResponse interface{} `json:"serverResponse,omitempty"`

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PullRequestResponse PullRequestResponse
+// PullRequestResponse pull request response
 //
 // swagger:model PullRequestResponse
 type PullRequestResponse struct {

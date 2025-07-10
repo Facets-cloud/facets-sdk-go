@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadGcpAccount OneTimePayload«GcpAccount»
+// OneTimePayloadGcpAccount one time payload gcp account
 //
-// swagger:model OneTimePayload«GcpAccount»
+// swagger:model OneTimePayloadGcpAccount
 type OneTimePayloadGcpAccount struct {
 
 	// payload

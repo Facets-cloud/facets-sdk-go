@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CloudLinkingRequest CloudLinkingRequest
+// CloudLinkingRequest cloud linking request
 //
 // swagger:model CloudLinkingRequest
 type CloudLinkingRequest struct {

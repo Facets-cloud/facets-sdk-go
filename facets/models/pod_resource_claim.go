@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodResourceClaim PodResourceClaim
+// PodResourceClaim pod resource claim
 //
 // swagger:model PodResourceClaim
 type PodResourceClaim struct {

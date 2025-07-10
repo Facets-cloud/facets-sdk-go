@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodOS PodOS
+// PodOS pod o s
 //
 // swagger:model PodOS
 type PodOS struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Workflow Workflow
+// Workflow workflow
 //
 // swagger:model Workflow
 type Workflow struct {

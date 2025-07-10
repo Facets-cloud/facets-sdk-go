@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Capabilities Capabilities
+// Capabilities capabilities
 //
 // swagger:model Capabilities
 type Capabilities struct {

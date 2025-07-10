@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretProjection SecretProjection
+// SecretProjection secret projection
 //
 // swagger:model SecretProjection
 type SecretProjection struct {

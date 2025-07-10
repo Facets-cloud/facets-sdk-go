@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NotificationTagsForTypeResult NotificationTagsForTypeResult
+// NotificationTagsForTypeResult notification tags for type result
 //
 // swagger:model NotificationTagsForTypeResult
 type NotificationTagsForTypeResult struct {

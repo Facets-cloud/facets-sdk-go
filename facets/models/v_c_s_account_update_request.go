@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VCSAccountUpdateRequest VCSAccountUpdateRequest
+// VCSAccountUpdateRequest v c s account update request
 //
 // swagger:model VCSAccountUpdateRequest
 type VCSAccountUpdateRequest struct {

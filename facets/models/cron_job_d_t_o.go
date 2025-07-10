@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CronJobDTO CronJobDTO
+// CronJobDTO cron job d t o
 //
 // swagger:model CronJobDTO
 type CronJobDTO struct {

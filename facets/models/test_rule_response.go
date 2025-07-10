@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TestRuleResponse TestRuleResponse
+// TestRuleResponse test rule response
 //
 // swagger:model TestRuleResponse
 type TestRuleResponse struct {

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// GCPCluster GCPCluster
+// GCPCluster g c p cluster
 //
 // swagger:model GCPCluster
 type GCPCluster struct {
@@ -38,6 +38,9 @@ type GCPCluster struct {
 	// cd pipeline parent
 	CdPipelineParent string `json:"cdPipelineParent,omitempty"`
 
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
+
 	// cloud
 	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
 	Cloud string `json:"cloud,omitempty"`
@@ -49,6 +52,7 @@ type GCPCluster struct {
 	CloudAccountSecretID string `json:"cloudAccountSecretId,omitempty"`
 
 	// cluster code
+	// Read Only: true
 	ClusterCode string `json:"clusterCode,omitempty"`
 
 	// cluster state
@@ -107,7 +111,8 @@ type GCPCluster struct {
 	MachineType string `json:"machineType,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
@@ -128,7 +133,8 @@ type GCPCluster struct {
 	Region string `json:"region,omitempty"`
 
 	// release stream
-	ReleaseStream string `json:"releaseStream,omitempty"`
+	// Required: true
+	ReleaseStream *string `json:"releaseStream"`
 
 	// require sign off
 	RequireSignOff bool `json:"requireSignOff,omitempty"`
@@ -149,10 +155,12 @@ type GCPCluster struct {
 	SharedVPCSettings map[string]string `json:"sharedVPCSettings,omitempty"`
 
 	// stack name
-	StackName string `json:"stackName,omitempty"`
+	// Required: true
+	StackName *string `json:"stackName"`
 
 	// tz
-	Tz string `json:"tz,omitempty"`
+	// Required: true
+	Tz *string `json:"tz"`
 
 	// variables
 	Variables map[string]Variables `json:"variables,omitempty"`
@@ -185,6 +193,22 @@ func (m *GCPCluster) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReleaseStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTz(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -408,6 +432,42 @@ func (m *GCPCluster) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *GCPCluster) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GCPCluster) validateReleaseStream(formats strfmt.Registry) error {
+
+	if err := validate.Required("releaseStream", "body", m.ReleaseStream); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GCPCluster) validateStackName(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackName", "body", m.StackName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GCPCluster) validateTz(formats strfmt.Registry) error {
+
+	if err := validate.Required("tz", "body", m.Tz); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *GCPCluster) validateVariables(formats strfmt.Registry) error {
 	if swag.IsZero(m.Variables) { // not required
 		return nil
@@ -438,6 +498,10 @@ func (m *GCPCluster) validateVariables(formats strfmt.Registry) error {
 func (m *GCPCluster) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateClusterCode(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -445,6 +509,15 @@ func (m *GCPCluster) ContextValidate(ctx context.Context, formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *GCPCluster) contextValidateClusterCode(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "clusterCode", "body", string(m.ClusterCode)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

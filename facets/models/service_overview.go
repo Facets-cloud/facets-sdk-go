@@ -12,14 +12,16 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ServiceOverview ServiceOverview
+// ServiceOverview service overview
 //
 // swagger:model ServiceOverview
 type ServiceOverview struct {
 
 	// ports
+	// Unique: true
 	Ports []*PortInfo `json:"ports"`
 }
 
@@ -40,6 +42,10 @@ func (m *ServiceOverview) Validate(formats strfmt.Registry) error {
 func (m *ServiceOverview) validatePorts(formats strfmt.Registry) error {
 	if swag.IsZero(m.Ports) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("ports", "body", m.Ports); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Ports); i++ {

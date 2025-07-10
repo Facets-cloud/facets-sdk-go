@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ObjectMeta ObjectMeta
+// ObjectMeta object meta
 //
 // swagger:model ObjectMeta
 type ObjectMeta struct {

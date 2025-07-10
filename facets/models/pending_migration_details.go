@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PendingMigrationDetails PendingMigrationDetails
+// PendingMigrationDetails pending migration details
 //
 // swagger:model PendingMigrationDetails
 type PendingMigrationDetails struct {

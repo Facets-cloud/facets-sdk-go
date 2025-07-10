@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CreateTemplateRequest CreateTemplateRequest
+// CreateTemplateRequest create template request
 //
 // swagger:model CreateTemplateRequest
 type CreateTemplateRequest struct {

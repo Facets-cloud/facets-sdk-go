@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PushCredentialsResponse PushCredentialsResponse
+// PushCredentialsResponse push credentials response
 //
 // swagger:model PushCredentialsResponse
 type PushCredentialsResponse struct {

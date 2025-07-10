@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// LabelSelector LabelSelector
+// LabelSelector label selector
 //
 // swagger:model LabelSelector
 type LabelSelector struct {

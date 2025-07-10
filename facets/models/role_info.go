@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RoleInfo RoleInfo
+// RoleInfo role info
 //
 // swagger:model RoleInfo
 type RoleInfo struct {

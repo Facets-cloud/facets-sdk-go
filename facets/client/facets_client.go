@@ -11,21 +11,11 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/application_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/artifact_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/artifactory_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/aws_cluster_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/azure_cluster_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/build_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/callback_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/capillary_cloud_callback_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/common_cluster_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/deployment_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/gcp_cluster_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/meta_controller"
+	"github.com/Facets-cloud/facets-sdk-go/facets/client/intent_management"
+	"github.com/Facets-cloud/facets-sdk-go/facets/client/module_management"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/public_ap_is"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/stack_controller"
+	"github.com/Facets-cloud/facets-sdk-go/facets/client/t_f_output_management"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_accounts_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_alerts_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_application_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_artifact_ci_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_artifact_hub_controller"
@@ -38,7 +28,7 @@ import (
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_azure_cluster_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_billing_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_blueprint_designer_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_chat_gpt_controller"
+	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_chat_g_p_t_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_ci_cd_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_cloud_cost_explorer_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_coder_controller"
@@ -50,13 +40,9 @@ import (
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_domain_mapping_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_dropdowns_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_gcp_cluster_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_iac_repo_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_intent_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_k_8s_cluster_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_kubernetes_explorer_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_local_cluster_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_maintenance_window_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_meta_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_no_auth_user_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_notification_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_o_auth_controller"
@@ -64,16 +50,12 @@ import (
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_opa_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_project_type_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_promotion_workflow_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_provided_resources_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_queued_release_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_release_stream_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_resource_group_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_resource_status_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_settings_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_stack_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_team_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_tf_module_controller"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_tf_output_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_tf_version_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_theme_file_controller"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_user_controller"
@@ -89,7 +71,7 @@ var Default = NewHTTPClient(nil)
 const (
 	// DefaultHost is the default Host
 	// found in Meta (info) section of spec file
-	DefaultHost string = "facetsdemo.console.facets.cloud"
+	DefaultHost string = "localhost"
 	// DefaultBasePath is the default BasePath
 	// found in Meta (info) section of spec file
 	DefaultBasePath string = "/"
@@ -126,21 +108,11 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Facets {
 	cli := new(Facets)
 	cli.Transport = transport
 	cli.ApplicationController = application_controller.New(transport, formats)
-	cli.ArtifactController = artifact_controller.New(transport, formats)
-	cli.ArtifactoryController = artifactory_controller.New(transport, formats)
-	cli.AwsClusterController = aws_cluster_controller.New(transport, formats)
-	cli.AzureClusterController = azure_cluster_controller.New(transport, formats)
-	cli.BuildController = build_controller.New(transport, formats)
-	cli.CallbackController = callback_controller.New(transport, formats)
-	cli.CapillaryCloudCallbackController = capillary_cloud_callback_controller.New(transport, formats)
-	cli.CommonClusterController = common_cluster_controller.New(transport, formats)
-	cli.DeploymentController = deployment_controller.New(transport, formats)
-	cli.GcpClusterController = gcp_cluster_controller.New(transport, formats)
-	cli.MetaController = meta_controller.New(transport, formats)
+	cli.IntentManagement = intent_management.New(transport, formats)
+	cli.ModuleManagement = module_management.New(transport, formats)
 	cli.PublicApIs = public_ap_is.New(transport, formats)
-	cli.StackController = stack_controller.New(transport, formats)
+	cli.TfOutputManagement = t_f_output_management.New(transport, formats)
 	cli.UIAccountsController = ui_accounts_controller.New(transport, formats)
-	cli.UIAlertsController = ui_alerts_controller.New(transport, formats)
 	cli.UIApplicationController = ui_application_controller.New(transport, formats)
 	cli.UIArtifactCiController = ui_artifact_ci_controller.New(transport, formats)
 	cli.UIArtifactHubController = ui_artifact_hub_controller.New(transport, formats)
@@ -153,7 +125,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Facets {
 	cli.UIAzureClusterController = ui_azure_cluster_controller.New(transport, formats)
 	cli.UIBillingController = ui_billing_controller.New(transport, formats)
 	cli.UIBlueprintDesignerController = ui_blueprint_designer_controller.New(transport, formats)
-	cli.UIChatGptController = ui_chat_gpt_controller.New(transport, formats)
+	cli.UIChatgptController = ui_chat_g_p_t_controller.New(transport, formats)
 	cli.UICiCdController = ui_ci_cd_controller.New(transport, formats)
 	cli.UICloudCostExplorerController = ui_cloud_cost_explorer_controller.New(transport, formats)
 	cli.UICoderController = ui_coder_controller.New(transport, formats)
@@ -165,13 +137,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Facets {
 	cli.UIDomainMappingController = ui_domain_mapping_controller.New(transport, formats)
 	cli.UIDropdownsController = ui_dropdowns_controller.New(transport, formats)
 	cli.UIGcpClusterController = ui_gcp_cluster_controller.New(transport, formats)
-	cli.UIIacRepoController = ui_iac_repo_controller.New(transport, formats)
-	cli.UIIntentController = ui_intent_controller.New(transport, formats)
 	cli.UIk8sClusterController = ui_k_8s_cluster_controller.New(transport, formats)
 	cli.UIKubernetesExplorerController = ui_kubernetes_explorer_controller.New(transport, formats)
-	cli.UILocalClusterController = ui_local_cluster_controller.New(transport, formats)
 	cli.UIMaintenanceWindowController = ui_maintenance_window_controller.New(transport, formats)
-	cli.UIMetaController = ui_meta_controller.New(transport, formats)
 	cli.UINoAuthUserController = ui_no_auth_user_controller.New(transport, formats)
 	cli.UINotificationController = ui_notification_controller.New(transport, formats)
 	cli.UIoAuthController = ui_o_auth_controller.New(transport, formats)
@@ -179,16 +147,12 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Facets {
 	cli.UIOpaController = ui_opa_controller.New(transport, formats)
 	cli.UIProjectTypeController = ui_project_type_controller.New(transport, formats)
 	cli.UIPromotionWorkflowController = ui_promotion_workflow_controller.New(transport, formats)
-	cli.UIProvidedResourcesController = ui_provided_resources_controller.New(transport, formats)
 	cli.UIQueuedReleaseController = ui_queued_release_controller.New(transport, formats)
 	cli.UIReleaseStreamController = ui_release_stream_controller.New(transport, formats)
 	cli.UIResourceGroupController = ui_resource_group_controller.New(transport, formats)
 	cli.UIResourceStatusController = ui_resource_status_controller.New(transport, formats)
 	cli.UISettingsController = ui_settings_controller.New(transport, formats)
 	cli.UIStackController = ui_stack_controller.New(transport, formats)
-	cli.UITeamController = ui_team_controller.New(transport, formats)
-	cli.UITfModuleController = ui_tf_module_controller.New(transport, formats)
-	cli.UITfOutputController = ui_tf_output_controller.New(transport, formats)
 	cli.UITfVersionController = ui_tf_version_controller.New(transport, formats)
 	cli.UIThemeFileController = ui_theme_file_controller.New(transport, formats)
 	cli.UIUserController = ui_user_controller.New(transport, formats)
@@ -242,35 +206,15 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Facets struct {
 	ApplicationController application_controller.ClientService
 
-	ArtifactController artifact_controller.ClientService
+	IntentManagement intent_management.ClientService
 
-	ArtifactoryController artifactory_controller.ClientService
-
-	AwsClusterController aws_cluster_controller.ClientService
-
-	AzureClusterController azure_cluster_controller.ClientService
-
-	BuildController build_controller.ClientService
-
-	CallbackController callback_controller.ClientService
-
-	CapillaryCloudCallbackController capillary_cloud_callback_controller.ClientService
-
-	CommonClusterController common_cluster_controller.ClientService
-
-	DeploymentController deployment_controller.ClientService
-
-	GcpClusterController gcp_cluster_controller.ClientService
-
-	MetaController meta_controller.ClientService
+	ModuleManagement module_management.ClientService
 
 	PublicApIs public_ap_is.ClientService
 
-	StackController stack_controller.ClientService
+	TfOutputManagement t_f_output_management.ClientService
 
 	UIAccountsController ui_accounts_controller.ClientService
-
-	UIAlertsController ui_alerts_controller.ClientService
 
 	UIApplicationController ui_application_controller.ClientService
 
@@ -296,7 +240,7 @@ type Facets struct {
 
 	UIBlueprintDesignerController ui_blueprint_designer_controller.ClientService
 
-	UIChatGptController ui_chat_gpt_controller.ClientService
+	UIChatgptController ui_chat_g_p_t_controller.ClientService
 
 	UICiCdController ui_ci_cd_controller.ClientService
 
@@ -320,19 +264,11 @@ type Facets struct {
 
 	UIGcpClusterController ui_gcp_cluster_controller.ClientService
 
-	UIIacRepoController ui_iac_repo_controller.ClientService
-
-	UIIntentController ui_intent_controller.ClientService
-
 	UIk8sClusterController ui_k_8s_cluster_controller.ClientService
 
 	UIKubernetesExplorerController ui_kubernetes_explorer_controller.ClientService
 
-	UILocalClusterController ui_local_cluster_controller.ClientService
-
 	UIMaintenanceWindowController ui_maintenance_window_controller.ClientService
-
-	UIMetaController ui_meta_controller.ClientService
 
 	UINoAuthUserController ui_no_auth_user_controller.ClientService
 
@@ -348,8 +284,6 @@ type Facets struct {
 
 	UIPromotionWorkflowController ui_promotion_workflow_controller.ClientService
 
-	UIProvidedResourcesController ui_provided_resources_controller.ClientService
-
 	UIQueuedReleaseController ui_queued_release_controller.ClientService
 
 	UIReleaseStreamController ui_release_stream_controller.ClientService
@@ -361,12 +295,6 @@ type Facets struct {
 	UISettingsController ui_settings_controller.ClientService
 
 	UIStackController ui_stack_controller.ClientService
-
-	UITeamController ui_team_controller.ClientService
-
-	UITfModuleController ui_tf_module_controller.ClientService
-
-	UITfOutputController ui_tf_output_controller.ClientService
 
 	UITfVersionController ui_tf_version_controller.ClientService
 
@@ -389,21 +317,11 @@ type Facets struct {
 func (c *Facets) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.ApplicationController.SetTransport(transport)
-	c.ArtifactController.SetTransport(transport)
-	c.ArtifactoryController.SetTransport(transport)
-	c.AwsClusterController.SetTransport(transport)
-	c.AzureClusterController.SetTransport(transport)
-	c.BuildController.SetTransport(transport)
-	c.CallbackController.SetTransport(transport)
-	c.CapillaryCloudCallbackController.SetTransport(transport)
-	c.CommonClusterController.SetTransport(transport)
-	c.DeploymentController.SetTransport(transport)
-	c.GcpClusterController.SetTransport(transport)
-	c.MetaController.SetTransport(transport)
+	c.IntentManagement.SetTransport(transport)
+	c.ModuleManagement.SetTransport(transport)
 	c.PublicApIs.SetTransport(transport)
-	c.StackController.SetTransport(transport)
+	c.TfOutputManagement.SetTransport(transport)
 	c.UIAccountsController.SetTransport(transport)
-	c.UIAlertsController.SetTransport(transport)
 	c.UIApplicationController.SetTransport(transport)
 	c.UIArtifactCiController.SetTransport(transport)
 	c.UIArtifactHubController.SetTransport(transport)
@@ -416,7 +334,7 @@ func (c *Facets) SetTransport(transport runtime.ClientTransport) {
 	c.UIAzureClusterController.SetTransport(transport)
 	c.UIBillingController.SetTransport(transport)
 	c.UIBlueprintDesignerController.SetTransport(transport)
-	c.UIChatGptController.SetTransport(transport)
+	c.UIChatgptController.SetTransport(transport)
 	c.UICiCdController.SetTransport(transport)
 	c.UICloudCostExplorerController.SetTransport(transport)
 	c.UICoderController.SetTransport(transport)
@@ -428,13 +346,9 @@ func (c *Facets) SetTransport(transport runtime.ClientTransport) {
 	c.UIDomainMappingController.SetTransport(transport)
 	c.UIDropdownsController.SetTransport(transport)
 	c.UIGcpClusterController.SetTransport(transport)
-	c.UIIacRepoController.SetTransport(transport)
-	c.UIIntentController.SetTransport(transport)
 	c.UIk8sClusterController.SetTransport(transport)
 	c.UIKubernetesExplorerController.SetTransport(transport)
-	c.UILocalClusterController.SetTransport(transport)
 	c.UIMaintenanceWindowController.SetTransport(transport)
-	c.UIMetaController.SetTransport(transport)
 	c.UINoAuthUserController.SetTransport(transport)
 	c.UINotificationController.SetTransport(transport)
 	c.UIoAuthController.SetTransport(transport)
@@ -442,16 +356,12 @@ func (c *Facets) SetTransport(transport runtime.ClientTransport) {
 	c.UIOpaController.SetTransport(transport)
 	c.UIProjectTypeController.SetTransport(transport)
 	c.UIPromotionWorkflowController.SetTransport(transport)
-	c.UIProvidedResourcesController.SetTransport(transport)
 	c.UIQueuedReleaseController.SetTransport(transport)
 	c.UIReleaseStreamController.SetTransport(transport)
 	c.UIResourceGroupController.SetTransport(transport)
 	c.UIResourceStatusController.SetTransport(transport)
 	c.UISettingsController.SetTransport(transport)
 	c.UIStackController.SetTransport(transport)
-	c.UITeamController.SetTransport(transport)
-	c.UITfModuleController.SetTransport(transport)
-	c.UITfOutputController.SetTransport(transport)
 	c.UITfVersionController.SetTransport(transport)
 	c.UIThemeFileController.SetTransport(transport)
 	c.UIUserController.SetTransport(transport)

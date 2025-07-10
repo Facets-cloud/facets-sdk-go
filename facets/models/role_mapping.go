@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// RoleMapping RoleMapping
+// RoleMapping role mapping
 //
 // swagger:model RoleMapping
 type RoleMapping struct {
@@ -28,7 +28,8 @@ type RoleMapping struct {
 	Description string `json:"description,omitempty"`
 
 	// entities
-	Entities []*RBACEntity `json:"entities"`
+	// Unique: true
+	Entities []string `json:"entities"`
 
 	// k8s cluster role
 	K8sClusterRole string `json:"k8sClusterRole,omitempty"`
@@ -76,25 +77,39 @@ func (m *RoleMapping) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+var roleMappingEntitiesItemsEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["ACCOUNTS_WRITE","ACCOUNTS_DELETE","ALERTS_CONFIGURE","ARTIFACTORY_WRITE","ARTIFACTORY_DELETE","ARTIFACTS_DELETE","ARTIFACTS_WRITE","ARTIFACT_ROUTING_RULE_WRITE","ARTIFACT_ROUTING_RULE_DELETE","APPLICATION_ROLLING_RESTART","APPLICATION_DEPLOYMENT_PROMOTE","APPLICATION_DEPLOYMENT_ABORT","BILLING_MANAGE","CHANNEL_WRITE","CHANNEL_DELETE","ENVIRONMENT_CONFIGURE","ENVIRONMENT_DELETE","ENVIRONMENT_WRITE","ENVIRONMENT_DESTROY","ENVIRONMENT_LAUNCH","OAUTH_INTEGRATION_DELETE","OAUTH_INTEGRATION_WRITE","RESOURCE_OVERRIDE","RESOURCE_WRITE","RESOURCE_DELETE","RESOURCE_GROUP_READ","RESOURCE_GROUP_WRITE","RESOURCE_GROUP_DELETE","RELEASE_APPROVAL_AUTHORITY","RELEASE_FULL","RELEASE_PLAN","RELEASE_APPLY_PLAN","RELEASE_SELECTIVE","RELEASE_CUSTOM","RELEASE_MAINTENANCE","RELEASE_TERRAFORM_EXPORT","RELEASE_SCALE_UP","RELEASE_SCALE_DOWN","RELEASE_FULL_ALLOW_DESTROY","RELEASE_SELECTIVE_ALLOW_DESTROY","RELEASE_CUSTOM_ALLOW_DESTROY","RELEASE_PAUSE","STACK_CONFIGURE","STACK_WRITE","STACK_DELETE","SUBSCRIPTION_WRITE","SUBSCRIPTION_DELETE","SETTINGS_WRITE","USER_READ","USER_WRITE","USER_DELETE","TEMPLATE_WRITE","TEMPLATE_DELETE","TRASH_RESTORE","TRASH_DELETE","USER_GROUP_READ","USER_GROUP_WRITE","USER_GROUP_DELETE","CUSTOM_ROLE_READ","CUSTOM_ROLE_WRITE","CUSTOM_ROLE_DELETE","K8S_READER","K8S_DEBUGGER","K8S_CUSTOM","K8S_CREDENTIALS","CLI_ARTIFACT_PUSH","K8S_PERMISSION","PIPELINE_WRITE","ARTIFACT_CI_WRITE","ARTIFACT_CI_DELETE","PROMOTIONAL_WORKFLOW_WRITE","PROMOTIONAL_WORKFLOW_DELETE","VIEW_RESOURCE_SECRETS","COST_EXPLORER_VIEW","RELEASE_STREAM_WRITE","RELEASE_STREAM_DELETE","BLUEPRINT_TEMPLATE_WRITE","BLUEPRINT_TEMPLATE_DELETE","VPN_CONNECT","OPA_WRITE","OPA_EXECUTE","OPA_DELETE","AUDIT_LOGS_VIEW","CI_CD_CONFIGURE","VIEW_SECRETS","MAINTENANCE_WINDOW_EDIT","MODULE_READ","MODULE_WRITE","MODULE_DELETE","PROJECT_TYPE_WRITE","PROJECT_TYPE_DELETE","WEB_COMPONENT_WRITE","WEB_COMPONENT_DELETE"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		roleMappingEntitiesItemsEnum = append(roleMappingEntitiesItemsEnum, v)
+	}
+}
+
+func (m *RoleMapping) validateEntitiesItemsEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, roleMappingEntitiesItemsEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *RoleMapping) validateEntities(formats strfmt.Registry) error {
 	if swag.IsZero(m.Entities) { // not required
 		return nil
 	}
 
-	for i := 0; i < len(m.Entities); i++ {
-		if swag.IsZero(m.Entities[i]) { // not required
-			continue
-		}
+	if err := validate.UniqueItems("entities", "body", m.Entities); err != nil {
+		return err
+	}
 
-		if m.Entities[i] != nil {
-			if err := m.Entities[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("entities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("entities" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
+	for i := 0; i < len(m.Entities); i++ {
+
+		// value enum
+		if err := m.validateEntitiesItemsEnum("entities"+"."+strconv.Itoa(i), "body", m.Entities[i]); err != nil {
+			return err
 		}
 
 	}
@@ -156,42 +171,8 @@ func (m *RoleMapping) validateRoleType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this role mapping based on the context it is used
+// ContextValidate validates this role mapping based on context it is used
 func (m *RoleMapping) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateEntities(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *RoleMapping) contextValidateEntities(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Entities); i++ {
-
-		if m.Entities[i] != nil {
-
-			if swag.IsZero(m.Entities[i]) { // not required
-				return nil
-			}
-
-			if err := m.Entities[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("entities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("entities" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 

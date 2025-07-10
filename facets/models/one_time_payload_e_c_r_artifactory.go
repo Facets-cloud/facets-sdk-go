@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadECRArtifactory OneTimePayload«ECRArtifactory»
+// OneTimePayloadECRArtifactory one time payload e c r artifactory
 //
-// swagger:model OneTimePayload«ECRArtifactory»
+// swagger:model OneTimePayloadECRArtifactory
 type OneTimePayloadECRArtifactory struct {
 
 	// payload

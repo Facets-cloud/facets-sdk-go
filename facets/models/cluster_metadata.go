@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ClusterMetadata ClusterMetadata
+// ClusterMetadata cluster metadata
 //
 // swagger:model ClusterMetadata
 type ClusterMetadata struct {

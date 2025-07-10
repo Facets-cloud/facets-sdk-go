@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterResourcesResponseFacetsResource ClusterResourcesResponse.FacetsResource
+// ClusterResourcesResponseFacetsResource cluster resources response facets resource
 //
 // swagger:model ClusterResourcesResponse.FacetsResource
 type ClusterResourcesResponseFacetsResource struct {

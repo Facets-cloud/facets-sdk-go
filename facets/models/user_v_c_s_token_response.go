@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// UserVCSTokenResponse UserVCSTokenResponse
+// UserVCSTokenResponse user v c s token response
 //
 // swagger:model UserVCSTokenResponse
 type UserVCSTokenResponse struct {

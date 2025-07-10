@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SnapshotInfo SnapshotInfo
+// SnapshotInfo snapshot info
 //
 // swagger:model SnapshotInfo
 type SnapshotInfo struct {

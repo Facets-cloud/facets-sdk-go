@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VariableCountDto VariableCountDto
+// VariableCountDto variable count dto
 //
 // swagger:model VariableCountDto
 type VariableCountDto struct {

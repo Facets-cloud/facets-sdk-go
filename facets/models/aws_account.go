@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AwsAccount AwsAccount
+// AwsAccount aws account
 //
 // swagger:model AwsAccount
 type AwsAccount struct {

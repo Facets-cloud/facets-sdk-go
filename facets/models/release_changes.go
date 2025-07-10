@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ReleaseChanges ReleaseChanges
+// ReleaseChanges release changes
 //
 // swagger:model ReleaseChanges
 type ReleaseChanges struct {

@@ -54,86 +54,62 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateNotificationChannelUsingPOST(params *CreateNotificationChannelUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNotificationChannelUsingPOSTOK, *CreateNotificationChannelUsingPOSTCreated, error)
+	CreateNotificationChannel(params *CreateNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNotificationChannelOK, error)
 
-	CreateSubscriptionUsingPOST(params *CreateSubscriptionUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubscriptionUsingPOSTOK, *CreateSubscriptionUsingPOSTCreated, error)
+	CreateSubscription1(params *CreateSubscription1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubscription1OK, error)
 
-	DeleteNotificationChannelUsingDELETE(params *DeleteNotificationChannelUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteNotificationChannelUsingDELETEOK, *DeleteNotificationChannelUsingDELETENoContent, error)
+	DeleteNotificationChannel(params *DeleteNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteNotificationChannelOK, error)
 
-	DeleteSubscriptionUsingDELETE(params *DeleteSubscriptionUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSubscriptionUsingDELETEOK, *DeleteSubscriptionUsingDELETENoContent, error)
+	DeleteSubscription(params *DeleteSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSubscriptionOK, error)
 
-	EditNotificationChannelUsingPUT(params *EditNotificationChannelUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditNotificationChannelUsingPUTOK, *EditNotificationChannelUsingPUTCreated, error)
+	EditNotificationChannel(params *EditNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditNotificationChannelOK, error)
 
-	EditSubscriptionUsingPUT(params *EditSubscriptionUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditSubscriptionUsingPUTOK, *EditSubscriptionUsingPUTCreated, error)
+	EditSubscription(params *EditSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditSubscriptionOK, error)
 
-	GetAllChannelTypesUsingGET(params *GetAllChannelTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelTypesUsingGETOK, error)
+	GetAllChannelTypes(params *GetAllChannelTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelTypesOK, error)
 
-	GetAllChannelsUsingGET(params *GetAllChannelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelsUsingGETOK, error)
+	GetAllChannels(params *GetAllChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelsOK, error)
 
-	GetAllNotificationTagsUsingGET(params *GetAllNotificationTagsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTagsUsingGETOK, error)
+	GetAllNotificationTags(params *GetAllNotificationTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTagsOK, error)
 
-	GetAllNotificationTypesUsingGET(params *GetAllNotificationTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTypesUsingGETOK, error)
+	GetAllNotificationTypes(params *GetAllNotificationTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTypesOK, error)
 
-	GetAllSubscriptionsUsingGET(params *GetAllSubscriptionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSubscriptionsUsingGETOK, error)
+	GetAllSubscriptions1(params *GetAllSubscriptions1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSubscriptions1OK, error)
 
-	GetChannelUsingGET(params *GetChannelUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelUsingGETOK, error)
+	GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelOK, error)
 
-	GetFiltersForSubscriptionsUsingPOST(params *GetFiltersForSubscriptionsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFiltersForSubscriptionsUsingPOSTOK, *GetFiltersForSubscriptionsUsingPOSTCreated, error)
+	GetFiltersForSubscriptions(params *GetFiltersForSubscriptionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFiltersForSubscriptionsOK, error)
 
-	GetNotificationTagsForNotificationTypeUsingGET(params *GetNotificationTagsForNotificationTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNotificationTagsForNotificationTypeUsingGETOK, error)
+	GetNotificationTagsForNotificationType(params *GetNotificationTagsForNotificationTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNotificationTagsForNotificationTypeOK, error)
 
-	GetSubscriptionAttributesUsingGET(params *GetSubscriptionAttributesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionAttributesUsingGETOK, error)
+	GetSubscription(params *GetSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionOK, error)
 
-	GetSubscriptionUsingGET(params *GetSubscriptionUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionUsingGETOK, error)
+	GetSubscriptionAttributes(params *GetSubscriptionAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionAttributesOK, error)
 
-	TestNotificationChannelUsingPOST(params *TestNotificationChannelUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestNotificationChannelUsingPOSTOK, *TestNotificationChannelUsingPOSTCreated, error)
+	TestNotificationChannel(params *TestNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestNotificationChannelOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateNotificationChannelUsingPOST creates notification channel
+CreateNotificationChannel create notification channel API
 */
-func (a *Client) CreateNotificationChannelUsingPOST(params *CreateNotificationChannelUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNotificationChannelUsingPOSTOK, *CreateNotificationChannelUsingPOSTCreated, error) {
+func (a *Client) CreateNotificationChannel(params *CreateNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNotificationChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateNotificationChannelUsingPOSTParams()
+		params = NewCreateNotificationChannelParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createNotificationChannelUsingPOST",
+		ID:                 "createNotificationChannel",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/notification/channels",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateNotificationChannelUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateNotificationChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,36 +120,35 @@ func (a *Client) CreateNotificationChannelUsingPOST(params *CreateNotificationCh
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateNotificationChannelUsingPOSTOK:
-		return value, nil, nil
-	case *CreateNotificationChannelUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateNotificationChannelOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createNotificationChannel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateSubscriptionUsingPOST creates subscription
+CreateSubscription1 create subscription 1 API
 */
-func (a *Client) CreateSubscriptionUsingPOST(params *CreateSubscriptionUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubscriptionUsingPOSTOK, *CreateSubscriptionUsingPOSTCreated, error) {
+func (a *Client) CreateSubscription1(params *CreateSubscription1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubscription1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateSubscriptionUsingPOSTParams()
+		params = NewCreateSubscription1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createSubscriptionUsingPOST",
+		ID:                 "createSubscription_1",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/notification/subscriptions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateSubscriptionUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateSubscription1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -184,36 +159,35 @@ func (a *Client) CreateSubscriptionUsingPOST(params *CreateSubscriptionUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateSubscriptionUsingPOSTOK:
-		return value, nil, nil
-	case *CreateSubscriptionUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateSubscription1OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createSubscription_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteNotificationChannelUsingDELETE deletes notification channel
+DeleteNotificationChannel delete notification channel API
 */
-func (a *Client) DeleteNotificationChannelUsingDELETE(params *DeleteNotificationChannelUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteNotificationChannelUsingDELETEOK, *DeleteNotificationChannelUsingDELETENoContent, error) {
+func (a *Client) DeleteNotificationChannel(params *DeleteNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteNotificationChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteNotificationChannelUsingDELETEParams()
+		params = NewDeleteNotificationChannelParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteNotificationChannelUsingDELETE",
+		ID:                 "deleteNotificationChannel",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/notification/channels/{channelId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteNotificationChannelUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteNotificationChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -224,36 +198,35 @@ func (a *Client) DeleteNotificationChannelUsingDELETE(params *DeleteNotification
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteNotificationChannelUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteNotificationChannelUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteNotificationChannelOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteNotificationChannel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteSubscriptionUsingDELETE deletes subscription
+DeleteSubscription delete subscription API
 */
-func (a *Client) DeleteSubscriptionUsingDELETE(params *DeleteSubscriptionUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSubscriptionUsingDELETEOK, *DeleteSubscriptionUsingDELETENoContent, error) {
+func (a *Client) DeleteSubscription(params *DeleteSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSubscriptionUsingDELETEParams()
+		params = NewDeleteSubscriptionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteSubscriptionUsingDELETE",
+		ID:                 "deleteSubscription",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/notification/subscriptions/{subscriptionId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteSubscriptionUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteSubscriptionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,36 +237,35 @@ func (a *Client) DeleteSubscriptionUsingDELETE(params *DeleteSubscriptionUsingDE
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteSubscriptionUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteSubscriptionUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteSubscriptionOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteSubscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-EditNotificationChannelUsingPUT edits notification channel
+EditNotificationChannel edit notification channel API
 */
-func (a *Client) EditNotificationChannelUsingPUT(params *EditNotificationChannelUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditNotificationChannelUsingPUTOK, *EditNotificationChannelUsingPUTCreated, error) {
+func (a *Client) EditNotificationChannel(params *EditNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditNotificationChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEditNotificationChannelUsingPUTParams()
+		params = NewEditNotificationChannelParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "editNotificationChannelUsingPUT",
+		ID:                 "editNotificationChannel",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/notification/channels/{channelId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EditNotificationChannelUsingPUTReader{formats: a.formats},
+		Reader:             &EditNotificationChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -304,36 +276,35 @@ func (a *Client) EditNotificationChannelUsingPUT(params *EditNotificationChannel
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *EditNotificationChannelUsingPUTOK:
-		return value, nil, nil
-	case *EditNotificationChannelUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*EditNotificationChannelOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for editNotificationChannel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-EditSubscriptionUsingPUT edits subscription
+EditSubscription edit subscription API
 */
-func (a *Client) EditSubscriptionUsingPUT(params *EditSubscriptionUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditSubscriptionUsingPUTOK, *EditSubscriptionUsingPUTCreated, error) {
+func (a *Client) EditSubscription(params *EditSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEditSubscriptionUsingPUTParams()
+		params = NewEditSubscriptionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "editSubscriptionUsingPUT",
+		ID:                 "editSubscription",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/notification/subscriptions/{subscriptionId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EditSubscriptionUsingPUTReader{formats: a.formats},
+		Reader:             &EditSubscriptionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -344,36 +315,35 @@ func (a *Client) EditSubscriptionUsingPUT(params *EditSubscriptionUsingPUTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *EditSubscriptionUsingPUTOK:
-		return value, nil, nil
-	case *EditSubscriptionUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*EditSubscriptionOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for editSubscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllChannelTypesUsingGET gets all channel types
+GetAllChannelTypes get all channel types API
 */
-func (a *Client) GetAllChannelTypesUsingGET(params *GetAllChannelTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelTypesUsingGETOK, error) {
+func (a *Client) GetAllChannelTypes(params *GetAllChannelTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelTypesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllChannelTypesUsingGETParams()
+		params = NewGetAllChannelTypesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllChannelTypesUsingGET",
+		ID:                 "getAllChannelTypes",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/channelTypes",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllChannelTypesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllChannelTypesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -386,33 +356,33 @@ func (a *Client) GetAllChannelTypesUsingGET(params *GetAllChannelTypesUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllChannelTypesUsingGETOK)
+	success, ok := result.(*GetAllChannelTypesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllChannelTypesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllChannelTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllChannelsUsingGET gets all channels
+GetAllChannels get all channels API
 */
-func (a *Client) GetAllChannelsUsingGET(params *GetAllChannelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelsUsingGETOK, error) {
+func (a *Client) GetAllChannels(params *GetAllChannelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllChannelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllChannelsUsingGETParams()
+		params = NewGetAllChannelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllChannelsUsingGET",
+		ID:                 "getAllChannels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/channels",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllChannelsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllChannelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -425,33 +395,33 @@ func (a *Client) GetAllChannelsUsingGET(params *GetAllChannelsUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllChannelsUsingGETOK)
+	success, ok := result.(*GetAllChannelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllChannelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllChannels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllNotificationTagsUsingGET gets all notification tags
+GetAllNotificationTags get all notification tags API
 */
-func (a *Client) GetAllNotificationTagsUsingGET(params *GetAllNotificationTagsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTagsUsingGETOK, error) {
+func (a *Client) GetAllNotificationTags(params *GetAllNotificationTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTagsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllNotificationTagsUsingGETParams()
+		params = NewGetAllNotificationTagsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllNotificationTagsUsingGET",
+		ID:                 "getAllNotificationTags",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/notificationTags",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllNotificationTagsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllNotificationTagsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -464,33 +434,33 @@ func (a *Client) GetAllNotificationTagsUsingGET(params *GetAllNotificationTagsUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllNotificationTagsUsingGETOK)
+	success, ok := result.(*GetAllNotificationTagsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllNotificationTagsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllNotificationTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllNotificationTypesUsingGET gets all notification types
+GetAllNotificationTypes get all notification types API
 */
-func (a *Client) GetAllNotificationTypesUsingGET(params *GetAllNotificationTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTypesUsingGETOK, error) {
+func (a *Client) GetAllNotificationTypes(params *GetAllNotificationTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllNotificationTypesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllNotificationTypesUsingGETParams()
+		params = NewGetAllNotificationTypesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllNotificationTypesUsingGET",
+		ID:                 "getAllNotificationTypes",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/notificationTypes",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllNotificationTypesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllNotificationTypesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -503,33 +473,33 @@ func (a *Client) GetAllNotificationTypesUsingGET(params *GetAllNotificationTypes
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllNotificationTypesUsingGETOK)
+	success, ok := result.(*GetAllNotificationTypesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllNotificationTypesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllNotificationTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllSubscriptionsUsingGET gets all subscriptions
+GetAllSubscriptions1 get all subscriptions 1 API
 */
-func (a *Client) GetAllSubscriptionsUsingGET(params *GetAllSubscriptionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSubscriptionsUsingGETOK, error) {
+func (a *Client) GetAllSubscriptions1(params *GetAllSubscriptions1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSubscriptions1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllSubscriptionsUsingGETParams()
+		params = NewGetAllSubscriptions1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllSubscriptionsUsingGET",
+		ID:                 "getAllSubscriptions_1",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/subscriptions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllSubscriptionsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllSubscriptions1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -542,33 +512,33 @@ func (a *Client) GetAllSubscriptionsUsingGET(params *GetAllSubscriptionsUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllSubscriptionsUsingGETOK)
+	success, ok := result.(*GetAllSubscriptions1OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllSubscriptionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllSubscriptions_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetChannelUsingGET gets channel
+GetChannel get channel API
 */
-func (a *Client) GetChannelUsingGET(params *GetChannelUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelUsingGETOK, error) {
+func (a *Client) GetChannel(params *GetChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChannelOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetChannelUsingGETParams()
+		params = NewGetChannelParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getChannelUsingGET",
+		ID:                 "getChannel",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/channels/{channelId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetChannelUsingGETReader{formats: a.formats},
+		Reader:             &GetChannelReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -581,33 +551,33 @@ func (a *Client) GetChannelUsingGET(params *GetChannelUsingGETParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetChannelUsingGETOK)
+	success, ok := result.(*GetChannelOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getChannelUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getChannel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetFiltersForSubscriptionsUsingPOST gets filters for subscriptions
+GetFiltersForSubscriptions get filters for subscriptions API
 */
-func (a *Client) GetFiltersForSubscriptionsUsingPOST(params *GetFiltersForSubscriptionsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFiltersForSubscriptionsUsingPOSTOK, *GetFiltersForSubscriptionsUsingPOSTCreated, error) {
+func (a *Client) GetFiltersForSubscriptions(params *GetFiltersForSubscriptionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFiltersForSubscriptionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetFiltersForSubscriptionsUsingPOSTParams()
+		params = NewGetFiltersForSubscriptionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getFiltersForSubscriptionsUsingPOST",
+		ID:                 "getFiltersForSubscriptions",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/notification/{notificationType}/tag/{tagName}/values/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetFiltersForSubscriptionsUsingPOSTReader{formats: a.formats},
+		Reader:             &GetFiltersForSubscriptionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -618,36 +588,35 @@ func (a *Client) GetFiltersForSubscriptionsUsingPOST(params *GetFiltersForSubscr
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *GetFiltersForSubscriptionsUsingPOSTOK:
-		return value, nil, nil
-	case *GetFiltersForSubscriptionsUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetFiltersForSubscriptionsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getFiltersForSubscriptions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetNotificationTagsForNotificationTypeUsingGET gets notification tags for notification type
+GetNotificationTagsForNotificationType get notification tags for notification type API
 */
-func (a *Client) GetNotificationTagsForNotificationTypeUsingGET(params *GetNotificationTagsForNotificationTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNotificationTagsForNotificationTypeUsingGETOK, error) {
+func (a *Client) GetNotificationTagsForNotificationType(params *GetNotificationTagsForNotificationTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNotificationTagsForNotificationTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetNotificationTagsForNotificationTypeUsingGETParams()
+		params = NewGetNotificationTagsForNotificationTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getNotificationTagsForNotificationTypeUsingGET",
+		ID:                 "getNotificationTagsForNotificationType",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/{notificationType}/tags",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetNotificationTagsForNotificationTypeUsingGETReader{formats: a.formats},
+		Reader:             &GetNotificationTagsForNotificationTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -660,72 +629,33 @@ func (a *Client) GetNotificationTagsForNotificationTypeUsingGET(params *GetNotif
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetNotificationTagsForNotificationTypeUsingGETOK)
+	success, ok := result.(*GetNotificationTagsForNotificationTypeOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getNotificationTagsForNotificationTypeUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getNotificationTagsForNotificationType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetSubscriptionAttributesUsingGET gets subscription attributes
+GetSubscription get subscription API
 */
-func (a *Client) GetSubscriptionAttributesUsingGET(params *GetSubscriptionAttributesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionAttributesUsingGETOK, error) {
+func (a *Client) GetSubscription(params *GetSubscriptionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSubscriptionAttributesUsingGETParams()
+		params = NewGetSubscriptionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getSubscriptionAttributesUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/notification/notificationType/{notificationType}/attributes",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetSubscriptionAttributesUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetSubscriptionAttributesUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getSubscriptionAttributesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetSubscriptionUsingGET gets subscription
-*/
-func (a *Client) GetSubscriptionUsingGET(params *GetSubscriptionUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetSubscriptionUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getSubscriptionUsingGET",
+		ID:                 "getSubscription",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/notification/subscriptions/{subscriptionId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSubscriptionUsingGETReader{formats: a.formats},
+		Reader:             &GetSubscriptionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -738,33 +668,33 @@ func (a *Client) GetSubscriptionUsingGET(params *GetSubscriptionUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSubscriptionUsingGETOK)
+	success, ok := result.(*GetSubscriptionOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getSubscriptionUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getSubscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-TestNotificationChannelUsingPOST tests notification channel
+GetSubscriptionAttributes get subscription attributes API
 */
-func (a *Client) TestNotificationChannelUsingPOST(params *TestNotificationChannelUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestNotificationChannelUsingPOSTOK, *TestNotificationChannelUsingPOSTCreated, error) {
+func (a *Client) GetSubscriptionAttributes(params *GetSubscriptionAttributesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSubscriptionAttributesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewTestNotificationChannelUsingPOSTParams()
+		params = NewGetSubscriptionAttributesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "testNotificationChannelUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/notification/channels/test",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "getSubscriptionAttributes",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/notification/notificationType/{notificationType}/attributes",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &TestNotificationChannelUsingPOSTReader{formats: a.formats},
+		Reader:             &GetSubscriptionAttributesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -775,16 +705,54 @@ func (a *Client) TestNotificationChannelUsingPOST(params *TestNotificationChanne
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *TestNotificationChannelUsingPOSTOK:
-		return value, nil, nil
-	case *TestNotificationChannelUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetSubscriptionAttributesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_notification_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getSubscriptionAttributes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+TestNotificationChannel test notification channel API
+*/
+func (a *Client) TestNotificationChannel(params *TestNotificationChannelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestNotificationChannelOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTestNotificationChannelParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "testNotificationChannel",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/notification/channels/test",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &TestNotificationChannelReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TestNotificationChannelOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for testNotificationChannel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VCSLinkingResponse VCSLinkingResponse
+// VCSLinkingResponse v c s linking response
 //
 // swagger:model VCSLinkingResponse
 type VCSLinkingResponse struct {

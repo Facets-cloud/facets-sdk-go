@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GCEPersistentDiskVolumeSource GCEPersistentDiskVolumeSource
+// GCEPersistentDiskVolumeSource g c e persistent disk volume source
 //
 // swagger:model GCEPersistentDiskVolumeSource
 type GCEPersistentDiskVolumeSource struct {

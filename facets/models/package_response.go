@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PackageResponse PackageResponse
+// PackageResponse package response
 //
 // swagger:model PackageResponse
 type PackageResponse struct {

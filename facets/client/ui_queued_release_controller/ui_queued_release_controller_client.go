@@ -54,96 +54,32 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteByIDUsingDELETE(params *DeleteByIDUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteByIDUsingDELETEOK, *DeleteByIDUsingDELETENoContent, error)
+	DeleteByID(params *DeleteByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteByIDOK, error)
 
-	GetAllQueuedReleasesUsingGET(params *GetAllQueuedReleasesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllQueuedReleasesUsingGETOK, error)
+	GetAllQueuedReleases(params *GetAllQueuedReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllQueuedReleasesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-DeleteByIDUsingDELETE deletes by Id
+DeleteByID delete by Id API
 */
-func (a *Client) DeleteByIDUsingDELETE(params *DeleteByIDUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteByIDUsingDELETEOK, *DeleteByIDUsingDELETENoContent, error) {
+func (a *Client) DeleteByID(params *DeleteByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteByIDUsingDELETEParams()
+		params = NewDeleteByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteByIdUsingDELETE",
+		ID:                 "deleteById",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/queued-releases/{queuedReleaseId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteByIDUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteByIDUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteByIDUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_queued_release_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllQueuedReleasesUsingGET gets all queued releases
-*/
-func (a *Client) GetAllQueuedReleasesUsingGET(params *GetAllQueuedReleasesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllQueuedReleasesUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllQueuedReleasesUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllQueuedReleasesUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/queued-releases/",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllQueuedReleasesUsingGETReader{formats: a.formats},
+		Reader:             &DeleteByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -156,13 +92,52 @@ func (a *Client) GetAllQueuedReleasesUsingGET(params *GetAllQueuedReleasesUsingG
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllQueuedReleasesUsingGETOK)
+	success, ok := result.(*DeleteByIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllQueuedReleasesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllQueuedReleases get all queued releases API
+*/
+func (a *Client) GetAllQueuedReleases(params *GetAllQueuedReleasesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllQueuedReleasesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllQueuedReleasesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllQueuedReleases",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/queued-releases/",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllQueuedReleasesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllQueuedReleasesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllQueuedReleases: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ResourceStatus ResourceStatus
+// ResourceStatus resource status
 //
 // swagger:model ResourceStatus
 type ResourceStatus struct {
@@ -38,6 +38,9 @@ type ResourceStatus struct {
 
 	// disabled
 	Disabled bool `json:"disabled,omitempty"`
+
+	// flavor
+	Flavor string `json:"flavor,omitempty"`
 
 	// has state change
 	HasStateChange bool `json:"hasStateChange,omitempty"`

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// FacetsResource FacetsResource
+// FacetsResource facets resource
 //
 // swagger:model FacetsResource
 type FacetsResource struct {

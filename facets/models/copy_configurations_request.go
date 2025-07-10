@@ -16,12 +16,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CopyConfigurationsRequest CopyConfigurationsRequest
+// CopyConfigurationsRequest Request containing source cluster ID, selection mode (INCLUDE/EXCLUDE), and set of configuration types
 //
 // swagger:model CopyConfigurationsRequest
 type CopyConfigurationsRequest struct {
 
 	// configuration types
+	// Unique: true
 	ConfigurationTypes []string `json:"configurationTypes"`
 
 	// selection mode
@@ -72,6 +73,10 @@ func (m *CopyConfigurationsRequest) validateConfigurationTypesItemsEnum(path, lo
 func (m *CopyConfigurationsRequest) validateConfigurationTypes(formats strfmt.Registry) error {
 	if swag.IsZero(m.ConfigurationTypes) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("configurationTypes", "body", m.ConfigurationTypes); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.ConfigurationTypes); i++ {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// FlockerVolumeSource FlockerVolumeSource
+// FlockerVolumeSource flocker volume source
 //
 // swagger:model FlockerVolumeSource
 type FlockerVolumeSource struct {

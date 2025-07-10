@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Lifecycle Lifecycle
+// Lifecycle lifecycle
 //
 // swagger:model Lifecycle
 type Lifecycle struct {

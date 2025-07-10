@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NodeSelectorRequirement NodeSelectorRequirement
+// NodeSelectorRequirement node selector requirement
 //
 // swagger:model NodeSelectorRequirement
 type NodeSelectorRequirement struct {

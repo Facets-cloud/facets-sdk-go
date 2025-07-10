@@ -54,68 +54,46 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteAllSoftDeleteEntitiesUsingDELETE(params *DeleteAllSoftDeleteEntitiesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAllSoftDeleteEntitiesUsingDELETEOK, *DeleteAllSoftDeleteEntitiesUsingDELETENoContent, error)
+	DeleteAllSoftDeleteEntities(params *DeleteAllSoftDeleteEntitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAllSoftDeleteEntitiesOK, error)
 
-	DeleteSoftDeleteEntityUsingDELETE(params *DeleteSoftDeleteEntityUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSoftDeleteEntityUsingDELETEOK, *DeleteSoftDeleteEntityUsingDELETENoContent, error)
+	DeleteSoftDeleteEntity(params *DeleteSoftDeleteEntityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSoftDeleteEntityOK, error)
 
-	GetVersionByIDUsingGET(params *GetVersionByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionByIDUsingGETOK, error)
+	GetVersionByID(params *GetVersionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionByIDOK, error)
 
-	GetVersionsUsingGET(params *GetVersionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsUsingGETOK, error)
+	GetVersions(params *GetVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsOK, error)
 
-	RestoreSoftDeleteUsingPOST(params *RestoreSoftDeleteUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSoftDeleteUsingPOSTOK, *RestoreSoftDeleteUsingPOSTCreated, error)
+	GetVersionsPaginated(params *GetVersionsPaginatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsPaginatedOK, error)
 
-	RestoreUsingPOST(params *RestoreUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreUsingPOSTOK, *RestoreUsingPOSTCreated, error)
+	Restore(params *RestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreOK, error)
 
-	SoftDeletedEntitiesByTypeUsingGET(params *SoftDeletedEntitiesByTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesByTypeUsingGETOK, error)
+	RestoreSoftDelete(params *RestoreSoftDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSoftDeleteOK, error)
 
-	SoftDeletedEntitiesUsingGET(params *SoftDeletedEntitiesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesUsingGETOK, error)
+	SoftDeletedEntities(params *SoftDeletedEntitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesOK, error)
+
+	SoftDeletedEntitiesByType(params *SoftDeletedEntitiesByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesByTypeOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-DeleteAllSoftDeleteEntitiesUsingDELETE deletes all soft delete entities
+DeleteAllSoftDeleteEntities delete all soft delete entities API
 */
-func (a *Client) DeleteAllSoftDeleteEntitiesUsingDELETE(params *DeleteAllSoftDeleteEntitiesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAllSoftDeleteEntitiesUsingDELETEOK, *DeleteAllSoftDeleteEntitiesUsingDELETENoContent, error) {
+func (a *Client) DeleteAllSoftDeleteEntities(params *DeleteAllSoftDeleteEntitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAllSoftDeleteEntitiesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteAllSoftDeleteEntitiesUsingDELETEParams()
+		params = NewDeleteAllSoftDeleteEntitiesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteAllSoftDeleteEntitiesUsingDELETE",
+		ID:                 "deleteAllSoftDeleteEntities",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities/all",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteAllSoftDeleteEntitiesUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteAllSoftDeleteEntitiesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,36 +104,35 @@ func (a *Client) DeleteAllSoftDeleteEntitiesUsingDELETE(params *DeleteAllSoftDel
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteAllSoftDeleteEntitiesUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteAllSoftDeleteEntitiesUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteAllSoftDeleteEntitiesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_versioning_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteAllSoftDeleteEntities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteSoftDeleteEntityUsingDELETE deletes soft delete entity
+DeleteSoftDeleteEntity delete soft delete entity API
 */
-func (a *Client) DeleteSoftDeleteEntityUsingDELETE(params *DeleteSoftDeleteEntityUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSoftDeleteEntityUsingDELETEOK, *DeleteSoftDeleteEntityUsingDELETENoContent, error) {
+func (a *Client) DeleteSoftDeleteEntity(params *DeleteSoftDeleteEntityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteSoftDeleteEntityOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteSoftDeleteEntityUsingDELETEParams()
+		params = NewDeleteSoftDeleteEntityParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteSoftDeleteEntityUsingDELETE",
+		ID:                 "deleteSoftDeleteEntity",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteSoftDeleteEntityUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteSoftDeleteEntityReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,36 +143,35 @@ func (a *Client) DeleteSoftDeleteEntityUsingDELETE(params *DeleteSoftDeleteEntit
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteSoftDeleteEntityUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteSoftDeleteEntityUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteSoftDeleteEntityOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_versioning_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteSoftDeleteEntity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetVersionByIDUsingGET gets version by Id
+GetVersionByID get version by Id API
 */
-func (a *Client) GetVersionByIDUsingGET(params *GetVersionByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionByIDUsingGETOK, error) {
+func (a *Client) GetVersionByID(params *GetVersionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVersionByIDUsingGETParams()
+		params = NewGetVersionByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVersionByIdUsingGET",
+		ID:                 "getVersionById",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/versions/id/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVersionByIDUsingGETReader{formats: a.formats},
+		Reader:             &GetVersionByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -208,33 +184,33 @@ func (a *Client) GetVersionByIDUsingGET(params *GetVersionByIDUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetVersionByIDUsingGETOK)
+	success, ok := result.(*GetVersionByIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getVersionByIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVersionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetVersionsUsingGET gets versions
+GetVersions get versions API
 */
-func (a *Client) GetVersionsUsingGET(params *GetVersionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsUsingGETOK, error) {
+func (a *Client) GetVersions(params *GetVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVersionsUsingGETParams()
+		params = NewGetVersionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVersionsUsingGET",
+		ID:                 "getVersions",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/versions/{versioningKey}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVersionsUsingGETReader{formats: a.formats},
+		Reader:             &GetVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -247,33 +223,33 @@ func (a *Client) GetVersionsUsingGET(params *GetVersionsUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetVersionsUsingGETOK)
+	success, ok := result.(*GetVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getVersionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RestoreSoftDeleteUsingPOST restores soft delete
+GetVersionsPaginated get versions paginated API
 */
-func (a *Client) RestoreSoftDeleteUsingPOST(params *RestoreSoftDeleteUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSoftDeleteUsingPOSTOK, *RestoreSoftDeleteUsingPOSTCreated, error) {
+func (a *Client) GetVersionsPaginated(params *GetVersionsPaginatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVersionsPaginatedOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRestoreSoftDeleteUsingPOSTParams()
+		params = NewGetVersionsPaginatedParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "restoreSoftDeleteUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities/{entityId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "getVersionsPaginated",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/versions/{versioningKey}/paginated",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RestoreSoftDeleteUsingPOSTReader{formats: a.formats},
+		Reader:             &GetVersionsPaginatedReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -284,76 +260,35 @@ func (a *Client) RestoreSoftDeleteUsingPOST(params *RestoreSoftDeleteUsingPOSTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RestoreSoftDeleteUsingPOSTOK:
-		return value, nil, nil
-	case *RestoreSoftDeleteUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetVersionsPaginatedOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_versioning_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVersionsPaginated: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RestoreUsingPOST restores
+Restore restore API
 */
-func (a *Client) RestoreUsingPOST(params *RestoreUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreUsingPOSTOK, *RestoreUsingPOSTCreated, error) {
+func (a *Client) Restore(params *RestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRestoreUsingPOSTParams()
+		params = NewRestoreParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "restoreUsingPOST",
+		ID:                 "restore",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/versions/{versionId}/restore",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RestoreUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *RestoreUsingPOSTOK:
-		return value, nil, nil
-	case *RestoreUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_versioning_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-SoftDeletedEntitiesByTypeUsingGET softs deleted entities by type
-*/
-func (a *Client) SoftDeletedEntitiesByTypeUsingGET(params *SoftDeletedEntitiesByTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesByTypeUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSoftDeletedEntitiesByTypeUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "softDeletedEntitiesByTypeUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities/{entityType}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &SoftDeletedEntitiesByTypeUsingGETReader{formats: a.formats},
+		Reader:             &RestoreReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -366,33 +301,72 @@ func (a *Client) SoftDeletedEntitiesByTypeUsingGET(params *SoftDeletedEntitiesBy
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SoftDeletedEntitiesByTypeUsingGETOK)
+	success, ok := result.(*RestoreOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for softDeletedEntitiesByTypeUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for restore: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SoftDeletedEntitiesUsingGET softs deleted entities
+RestoreSoftDelete restore soft delete API
 */
-func (a *Client) SoftDeletedEntitiesUsingGET(params *SoftDeletedEntitiesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesUsingGETOK, error) {
+func (a *Client) RestoreSoftDelete(params *RestoreSoftDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestoreSoftDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSoftDeletedEntitiesUsingGETParams()
+		params = NewRestoreSoftDeleteParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "softDeletedEntitiesUsingGET",
+		ID:                 "restoreSoftDelete",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities/{entityId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RestoreSoftDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RestoreSoftDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for restoreSoftDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SoftDeletedEntities soft deleted entities API
+*/
+func (a *Client) SoftDeletedEntities(params *SoftDeletedEntitiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSoftDeletedEntitiesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "softDeletedEntities",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SoftDeletedEntitiesUsingGETReader{formats: a.formats},
+		Reader:             &SoftDeletedEntitiesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -405,13 +379,52 @@ func (a *Client) SoftDeletedEntitiesUsingGET(params *SoftDeletedEntitiesUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SoftDeletedEntitiesUsingGETOK)
+	success, ok := result.(*SoftDeletedEntitiesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for softDeletedEntitiesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for softDeletedEntities: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SoftDeletedEntitiesByType soft deleted entities by type API
+*/
+func (a *Client) SoftDeletedEntitiesByType(params *SoftDeletedEntitiesByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SoftDeletedEntitiesByTypeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSoftDeletedEntitiesByTypeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "softDeletedEntitiesByType",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/versions/softDeletedEntities/{entityType}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SoftDeletedEntitiesByTypeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SoftDeletedEntitiesByTypeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for softDeletedEntitiesByType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

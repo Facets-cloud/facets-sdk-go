@@ -54,68 +54,44 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateUsingPOST(params *CreateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUsingPOSTOK, *CreateUsingPOSTCreated, error)
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
 
-	DeleteUsingDELETE1(params *DeleteUsingDELETE1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUsingDELETE1OK, *DeleteUsingDELETE1NoContent, error)
+	Delete1(params *Delete1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Delete1OK, error)
 
-	FindAllUsingGET(params *FindAllUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindAllUsingGETOK, error)
+	FindAll(params *FindAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindAllOK, error)
 
-	GetResourceGroupUsingGET(params *GetResourceGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupUsingGETOK, error)
+	GetResourceGroup(params *GetResourceGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupOK, error)
 
-	GetResourceGroupsForSessionUserUsingGET(params *GetResourceGroupsForSessionUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupsForSessionUserUsingGETOK, error)
+	GetResourceGroupsForSessionUser(params *GetResourceGroupsForSessionUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupsForSessionUserOK, error)
 
-	UpdateAllResourcesUsingPUT(params *UpdateAllResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAllResourcesUsingPUTOK, *UpdateAllResourcesUsingPUTCreated, error)
+	UpdateAllResources(params *UpdateAllResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAllResourcesOK, error)
 
-	UpdateResourceUsingPATCH(params *UpdateResourceUsingPATCHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourceUsingPATCHOK, *UpdateResourceUsingPATCHNoContent, error)
+	UpdateResource(params *UpdateResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourceOK, error)
 
-	UpdateUsingPUT1(params *UpdateUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUsingPUT1OK, *UpdateUsingPUT1Created, error)
+	Update1(params *Update1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Update1OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateUsingPOST creates
+Create create API
 */
-func (a *Client) CreateUsingPOST(params *CreateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUsingPOSTOK, *CreateUsingPOSTCreated, error) {
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateUsingPOSTParams()
+		params = NewCreateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createUsingPOST",
+		ID:                 "create",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/resource-groups",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,36 +102,35 @@ func (a *Client) CreateUsingPOST(params *CreateUsingPOSTParams, authInfo runtime
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateUsingPOSTOK:
-		return value, nil, nil
-	case *CreateUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteUsingDELETE1 deletes
+Delete1 delete 1 API
 */
-func (a *Client) DeleteUsingDELETE1(params *DeleteUsingDELETE1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUsingDELETE1OK, *DeleteUsingDELETE1NoContent, error) {
+func (a *Client) Delete1(params *Delete1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Delete1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteUsingDELETE1Params()
+		params = NewDelete1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteUsingDELETE_1",
+		ID:                 "delete_1",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/resource-groups/{resourceGroupId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteUsingDELETE1Reader{formats: a.formats},
+		Reader:             &Delete1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,36 +141,35 @@ func (a *Client) DeleteUsingDELETE1(params *DeleteUsingDELETE1Params, authInfo r
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteUsingDELETE1OK:
-		return value, nil, nil
-	case *DeleteUsingDELETE1NoContent:
-		return nil, value, nil
+	success, ok := result.(*Delete1OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for delete_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-FindAllUsingGET finds all
+FindAll find all API
 */
-func (a *Client) FindAllUsingGET(params *FindAllUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindAllUsingGETOK, error) {
+func (a *Client) FindAll(params *FindAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewFindAllUsingGETParams()
+		params = NewFindAllParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "findAllUsingGET",
+		ID:                 "findAll",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/resource-groups",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &FindAllUsingGETReader{formats: a.formats},
+		Reader:             &FindAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -208,33 +182,33 @@ func (a *Client) FindAllUsingGET(params *FindAllUsingGETParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*FindAllUsingGETOK)
+	success, ok := result.(*FindAllOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for findAllUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for findAll: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceGroupUsingGET gets resource group
+GetResourceGroup get resource group API
 */
-func (a *Client) GetResourceGroupUsingGET(params *GetResourceGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupUsingGETOK, error) {
+func (a *Client) GetResourceGroup(params *GetResourceGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceGroupUsingGETParams()
+		params = NewGetResourceGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceGroupUsingGET",
+		ID:                 "getResourceGroup",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/resource-groups/{resourceGroupId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceGroupUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -247,33 +221,33 @@ func (a *Client) GetResourceGroupUsingGET(params *GetResourceGroupUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceGroupUsingGETOK)
+	success, ok := result.(*GetResourceGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceGroupUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceGroupsForSessionUserUsingGET gets resource groups for session user
+GetResourceGroupsForSessionUser get resource groups for session user API
 */
-func (a *Client) GetResourceGroupsForSessionUserUsingGET(params *GetResourceGroupsForSessionUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupsForSessionUserUsingGETOK, error) {
+func (a *Client) GetResourceGroupsForSessionUser(params *GetResourceGroupsForSessionUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceGroupsForSessionUserOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceGroupsForSessionUserUsingGETParams()
+		params = NewGetResourceGroupsForSessionUserParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceGroupsForSessionUserUsingGET",
+		ID:                 "getResourceGroupsForSessionUser",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/resource-groups/me",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceGroupsForSessionUserUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceGroupsForSessionUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -286,33 +260,33 @@ func (a *Client) GetResourceGroupsForSessionUserUsingGET(params *GetResourceGrou
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceGroupsForSessionUserUsingGETOK)
+	success, ok := result.(*GetResourceGroupsForSessionUserOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceGroupsForSessionUserUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceGroupsForSessionUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateAllResourcesUsingPUT updates all resources
+UpdateAllResources update all resources API
 */
-func (a *Client) UpdateAllResourcesUsingPUT(params *UpdateAllResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAllResourcesUsingPUTOK, *UpdateAllResourcesUsingPUTCreated, error) {
+func (a *Client) UpdateAllResources(params *UpdateAllResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAllResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateAllResourcesUsingPUTParams()
+		params = NewUpdateAllResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateAllResourcesUsingPUT",
+		ID:                 "updateAllResources",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/resource-groups/{resourceGroupId}/resources",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateAllResourcesUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateAllResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -323,36 +297,35 @@ func (a *Client) UpdateAllResourcesUsingPUT(params *UpdateAllResourcesUsingPUTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateAllResourcesUsingPUTOK:
-		return value, nil, nil
-	case *UpdateAllResourcesUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateAllResourcesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateAllResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateResourceUsingPATCH updates resource
+UpdateResource update resource API
 */
-func (a *Client) UpdateResourceUsingPATCH(params *UpdateResourceUsingPATCHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourceUsingPATCHOK, *UpdateResourceUsingPATCHNoContent, error) {
+func (a *Client) UpdateResource(params *UpdateResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateResourceUsingPATCHParams()
+		params = NewUpdateResourceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateResourceUsingPATCH",
+		ID:                 "updateResource",
 		Method:             "PATCH",
 		PathPattern:        "/cc-ui/v1/resource-groups/{resourceGroupId}/resources",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateResourceUsingPATCHReader{formats: a.formats},
+		Reader:             &UpdateResourceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -363,36 +336,35 @@ func (a *Client) UpdateResourceUsingPATCH(params *UpdateResourceUsingPATCHParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateResourceUsingPATCHOK:
-		return value, nil, nil
-	case *UpdateResourceUsingPATCHNoContent:
-		return nil, value, nil
+	success, ok := result.(*UpdateResourceOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateUsingPUT1 updates
+Update1 update 1 API
 */
-func (a *Client) UpdateUsingPUT1(params *UpdateUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUsingPUT1OK, *UpdateUsingPUT1Created, error) {
+func (a *Client) Update1(params *Update1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Update1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateUsingPUT1Params()
+		params = NewUpdate1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateUsingPUT_1",
+		ID:                 "update_1",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/resource-groups/{resourceGroupId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateUsingPUT1Reader{formats: a.formats},
+		Reader:             &Update1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -403,16 +375,15 @@ func (a *Client) UpdateUsingPUT1(params *UpdateUsingPUT1Params, authInfo runtime
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateUsingPUT1OK:
-		return value, nil, nil
-	case *UpdateUsingPUT1Created:
-		return nil, value, nil
+	success, ok := result.(*Update1OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for update_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

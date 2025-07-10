@@ -14,12 +14,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// UserAccessToken UserAccessToken
+// UserAccessToken user access token
 //
 // swagger:model UserAccessToken
 type UserAccessToken struct {
 
 	// created on
+	// Read Only: true
 	// Format: date-time
 	CreatedOn strfmt.DateTime `json:"createdOn,omitempty"`
 
@@ -27,12 +28,18 @@ type UserAccessToken struct {
 	Description string `json:"description,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
+
+	// token
+	Token string `json:"token,omitempty"`
 
 	// token Id
+	// Read Only: true
 	TokenID string `json:"tokenId,omitempty"`
 
 	// user name
+	// Read Only: true
 	UserName string `json:"userName,omitempty"`
 }
 
@@ -41,6 +48,10 @@ func (m *UserAccessToken) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCreatedOn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -62,8 +73,61 @@ func (m *UserAccessToken) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this user access token based on context it is used
+func (m *UserAccessToken) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this user access token based on the context it is used
 func (m *UserAccessToken) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCreatedOn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTokenID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUserName(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *UserAccessToken) contextValidateCreatedOn(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createdOn", "body", strfmt.DateTime(m.CreatedOn)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserAccessToken) contextValidateTokenID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "tokenId", "body", string(m.TokenID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserAccessToken) contextValidateUserName(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "userName", "body", string(m.UserName)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

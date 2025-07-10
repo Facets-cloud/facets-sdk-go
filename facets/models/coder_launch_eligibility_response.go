@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CoderLaunchEligibilityResponse CoderLaunchEligibilityResponse
+// CoderLaunchEligibilityResponse coder launch eligibility response
 //
 // swagger:model CoderLaunchEligibilityResponse
 type CoderLaunchEligibilityResponse struct {

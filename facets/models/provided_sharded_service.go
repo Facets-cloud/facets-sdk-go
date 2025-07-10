@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProvidedShardedService ProvidedShardedService
+// ProvidedShardedService provided sharded service
 //
 // swagger:model ProvidedShardedService
 type ProvidedShardedService struct {

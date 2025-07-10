@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterLite ClusterLite
+// ClusterLite cluster lite
 //
 // swagger:model ClusterLite
 type ClusterLite struct {

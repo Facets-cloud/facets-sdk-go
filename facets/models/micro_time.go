@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MicroTime MicroTime
+// MicroTime micro time
 //
 // swagger:model MicroTime
 type MicroTime struct {

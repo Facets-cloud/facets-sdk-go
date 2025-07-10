@@ -8,16 +8,19 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// User User
+// User user
 //
 // swagger:model User
 type User struct {
 
 	// cluster ids
+	// Unique: true
 	ClusterIds []string `json:"clusterIds"`
 
 	// group Id
@@ -29,13 +32,18 @@ type User struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// password
+	Password string `json:"password,omitempty"`
+
 	// picture
 	Picture string `json:"picture,omitempty"`
 
 	// roles
+	// Unique: true
 	Roles []string `json:"roles"`
 
 	// teams
+	// Unique: true
 	Teams []string `json:"teams"`
 
 	// user name
@@ -44,6 +52,59 @@ type User struct {
 
 // Validate validates this user
 func (m *User) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateClusterIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRoles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTeams(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *User) validateClusterIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.ClusterIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("clusterIds", "body", m.ClusterIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *User) validateRoles(formats strfmt.Registry) error {
+	if swag.IsZero(m.Roles) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("roles", "body", m.Roles); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *User) validateTeams(formats strfmt.Registry) error {
+	if swag.IsZero(m.Teams) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("teams", "body", m.Teams); err != nil {
+		return err
+	}
+
 	return nil
 }
 

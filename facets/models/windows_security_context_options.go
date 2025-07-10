@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// WindowsSecurityContextOptions WindowsSecurityContextOptions
+// WindowsSecurityContextOptions windows security context options
 //
 // swagger:model WindowsSecurityContextOptions
 type WindowsSecurityContextOptions struct {

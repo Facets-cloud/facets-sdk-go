@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ValidationResult ValidationResult
+// ValidationResult validation result
 //
 // swagger:model ValidationResult
 type ValidationResult struct {

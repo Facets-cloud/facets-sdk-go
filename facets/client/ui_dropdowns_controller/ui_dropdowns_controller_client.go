@@ -54,96 +54,160 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetAllClusterResourcesByStackUsingGET(params *GetAllClusterResourcesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllClusterResourcesByStackUsingGETOK, error)
+	GetAffectedResourcesByCluster(params *GetAffectedResourcesByClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAffectedResourcesByClusterOK, error)
 
-	GetAllPermissionsUsingGET(params *GetAllPermissionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPermissionsUsingGETOK, error)
+	GetAffectedResourcesByStack(params *GetAffectedResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAffectedResourcesByStackOK, error)
 
-	GetAllResourcesByClusterUsingGET(params *GetAllResourcesByClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByClusterUsingGETOK, error)
+	GetAllClusterResourcesByStack(params *GetAllClusterResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllClusterResourcesByStackOK, error)
 
-	GetAllResourcesByStackUsingGET(params *GetAllResourcesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByStackUsingGETOK, error)
+	GetAllPermissions(params *GetAllPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPermissionsOK, error)
 
-	GetAllResourcesForAllClusterOfStackUsingGET(params *GetAllResourcesForAllClusterOfStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesForAllClusterOfStackUsingGETOK, error)
+	GetAllResources(params *GetAllResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesOK, error)
 
-	GetAllResourcesUsingGET(params *GetAllResourcesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesUsingGETOK, error)
+	GetAllResourcesByCluster(params *GetAllResourcesByClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByClusterOK, error)
 
-	GetAllVCSUsingGET(params *GetAllVCSUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSUsingGETOK, error)
+	GetAllResourcesByStack(params *GetAllResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByStackOK, error)
 
-	GetApplicationListByClusterIDAndResourceNameUsingGET(params *GetApplicationListByClusterIDAndResourceNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetApplicationListByClusterIDAndResourceNameUsingGETOK, error)
+	GetAllResourcesForAllClusterOfStack(params *GetAllResourcesForAllClusterOfStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesForAllClusterOfStackOK, error)
 
-	GetFileFromFacetsModulesUsingGET(params *GetFileFromFacetsModulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFileFromFacetsModulesUsingGETOK, error)
+	GetAllVCS(params *GetAllVCSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSOK, error)
 
-	GetGitHistoryForResourceUsingGET(params *GetGitHistoryForResourceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHistoryForResourceUsingGETOK, error)
+	GetApplicationListByClusterIDAndResourceName(params *GetApplicationListByClusterIDAndResourceNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetApplicationListByClusterIDAndResourceNameOK, error)
 
-	GetLaunchDAGUsingGET(params *GetLaunchDAGUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLaunchDAGUsingGETOK, error)
+	GetAzForRegionByCloud(params *GetAzForRegionByCloudParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzForRegionByCloudOK, error)
 
-	GetOutputReferencesUsingGET(params *GetOutputReferencesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesUsingGETOK, error)
+	GetFileFromFacetsModules(params *GetFileFromFacetsModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFileFromFacetsModulesOK, error)
 
-	GetRegionsUsingGET(params *GetRegionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsUsingGETOK, error)
+	GetGitHistoryForResource(params *GetGitHistoryForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHistoryForResourceOK, error)
 
-	GetReleaseStreamsUsingGET(params *GetReleaseStreamsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStreamsUsingGETOK, error)
+	GetLaunchDAG(params *GetLaunchDAGParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLaunchDAGOK, error)
 
-	GetResourceByClusterIDUsingGET(params *GetResourceByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByClusterIDUsingGETOK, error)
+	GetOutputReferences(params *GetOutputReferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesOK, error)
 
-	GetResourceByStackUsingGET(params *GetResourceByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByStackUsingGETOK, error)
+	GetOutputReferencesByType(params *GetOutputReferencesByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesByTypeOK, error)
 
-	GetResourceHistoriesByStackUsingGET(params *GetResourceHistoriesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoriesByStackUsingGETOK, error)
+	GetRegions(params *GetRegionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsOK, error)
 
-	GetResourceHistoryOverviewByStackUsingGET(params *GetResourceHistoryOverviewByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoryOverviewByStackUsingGETOK, error)
+	GetRegionsV2(params *GetRegionsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsV2OK, error)
 
-	GetRolePermissionsUsingGET(params *GetRolePermissionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRolePermissionsUsingGETOK, error)
+	GetReleaseStreams(params *GetReleaseStreamsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStreamsOK, error)
 
-	GetServiceOverviewUsingGET(params *GetServiceOverviewUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOverviewUsingGETOK, error)
+	GetResourceByClusterID(params *GetResourceByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByClusterIDOK, error)
 
-	SyncClusterHistoryUsingPOST(params *SyncClusterHistoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncClusterHistoryUsingPOSTOK, *SyncClusterHistoryUsingPOSTCreated, error)
+	GetResourceByStack(params *GetResourceByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByStackOK, error)
 
-	SyncSubstackGitHistoryUsingPOST(params *SyncSubstackGitHistoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSubstackGitHistoryUsingPOSTOK, *SyncSubstackGitHistoryUsingPOSTCreated, error)
+	GetResourceHistoriesByStack(params *GetResourceHistoriesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoriesByStackOK, error)
+
+	GetResourceHistoryOverviewByStack(params *GetResourceHistoryOverviewByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoryOverviewByStackOK, error)
+
+	GetRolePermissions(params *GetRolePermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRolePermissionsOK, error)
+
+	GetServiceOverview(params *GetServiceOverviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOverviewOK, error)
+
+	SyncClusterHistory(params *SyncClusterHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncClusterHistoryOK, error)
+
+	SyncSubstackGitHistory(params *SyncSubstackGitHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSubstackGitHistoryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetAllClusterResourcesByStackUsingGET gets all cluster resources by stack
+GetAffectedResourcesByCluster get affected resources by cluster API
 */
-func (a *Client) GetAllClusterResourcesByStackUsingGET(params *GetAllClusterResourcesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllClusterResourcesByStackUsingGETOK, error) {
+func (a *Client) GetAffectedResourcesByCluster(params *GetAffectedResourcesByClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAffectedResourcesByClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllClusterResourcesByStackUsingGETParams()
+		params = NewGetAffectedResourcesByClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllClusterResourcesByStackUsingGET",
+		ID:                 "getAffectedResourcesByCluster",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/dropdown/cluster/{clusterId}/affected-resources",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAffectedResourcesByClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAffectedResourcesByClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAffectedResourcesByCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAffectedResourcesByStack get affected resources by stack API
+*/
+func (a *Client) GetAffectedResourcesByStack(params *GetAffectedResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAffectedResourcesByStackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAffectedResourcesByStackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAffectedResourcesByStack",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/affected-resources",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAffectedResourcesByStackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAffectedResourcesByStackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAffectedResourcesByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllClusterResourcesByStack get all cluster resources by stack API
+*/
+func (a *Client) GetAllClusterResourcesByStack(params *GetAllClusterResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllClusterResourcesByStackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllClusterResourcesByStackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllClusterResourcesByStack",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/{resourceType}/{resourceName}/cluster-resources-info",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllClusterResourcesByStackUsingGETReader{formats: a.formats},
+		Reader:             &GetAllClusterResourcesByStackReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -156,33 +220,33 @@ func (a *Client) GetAllClusterResourcesByStackUsingGET(params *GetAllClusterReso
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllClusterResourcesByStackUsingGETOK)
+	success, ok := result.(*GetAllClusterResourcesByStackOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllClusterResourcesByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllClusterResourcesByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllPermissionsUsingGET gets all permissions
+GetAllPermissions get all permissions API
 */
-func (a *Client) GetAllPermissionsUsingGET(params *GetAllPermissionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPermissionsUsingGETOK, error) {
+func (a *Client) GetAllPermissions(params *GetAllPermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPermissionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllPermissionsUsingGETParams()
+		params = NewGetAllPermissionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllPermissionsUsingGET",
+		ID:                 "getAllPermissions",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/getAllPermissions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllPermissionsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllPermissionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -195,150 +259,33 @@ func (a *Client) GetAllPermissionsUsingGET(params *GetAllPermissionsUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllPermissionsUsingGETOK)
+	success, ok := result.(*GetAllPermissionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllPermissionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllPermissions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllResourcesByClusterUsingGET gets all resources by cluster
+GetAllResources get all resources API
 */
-func (a *Client) GetAllResourcesByClusterUsingGET(params *GetAllResourcesByClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByClusterUsingGETOK, error) {
+func (a *Client) GetAllResources(params *GetAllResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllResourcesByClusterUsingGETParams()
+		params = NewGetAllResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllResourcesByClusterUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/dropdown/cluster/{clusterId}/resources-info",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllResourcesByClusterUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAllResourcesByClusterUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllResourcesByClusterUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllResourcesByStackUsingGET gets all resources by stack
-*/
-func (a *Client) GetAllResourcesByStackUsingGET(params *GetAllResourcesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByStackUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllResourcesByStackUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllResourcesByStackUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/resources-info",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllResourcesByStackUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAllResourcesByStackUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllResourcesByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllResourcesForAllClusterOfStackUsingGET gets all resources for all cluster of stack
-*/
-func (a *Client) GetAllResourcesForAllClusterOfStackUsingGET(params *GetAllResourcesForAllClusterOfStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesForAllClusterOfStackUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllResourcesForAllClusterOfStackUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllResourcesForAllClusterOfStackUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/all-cluster-resources",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllResourcesForAllClusterOfStackUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAllResourcesForAllClusterOfStackUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllResourcesForAllClusterOfStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllResourcesUsingGET gets all resources
-*/
-func (a *Client) GetAllResourcesUsingGET(params *GetAllResourcesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllResourcesUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllResourcesUsingGET",
+		ID:                 "getAllResources",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/cluster/{clusterId}/resources",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllResourcesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -351,33 +298,150 @@ func (a *Client) GetAllResourcesUsingGET(params *GetAllResourcesUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllResourcesUsingGETOK)
+	success, ok := result.(*GetAllResourcesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllResourcesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllVCSUsingGET gets all v c s
+GetAllResourcesByCluster get all resources by cluster API
 */
-func (a *Client) GetAllVCSUsingGET(params *GetAllVCSUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSUsingGETOK, error) {
+func (a *Client) GetAllResourcesByCluster(params *GetAllResourcesByClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllVCSUsingGETParams()
+		params = NewGetAllResourcesByClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllVCSUsingGET",
+		ID:                 "getAllResourcesByCluster",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/cluster/{clusterId}/resources-info",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllResourcesByClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllResourcesByClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllResourcesByCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllResourcesByStack get all resources by stack API
+*/
+func (a *Client) GetAllResourcesByStack(params *GetAllResourcesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesByStackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllResourcesByStackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllResourcesByStack",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/resources-info",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllResourcesByStackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllResourcesByStackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllResourcesByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllResourcesForAllClusterOfStack get all resources for all cluster of stack API
+*/
+func (a *Client) GetAllResourcesForAllClusterOfStack(params *GetAllResourcesForAllClusterOfStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllResourcesForAllClusterOfStackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllResourcesForAllClusterOfStackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllResourcesForAllClusterOfStack",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/all-cluster-resources",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllResourcesForAllClusterOfStackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllResourcesForAllClusterOfStackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllResourcesForAllClusterOfStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllVCS get all v c s API
+*/
+func (a *Client) GetAllVCS(params *GetAllVCSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllVCSParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllVCS",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/vcs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllVCSUsingGETReader{formats: a.formats},
+		Reader:             &GetAllVCSReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -390,33 +454,33 @@ func (a *Client) GetAllVCSUsingGET(params *GetAllVCSUsingGETParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllVCSUsingGETOK)
+	success, ok := result.(*GetAllVCSOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllVCSUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllVCS: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetApplicationListByClusterIDAndResourceNameUsingGET gets application list by cluster Id and resource name
+GetApplicationListByClusterIDAndResourceName get application list by cluster Id and resource name API
 */
-func (a *Client) GetApplicationListByClusterIDAndResourceNameUsingGET(params *GetApplicationListByClusterIDAndResourceNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetApplicationListByClusterIDAndResourceNameUsingGETOK, error) {
+func (a *Client) GetApplicationListByClusterIDAndResourceName(params *GetApplicationListByClusterIDAndResourceNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetApplicationListByClusterIDAndResourceNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetApplicationListByClusterIDAndResourceNameUsingGETParams()
+		params = NewGetApplicationListByClusterIDAndResourceNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getApplicationListByClusterIdAndResourceNameUsingGET",
+		ID:                 "getApplicationListByClusterIdAndResourceName",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{clusterId}/{resourceType}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetApplicationListByClusterIDAndResourceNameUsingGETReader{formats: a.formats},
+		Reader:             &GetApplicationListByClusterIDAndResourceNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -429,33 +493,72 @@ func (a *Client) GetApplicationListByClusterIDAndResourceNameUsingGET(params *Ge
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetApplicationListByClusterIDAndResourceNameUsingGETOK)
+	success, ok := result.(*GetApplicationListByClusterIDAndResourceNameOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getApplicationListByClusterIdAndResourceNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getApplicationListByClusterIdAndResourceName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetFileFromFacetsModulesUsingGET gets file from facets modules
+GetAzForRegionByCloud get az for region by cloud API
 */
-func (a *Client) GetFileFromFacetsModulesUsingGET(params *GetFileFromFacetsModulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFileFromFacetsModulesUsingGETOK, error) {
+func (a *Client) GetAzForRegionByCloud(params *GetAzForRegionByCloudParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzForRegionByCloudOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetFileFromFacetsModulesUsingGETParams()
+		params = NewGetAzForRegionByCloudParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getFileFromFacetsModulesUsingGET",
+		ID:                 "getAzForRegionByCloud",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/{cloud}/region/{region}/availability-zones",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAzForRegionByCloudReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAzForRegionByCloudOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAzForRegionByCloud: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetFileFromFacetsModules get file from facets modules API
+*/
+func (a *Client) GetFileFromFacetsModules(params *GetFileFromFacetsModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFileFromFacetsModulesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetFileFromFacetsModulesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getFileFromFacetsModules",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/file",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetFileFromFacetsModulesUsingGETReader{formats: a.formats},
+		Reader:             &GetFileFromFacetsModulesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -468,33 +571,33 @@ func (a *Client) GetFileFromFacetsModulesUsingGET(params *GetFileFromFacetsModul
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetFileFromFacetsModulesUsingGETOK)
+	success, ok := result.(*GetFileFromFacetsModulesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getFileFromFacetsModulesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getFileFromFacetsModules: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetGitHistoryForResourceUsingGET gets git history for resource
+GetGitHistoryForResource get git history for resource API
 */
-func (a *Client) GetGitHistoryForResourceUsingGET(params *GetGitHistoryForResourceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHistoryForResourceUsingGETOK, error) {
+func (a *Client) GetGitHistoryForResource(params *GetGitHistoryForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGitHistoryForResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetGitHistoryForResourceUsingGETParams()
+		params = NewGetGitHistoryForResourceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getGitHistoryForResourceUsingGET",
+		ID:                 "getGitHistoryForResource",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/logs/cluster/{clusterId}/resourceName/{resourceName}/resourceType/{resourceType}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetGitHistoryForResourceUsingGETReader{formats: a.formats},
+		Reader:             &GetGitHistoryForResourceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -507,33 +610,33 @@ func (a *Client) GetGitHistoryForResourceUsingGET(params *GetGitHistoryForResour
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetGitHistoryForResourceUsingGETOK)
+	success, ok := result.(*GetGitHistoryForResourceOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getGitHistoryForResourceUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getGitHistoryForResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetLaunchDAGUsingGET gets launch d a g
+GetLaunchDAG get launch d a g API
 */
-func (a *Client) GetLaunchDAGUsingGET(params *GetLaunchDAGUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLaunchDAGUsingGETOK, error) {
+func (a *Client) GetLaunchDAG(params *GetLaunchDAGParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLaunchDAGOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetLaunchDAGUsingGETParams()
+		params = NewGetLaunchDAGParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getLaunchDAGUsingGET",
+		ID:                 "getLaunchDAG",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{clusterId}/cloud/{cloud}/launch-dag",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetLaunchDAGUsingGETReader{formats: a.formats},
+		Reader:             &GetLaunchDAGReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -546,33 +649,33 @@ func (a *Client) GetLaunchDAGUsingGET(params *GetLaunchDAGUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetLaunchDAGUsingGETOK)
+	success, ok := result.(*GetLaunchDAGOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getLaunchDAGUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getLaunchDAG: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetOutputReferencesUsingGET gets output references
+GetOutputReferences get output references API
 */
-func (a *Client) GetOutputReferencesUsingGET(params *GetOutputReferencesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesUsingGETOK, error) {
+func (a *Client) GetOutputReferences(params *GetOutputReferencesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetOutputReferencesUsingGETParams()
+		params = NewGetOutputReferencesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getOutputReferencesUsingGET",
+		ID:                 "getOutputReferences",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{stackName}/output/{outputType}/references",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetOutputReferencesUsingGETReader{formats: a.formats},
+		Reader:             &GetOutputReferencesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -585,33 +688,72 @@ func (a *Client) GetOutputReferencesUsingGET(params *GetOutputReferencesUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetOutputReferencesUsingGETOK)
+	success, ok := result.(*GetOutputReferencesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getOutputReferencesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getOutputReferences: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetRegionsUsingGET gets regions
+GetOutputReferencesByType get output references by type API
 */
-func (a *Client) GetRegionsUsingGET(params *GetRegionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsUsingGETOK, error) {
+func (a *Client) GetOutputReferencesByType(params *GetOutputReferencesByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOutputReferencesByTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetRegionsUsingGETParams()
+		params = NewGetOutputReferencesByTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getRegionsUsingGET",
+		ID:                 "getOutputReferencesByType",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/{stackName}/output-references",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetOutputReferencesByTypeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetOutputReferencesByTypeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getOutputReferencesByType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetRegions get regions API
+*/
+func (a *Client) GetRegions(params *GetRegionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetRegionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getRegions",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{cloud}/regions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRegionsUsingGETReader{formats: a.formats},
+		Reader:             &GetRegionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -624,33 +766,72 @@ func (a *Client) GetRegionsUsingGET(params *GetRegionsUsingGETParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRegionsUsingGETOK)
+	success, ok := result.(*GetRegionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getRegionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getRegions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetReleaseStreamsUsingGET gets release streams
+GetRegionsV2 get regions v2 API
 */
-func (a *Client) GetReleaseStreamsUsingGET(params *GetReleaseStreamsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStreamsUsingGETOK, error) {
+func (a *Client) GetRegionsV2(params *GetRegionsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegionsV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetReleaseStreamsUsingGETParams()
+		params = NewGetRegionsV2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getReleaseStreamsUsingGET",
+		ID:                 "getRegionsV2",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/dropdown/{cloud}/regions-v2",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetRegionsV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetRegionsV2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getRegionsV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetReleaseStreams get release streams API
+*/
+func (a *Client) GetReleaseStreams(params *GetReleaseStreamsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseStreamsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetReleaseStreamsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getReleaseStreams",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/releaseStreams",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReleaseStreamsUsingGETReader{formats: a.formats},
+		Reader:             &GetReleaseStreamsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -663,33 +844,33 @@ func (a *Client) GetReleaseStreamsUsingGET(params *GetReleaseStreamsUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetReleaseStreamsUsingGETOK)
+	success, ok := result.(*GetReleaseStreamsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getReleaseStreamsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getReleaseStreams: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceByClusterIDUsingGET gets resource by cluster Id
+GetResourceByClusterID get resource by cluster Id API
 */
-func (a *Client) GetResourceByClusterIDUsingGET(params *GetResourceByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByClusterIDUsingGETOK, error) {
+func (a *Client) GetResourceByClusterID(params *GetResourceByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByClusterIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceByClusterIDUsingGETParams()
+		params = NewGetResourceByClusterIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceByClusterIdUsingGET",
+		ID:                 "getResourceByClusterId",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/cluster/{clusterId}/{resourceType}/{resourceName}/resource-info",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceByClusterIDUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceByClusterIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -702,33 +883,33 @@ func (a *Client) GetResourceByClusterIDUsingGET(params *GetResourceByClusterIDUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceByClusterIDUsingGETOK)
+	success, ok := result.(*GetResourceByClusterIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceByClusterIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceByClusterId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceByStackUsingGET gets resource by stack
+GetResourceByStack get resource by stack API
 */
-func (a *Client) GetResourceByStackUsingGET(params *GetResourceByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByStackUsingGETOK, error) {
+func (a *Client) GetResourceByStack(params *GetResourceByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceByStackOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceByStackUsingGETParams()
+		params = NewGetResourceByStackParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceByStackUsingGET",
+		ID:                 "getResourceByStack",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/{resourceType}/{resourceName}/resource-info",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceByStackUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceByStackReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -741,33 +922,33 @@ func (a *Client) GetResourceByStackUsingGET(params *GetResourceByStackUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceByStackUsingGETOK)
+	success, ok := result.(*GetResourceByStackOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceHistoriesByStackUsingGET gets resource histories by stack
+GetResourceHistoriesByStack get resource histories by stack API
 */
-func (a *Client) GetResourceHistoriesByStackUsingGET(params *GetResourceHistoriesByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoriesByStackUsingGETOK, error) {
+func (a *Client) GetResourceHistoriesByStack(params *GetResourceHistoriesByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoriesByStackOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceHistoriesByStackUsingGETParams()
+		params = NewGetResourceHistoriesByStackParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceHistoriesByStackUsingGET",
+		ID:                 "getResourceHistoriesByStack",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/resource-history",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceHistoriesByStackUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceHistoriesByStackReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -780,33 +961,33 @@ func (a *Client) GetResourceHistoriesByStackUsingGET(params *GetResourceHistorie
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceHistoriesByStackUsingGETOK)
+	success, ok := result.(*GetResourceHistoriesByStackOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceHistoriesByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceHistoriesByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceHistoryOverviewByStackUsingGET gets resource history overview by stack
+GetResourceHistoryOverviewByStack get resource history overview by stack API
 */
-func (a *Client) GetResourceHistoryOverviewByStackUsingGET(params *GetResourceHistoryOverviewByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoryOverviewByStackUsingGETOK, error) {
+func (a *Client) GetResourceHistoryOverviewByStack(params *GetResourceHistoryOverviewByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceHistoryOverviewByStackOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceHistoryOverviewByStackUsingGETParams()
+		params = NewGetResourceHistoryOverviewByStackParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceHistoryOverviewByStackUsingGET",
+		ID:                 "getResourceHistoryOverviewByStack",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/resource-history-overview",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceHistoryOverviewByStackUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceHistoryOverviewByStackReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -819,33 +1000,33 @@ func (a *Client) GetResourceHistoryOverviewByStackUsingGET(params *GetResourceHi
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceHistoryOverviewByStackUsingGETOK)
+	success, ok := result.(*GetResourceHistoryOverviewByStackOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceHistoryOverviewByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceHistoryOverviewByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetRolePermissionsUsingGET gets role permissions
+GetRolePermissions get role permissions API
 */
-func (a *Client) GetRolePermissionsUsingGET(params *GetRolePermissionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRolePermissionsUsingGETOK, error) {
+func (a *Client) GetRolePermissions(params *GetRolePermissionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRolePermissionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetRolePermissionsUsingGETParams()
+		params = NewGetRolePermissionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getRolePermissionsUsingGET",
+		ID:                 "getRolePermissions",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/rolePermissions/{role}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRolePermissionsUsingGETReader{formats: a.formats},
+		Reader:             &GetRolePermissionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -858,33 +1039,33 @@ func (a *Client) GetRolePermissionsUsingGET(params *GetRolePermissionsUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRolePermissionsUsingGETOK)
+	success, ok := result.(*GetRolePermissionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getRolePermissionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getRolePermissions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetServiceOverviewUsingGET gets service overview
+GetServiceOverview get service overview API
 */
-func (a *Client) GetServiceOverviewUsingGET(params *GetServiceOverviewUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOverviewUsingGETOK, error) {
+func (a *Client) GetServiceOverview(params *GetServiceOverviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceOverviewOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetServiceOverviewUsingGETParams()
+		params = NewGetServiceOverviewParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getServiceOverviewUsingGET",
+		ID:                 "getServiceOverview",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/dropdown/stack/{stackName}/service/{serviceName}/overview",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetServiceOverviewUsingGETReader{formats: a.formats},
+		Reader:             &GetServiceOverviewReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -897,33 +1078,33 @@ func (a *Client) GetServiceOverviewUsingGET(params *GetServiceOverviewUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetServiceOverviewUsingGETOK)
+	success, ok := result.(*GetServiceOverviewOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getServiceOverviewUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getServiceOverview: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SyncClusterHistoryUsingPOST syncs cluster history
+SyncClusterHistory sync cluster history API
 */
-func (a *Client) SyncClusterHistoryUsingPOST(params *SyncClusterHistoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncClusterHistoryUsingPOSTOK, *SyncClusterHistoryUsingPOSTCreated, error) {
+func (a *Client) SyncClusterHistory(params *SyncClusterHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncClusterHistoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSyncClusterHistoryUsingPOSTParams()
+		params = NewSyncClusterHistoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "syncClusterHistoryUsingPOST",
+		ID:                 "syncClusterHistory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/dropdown/logs/cluster/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SyncClusterHistoryUsingPOSTReader{formats: a.formats},
+		Reader:             &SyncClusterHistoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -934,36 +1115,35 @@ func (a *Client) SyncClusterHistoryUsingPOST(params *SyncClusterHistoryUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SyncClusterHistoryUsingPOSTOK:
-		return value, nil, nil
-	case *SyncClusterHistoryUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SyncClusterHistoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_dropdowns_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for syncClusterHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SyncSubstackGitHistoryUsingPOST syncs substack git history
+SyncSubstackGitHistory sync substack git history API
 */
-func (a *Client) SyncSubstackGitHistoryUsingPOST(params *SyncSubstackGitHistoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSubstackGitHistoryUsingPOSTOK, *SyncSubstackGitHistoryUsingPOSTCreated, error) {
+func (a *Client) SyncSubstackGitHistory(params *SyncSubstackGitHistoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSubstackGitHistoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSyncSubstackGitHistoryUsingPOSTParams()
+		params = NewSyncSubstackGitHistoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "syncSubstackGitHistoryUsingPOST",
+		ID:                 "syncSubstackGitHistory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/dropdown/logs/substack",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SyncSubstackGitHistoryUsingPOSTReader{formats: a.formats},
+		Reader:             &SyncSubstackGitHistoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -974,16 +1154,15 @@ func (a *Client) SyncSubstackGitHistoryUsingPOST(params *SyncSubstackGitHistoryU
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SyncSubstackGitHistoryUsingPOSTOK:
-		return value, nil, nil
-	case *SyncSubstackGitHistoryUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SyncSubstackGitHistoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_dropdowns_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for syncSubstackGitHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

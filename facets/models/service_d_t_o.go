@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceDTO ServiceDTO
+// ServiceDTO service d t o
 //
 // swagger:model ServiceDTO
 type ServiceDTO struct {

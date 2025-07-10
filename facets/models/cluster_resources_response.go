@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterResourcesResponse ClusterResourcesResponse
+// ClusterResourcesResponse cluster resources response
 //
 // swagger:model ClusterResourcesResponse
 type ClusterResourcesResponse struct {

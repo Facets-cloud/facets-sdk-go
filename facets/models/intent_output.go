@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IntentOutput IntentOutput
+// IntentOutput intent output
 //
 // swagger:model IntentOutput
 type IntentOutput struct {

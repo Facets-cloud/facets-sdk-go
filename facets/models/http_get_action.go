@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HTTPGetAction HTTPGetAction
+// HTTPGetAction HTTP get action
 //
 // swagger:model HTTPGetAction
 type HTTPGetAction struct {

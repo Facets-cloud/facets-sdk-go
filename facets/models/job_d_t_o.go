@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// JobDTO JobDTO
+// JobDTO job d t o
 //
 // swagger:model JobDTO
 type JobDTO struct {

@@ -54,62 +54,38 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ConfigureDraftClusterUsingPOST2(params *ConfigureDraftClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOST2OK, *ConfigureDraftClusterUsingPOST2Created, error)
+	ConfigureDraftCluster(params *ConfigureDraftClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterOK, error)
 
-	CreateGCPClusterUsingPOST(params *CreateGCPClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGCPClusterUsingPOSTOK, *CreateGCPClusterUsingPOSTCreated, error)
+	CreateGCPCluster(params *CreateGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGCPClusterOK, error)
 
-	GetGCPClusterUsingGET(params *GetGCPClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGCPClusterUsingGETOK, error)
+	GetGCPCluster(params *GetGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGCPClusterOK, error)
 
-	UpdateGCPClusterUsingPUT(params *UpdateGCPClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGCPClusterUsingPUTOK, *UpdateGCPClusterUsingPUTCreated, error)
+	UpdateGCPCluster(params *UpdateGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGCPClusterOK, error)
 
-	ValidateVpcIDUsingGET1(params *ValidateVpcIDUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDUsingGET1OK, error)
+	ValidateVpcID(params *ValidateVpcIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ConfigureDraftClusterUsingPOST2 configures draft cluster
+ConfigureDraftCluster configure draft cluster API
 */
-func (a *Client) ConfigureDraftClusterUsingPOST2(params *ConfigureDraftClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOST2OK, *ConfigureDraftClusterUsingPOST2Created, error) {
+func (a *Client) ConfigureDraftCluster(params *ConfigureDraftClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConfigureDraftClusterUsingPOST2Params()
+		params = NewConfigureDraftClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "configureDraftClusterUsingPOST_2",
+		ID:                 "configureDraftCluster",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/gcp/clusters/configure/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConfigureDraftClusterUsingPOST2Reader{formats: a.formats},
+		Reader:             &ConfigureDraftClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -120,76 +96,35 @@ func (a *Client) ConfigureDraftClusterUsingPOST2(params *ConfigureDraftClusterUs
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ConfigureDraftClusterUsingPOST2OK:
-		return value, nil, nil
-	case *ConfigureDraftClusterUsingPOST2Created:
-		return nil, value, nil
+	success, ok := result.(*ConfigureDraftClusterOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_gcp_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for configureDraftCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateGCPClusterUsingPOST creates g c p cluster
+CreateGCPCluster create g c p cluster API
 */
-func (a *Client) CreateGCPClusterUsingPOST(params *CreateGCPClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGCPClusterUsingPOSTOK, *CreateGCPClusterUsingPOSTCreated, error) {
+func (a *Client) CreateGCPCluster(params *CreateGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGCPClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGCPClusterUsingPOSTParams()
+		params = NewCreateGCPClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createGCPClusterUsingPOST",
+		ID:                 "createGCPCluster",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/gcp/clusters",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGCPClusterUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateGCPClusterUsingPOSTOK:
-		return value, nil, nil
-	case *CreateGCPClusterUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_gcp_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetGCPClusterUsingGET gets g c p cluster
-*/
-func (a *Client) GetGCPClusterUsingGET(params *GetGCPClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGCPClusterUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetGCPClusterUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getGCPClusterUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/gcp/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetGCPClusterUsingGETReader{formats: a.formats},
+		Reader:             &CreateGCPClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,73 +137,72 @@ func (a *Client) GetGCPClusterUsingGET(params *GetGCPClusterUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetGCPClusterUsingGETOK)
+	success, ok := result.(*CreateGCPClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getGCPClusterUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createGCPCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateGCPClusterUsingPUT updates g c p cluster
+GetGCPCluster get g c p cluster API
 */
-func (a *Client) UpdateGCPClusterUsingPUT(params *UpdateGCPClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGCPClusterUsingPUTOK, *UpdateGCPClusterUsingPUTCreated, error) {
+func (a *Client) GetGCPCluster(params *GetGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetGCPClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGCPClusterUsingPUTParams()
+		params = NewGetGCPClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateGCPClusterUsingPUT",
+		ID:                 "getGCPCluster",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/gcp/clusters/{clusterId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetGCPClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetGCPClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getGCPCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateGCPCluster update g c p cluster API
+*/
+func (a *Client) UpdateGCPCluster(params *UpdateGCPClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGCPClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateGCPClusterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateGCPCluster",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/gcp/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGCPClusterUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *UpdateGCPClusterUsingPUTOK:
-		return value, nil, nil
-	case *UpdateGCPClusterUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_gcp_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-ValidateVpcIDUsingGET1 validates vpc Id
-*/
-func (a *Client) ValidateVpcIDUsingGET1(params *ValidateVpcIDUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDUsingGET1OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewValidateVpcIDUsingGET1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "validateVpcIdUsingGET_1",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/gcp/clusters/validate-vpcId",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ValidateVpcIDUsingGET1Reader{formats: a.formats},
+		Reader:             &UpdateGCPClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -281,13 +215,52 @@ func (a *Client) ValidateVpcIDUsingGET1(params *ValidateVpcIDUsingGET1Params, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ValidateVpcIDUsingGET1OK)
+	success, ok := result.(*UpdateGCPClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for validateVpcIdUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateGCPCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ValidateVpcID validate vpc Id API
+*/
+func (a *Client) ValidateVpcID(params *ValidateVpcIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewValidateVpcIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "validateVpcId",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/gcp/clusters/validate-vpcId",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ValidateVpcIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ValidateVpcIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for validateVpcId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -14,9 +14,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PageDeploymentLog Page«DeploymentLog»
+// PageDeploymentLog page deployment log
 //
-// swagger:model Page«DeploymentLog»
+// swagger:model PageDeploymentLog
 type PageDeploymentLog struct {
 
 	// content
@@ -38,13 +38,13 @@ type PageDeploymentLog struct {
 	NumberOfElements int32 `json:"numberOfElements,omitempty"`
 
 	// pageable
-	Pageable *Pageable `json:"pageable,omitempty"`
+	Pageable *PageableObject `json:"pageable,omitempty"`
 
 	// size
 	Size int32 `json:"size,omitempty"`
 
 	// sort
-	Sort *Sort `json:"sort,omitempty"`
+	Sort *SortObject `json:"sort,omitempty"`
 
 	// total elements
 	TotalElements int64 `json:"totalElements,omitempty"`

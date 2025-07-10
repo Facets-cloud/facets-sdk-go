@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ArtifactRoutingRuleResponse ArtifactRoutingRuleResponse
+// ArtifactRoutingRuleResponse artifact routing rule response
 //
 // swagger:model ArtifactRoutingRuleResponse
 type ArtifactRoutingRuleResponse struct {

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// OverrideConfig OverrideConfig
+// OverrideConfig override config
 //
 // swagger:model OverrideConfig
 type OverrideConfig struct {

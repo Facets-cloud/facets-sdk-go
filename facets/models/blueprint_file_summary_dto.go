@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BlueprintFileSummaryDto BlueprintFileSummaryDto
+// BlueprintFileSummaryDto blueprint file summary dto
 //
 // swagger:model BlueprintFileSummaryDto
 type BlueprintFileSummaryDto struct {

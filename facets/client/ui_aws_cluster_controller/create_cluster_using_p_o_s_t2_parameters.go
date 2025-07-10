@@ -63,11 +63,8 @@ CreateClusterUsingPOST2Params contains all the parameters to send to the API end
 */
 type CreateClusterUsingPOST2Params struct {
 
-	/* Request.
-
-	   request
-	*/
-	Request *models.AwsClusterRequest
+	// Body.
+	Body *models.AwsClusterRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,15 +119,15 @@ func (o *CreateClusterUsingPOST2Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithRequest adds the request to the create cluster using p o s t2 params
-func (o *CreateClusterUsingPOST2Params) WithRequest(request *models.AwsClusterRequest) *CreateClusterUsingPOST2Params {
-	o.SetRequest(request)
+// WithBody adds the body to the create cluster using p o s t2 params
+func (o *CreateClusterUsingPOST2Params) WithBody(body *models.AwsClusterRequest) *CreateClusterUsingPOST2Params {
+	o.SetBody(body)
 	return o
 }
 
-// SetRequest adds the request to the create cluster using p o s t2 params
-func (o *CreateClusterUsingPOST2Params) SetRequest(request *models.AwsClusterRequest) {
-	o.Request = request
+// SetBody adds the body to the create cluster using p o s t2 params
+func (o *CreateClusterUsingPOST2Params) SetBody(body *models.AwsClusterRequest) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +137,8 @@ func (o *CreateClusterUsingPOST2Params) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
-	if o.Request != nil {
-		if err := r.SetBodyParam(o.Request); err != nil {
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
 	}

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceEnableDisableRequest ResourceEnableDisableRequest
+// ResourceEnableDisableRequest resource enable disable request
 //
 // swagger:model ResourceEnableDisableRequest
 type ResourceEnableDisableRequest struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GlusterfsVolumeSource GlusterfsVolumeSource
+// GlusterfsVolumeSource glusterfs volume source
 //
 // swagger:model GlusterfsVolumeSource
 type GlusterfsVolumeSource struct {

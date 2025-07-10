@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TokenValidationRequest TokenValidationRequest
+// TokenValidationRequest token validation request
 //
 // swagger:model TokenValidationRequest
 type TokenValidationRequest struct {

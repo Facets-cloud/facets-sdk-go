@@ -54,98 +54,34 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ContinueChatUsingPOST(params *ContinueChatUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContinueChatUsingPOSTOK, *ContinueChatUsingPOSTCreated, error)
+	ContinueChat(params *ContinueChatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContinueChatOK, error)
 
-	CreateThreadUsingGET(params *CreateThreadUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateThreadUsingGETOK, error)
+	CreateThread(params *CreateThreadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateThreadOK, error)
 
-	GetChatUsingPOST(params *GetChatUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChatUsingPOSTOK, *GetChatUsingPOSTCreated, error)
+	GetChat(params *GetChatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChatOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ContinueChatUsingPOST continues chat
+ContinueChat continues chat
 */
-func (a *Client) ContinueChatUsingPOST(params *ContinueChatUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContinueChatUsingPOSTOK, *ContinueChatUsingPOSTCreated, error) {
+func (a *Client) ContinueChat(params *ContinueChatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContinueChatOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewContinueChatUsingPOSTParams()
+		params = NewContinueChatParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "continueChatUsingPOST",
+		ID:                 "continueChat",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v2/assistant/chat",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ContinueChatUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *ContinueChatUsingPOSTOK:
-		return value, nil, nil
-	case *ContinueChatUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_assistant_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateThreadUsingGET creates thread
-*/
-func (a *Client) CreateThreadUsingGET(params *CreateThreadUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateThreadUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateThreadUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createThreadUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v2/assistant/thread",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateThreadUsingGETReader{formats: a.formats},
+		Reader:             &ContinueChatReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -158,33 +94,33 @@ func (a *Client) CreateThreadUsingGET(params *CreateThreadUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateThreadUsingGETOK)
+	success, ok := result.(*ContinueChatOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for createThreadUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for continueChat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetChatUsingPOST gets chat
+CreateThread create thread API
 */
-func (a *Client) GetChatUsingPOST(params *GetChatUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChatUsingPOSTOK, *GetChatUsingPOSTCreated, error) {
+func (a *Client) CreateThread(params *CreateThreadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateThreadOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetChatUsingPOSTParams()
+		params = NewCreateThreadParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getChatUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v2/assistant/{threadId}/getChat",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "createThread",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v2/assistant/thread",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetChatUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateThreadReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -195,16 +131,54 @@ func (a *Client) GetChatUsingPOST(params *GetChatUsingPOSTParams, authInfo runti
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *GetChatUsingPOSTOK:
-		return value, nil, nil
-	case *GetChatUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateThreadOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_assistant_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createThread: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetChat get chat API
+*/
+func (a *Client) GetChat(params *GetChatParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetChatOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetChatParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getChat",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v2/assistant/{threadId}/getChat",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetChatReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetChatOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getChat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadGitlabOauthAppPayload OneTimePayload«GitlabOauthAppPayload»
+// OneTimePayloadGitlabOauthAppPayload one time payload gitlab oauth app payload
 //
-// swagger:model OneTimePayload«GitlabOauthAppPayload»
+// swagger:model OneTimePayloadGitlabOauthAppPayload
 type OneTimePayloadGitlabOauthAppPayload struct {
 
 	// payload

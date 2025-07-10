@@ -54,64 +54,40 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ConfigureDraftClusterUsingPOST(params *ConfigureDraftClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOSTOK, *ConfigureDraftClusterUsingPOSTCreated, error)
+	ConfigureDraftCluster2(params *ConfigureDraftCluster2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftCluster2OK, error)
 
-	CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterUsingPOST2OK, *CreateClusterUsingPOST2Created, error)
+	CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterUsingPOST2OK, error)
 
 	GetClusterUsingGET2(params *GetClusterUsingGET2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterUsingGET2OK, error)
 
-	OnboardCustomerUsingPOST(params *OnboardCustomerUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OnboardCustomerUsingPOSTOK, *OnboardCustomerUsingPOSTCreated, error)
+	OnboardCustomer(params *OnboardCustomerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OnboardCustomerOK, error)
 
-	UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterUsingPUT2OK, *UpdateClusterUsingPUT2Created, error)
+	UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterUsingPUT2OK, error)
 
-	ValidateVpcIDUsingGET(params *ValidateVpcIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDUsingGETOK, error)
+	ValidateVpcID1(params *ValidateVpcID1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcId1OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ConfigureDraftClusterUsingPOST configures draft cluster
+ConfigureDraftCluster2 configure draft cluster 2 API
 */
-func (a *Client) ConfigureDraftClusterUsingPOST(params *ConfigureDraftClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOSTOK, *ConfigureDraftClusterUsingPOSTCreated, error) {
+func (a *Client) ConfigureDraftCluster2(params *ConfigureDraftCluster2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftCluster2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConfigureDraftClusterUsingPOSTParams()
+		params = NewConfigureDraftCluster2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "configureDraftClusterUsingPOST",
+		ID:                 "configureDraftCluster_2",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/aws/clusters/configure/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConfigureDraftClusterUsingPOSTReader{formats: a.formats},
+		Reader:             &ConfigureDraftCluster2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -122,23 +98,22 @@ func (a *Client) ConfigureDraftClusterUsingPOST(params *ConfigureDraftClusterUsi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ConfigureDraftClusterUsingPOSTOK:
-		return value, nil, nil
-	case *ConfigureDraftClusterUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ConfigureDraftCluster2OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_aws_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for configureDraftCluster_2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
 CreateClusterUsingPOST2 creates a new environment for a blueprint
 */
-func (a *Client) CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterUsingPOST2OK, *CreateClusterUsingPOST2Created, error) {
+func (a *Client) CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterUsingPOST2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateClusterUsingPOST2Params()
@@ -147,7 +122,7 @@ func (a *Client) CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, 
 		ID:                 "createClusterUsingPOST2",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/aws/clusters",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
@@ -162,21 +137,20 @@ func (a *Client) CreateClusterUsingPOST2(params *CreateClusterUsingPOST2Params, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateClusterUsingPOST2OK:
-		return value, nil, nil
-	case *CreateClusterUsingPOST2Created:
-		return nil, value, nil
+	success, ok := result.(*CreateClusterUsingPOST2OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_aws_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createClusterUsingPOST2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetClusterUsingGET2 gets cluster
+GetClusterUsingGET2 get cluster using g e t2 API
 */
 func (a *Client) GetClusterUsingGET2(params *GetClusterUsingGET2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterUsingGET2OK, error) {
 	// TODO: Validate the params before sending
@@ -187,7 +161,7 @@ func (a *Client) GetClusterUsingGET2(params *GetClusterUsingGET2Params, authInfo
 		ID:                 "getClusterUsingGET2",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/aws/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
@@ -215,22 +189,22 @@ func (a *Client) GetClusterUsingGET2(params *GetClusterUsingGET2Params, authInfo
 }
 
 /*
-OnboardCustomerUsingPOST onboards customer
+OnboardCustomer onboard customer API
 */
-func (a *Client) OnboardCustomerUsingPOST(params *OnboardCustomerUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OnboardCustomerUsingPOSTOK, *OnboardCustomerUsingPOSTCreated, error) {
+func (a *Client) OnboardCustomer(params *OnboardCustomerParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OnboardCustomerOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewOnboardCustomerUsingPOSTParams()
+		params = NewOnboardCustomerParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "onboardCustomerUsingPOST",
+		ID:                 "onboardCustomer",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/aws/clusters/onboard-customer",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &OnboardCustomerUsingPOSTReader{formats: a.formats},
+		Reader:             &OnboardCustomerReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -241,23 +215,22 @@ func (a *Client) OnboardCustomerUsingPOST(params *OnboardCustomerUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *OnboardCustomerUsingPOSTOK:
-		return value, nil, nil
-	case *OnboardCustomerUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*OnboardCustomerOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_aws_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for onboardCustomer: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateClusterUsingPUT2 updates cluster
+UpdateClusterUsingPUT2 update cluster using p u t2 API
 */
-func (a *Client) UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterUsingPUT2OK, *UpdateClusterUsingPUT2Created, error) {
+func (a *Client) UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateClusterUsingPUT2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateClusterUsingPUT2Params()
@@ -266,7 +239,7 @@ func (a *Client) UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, au
 		ID:                 "updateClusterUsingPUT2",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/aws/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
@@ -281,36 +254,35 @@ func (a *Client) UpdateClusterUsingPUT2(params *UpdateClusterUsingPUT2Params, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateClusterUsingPUT2OK:
-		return value, nil, nil
-	case *UpdateClusterUsingPUT2Created:
-		return nil, value, nil
+	success, ok := result.(*UpdateClusterUsingPUT2OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_aws_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateClusterUsingPUT2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateVpcIDUsingGET validates vpc Id
+ValidateVpcID1 validate vpc Id 1 API
 */
-func (a *Client) ValidateVpcIDUsingGET(params *ValidateVpcIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcIDUsingGETOK, error) {
+func (a *Client) ValidateVpcID1(params *ValidateVpcID1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVpcId1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateVpcIDUsingGETParams()
+		params = NewValidateVpcID1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateVpcIdUsingGET",
+		ID:                 "validateVpcId_1",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/aws/clusters/validate-vpcId",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateVpcIDUsingGETReader{formats: a.formats},
+		Reader:             &ValidateVpcID1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -323,13 +295,13 @@ func (a *Client) ValidateVpcIDUsingGET(params *ValidateVpcIDUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ValidateVpcIDUsingGETOK)
+	success, ok := result.(*ValidateVpcId1OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for validateVpcIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateVpcId_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

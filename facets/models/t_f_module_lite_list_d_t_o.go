@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TFModuleLiteListDTO TFModuleLiteListDTO
+// TFModuleLiteListDTO Grouped resources by type and name
 //
 // swagger:model TFModuleLiteListDTO
 type TFModuleLiteListDTO struct {

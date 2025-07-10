@@ -15,15 +15,17 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// UserGroup UserGroup
+// UserGroup user group
 //
 // swagger:model UserGroup
 type UserGroup struct {
 
 	// accounts
+	// Unique: true
 	Accounts []string `json:"accounts"`
 
 	// additional roles
+	// Unique: true
 	AdditionalRoles []string `json:"additionalRoles"`
 
 	// associated resource groups
@@ -36,6 +38,7 @@ type UserGroup struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// cluster ids
+	// Unique: true
 	ClusterIds []string `json:"clusterIds"`
 
 	// cluster role bindings
@@ -55,6 +58,7 @@ type UserGroup struct {
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stack names
+	// Unique: true
 	StackNames []string `json:"stackNames"`
 
 	// versioning key
@@ -65,13 +69,65 @@ type UserGroup struct {
 func (m *UserGroup) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccounts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAdditionalRoles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterIds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEntityType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackNames(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *UserGroup) validateAccounts(formats strfmt.Registry) error {
+	if swag.IsZero(m.Accounts) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("accounts", "body", m.Accounts); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserGroup) validateAdditionalRoles(formats strfmt.Registry) error {
+	if swag.IsZero(m.AdditionalRoles) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("additionalRoles", "body", m.AdditionalRoles); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserGroup) validateClusterIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.ClusterIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("clusterIds", "body", m.ClusterIds); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -132,6 +188,18 @@ func (m *UserGroup) validateEntityType(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserGroup) validateStackNames(formats strfmt.Registry) error {
+	if swag.IsZero(m.StackNames) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("stackNames", "body", m.StackNames); err != nil {
 		return err
 	}
 

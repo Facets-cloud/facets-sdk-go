@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ChangedAttribute ChangedAttribute
+// ChangedAttribute changed attribute
 //
 // swagger:model ChangedAttribute
 type ChangedAttribute struct {

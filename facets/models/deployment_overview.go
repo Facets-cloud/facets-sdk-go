@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DeploymentOverview DeploymentOverview
+// DeploymentOverview deployment overview
 //
 // swagger:model DeploymentOverview
 type DeploymentOverview struct {

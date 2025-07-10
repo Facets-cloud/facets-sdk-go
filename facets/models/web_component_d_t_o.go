@@ -15,16 +15,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// WebComponentDTO WebComponentDTO
-//
-// # Model representing a Web Component for embedding custom applications
+// WebComponentDTO Model representing a Web Component for embedding custom applications
 //
 // swagger:model WebComponentDTO
 type WebComponentDTO struct {
 
 	// Additional contextual attributes for component configuration
 	// Example: {"theme":"dark","width":"100%"}
-	ContextualAttributes interface{} `json:"contextualAttributes,omitempty"`
+	ContextualAttributes map[string]interface{} `json:"contextualAttributes,omitempty"`
 
 	// Flag to enable/disable component visibility
 	// Example: true
@@ -40,9 +38,11 @@ type WebComponentDTO struct {
 	ID string `json:"id,omitempty"`
 
 	// last modified by
+	// Read Only: true
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
 
 	// last modified date
+	// Read Only: true
 	// Format: date-time
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
@@ -183,8 +183,39 @@ func (m *WebComponentDTO) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this web component d t o based on context it is used
+// ContextValidate validate this web component d t o based on the context it is used
 func (m *WebComponentDTO) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLastModifiedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLastModifiedDate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *WebComponentDTO) contextValidateLastModifiedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "lastModifiedBy", "body", string(m.LastModifiedBy)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *WebComponentDTO) contextValidateLastModifiedDate(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "lastModifiedDate", "body", strfmt.DateTime(m.LastModifiedDate)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

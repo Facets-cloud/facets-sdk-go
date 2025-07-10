@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NodeAffinity NodeAffinity
+// NodeAffinity node affinity
 //
 // swagger:model NodeAffinity
 type NodeAffinity struct {

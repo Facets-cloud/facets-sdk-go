@@ -54,138 +54,34 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddUsingPOST(params *AddUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddUsingPOSTOK, *AddUsingPOSTCreated, error)
+	Add1(params *Add1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Add1OK, error)
 
-	DeleteUsingDELETE(params *DeleteUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUsingDELETEOK, *DeleteUsingDELETENoContent, error)
+	Delete2(params *Delete2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Delete2OK, error)
 
-	GetAllUsingGET3(params *GetAllUsingGET3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET3OK, error)
+	GetAll1(params *GetAll1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll1OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddUsingPOST adds
+Add1 add 1 API
 */
-func (a *Client) AddUsingPOST(params *AddUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddUsingPOSTOK, *AddUsingPOSTCreated, error) {
+func (a *Client) Add1(params *Add1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Add1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddUsingPOSTParams()
+		params = NewAdd1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addUsingPOST",
+		ID:                 "add_1",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/release-stream",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *AddUsingPOSTOK:
-		return value, nil, nil
-	case *AddUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_release_stream_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteUsingDELETE deletes
-*/
-func (a *Client) DeleteUsingDELETE(params *DeleteUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUsingDELETEOK, *DeleteUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteUsingDELETE",
-		Method:             "DELETE",
-		PathPattern:        "/cc-ui/v1/release-stream/{name}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_release_stream_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllUsingGET3 gets all
-*/
-func (a *Client) GetAllUsingGET3(params *GetAllUsingGET3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET3OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllUsingGET3Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllUsingGET_3",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/release-stream",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllUsingGET3Reader{formats: a.formats},
+		Reader:             &Add1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -198,13 +94,91 @@ func (a *Client) GetAllUsingGET3(params *GetAllUsingGET3Params, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUsingGET3OK)
+	success, ok := result.(*Add1OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsingGET_3: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for add_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+Delete2 delete 2 API
+*/
+func (a *Client) Delete2(params *Delete2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Delete2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDelete2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "delete_2",
+		Method:             "DELETE",
+		PathPattern:        "/cc-ui/v1/release-stream/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &Delete2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Delete2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for delete_2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAll1 get all 1 API
+*/
+func (a *Client) GetAll1(params *GetAll1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll1OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAll1Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAll_1",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/release-stream",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAll1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAll1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAll_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

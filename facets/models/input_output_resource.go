@@ -12,10 +12,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// InputOutputResource InputOutputResource
+// InputOutputResource input output resource
 //
 // swagger:model InputOutputResource
 type InputOutputResource struct {
+
+	// default
+	Default bool `json:"default,omitempty"`
 
 	// output name
 	OutputName string `json:"outputName,omitempty"`

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DraftClusterRequest DraftClusterRequest
+// DraftClusterRequest draft cluster request
 //
 // swagger:model DraftClusterRequest
 type DraftClusterRequest struct {
@@ -67,7 +67,7 @@ type DraftClusterRequest struct {
 	StackName string `json:"stackName,omitempty"`
 
 	// tz
-	Tz *TimeZone `json:"tz,omitempty"`
+	Tz *DraftClusterRequestTz `json:"tz,omitempty"`
 }
 
 // Validate validates this draft cluster request
@@ -204,6 +204,52 @@ func (m *DraftClusterRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *DraftClusterRequest) UnmarshalBinary(b []byte) error {
 	var res DraftClusterRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// DraftClusterRequestTz draft cluster request tz
+//
+// swagger:model DraftClusterRequestTz
+type DraftClusterRequestTz struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this draft cluster request tz
+func (m *DraftClusterRequestTz) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this draft cluster request tz based on context it is used
+func (m *DraftClusterRequestTz) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *DraftClusterRequestTz) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *DraftClusterRequestTz) UnmarshalBinary(b []byte) error {
+	var res DraftClusterRequestTz
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SoftDelete SoftDelete
+// SoftDelete soft delete
 //
 // swagger:model SoftDelete
 type SoftDelete struct {

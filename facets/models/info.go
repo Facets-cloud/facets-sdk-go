@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Info Info
+// Info info
 //
 // swagger:model Info
 type Info struct {
@@ -67,8 +67,11 @@ type Info struct {
 	// tag
 	Tag string `json:"tag,omitempty"`
 
+	// tf module Id
+	TfModuleID string `json:"tfModuleId,omitempty"`
+
 	// ui
-	UI interface{} `json:"ui,omitempty"`
+	UI map[string]interface{} `json:"ui,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`

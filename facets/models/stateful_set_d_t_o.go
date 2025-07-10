@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// StatefulSetDTO StatefulSetDTO
+// StatefulSetDTO stateful set d t o
 //
 // swagger:model StatefulSetDTO
 type StatefulSetDTO struct {

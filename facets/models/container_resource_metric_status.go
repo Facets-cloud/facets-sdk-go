@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerResourceMetricStatus ContainerResourceMetricStatus
+// ContainerResourceMetricStatus container resource metric status
 //
 // swagger:model ContainerResourceMetricStatus
 type ContainerResourceMetricStatus struct {

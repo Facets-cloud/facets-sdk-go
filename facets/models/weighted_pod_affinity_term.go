@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// WeightedPodAffinityTerm WeightedPodAffinityTerm
+// WeightedPodAffinityTerm weighted pod affinity term
 //
 // swagger:model WeightedPodAffinityTerm
 type WeightedPodAffinityTerm struct {

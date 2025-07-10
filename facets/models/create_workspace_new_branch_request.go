@@ -8,27 +8,76 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// CreateWorkspaceNewBranchRequest CreateWorkspaceNewBranchRequest
+// CreateWorkspaceNewBranchRequest create workspace new branch request
 //
 // swagger:model CreateWorkspaceNewBranchRequest
 type CreateWorkspaceNewBranchRequest struct {
 
 	// new branch
-	NewBranch string `json:"newBranch,omitempty"`
+	// Required: true
+	NewBranch *string `json:"newBranch"`
 
 	// source branch
-	SourceBranch string `json:"sourceBranch,omitempty"`
+	// Required: true
+	SourceBranch *string `json:"sourceBranch"`
 
 	// workspace name
-	WorkspaceName string `json:"workspaceName,omitempty"`
+	// Required: true
+	WorkspaceName *string `json:"workspaceName"`
 }
 
 // Validate validates this create workspace new branch request
 func (m *CreateWorkspaceNewBranchRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateNewBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSourceBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkspaceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CreateWorkspaceNewBranchRequest) validateNewBranch(formats strfmt.Registry) error {
+
+	if err := validate.Required("newBranch", "body", m.NewBranch); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CreateWorkspaceNewBranchRequest) validateSourceBranch(formats strfmt.Registry) error {
+
+	if err := validate.Required("sourceBranch", "body", m.SourceBranch); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CreateWorkspaceNewBranchRequest) validateWorkspaceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("workspaceName", "body", m.WorkspaceName); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -54,64 +54,40 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateCustomRoleUsingPOST(params *CreateCustomRoleUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCustomRoleUsingPOSTOK, *CreateCustomRoleUsingPOSTCreated, error)
+	CreateCustomRole(params *CreateCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCustomRoleOK, error)
 
-	DeleteCustomRoleUsingDELETE(params *DeleteCustomRoleUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCustomRoleUsingDELETEOK, *DeleteCustomRoleUsingDELETENoContent, error)
+	DeleteCustomRole(params *DeleteCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCustomRoleOK, error)
 
-	GetAllCustomRolesUsingGET(params *GetAllCustomRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllCustomRolesUsingGETOK, error)
+	GetAllCustomRoles(params *GetAllCustomRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllCustomRolesOK, error)
 
-	GetAllRolesUsingGET(params *GetAllRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllRolesUsingGETOK, error)
+	GetAllRoles(params *GetAllRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllRolesOK, error)
 
-	GetCustomRoleUsingGET(params *GetCustomRoleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCustomRoleUsingGETOK, error)
+	GetCustomRole(params *GetCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCustomRoleOK, error)
 
-	UpdateCustomRoleUsingPUT(params *UpdateCustomRoleUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCustomRoleUsingPUTOK, *UpdateCustomRoleUsingPUTCreated, error)
+	UpdateCustomRole(params *UpdateCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCustomRoleOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateCustomRoleUsingPOST creates custom role
+CreateCustomRole create custom role API
 */
-func (a *Client) CreateCustomRoleUsingPOST(params *CreateCustomRoleUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCustomRoleUsingPOSTOK, *CreateCustomRoleUsingPOSTCreated, error) {
+func (a *Client) CreateCustomRole(params *CreateCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCustomRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateCustomRoleUsingPOSTParams()
+		params = NewCreateCustomRoleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createCustomRoleUsingPOST",
+		ID:                 "createCustomRole",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/custom-role",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateCustomRoleUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateCustomRoleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -122,36 +98,35 @@ func (a *Client) CreateCustomRoleUsingPOST(params *CreateCustomRoleUsingPOSTPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateCustomRoleUsingPOSTOK:
-		return value, nil, nil
-	case *CreateCustomRoleUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateCustomRoleOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_role_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createCustomRole: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteCustomRoleUsingDELETE deletes custom role
+DeleteCustomRole delete custom role API
 */
-func (a *Client) DeleteCustomRoleUsingDELETE(params *DeleteCustomRoleUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCustomRoleUsingDELETEOK, *DeleteCustomRoleUsingDELETENoContent, error) {
+func (a *Client) DeleteCustomRole(params *DeleteCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCustomRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteCustomRoleUsingDELETEParams()
+		params = NewDeleteCustomRoleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteCustomRoleUsingDELETE",
+		ID:                 "deleteCustomRole",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/custom-role/{roleName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteCustomRoleUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteCustomRoleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -162,36 +137,35 @@ func (a *Client) DeleteCustomRoleUsingDELETE(params *DeleteCustomRoleUsingDELETE
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteCustomRoleUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteCustomRoleUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteCustomRoleOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_role_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteCustomRole: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllCustomRolesUsingGET gets all custom roles
+GetAllCustomRoles get all custom roles API
 */
-func (a *Client) GetAllCustomRolesUsingGET(params *GetAllCustomRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllCustomRolesUsingGETOK, error) {
+func (a *Client) GetAllCustomRoles(params *GetAllCustomRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllCustomRolesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllCustomRolesUsingGETParams()
+		params = NewGetAllCustomRolesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllCustomRolesUsingGET",
+		ID:                 "getAllCustomRoles",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/custom-role",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllCustomRolesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllCustomRolesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -204,33 +178,33 @@ func (a *Client) GetAllCustomRolesUsingGET(params *GetAllCustomRolesUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllCustomRolesUsingGETOK)
+	success, ok := result.(*GetAllCustomRolesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllCustomRolesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllCustomRoles: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllRolesUsingGET gets all roles
+GetAllRoles get all roles API
 */
-func (a *Client) GetAllRolesUsingGET(params *GetAllRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllRolesUsingGETOK, error) {
+func (a *Client) GetAllRoles(params *GetAllRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllRolesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllRolesUsingGETParams()
+		params = NewGetAllRolesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllRolesUsingGET",
+		ID:                 "getAllRoles",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/custom-role/roles",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllRolesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllRolesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -243,33 +217,33 @@ func (a *Client) GetAllRolesUsingGET(params *GetAllRolesUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllRolesUsingGETOK)
+	success, ok := result.(*GetAllRolesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllRolesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllRoles: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetCustomRoleUsingGET gets custom role
+GetCustomRole get custom role API
 */
-func (a *Client) GetCustomRoleUsingGET(params *GetCustomRoleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCustomRoleUsingGETOK, error) {
+func (a *Client) GetCustomRole(params *GetCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCustomRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetCustomRoleUsingGETParams()
+		params = NewGetCustomRoleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getCustomRoleUsingGET",
+		ID:                 "getCustomRole",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/custom-role/{roleName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetCustomRoleUsingGETReader{formats: a.formats},
+		Reader:             &GetCustomRoleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -282,33 +256,33 @@ func (a *Client) GetCustomRoleUsingGET(params *GetCustomRoleUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetCustomRoleUsingGETOK)
+	success, ok := result.(*GetCustomRoleOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getCustomRoleUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getCustomRole: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateCustomRoleUsingPUT updates custom role
+UpdateCustomRole update custom role API
 */
-func (a *Client) UpdateCustomRoleUsingPUT(params *UpdateCustomRoleUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCustomRoleUsingPUTOK, *UpdateCustomRoleUsingPUTCreated, error) {
+func (a *Client) UpdateCustomRole(params *UpdateCustomRoleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCustomRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateCustomRoleUsingPUTParams()
+		params = NewUpdateCustomRoleParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateCustomRoleUsingPUT",
+		ID:                 "updateCustomRole",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/custom-role/{roleName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateCustomRoleUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateCustomRoleReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -319,16 +293,15 @@ func (a *Client) UpdateCustomRoleUsingPUT(params *UpdateCustomRoleUsingPUTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateCustomRoleUsingPUTOK:
-		return value, nil, nil
-	case *UpdateCustomRoleUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateCustomRoleOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_custom_role_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateCustomRole: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

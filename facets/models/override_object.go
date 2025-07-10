@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// OverrideObject OverrideObject
+// OverrideObject override object
 //
 // swagger:model OverrideObject
 type OverrideObject struct {
@@ -46,7 +46,7 @@ type OverrideObject struct {
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// overrides
-	Overrides interface{} `json:"overrides,omitempty"`
+	Overrides map[string]interface{} `json:"overrides,omitempty"`
 
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`

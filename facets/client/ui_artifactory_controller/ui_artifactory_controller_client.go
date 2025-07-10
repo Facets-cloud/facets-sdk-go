@@ -54,86 +54,62 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AssociateStacksUsingPOST(params *AssociateStacksUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateStacksUsingPOSTOK, *AssociateStacksUsingPOSTCreated, error)
+	AssociateStacks(params *AssociateStacksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateStacksOK, error)
 
-	CreateArtifactoryMirrorUsingPOST(params *CreateArtifactoryMirrorUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArtifactoryMirrorUsingPOSTOK, *CreateArtifactoryMirrorUsingPOSTCreated, error)
+	CreateArtifactoryMirror(params *CreateArtifactoryMirrorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArtifactoryMirrorOK, error)
 
-	CreateBasicDockerArtifactoryUsingPOST(params *CreateBasicDockerArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBasicDockerArtifactoryUsingPOSTOK, *CreateBasicDockerArtifactoryUsingPOSTCreated, error)
+	CreateBasicDockerArtifactory(params *CreateBasicDockerArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBasicDockerArtifactoryOK, error)
 
-	CreateECRArtifactoryUsingPOST1(params *CreateECRArtifactoryUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateECRArtifactoryUsingPOST1OK, *CreateECRArtifactoryUsingPOST1Created, error)
+	CreateECRArtifactory(params *CreateECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateECRArtifactoryOK, error)
 
-	DeleteArtifactoryUsingDELETE(params *DeleteArtifactoryUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactoryUsingDELETEOK, *DeleteArtifactoryUsingDELETENoContent, error)
+	DeleteArtifactory(params *DeleteArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactoryOK, error)
 
-	DeleteECRArtifactoryUsingDELETE(params *DeleteECRArtifactoryUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteECRArtifactoryUsingDELETEOK, *DeleteECRArtifactoryUsingDELETENoContent, error)
+	DeleteECRArtifactory(params *DeleteECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteECRArtifactoryOK, error)
 
-	GetAllArtifactoriesForStackUsingGET(params *GetAllArtifactoriesForStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesForStackUsingGETOK, error)
+	GetAllArtifactories(params *GetAllArtifactoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesOK, error)
 
-	GetAllArtifactoriesUsingGET1(params *GetAllArtifactoriesUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesUsingGET1OK, error)
+	GetAllArtifactoriesForStack(params *GetAllArtifactoriesForStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesForStackOK, error)
 
-	GetArtifactoryByIDUsingGET(params *GetArtifactoryByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByIDUsingGETOK, error)
+	GetArtifactoryByID(params *GetArtifactoryByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByIDOK, error)
 
-	GetArtifactoryByNameUsingGET(params *GetArtifactoryByNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByNameUsingGETOK, error)
+	GetArtifactoryByName(params *GetArtifactoryByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByNameOK, error)
 
-	GetRepositoriesByArtifactoryNameUsingGET(params *GetRepositoriesByArtifactoryNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesByArtifactoryNameUsingGETOK, error)
+	GetRepositories(params *GetRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesOK, error)
 
-	GetRepositoriesUsingGET(params *GetRepositoriesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesUsingGETOK, error)
+	GetRepositoriesByArtifactoryName(params *GetRepositoriesByArtifactoryNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesByArtifactoryNameOK, error)
 
-	GetTagsByArtifactoryNameUsingGET(params *GetTagsByArtifactoryNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsByArtifactoryNameUsingGETOK, error)
+	GetTags(params *GetTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsOK, error)
 
-	GetTagsUsingGET(params *GetTagsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsUsingGETOK, error)
+	GetTagsByArtifactoryName(params *GetTagsByArtifactoryNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsByArtifactoryNameOK, error)
 
-	RequestArtifactoryLinkingUsingPOST(params *RequestArtifactoryLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestArtifactoryLinkingUsingPOSTOK, *RequestArtifactoryLinkingUsingPOSTCreated, error)
+	RequestArtifactoryLinking(params *RequestArtifactoryLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestArtifactoryLinkingOK, error)
 
-	UpdateBasicDockerArtifactoryUsingPOST(params *UpdateBasicDockerArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBasicDockerArtifactoryUsingPOSTOK, *UpdateBasicDockerArtifactoryUsingPOSTCreated, error)
+	UpdateBasicDockerArtifactory(params *UpdateBasicDockerArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBasicDockerArtifactoryOK, error)
 
-	UpdateECRArtifactoryUsingPOST(params *UpdateECRArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateECRArtifactoryUsingPOSTOK, *UpdateECRArtifactoryUsingPOSTCreated, error)
+	UpdateECRArtifactory(params *UpdateECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateECRArtifactoryOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AssociateStacksUsingPOST associates stacks
+AssociateStacks associate stacks API
 */
-func (a *Client) AssociateStacksUsingPOST(params *AssociateStacksUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateStacksUsingPOSTOK, *AssociateStacksUsingPOSTCreated, error) {
+func (a *Client) AssociateStacks(params *AssociateStacksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AssociateStacksOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAssociateStacksUsingPOSTParams()
+		params = NewAssociateStacksParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "associateStacksUsingPOST",
+		ID:                 "associateStacks",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}/associate-projects",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AssociateStacksUsingPOSTReader{formats: a.formats},
+		Reader:             &AssociateStacksReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -144,36 +120,35 @@ func (a *Client) AssociateStacksUsingPOST(params *AssociateStacksUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AssociateStacksUsingPOSTOK:
-		return value, nil, nil
-	case *AssociateStacksUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*AssociateStacksOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for associateStacks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateArtifactoryMirrorUsingPOST creates artifactory mirror
+CreateArtifactoryMirror create artifactory mirror API
 */
-func (a *Client) CreateArtifactoryMirrorUsingPOST(params *CreateArtifactoryMirrorUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArtifactoryMirrorUsingPOSTOK, *CreateArtifactoryMirrorUsingPOSTCreated, error) {
+func (a *Client) CreateArtifactoryMirror(params *CreateArtifactoryMirrorParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateArtifactoryMirrorOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateArtifactoryMirrorUsingPOSTParams()
+		params = NewCreateArtifactoryMirrorParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createArtifactoryMirrorUsingPOST",
+		ID:                 "createArtifactoryMirror",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/mirrors",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateArtifactoryMirrorUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateArtifactoryMirrorReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -184,36 +159,35 @@ func (a *Client) CreateArtifactoryMirrorUsingPOST(params *CreateArtifactoryMirro
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateArtifactoryMirrorUsingPOSTOK:
-		return value, nil, nil
-	case *CreateArtifactoryMirrorUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateArtifactoryMirrorOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createArtifactoryMirror: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateBasicDockerArtifactoryUsingPOST creates basic docker artifactory
+CreateBasicDockerArtifactory create basic docker artifactory API
 */
-func (a *Client) CreateBasicDockerArtifactoryUsingPOST(params *CreateBasicDockerArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBasicDockerArtifactoryUsingPOSTOK, *CreateBasicDockerArtifactoryUsingPOSTCreated, error) {
+func (a *Client) CreateBasicDockerArtifactory(params *CreateBasicDockerArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBasicDockerArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateBasicDockerArtifactoryUsingPOSTParams()
+		params = NewCreateBasicDockerArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createBasicDockerArtifactoryUsingPOST",
+		ID:                 "createBasicDockerArtifactory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/others",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateBasicDockerArtifactoryUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateBasicDockerArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -224,36 +198,35 @@ func (a *Client) CreateBasicDockerArtifactoryUsingPOST(params *CreateBasicDocker
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateBasicDockerArtifactoryUsingPOSTOK:
-		return value, nil, nil
-	case *CreateBasicDockerArtifactoryUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateBasicDockerArtifactoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createBasicDockerArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateECRArtifactoryUsingPOST1 creates e c r artifactory
+CreateECRArtifactory create e c r artifactory API
 */
-func (a *Client) CreateECRArtifactoryUsingPOST1(params *CreateECRArtifactoryUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateECRArtifactoryUsingPOST1OK, *CreateECRArtifactoryUsingPOST1Created, error) {
+func (a *Client) CreateECRArtifactory(params *CreateECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateECRArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateECRArtifactoryUsingPOST1Params()
+		params = NewCreateECRArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createECRArtifactoryUsingPOST_1",
+		ID:                 "createECRArtifactory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateECRArtifactoryUsingPOST1Reader{formats: a.formats},
+		Reader:             &CreateECRArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,36 +237,35 @@ func (a *Client) CreateECRArtifactoryUsingPOST1(params *CreateECRArtifactoryUsin
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateECRArtifactoryUsingPOST1OK:
-		return value, nil, nil
-	case *CreateECRArtifactoryUsingPOST1Created:
-		return nil, value, nil
+	success, ok := result.(*CreateECRArtifactoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createECRArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteArtifactoryUsingDELETE deletes artifactory
+DeleteArtifactory delete artifactory API
 */
-func (a *Client) DeleteArtifactoryUsingDELETE(params *DeleteArtifactoryUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactoryUsingDELETEOK, *DeleteArtifactoryUsingDELETENoContent, error) {
+func (a *Client) DeleteArtifactory(params *DeleteArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteArtifactoryUsingDELETEParams()
+		params = NewDeleteArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteArtifactoryUsingDELETE",
+		ID:                 "deleteArtifactory",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/artifactories/v2/{artifactoryId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteArtifactoryUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -304,76 +276,35 @@ func (a *Client) DeleteArtifactoryUsingDELETE(params *DeleteArtifactoryUsingDELE
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteArtifactoryUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteArtifactoryUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteArtifactoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteECRArtifactoryUsingDELETE deletes e c r artifactory
+DeleteECRArtifactory delete e c r artifactory API
 */
-func (a *Client) DeleteECRArtifactoryUsingDELETE(params *DeleteECRArtifactoryUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteECRArtifactoryUsingDELETEOK, *DeleteECRArtifactoryUsingDELETENoContent, error) {
+func (a *Client) DeleteECRArtifactory(params *DeleteECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteECRArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteECRArtifactoryUsingDELETEParams()
+		params = NewDeleteECRArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteECRArtifactoryUsingDELETE",
+		ID:                 "deleteECRArtifactory",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteECRArtifactoryUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteECRArtifactoryUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteECRArtifactoryUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllArtifactoriesForStackUsingGET gets all artifactories for stack
-*/
-func (a *Client) GetAllArtifactoriesForStackUsingGET(params *GetAllArtifactoriesForStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesForStackUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllArtifactoriesForStackUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllArtifactoriesForStackUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/artifactories/stack/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllArtifactoriesForStackUsingGETReader{formats: a.formats},
+		Reader:             &DeleteECRArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -386,33 +317,33 @@ func (a *Client) GetAllArtifactoriesForStackUsingGET(params *GetAllArtifactories
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllArtifactoriesForStackUsingGETOK)
+	success, ok := result.(*DeleteECRArtifactoryOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllArtifactoriesForStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteECRArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllArtifactoriesUsingGET1 gets all artifactories
+GetAllArtifactories get all artifactories API
 */
-func (a *Client) GetAllArtifactoriesUsingGET1(params *GetAllArtifactoriesUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesUsingGET1OK, error) {
+func (a *Client) GetAllArtifactories(params *GetAllArtifactoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllArtifactoriesUsingGET1Params()
+		params = NewGetAllArtifactoriesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllArtifactoriesUsingGET_1",
+		ID:                 "getAllArtifactories",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactories",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllArtifactoriesUsingGET1Reader{formats: a.formats},
+		Reader:             &GetAllArtifactoriesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -425,33 +356,72 @@ func (a *Client) GetAllArtifactoriesUsingGET1(params *GetAllArtifactoriesUsingGE
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllArtifactoriesUsingGET1OK)
+	success, ok := result.(*GetAllArtifactoriesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllArtifactoriesUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllArtifactories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactoryByIDUsingGET gets artifactory by Id
+GetAllArtifactoriesForStack get all artifactories for stack API
 */
-func (a *Client) GetArtifactoryByIDUsingGET(params *GetArtifactoryByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByIDUsingGETOK, error) {
+func (a *Client) GetAllArtifactoriesForStack(params *GetAllArtifactoriesForStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllArtifactoriesForStackOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactoryByIDUsingGETParams()
+		params = NewGetAllArtifactoriesForStackParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactoryByIdUsingGET",
+		ID:                 "getAllArtifactoriesForStack",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/artifactories/stack/{stackName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllArtifactoriesForStackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllArtifactoriesForStackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllArtifactoriesForStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetArtifactoryByID get artifactory by Id API
+*/
+func (a *Client) GetArtifactoryByID(params *GetArtifactoryByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetArtifactoryByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getArtifactoryById",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactoryByIDUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactoryByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -464,33 +434,33 @@ func (a *Client) GetArtifactoryByIDUsingGET(params *GetArtifactoryByIDUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactoryByIDUsingGETOK)
+	success, ok := result.(*GetArtifactoryByIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactoryByIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactoryById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactoryByNameUsingGET gets artifactory by name
+GetArtifactoryByName get artifactory by name API
 */
-func (a *Client) GetArtifactoryByNameUsingGET(params *GetArtifactoryByNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByNameUsingGETOK, error) {
+func (a *Client) GetArtifactoryByName(params *GetArtifactoryByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactoryByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactoryByNameUsingGETParams()
+		params = NewGetArtifactoryByNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactoryByNameUsingGET",
+		ID:                 "getArtifactoryByName",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactories/name/{name}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactoryByNameUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactoryByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -503,72 +473,33 @@ func (a *Client) GetArtifactoryByNameUsingGET(params *GetArtifactoryByNameUsingG
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactoryByNameUsingGETOK)
+	success, ok := result.(*GetArtifactoryByNameOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactoryByNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactoryByName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetRepositoriesByArtifactoryNameUsingGET gets repositories by artifactory name
+GetRepositories get repositories API
 */
-func (a *Client) GetRepositoriesByArtifactoryNameUsingGET(params *GetRepositoriesByArtifactoryNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesByArtifactoryNameUsingGETOK, error) {
+func (a *Client) GetRepositories(params *GetRepositoriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetRepositoriesByArtifactoryNameUsingGETParams()
+		params = NewGetRepositoriesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getRepositoriesByArtifactoryNameUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/artifactories/name/{name}/repos",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetRepositoriesByArtifactoryNameUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetRepositoriesByArtifactoryNameUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getRepositoriesByArtifactoryNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetRepositoriesUsingGET gets repositories
-*/
-func (a *Client) GetRepositoriesUsingGET(params *GetRepositoriesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetRepositoriesUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getRepositoriesUsingGET",
+		ID:                 "getRepositories",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}/repos",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRepositoriesUsingGETReader{formats: a.formats},
+		Reader:             &GetRepositoriesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -581,33 +512,33 @@ func (a *Client) GetRepositoriesUsingGET(params *GetRepositoriesUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRepositoriesUsingGETOK)
+	success, ok := result.(*GetRepositoriesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getRepositoriesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getRepositories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetTagsByArtifactoryNameUsingGET gets tags by artifactory name
+GetRepositoriesByArtifactoryName get repositories by artifactory name API
 */
-func (a *Client) GetTagsByArtifactoryNameUsingGET(params *GetTagsByArtifactoryNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsByArtifactoryNameUsingGETOK, error) {
+func (a *Client) GetRepositoriesByArtifactoryName(params *GetRepositoriesByArtifactoryNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoriesByArtifactoryNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTagsByArtifactoryNameUsingGETParams()
+		params = NewGetRepositoriesByArtifactoryNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getTagsByArtifactoryNameUsingGET",
+		ID:                 "getRepositoriesByArtifactoryName",
 		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/artifactories/name/{name}/tags",
-		ProducesMediaTypes: []string{"*/*"},
+		PathPattern:        "/cc-ui/v1/artifactories/name/{name}/repos",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTagsByArtifactoryNameUsingGETReader{formats: a.formats},
+		Reader:             &GetRepositoriesByArtifactoryNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -620,33 +551,33 @@ func (a *Client) GetTagsByArtifactoryNameUsingGET(params *GetTagsByArtifactoryNa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTagsByArtifactoryNameUsingGETOK)
+	success, ok := result.(*GetRepositoriesByArtifactoryNameOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getTagsByArtifactoryNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getRepositoriesByArtifactoryName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetTagsUsingGET gets tags
+GetTags get tags API
 */
-func (a *Client) GetTagsUsingGET(params *GetTagsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsUsingGETOK, error) {
+func (a *Client) GetTags(params *GetTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTagsUsingGETParams()
+		params = NewGetTagsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getTagsUsingGET",
+		ID:                 "getTags",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}/tags",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTagsUsingGETReader{formats: a.formats},
+		Reader:             &GetTagsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -659,33 +590,72 @@ func (a *Client) GetTagsUsingGET(params *GetTagsUsingGETParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTagsUsingGETOK)
+	success, ok := result.(*GetTagsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getTagsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RequestArtifactoryLinkingUsingPOST requests artifactory linking
+GetTagsByArtifactoryName get tags by artifactory name API
 */
-func (a *Client) RequestArtifactoryLinkingUsingPOST(params *RequestArtifactoryLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestArtifactoryLinkingUsingPOSTOK, *RequestArtifactoryLinkingUsingPOSTCreated, error) {
+func (a *Client) GetTagsByArtifactoryName(params *GetTagsByArtifactoryNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTagsByArtifactoryNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRequestArtifactoryLinkingUsingPOSTParams()
+		params = NewGetTagsByArtifactoryNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "requestArtifactoryLinkingUsingPOST",
+		ID:                 "getTagsByArtifactoryName",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/artifactories/name/{name}/tags",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTagsByArtifactoryNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTagsByArtifactoryNameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getTagsByArtifactoryName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RequestArtifactoryLinking request artifactory linking API
+*/
+func (a *Client) RequestArtifactoryLinking(params *RequestArtifactoryLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestArtifactoryLinkingOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRequestArtifactoryLinkingParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "requestArtifactoryLinking",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/link-container-registry",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RequestArtifactoryLinkingUsingPOSTReader{formats: a.formats},
+		Reader:             &RequestArtifactoryLinkingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -696,36 +666,35 @@ func (a *Client) RequestArtifactoryLinkingUsingPOST(params *RequestArtifactoryLi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RequestArtifactoryLinkingUsingPOSTOK:
-		return value, nil, nil
-	case *RequestArtifactoryLinkingUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RequestArtifactoryLinkingOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for requestArtifactoryLinking: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateBasicDockerArtifactoryUsingPOST updates basic docker artifactory
+UpdateBasicDockerArtifactory update basic docker artifactory API
 */
-func (a *Client) UpdateBasicDockerArtifactoryUsingPOST(params *UpdateBasicDockerArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBasicDockerArtifactoryUsingPOSTOK, *UpdateBasicDockerArtifactoryUsingPOSTCreated, error) {
+func (a *Client) UpdateBasicDockerArtifactory(params *UpdateBasicDockerArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBasicDockerArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateBasicDockerArtifactoryUsingPOSTParams()
+		params = NewUpdateBasicDockerArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateBasicDockerArtifactoryUsingPOST",
+		ID:                 "updateBasicDockerArtifactory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/others/{artifactoryId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateBasicDockerArtifactoryUsingPOSTReader{formats: a.formats},
+		Reader:             &UpdateBasicDockerArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -736,36 +705,35 @@ func (a *Client) UpdateBasicDockerArtifactoryUsingPOST(params *UpdateBasicDocker
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateBasicDockerArtifactoryUsingPOSTOK:
-		return value, nil, nil
-	case *UpdateBasicDockerArtifactoryUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateBasicDockerArtifactoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateBasicDockerArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateECRArtifactoryUsingPOST updates e c r artifactory
+UpdateECRArtifactory update e c r artifactory API
 */
-func (a *Client) UpdateECRArtifactoryUsingPOST(params *UpdateECRArtifactoryUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateECRArtifactoryUsingPOSTOK, *UpdateECRArtifactoryUsingPOSTCreated, error) {
+func (a *Client) UpdateECRArtifactory(params *UpdateECRArtifactoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateECRArtifactoryOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateECRArtifactoryUsingPOSTParams()
+		params = NewUpdateECRArtifactoryParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateECRArtifactoryUsingPOST",
+		ID:                 "updateECRArtifactory",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifactories/{artifactoryId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateECRArtifactoryUsingPOSTReader{formats: a.formats},
+		Reader:             &UpdateECRArtifactoryReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -776,16 +744,15 @@ func (a *Client) UpdateECRArtifactoryUsingPOST(params *UpdateECRArtifactoryUsing
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateECRArtifactoryUsingPOSTOK:
-		return value, nil, nil
-	case *UpdateECRArtifactoryUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateECRArtifactoryOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifactory_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateECRArtifactory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

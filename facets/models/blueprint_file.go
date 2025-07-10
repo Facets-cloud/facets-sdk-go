@@ -12,9 +12,10 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// BlueprintFile BlueprintFile
+// BlueprintFile blueprint file
 //
 // swagger:model BlueprintFile
 type BlueprintFile struct {
@@ -23,6 +24,7 @@ type BlueprintFile struct {
 	Alpha bool `json:"alpha,omitempty"`
 
 	// children resource ids
+	// Unique: true
 	ChildrenResourceIds []string `json:"childrenResourceIds"`
 
 	// cluster Id
@@ -35,16 +37,21 @@ type BlueprintFile struct {
 	Directory string `json:"directory,omitempty"`
 
 	// edges
+	// Unique: true
 	Edges []*Edge `json:"edges"`
 
 	// errors
 	Errors []*BlueprintValidationError `json:"errors"`
 
 	// expressions
+	// Unique: true
 	Expressions []*RefExpression `json:"expressions"`
 
 	// filename
 	Filename string `json:"filename,omitempty"`
+
+	// icon Url
+	IconURL string `json:"iconUrl,omitempty"`
 
 	// info
 	Info *Info `json:"info,omitempty"`
@@ -53,7 +60,7 @@ type BlueprintFile struct {
 	Overridden bool `json:"overridden,omitempty"`
 
 	// override
-	Override interface{} `json:"override,omitempty"`
+	Override map[string]interface{} `json:"override,omitempty"`
 
 	// parent resource Id
 	ParentResourceID string `json:"parentResourceId,omitempty"`
@@ -87,6 +94,10 @@ type BlueprintFile struct {
 func (m *BlueprintFile) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateChildrenResourceIds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEdges(formats); err != nil {
 		res = append(res, err)
 	}
@@ -109,9 +120,25 @@ func (m *BlueprintFile) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *BlueprintFile) validateChildrenResourceIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.ChildrenResourceIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("childrenResourceIds", "body", m.ChildrenResourceIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *BlueprintFile) validateEdges(formats strfmt.Registry) error {
 	if swag.IsZero(m.Edges) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("edges", "body", m.Edges); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Edges); i++ {
@@ -164,6 +191,10 @@ func (m *BlueprintFile) validateErrors(formats strfmt.Registry) error {
 func (m *BlueprintFile) validateExpressions(formats strfmt.Registry) error {
 	if swag.IsZero(m.Expressions) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("expressions", "body", m.Expressions); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Expressions); i++ {

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Artifactory Artifactory
+// Artifactory artifactory
 //
 // swagger:model Artifactory
 type Artifactory struct {
@@ -49,12 +49,14 @@ type Artifactory struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// number of versions
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stacks associated
+	// Unique: true
 	StacksAssociated []string `json:"stacksAssociated"`
 
 	// system defined
@@ -84,6 +86,14 @@ func (m *Artifactory) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStacksAssociated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -234,6 +244,27 @@ func (m *Artifactory) validateLastModifiedDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Artifactory) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Artifactory) validateStacksAssociated(formats strfmt.Registry) error {
+	if swag.IsZero(m.StacksAssociated) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("stacksAssociated", "body", m.StacksAssociated); err != nil {
 		return err
 	}
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// BitbucketOauthAppPayload BitbucketOauthAppPayload
+// BitbucketOauthAppPayload bitbucket oauth app payload
 //
 // swagger:model BitbucketOauthAppPayload
 type BitbucketOauthAppPayload struct {

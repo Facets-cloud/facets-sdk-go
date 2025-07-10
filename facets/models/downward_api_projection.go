@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DownwardAPIProjection DownwardAPIProjection
+// DownwardAPIProjection downward API projection
 //
 // swagger:model DownwardAPIProjection
 type DownwardAPIProjection struct {

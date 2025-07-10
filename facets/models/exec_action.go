@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ExecAction ExecAction
+// ExecAction exec action
 //
 // swagger:model ExecAction
 type ExecAction struct {

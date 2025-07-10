@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DownwardAPIVolumeFile DownwardAPIVolumeFile
+// DownwardAPIVolumeFile downward API volume file
 //
 // swagger:model DownwardAPIVolumeFile
 type DownwardAPIVolumeFile struct {

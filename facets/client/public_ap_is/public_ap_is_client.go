@@ -54,86 +54,62 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetAllFeaturePropertiesUsingGET(params *GetAllFeaturePropertiesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllFeaturePropertiesUsingGETOK, error)
+	GetAllFeatureProperties(params *GetAllFeaturePropertiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllFeaturePropertiesOK, error)
 
-	GetCPCloudUsingGET(params *GetCPCloudUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCPCloudUsingGETOK, error)
+	GetCPCloud(params *GetCPCloudParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCPCloudOK, error)
 
-	GetFeaturePropertyUsingGET(params *GetFeaturePropertyUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFeaturePropertyUsingGETOK, error)
+	GetFeatureProperty(params *GetFeaturePropertyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFeaturePropertyOK, error)
 
-	GetLoginOptionsUsingGET(params *GetLoginOptionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLoginOptionsUsingGETOK, error)
+	GetLoginOptions(params *GetLoginOptionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLoginOptionsOK, error)
 
-	GetLogoUsingGET(params *GetLogoUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogoUsingGETOK, error)
+	GetLogo(params *GetLogoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogoOK, error)
 
-	HealthCheckUsingGET(params *HealthCheckUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HealthCheckUsingGETOK, error)
+	HealthCheck(params *HealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HealthCheckOK, error)
 
-	LinkAwsAccountUsingPOST(params *LinkAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAwsAccountUsingPOSTOK, *LinkAwsAccountUsingPOSTCreated, error)
+	LinkAwsAccount(params *LinkAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAwsAccountOK, error)
 
-	LinkAzureAccountUsingPOST(params *LinkAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAzureAccountUsingPOSTOK, *LinkAzureAccountUsingPOSTCreated, error)
+	LinkAzureAccount(params *LinkAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAzureAccountOK, error)
 
-	LinkBitbucketAccountUsingPOST(params *LinkBitbucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkBitbucketAccountUsingPOSTOK, *LinkBitbucketAccountUsingPOSTCreated, error)
+	LinkBitbucketAccount(params *LinkBitbucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkBitbucketAccountOK, error)
 
-	LinkDockerRegistriesUsingPOST(params *LinkDockerRegistriesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkDockerRegistriesUsingPOSTOK, *LinkDockerRegistriesUsingPOSTCreated, error)
+	LinkDockerRegistries(params *LinkDockerRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkDockerRegistriesOK, error)
 
-	LinkECRUsingPOST(params *LinkECRUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkECRUsingPOSTOK, *LinkECRUsingPOSTCreated, error)
+	LinkECR(params *LinkECRParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkECROK, error)
 
-	LinkGcpAccountUsingPOST(params *LinkGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGcpAccountUsingPOSTOK, *LinkGcpAccountUsingPOSTCreated, error)
+	LinkGcpAccount(params *LinkGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGcpAccountOK, error)
 
-	LinkGithubAccountUsingPOST(params *LinkGithubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGithubAccountUsingPOSTOK, *LinkGithubAccountUsingPOSTCreated, error)
+	LinkGithubAccount(params *LinkGithubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGithubAccountOK, error)
 
-	LinkGitlabAccountUsingPOST(params *LinkGitlabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGitlabAccountUsingPOSTOK, *LinkGitlabAccountUsingPOSTCreated, error)
+	LinkGitlabAccount(params *LinkGitlabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGitlabAccountOK, error)
 
-	LinkK8sAccountUsingPOST(params *LinkK8sAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkK8sAccountUsingPOSTOK, *LinkK8sAccountUsingPOSTCreated, error)
+	LinkK8sAccount(params *LinkK8sAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkK8sAccountOK, error)
 
-	ProcessGithubInstallationRequestUsingPOST(params *ProcessGithubInstallationRequestUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProcessGithubInstallationRequestUsingPOSTOK, *ProcessGithubInstallationRequestUsingPOSTCreated, error)
+	ProcessGithubInstallationRequest(params *ProcessGithubInstallationRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProcessGithubInstallationRequestOK, error)
 
-	RetrieveThemeFileUsingGET(params *RetrieveThemeFileUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetrieveThemeFileUsingGETOK, error)
+	RetrieveThemeFile(params *RetrieveThemeFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetrieveThemeFileOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetAllFeaturePropertiesUsingGET gets all feature properties
+GetAllFeatureProperties get all feature properties API
 */
-func (a *Client) GetAllFeaturePropertiesUsingGET(params *GetAllFeaturePropertiesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllFeaturePropertiesUsingGETOK, error) {
+func (a *Client) GetAllFeatureProperties(params *GetAllFeaturePropertiesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllFeaturePropertiesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllFeaturePropertiesUsingGETParams()
+		params = NewGetAllFeaturePropertiesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllFeaturePropertiesUsingGET",
+		ID:                 "getAllFeatureProperties",
 		Method:             "GET",
 		PathPattern:        "/public/v1/features",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllFeaturePropertiesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllFeaturePropertiesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -146,33 +122,33 @@ func (a *Client) GetAllFeaturePropertiesUsingGET(params *GetAllFeatureProperties
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllFeaturePropertiesUsingGETOK)
+	success, ok := result.(*GetAllFeaturePropertiesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllFeaturePropertiesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllFeatureProperties: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetCPCloudUsingGET gets c p cloud
+GetCPCloud get c p cloud API
 */
-func (a *Client) GetCPCloudUsingGET(params *GetCPCloudUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCPCloudUsingGETOK, error) {
+func (a *Client) GetCPCloud(params *GetCPCloudParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCPCloudOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetCPCloudUsingGETParams()
+		params = NewGetCPCloudParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getCPCloudUsingGET",
+		ID:                 "getCPCloud",
 		Method:             "GET",
 		PathPattern:        "/public/v1/cp-cloud",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetCPCloudUsingGETReader{formats: a.formats},
+		Reader:             &GetCPCloudReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -185,33 +161,33 @@ func (a *Client) GetCPCloudUsingGET(params *GetCPCloudUsingGETParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetCPCloudUsingGETOK)
+	success, ok := result.(*GetCPCloudOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getCPCloudUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getCPCloud: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetFeaturePropertyUsingGET gets feature property
+GetFeatureProperty get feature property API
 */
-func (a *Client) GetFeaturePropertyUsingGET(params *GetFeaturePropertyUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFeaturePropertyUsingGETOK, error) {
+func (a *Client) GetFeatureProperty(params *GetFeaturePropertyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetFeaturePropertyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetFeaturePropertyUsingGETParams()
+		params = NewGetFeaturePropertyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getFeaturePropertyUsingGET",
+		ID:                 "getFeatureProperty",
 		Method:             "GET",
 		PathPattern:        "/public/v1/features/{name}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetFeaturePropertyUsingGETReader{formats: a.formats},
+		Reader:             &GetFeaturePropertyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -224,33 +200,33 @@ func (a *Client) GetFeaturePropertyUsingGET(params *GetFeaturePropertyUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetFeaturePropertyUsingGETOK)
+	success, ok := result.(*GetFeaturePropertyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getFeaturePropertyUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getFeatureProperty: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetLoginOptionsUsingGET gets login options
+GetLoginOptions get login options API
 */
-func (a *Client) GetLoginOptionsUsingGET(params *GetLoginOptionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLoginOptionsUsingGETOK, error) {
+func (a *Client) GetLoginOptions(params *GetLoginOptionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLoginOptionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetLoginOptionsUsingGETParams()
+		params = NewGetLoginOptionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getLoginOptionsUsingGET",
+		ID:                 "getLoginOptions",
 		Method:             "GET",
 		PathPattern:        "/public/v1/loginOptions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetLoginOptionsUsingGETReader{formats: a.formats},
+		Reader:             &GetLoginOptionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -263,33 +239,33 @@ func (a *Client) GetLoginOptionsUsingGET(params *GetLoginOptionsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetLoginOptionsUsingGETOK)
+	success, ok := result.(*GetLoginOptionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getLoginOptionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getLoginOptions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetLogoUsingGET gets logo
+GetLogo get logo API
 */
-func (a *Client) GetLogoUsingGET(params *GetLogoUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogoUsingGETOK, error) {
+func (a *Client) GetLogo(params *GetLogoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetLogoOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetLogoUsingGETParams()
+		params = NewGetLogoParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getLogoUsingGET",
+		ID:                 "getLogo",
 		Method:             "GET",
 		PathPattern:        "/public/v1/logo",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetLogoUsingGETReader{formats: a.formats},
+		Reader:             &GetLogoReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -302,33 +278,33 @@ func (a *Client) GetLogoUsingGET(params *GetLogoUsingGETParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetLogoUsingGETOK)
+	success, ok := result.(*GetLogoOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getLogoUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getLogo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-HealthCheckUsingGET healths check
+HealthCheck health check API
 */
-func (a *Client) HealthCheckUsingGET(params *HealthCheckUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HealthCheckUsingGETOK, error) {
+func (a *Client) HealthCheck(params *HealthCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HealthCheckOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewHealthCheckUsingGETParams()
+		params = NewHealthCheckParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "healthCheckUsingGET",
+		ID:                 "healthCheck",
 		Method:             "GET",
 		PathPattern:        "/public/v1/health",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &HealthCheckUsingGETReader{formats: a.formats},
+		Reader:             &HealthCheckReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -341,433 +317,33 @@ func (a *Client) HealthCheckUsingGET(params *HealthCheckUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HealthCheckUsingGETOK)
+	success, ok := result.(*HealthCheckOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for healthCheckUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for healthCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-LinkAwsAccountUsingPOST links aws account
+LinkAwsAccount link aws account API
 */
-func (a *Client) LinkAwsAccountUsingPOST(params *LinkAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAwsAccountUsingPOSTOK, *LinkAwsAccountUsingPOSTCreated, error) {
+func (a *Client) LinkAwsAccount(params *LinkAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAwsAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewLinkAwsAccountUsingPOSTParams()
+		params = NewLinkAwsAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "linkAwsAccountUsingPOST",
+		ID:                 "linkAwsAccount",
 		Method:             "POST",
 		PathPattern:        "/public/v1/link-aws",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &LinkAwsAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkAwsAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkAwsAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkAzureAccountUsingPOST links azure account
-*/
-func (a *Client) LinkAzureAccountUsingPOST(params *LinkAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAzureAccountUsingPOSTOK, *LinkAzureAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkAzureAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkAzureAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-azure",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkAzureAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkAzureAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkAzureAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkBitbucketAccountUsingPOST links bitbucket account
-*/
-func (a *Client) LinkBitbucketAccountUsingPOST(params *LinkBitbucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkBitbucketAccountUsingPOSTOK, *LinkBitbucketAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkBitbucketAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkBitbucketAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-bitbucket",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkBitbucketAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkBitbucketAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkBitbucketAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkDockerRegistriesUsingPOST links docker registries
-*/
-func (a *Client) LinkDockerRegistriesUsingPOST(params *LinkDockerRegistriesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkDockerRegistriesUsingPOSTOK, *LinkDockerRegistriesUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkDockerRegistriesUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkDockerRegistriesUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-docker-registries",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkDockerRegistriesUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkDockerRegistriesUsingPOSTOK:
-		return value, nil, nil
-	case *LinkDockerRegistriesUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkECRUsingPOST links e c r
-*/
-func (a *Client) LinkECRUsingPOST(params *LinkECRUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkECRUsingPOSTOK, *LinkECRUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkECRUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkECRUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-ecr",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkECRUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkECRUsingPOSTOK:
-		return value, nil, nil
-	case *LinkECRUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkGcpAccountUsingPOST links gcp account
-*/
-func (a *Client) LinkGcpAccountUsingPOST(params *LinkGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGcpAccountUsingPOSTOK, *LinkGcpAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkGcpAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkGcpAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-gcp",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkGcpAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkGcpAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkGcpAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkGithubAccountUsingPOST links github account
-*/
-func (a *Client) LinkGithubAccountUsingPOST(params *LinkGithubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGithubAccountUsingPOSTOK, *LinkGithubAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkGithubAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkGithubAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-github",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkGithubAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkGithubAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkGithubAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkGitlabAccountUsingPOST links gitlab account
-*/
-func (a *Client) LinkGitlabAccountUsingPOST(params *LinkGitlabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGitlabAccountUsingPOSTOK, *LinkGitlabAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkGitlabAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkGitlabAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-gitlab",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkGitlabAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkGitlabAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkGitlabAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-LinkK8sAccountUsingPOST links k8s account
-*/
-func (a *Client) LinkK8sAccountUsingPOST(params *LinkK8sAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkK8sAccountUsingPOSTOK, *LinkK8sAccountUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewLinkK8sAccountUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "linkK8sAccountUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/link-kubernetes",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &LinkK8sAccountUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *LinkK8sAccountUsingPOSTOK:
-		return value, nil, nil
-	case *LinkK8sAccountUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-ProcessGithubInstallationRequestUsingPOST processes github installation request
-*/
-func (a *Client) ProcessGithubInstallationRequestUsingPOST(params *ProcessGithubInstallationRequestUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProcessGithubInstallationRequestUsingPOSTOK, *ProcessGithubInstallationRequestUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewProcessGithubInstallationRequestUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "processGithubInstallationRequestUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/public/v1/github-installation-request",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ProcessGithubInstallationRequestUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *ProcessGithubInstallationRequestUsingPOSTOK:
-		return value, nil, nil
-	case *ProcessGithubInstallationRequestUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for public_ap_is: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-RetrieveThemeFileUsingGET retrieves theme file
-*/
-func (a *Client) RetrieveThemeFileUsingGET(params *RetrieveThemeFileUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetrieveThemeFileUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRetrieveThemeFileUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "retrieveThemeFileUsingGET",
-		Method:             "GET",
-		PathPattern:        "/public/v1/themeFile",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RetrieveThemeFileUsingGETReader{formats: a.formats},
+		Reader:             &LinkAwsAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -780,13 +356,403 @@ func (a *Client) RetrieveThemeFileUsingGET(params *RetrieveThemeFileUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*RetrieveThemeFileUsingGETOK)
+	success, ok := result.(*LinkAwsAccountOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for retrieveThemeFileUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for linkAwsAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkAzureAccount link azure account API
+*/
+func (a *Client) LinkAzureAccount(params *LinkAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkAzureAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkAzureAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkAzureAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-azure",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkAzureAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkAzureAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkAzureAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkBitbucketAccount link bitbucket account API
+*/
+func (a *Client) LinkBitbucketAccount(params *LinkBitbucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkBitbucketAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkBitbucketAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkBitbucketAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-bitbucket",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkBitbucketAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkBitbucketAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkBitbucketAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkDockerRegistries link docker registries API
+*/
+func (a *Client) LinkDockerRegistries(params *LinkDockerRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkDockerRegistriesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkDockerRegistriesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkDockerRegistries",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-docker-registries",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkDockerRegistriesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkDockerRegistriesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkDockerRegistries: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkECR link e c r API
+*/
+func (a *Client) LinkECR(params *LinkECRParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkECROK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkECRParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkECR",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-ecr",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkECRReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkECROK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkECR: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkGcpAccount link gcp account API
+*/
+func (a *Client) LinkGcpAccount(params *LinkGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGcpAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkGcpAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkGcpAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-gcp",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkGcpAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkGcpAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkGcpAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkGithubAccount link github account API
+*/
+func (a *Client) LinkGithubAccount(params *LinkGithubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGithubAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkGithubAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkGithubAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-github",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkGithubAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkGithubAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkGithubAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkGitlabAccount link gitlab account API
+*/
+func (a *Client) LinkGitlabAccount(params *LinkGitlabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkGitlabAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkGitlabAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkGitlabAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-gitlab",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkGitlabAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkGitlabAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkGitlabAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+LinkK8sAccount link k8s account API
+*/
+func (a *Client) LinkK8sAccount(params *LinkK8sAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LinkK8sAccountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewLinkK8sAccountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "linkK8sAccount",
+		Method:             "POST",
+		PathPattern:        "/public/v1/link-kubernetes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &LinkK8sAccountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*LinkK8sAccountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for linkK8sAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ProcessGithubInstallationRequest process github installation request API
+*/
+func (a *Client) ProcessGithubInstallationRequest(params *ProcessGithubInstallationRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProcessGithubInstallationRequestOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProcessGithubInstallationRequestParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "processGithubInstallationRequest",
+		Method:             "POST",
+		PathPattern:        "/public/v1/github-installation-request",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ProcessGithubInstallationRequestReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProcessGithubInstallationRequestOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for processGithubInstallationRequest: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RetrieveThemeFile retrieve theme file API
+*/
+func (a *Client) RetrieveThemeFile(params *RetrieveThemeFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RetrieveThemeFileOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRetrieveThemeFileParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "retrieveThemeFile",
+		Method:             "GET",
+		PathPattern:        "/public/v1/themeFile",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RetrieveThemeFileReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RetrieveThemeFileOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for retrieveThemeFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

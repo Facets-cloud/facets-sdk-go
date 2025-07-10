@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GithubLabel GithubLabel
+// GithubLabel github label
 //
 // swagger:model GithubLabel
 type GithubLabel struct {

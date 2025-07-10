@@ -8,20 +8,24 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ArtifactByReleaseStreamRequest ArtifactByReleaseStreamRequest
+// ArtifactByReleaseStreamRequest artifact by release stream request
 //
 // swagger:model ArtifactByReleaseStreamRequest
 type ArtifactByReleaseStreamRequest struct {
 
 	// application name
-	ApplicationName string `json:"applicationName,omitempty"`
+	// Required: true
+	ApplicationName *string `json:"applicationName"`
 
 	// artifact Uri
-	ArtifactURI string `json:"artifactUri,omitempty"`
+	// Required: true
+	ArtifactURI *string `json:"artifactUri"`
 
 	// artifactory
 	Artifactory string `json:"artifactory,omitempty"`
@@ -33,7 +37,8 @@ type ArtifactByReleaseStreamRequest struct {
 	ExternalID string `json:"externalId,omitempty"`
 
 	// release stream
-	ReleaseStream string `json:"releaseStream,omitempty"`
+	// Required: true
+	ReleaseStream *string `json:"releaseStream"`
 
 	// stack name
 	StackName string `json:"stackName,omitempty"`
@@ -41,6 +46,50 @@ type ArtifactByReleaseStreamRequest struct {
 
 // Validate validates this artifact by release stream request
 func (m *ArtifactByReleaseStreamRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateApplicationName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateArtifactURI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReleaseStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ArtifactByReleaseStreamRequest) validateApplicationName(formats strfmt.Registry) error {
+
+	if err := validate.Required("applicationName", "body", m.ApplicationName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactByReleaseStreamRequest) validateArtifactURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("artifactUri", "body", m.ArtifactURI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactByReleaseStreamRequest) validateReleaseStream(formats strfmt.Registry) error {
+
+	if err := validate.Required("releaseStream", "body", m.ReleaseStream); err != nil {
+		return err
+	}
+
 	return nil
 }
 

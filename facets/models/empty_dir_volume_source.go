@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EmptyDirVolumeSource EmptyDirVolumeSource
+// EmptyDirVolumeSource empty dir volume source
 //
 // swagger:model EmptyDirVolumeSource
 type EmptyDirVolumeSource struct {

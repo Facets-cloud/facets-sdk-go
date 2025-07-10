@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ScaleIOVolumeSource ScaleIOVolumeSource
+// ScaleIOVolumeSource scale i o volume source
 //
 // swagger:model ScaleIOVolumeSource
 type ScaleIOVolumeSource struct {

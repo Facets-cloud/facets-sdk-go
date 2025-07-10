@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AzureAccount AzureAccount
+// AzureAccount azure account
 //
 // swagger:model AzureAccount
 type AzureAccount struct {

@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadBitbucketOauthAppPayload OneTimePayload«BitbucketOauthAppPayload»
+// OneTimePayloadBitbucketOauthAppPayload one time payload bitbucket oauth app payload
 //
-// swagger:model OneTimePayload«BitbucketOauthAppPayload»
+// swagger:model OneTimePayloadBitbucketOauthAppPayload
 type OneTimePayloadBitbucketOauthAppPayload struct {
 
 	// payload

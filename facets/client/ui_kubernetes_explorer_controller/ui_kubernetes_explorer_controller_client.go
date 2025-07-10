@@ -54,103 +54,74 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
-// WithAcceptTextPlain sets the Accept header to "text/plain".
-func WithAcceptTextPlain(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"text/plain"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ContainerLogsUsingGET(params *ContainerLogsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerLogsUsingGETOK, error)
+	ContainerLogs(params *ContainerLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerLogsOK, error)
 
-	GetAllIngressRulesForClusterUsingGET(params *GetAllIngressRulesForClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIngressRulesForClusterUsingGETOK, error)
+	GetAllIngressRulesForCluster(params *GetAllIngressRulesForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIngressRulesForClusterOK, error)
 
-	GetConfigMapDataUsingGET(params *GetConfigMapDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfigMapDataUsingGETOK, error)
+	GetConfigMapData(params *GetConfigMapDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfigMapDataOK, error)
 
-	GetManifestUsingGET(params *GetManifestUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetManifestUsingGETOK, error)
+	GetManifest(params *GetManifestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetManifestOK, error)
 
-	GetPodsForDeploymentUsingGET(params *GetPodsForDeploymentUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPodsForDeploymentUsingGETOK, error)
+	GetPodsForDeployment(params *GetPodsForDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPodsForDeploymentOK, error)
 
-	GetSecretsDataUsingGET(params *GetSecretsDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSecretsDataUsingGETOK, error)
+	GetSecretsData(params *GetSecretsDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSecretsDataOK, error)
 
-	ListConfigMapByLabelsUsingGET(params *ListConfigMapByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigMapByLabelsUsingGETOK, error)
+	ListConfigMapByLabels(params *ListConfigMapByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigMapByLabelsOK, error)
 
-	ListContainersInPodUsingGET(params *ListContainersInPodUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodUsingGETOK, error)
+	ListContainersInPod(params *ListContainersInPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodOK, error)
 
-	ListContainersInPodV2UsingGET(params *ListContainersInPodV2UsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodV2UsingGETOK, error)
+	ListContainersInPodV2(params *ListContainersInPodV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodV2OK, error)
 
-	ListCronJobByLabelsUsingGET(params *ListCronJobByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCronJobByLabelsUsingGETOK, error)
+	ListCronJobByLabels(params *ListCronJobByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCronJobByLabelsOK, error)
 
-	ListDaemonSetsByLabelsUsingGET(params *ListDaemonSetsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDaemonSetsByLabelsUsingGETOK, error)
+	ListDaemonSetsByLabels(params *ListDaemonSetsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDaemonSetsByLabelsOK, error)
 
-	ListDeploymentsByLabelsUsingGET(params *ListDeploymentsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDeploymentsByLabelsUsingGETOK, error)
+	ListDeploymentsByLabels(params *ListDeploymentsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDeploymentsByLabelsOK, error)
 
-	ListEventsByK8sResourceUsingGET(params *ListEventsByK8sResourceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEventsByK8sResourceUsingGETOK, error)
+	ListEventsByK8sResource(params *ListEventsByK8sResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEventsByK8sResourceOK, error)
 
-	ListHpaByLabelsUsingGET(params *ListHpaByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHpaByLabelsUsingGETOK, error)
+	ListHpaByLabels(params *ListHpaByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHpaByLabelsOK, error)
 
-	ListIngressesByLabelsUsingGET(params *ListIngressesByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIngressesByLabelsUsingGETOK, error)
+	ListIngressesByLabels(params *ListIngressesByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIngressesByLabelsOK, error)
 
-	ListJobsByLabelsUsingGET(params *ListJobsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListJobsByLabelsUsingGETOK, error)
+	ListJobsByLabels(params *ListJobsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListJobsByLabelsOK, error)
 
-	ListPVByLabelsUsingGET(params *ListPVByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVByLabelsUsingGETOK, error)
+	ListPVByLabels(params *ListPVByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVByLabelsOK, error)
 
-	ListPVCByLabelsUsingGET(params *ListPVCByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVCByLabelsUsingGETOK, error)
+	ListPVCByLabels(params *ListPVCByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVCByLabelsOK, error)
 
-	ListPodsByLabelsUsingGET(params *ListPodsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPodsByLabelsUsingGETOK, error)
+	ListPodsByLabels(params *ListPodsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPodsByLabelsOK, error)
 
-	ListReplicasetsByLabelsUsingGET(params *ListReplicasetsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListReplicasetsByLabelsUsingGETOK, error)
+	ListReplicasetsByLabels(params *ListReplicasetsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListReplicasetsByLabelsOK, error)
 
-	ListSecretsByLabelsUsingGET(params *ListSecretsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSecretsByLabelsUsingGETOK, error)
+	ListSecretsByLabels(params *ListSecretsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSecretsByLabelsOK, error)
 
-	ListServicesByLabelsUsingGET(params *ListServicesByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesByLabelsUsingGETOK, error)
+	ListServicesByLabels(params *ListServicesByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesByLabelsOK, error)
 
-	ListStatefulsetsLabelsByLabelsUsingGET(params *ListStatefulsetsLabelsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStatefulsetsLabelsByLabelsUsingGETOK, error)
+	ListStatefulsetsLabelsByLabels(params *ListStatefulsetsLabelsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStatefulsetsLabelsByLabelsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ContainerLogsUsingGET containers logs
+ContainerLogs container logs API
 */
-func (a *Client) ContainerLogsUsingGET(params *ContainerLogsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerLogsUsingGETOK, error) {
+func (a *Client) ContainerLogs(params *ContainerLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerLogsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewContainerLogsUsingGETParams()
+		params = NewContainerLogsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "containerLogsUsingGET",
+		ID:                 "containerLogs",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/pods/{podName}/{containerName}/logs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ContainerLogsUsingGETReader{formats: a.formats},
+		Reader:             &ContainerLogsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -163,33 +134,33 @@ func (a *Client) ContainerLogsUsingGET(params *ContainerLogsUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ContainerLogsUsingGETOK)
+	success, ok := result.(*ContainerLogsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for containerLogsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for containerLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllIngressRulesForClusterUsingGET gets all ingress rules for cluster
+GetAllIngressRulesForCluster get all ingress rules for cluster API
 */
-func (a *Client) GetAllIngressRulesForClusterUsingGET(params *GetAllIngressRulesForClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIngressRulesForClusterUsingGETOK, error) {
+func (a *Client) GetAllIngressRulesForCluster(params *GetAllIngressRulesForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllIngressRulesForClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllIngressRulesForClusterUsingGETParams()
+		params = NewGetAllIngressRulesForClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllIngressRulesForClusterUsingGET",
+		ID:                 "getAllIngressRulesForCluster",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/ingress-rules",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllIngressRulesForClusterUsingGETReader{formats: a.formats},
+		Reader:             &GetAllIngressRulesForClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,33 +173,33 @@ func (a *Client) GetAllIngressRulesForClusterUsingGET(params *GetAllIngressRules
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllIngressRulesForClusterUsingGETOK)
+	success, ok := result.(*GetAllIngressRulesForClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllIngressRulesForClusterUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllIngressRulesForCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetConfigMapDataUsingGET gets config map data
+GetConfigMapData get config map data API
 */
-func (a *Client) GetConfigMapDataUsingGET(params *GetConfigMapDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfigMapDataUsingGETOK, error) {
+func (a *Client) GetConfigMapData(params *GetConfigMapDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetConfigMapDataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetConfigMapDataUsingGETParams()
+		params = NewGetConfigMapDataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getConfigMapDataUsingGET",
+		ID:                 "getConfigMapData",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/configMaps/{configMapName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetConfigMapDataUsingGETReader{formats: a.formats},
+		Reader:             &GetConfigMapDataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -241,33 +212,33 @@ func (a *Client) GetConfigMapDataUsingGET(params *GetConfigMapDataUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetConfigMapDataUsingGETOK)
+	success, ok := result.(*GetConfigMapDataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getConfigMapDataUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getConfigMapData: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetManifestUsingGET gets manifest
+GetManifest get manifest API
 */
-func (a *Client) GetManifestUsingGET(params *GetManifestUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetManifestUsingGETOK, error) {
+func (a *Client) GetManifest(params *GetManifestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetManifestOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetManifestUsingGETParams()
+		params = NewGetManifestParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getManifestUsingGET",
+		ID:                 "getManifest",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/{k8sResourceType}/{k8sResourceName}/manifest",
-		ProducesMediaTypes: []string{"text/plain"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetManifestUsingGETReader{formats: a.formats},
+		Reader:             &GetManifestReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -280,33 +251,33 @@ func (a *Client) GetManifestUsingGET(params *GetManifestUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetManifestUsingGETOK)
+	success, ok := result.(*GetManifestOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getManifestUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getManifest: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPodsForDeploymentUsingGET gets pods for deployment
+GetPodsForDeployment get pods for deployment API
 */
-func (a *Client) GetPodsForDeploymentUsingGET(params *GetPodsForDeploymentUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPodsForDeploymentUsingGETOK, error) {
+func (a *Client) GetPodsForDeployment(params *GetPodsForDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPodsForDeploymentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPodsForDeploymentUsingGETParams()
+		params = NewGetPodsForDeploymentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPodsForDeploymentUsingGET",
+		ID:                 "getPodsForDeployment",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/deployments/{deploymentName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPodsForDeploymentUsingGETReader{formats: a.formats},
+		Reader:             &GetPodsForDeploymentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -319,33 +290,33 @@ func (a *Client) GetPodsForDeploymentUsingGET(params *GetPodsForDeploymentUsingG
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPodsForDeploymentUsingGETOK)
+	success, ok := result.(*GetPodsForDeploymentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPodsForDeploymentUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPodsForDeployment: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetSecretsDataUsingGET gets secrets data
+GetSecretsData get secrets data API
 */
-func (a *Client) GetSecretsDataUsingGET(params *GetSecretsDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSecretsDataUsingGETOK, error) {
+func (a *Client) GetSecretsData(params *GetSecretsDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSecretsDataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSecretsDataUsingGETParams()
+		params = NewGetSecretsDataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getSecretsDataUsingGET",
+		ID:                 "getSecretsData",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/secrets/{secretName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSecretsDataUsingGETReader{formats: a.formats},
+		Reader:             &GetSecretsDataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -358,33 +329,33 @@ func (a *Client) GetSecretsDataUsingGET(params *GetSecretsDataUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSecretsDataUsingGETOK)
+	success, ok := result.(*GetSecretsDataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getSecretsDataUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getSecretsData: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListConfigMapByLabelsUsingGET lists config map by labels
+ListConfigMapByLabels list config map by labels API
 */
-func (a *Client) ListConfigMapByLabelsUsingGET(params *ListConfigMapByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigMapByLabelsUsingGETOK, error) {
+func (a *Client) ListConfigMapByLabels(params *ListConfigMapByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListConfigMapByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListConfigMapByLabelsUsingGETParams()
+		params = NewListConfigMapByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listConfigMapByLabelsUsingGET",
+		ID:                 "listConfigMapByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/configMaps",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListConfigMapByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListConfigMapByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -397,33 +368,33 @@ func (a *Client) ListConfigMapByLabelsUsingGET(params *ListConfigMapByLabelsUsin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListConfigMapByLabelsUsingGETOK)
+	success, ok := result.(*ListConfigMapByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listConfigMapByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listConfigMapByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListContainersInPodUsingGET lists containers in pod
+ListContainersInPod list containers in pod API
 */
-func (a *Client) ListContainersInPodUsingGET(params *ListContainersInPodUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodUsingGETOK, error) {
+func (a *Client) ListContainersInPod(params *ListContainersInPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListContainersInPodUsingGETParams()
+		params = NewListContainersInPodParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listContainersInPodUsingGET",
+		ID:                 "listContainersInPod",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/{podName}/containers",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListContainersInPodUsingGETReader{formats: a.formats},
+		Reader:             &ListContainersInPodReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -436,33 +407,33 @@ func (a *Client) ListContainersInPodUsingGET(params *ListContainersInPodUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListContainersInPodUsingGETOK)
+	success, ok := result.(*ListContainersInPodOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listContainersInPodUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listContainersInPod: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListContainersInPodV2UsingGET lists containers in pod v2
+ListContainersInPodV2 list containers in pod v2 API
 */
-func (a *Client) ListContainersInPodV2UsingGET(params *ListContainersInPodV2UsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodV2UsingGETOK, error) {
+func (a *Client) ListContainersInPodV2(params *ListContainersInPodV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListContainersInPodV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListContainersInPodV2UsingGETParams()
+		params = NewListContainersInPodV2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listContainersInPodV2UsingGET",
+		ID:                 "listContainersInPodV2",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/{podName}/v2/containers",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListContainersInPodV2UsingGETReader{formats: a.formats},
+		Reader:             &ListContainersInPodV2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -475,33 +446,33 @@ func (a *Client) ListContainersInPodV2UsingGET(params *ListContainersInPodV2Usin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListContainersInPodV2UsingGETOK)
+	success, ok := result.(*ListContainersInPodV2OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listContainersInPodV2UsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listContainersInPodV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListCronJobByLabelsUsingGET lists cron job by labels
+ListCronJobByLabels list cron job by labels API
 */
-func (a *Client) ListCronJobByLabelsUsingGET(params *ListCronJobByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCronJobByLabelsUsingGETOK, error) {
+func (a *Client) ListCronJobByLabels(params *ListCronJobByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListCronJobByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListCronJobByLabelsUsingGETParams()
+		params = NewListCronJobByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listCronJobByLabelsUsingGET",
+		ID:                 "listCronJobByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/cronJobs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListCronJobByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListCronJobByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -514,33 +485,33 @@ func (a *Client) ListCronJobByLabelsUsingGET(params *ListCronJobByLabelsUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListCronJobByLabelsUsingGETOK)
+	success, ok := result.(*ListCronJobByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listCronJobByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listCronJobByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListDaemonSetsByLabelsUsingGET lists daemon sets by labels
+ListDaemonSetsByLabels list daemon sets by labels API
 */
-func (a *Client) ListDaemonSetsByLabelsUsingGET(params *ListDaemonSetsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDaemonSetsByLabelsUsingGETOK, error) {
+func (a *Client) ListDaemonSetsByLabels(params *ListDaemonSetsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDaemonSetsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListDaemonSetsByLabelsUsingGETParams()
+		params = NewListDaemonSetsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listDaemonSetsByLabelsUsingGET",
+		ID:                 "listDaemonSetsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/daemonSets",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListDaemonSetsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListDaemonSetsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -553,33 +524,33 @@ func (a *Client) ListDaemonSetsByLabelsUsingGET(params *ListDaemonSetsByLabelsUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListDaemonSetsByLabelsUsingGETOK)
+	success, ok := result.(*ListDaemonSetsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listDaemonSetsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listDaemonSetsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListDeploymentsByLabelsUsingGET lists deployments by labels
+ListDeploymentsByLabels list deployments by labels API
 */
-func (a *Client) ListDeploymentsByLabelsUsingGET(params *ListDeploymentsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDeploymentsByLabelsUsingGETOK, error) {
+func (a *Client) ListDeploymentsByLabels(params *ListDeploymentsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDeploymentsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListDeploymentsByLabelsUsingGETParams()
+		params = NewListDeploymentsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listDeploymentsByLabelsUsingGET",
+		ID:                 "listDeploymentsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/deployments",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListDeploymentsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListDeploymentsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -592,33 +563,33 @@ func (a *Client) ListDeploymentsByLabelsUsingGET(params *ListDeploymentsByLabels
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListDeploymentsByLabelsUsingGETOK)
+	success, ok := result.(*ListDeploymentsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listDeploymentsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listDeploymentsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListEventsByK8sResourceUsingGET lists events by k8s resource
+ListEventsByK8sResource list events by k8s resource API
 */
-func (a *Client) ListEventsByK8sResourceUsingGET(params *ListEventsByK8sResourceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEventsByK8sResourceUsingGETOK, error) {
+func (a *Client) ListEventsByK8sResource(params *ListEventsByK8sResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEventsByK8sResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListEventsByK8sResourceUsingGETParams()
+		params = NewListEventsByK8sResourceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listEventsByK8sResourceUsingGET",
+		ID:                 "listEventsByK8sResource",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/{k8sResourceType}/{k8sResourceName}/events",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListEventsByK8sResourceUsingGETReader{formats: a.formats},
+		Reader:             &ListEventsByK8sResourceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -631,33 +602,33 @@ func (a *Client) ListEventsByK8sResourceUsingGET(params *ListEventsByK8sResource
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListEventsByK8sResourceUsingGETOK)
+	success, ok := result.(*ListEventsByK8sResourceOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listEventsByK8sResourceUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listEventsByK8sResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListHpaByLabelsUsingGET lists hpa by labels
+ListHpaByLabels list hpa by labels API
 */
-func (a *Client) ListHpaByLabelsUsingGET(params *ListHpaByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHpaByLabelsUsingGETOK, error) {
+func (a *Client) ListHpaByLabels(params *ListHpaByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListHpaByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListHpaByLabelsUsingGETParams()
+		params = NewListHpaByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listHpaByLabelsUsingGET",
+		ID:                 "listHpaByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/hpa",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListHpaByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListHpaByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -670,33 +641,33 @@ func (a *Client) ListHpaByLabelsUsingGET(params *ListHpaByLabelsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListHpaByLabelsUsingGETOK)
+	success, ok := result.(*ListHpaByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listHpaByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listHpaByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListIngressesByLabelsUsingGET lists ingresses by labels
+ListIngressesByLabels list ingresses by labels API
 */
-func (a *Client) ListIngressesByLabelsUsingGET(params *ListIngressesByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIngressesByLabelsUsingGETOK, error) {
+func (a *Client) ListIngressesByLabels(params *ListIngressesByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListIngressesByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListIngressesByLabelsUsingGETParams()
+		params = NewListIngressesByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listIngressesByLabelsUsingGET",
+		ID:                 "listIngressesByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/ingresses",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListIngressesByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListIngressesByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -709,33 +680,33 @@ func (a *Client) ListIngressesByLabelsUsingGET(params *ListIngressesByLabelsUsin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListIngressesByLabelsUsingGETOK)
+	success, ok := result.(*ListIngressesByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listIngressesByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listIngressesByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListJobsByLabelsUsingGET lists jobs by labels
+ListJobsByLabels list jobs by labels API
 */
-func (a *Client) ListJobsByLabelsUsingGET(params *ListJobsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListJobsByLabelsUsingGETOK, error) {
+func (a *Client) ListJobsByLabels(params *ListJobsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListJobsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListJobsByLabelsUsingGETParams()
+		params = NewListJobsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listJobsByLabelsUsingGET",
+		ID:                 "listJobsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/jobs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListJobsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListJobsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -748,33 +719,33 @@ func (a *Client) ListJobsByLabelsUsingGET(params *ListJobsByLabelsUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListJobsByLabelsUsingGETOK)
+	success, ok := result.(*ListJobsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listJobsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listJobsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListPVByLabelsUsingGET lists p v by labels
+ListPVByLabels list p v by labels API
 */
-func (a *Client) ListPVByLabelsUsingGET(params *ListPVByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVByLabelsUsingGETOK, error) {
+func (a *Client) ListPVByLabels(params *ListPVByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListPVByLabelsUsingGETParams()
+		params = NewListPVByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listPVByLabelsUsingGET",
+		ID:                 "listPVByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/pv",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListPVByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListPVByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -787,33 +758,33 @@ func (a *Client) ListPVByLabelsUsingGET(params *ListPVByLabelsUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListPVByLabelsUsingGETOK)
+	success, ok := result.(*ListPVByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listPVByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listPVByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListPVCByLabelsUsingGET lists p v c by labels
+ListPVCByLabels list p v c by labels API
 */
-func (a *Client) ListPVCByLabelsUsingGET(params *ListPVCByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVCByLabelsUsingGETOK, error) {
+func (a *Client) ListPVCByLabels(params *ListPVCByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPVCByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListPVCByLabelsUsingGETParams()
+		params = NewListPVCByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listPVCByLabelsUsingGET",
+		ID:                 "listPVCByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/pvc",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListPVCByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListPVCByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -826,33 +797,33 @@ func (a *Client) ListPVCByLabelsUsingGET(params *ListPVCByLabelsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListPVCByLabelsUsingGETOK)
+	success, ok := result.(*ListPVCByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listPVCByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listPVCByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListPodsByLabelsUsingGET lists pods by labels
+ListPodsByLabels list pods by labels API
 */
-func (a *Client) ListPodsByLabelsUsingGET(params *ListPodsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPodsByLabelsUsingGETOK, error) {
+func (a *Client) ListPodsByLabels(params *ListPodsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListPodsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListPodsByLabelsUsingGETParams()
+		params = NewListPodsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listPodsByLabelsUsingGET",
+		ID:                 "listPodsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/pods",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListPodsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListPodsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -865,33 +836,33 @@ func (a *Client) ListPodsByLabelsUsingGET(params *ListPodsByLabelsUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListPodsByLabelsUsingGETOK)
+	success, ok := result.(*ListPodsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listPodsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listPodsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListReplicasetsByLabelsUsingGET lists replicasets by labels
+ListReplicasetsByLabels list replicasets by labels API
 */
-func (a *Client) ListReplicasetsByLabelsUsingGET(params *ListReplicasetsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListReplicasetsByLabelsUsingGETOK, error) {
+func (a *Client) ListReplicasetsByLabels(params *ListReplicasetsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListReplicasetsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListReplicasetsByLabelsUsingGETParams()
+		params = NewListReplicasetsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listReplicasetsByLabelsUsingGET",
+		ID:                 "listReplicasetsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/replicasets",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListReplicasetsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListReplicasetsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -904,33 +875,33 @@ func (a *Client) ListReplicasetsByLabelsUsingGET(params *ListReplicasetsByLabels
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListReplicasetsByLabelsUsingGETOK)
+	success, ok := result.(*ListReplicasetsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listReplicasetsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listReplicasetsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListSecretsByLabelsUsingGET lists secrets by labels
+ListSecretsByLabels list secrets by labels API
 */
-func (a *Client) ListSecretsByLabelsUsingGET(params *ListSecretsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSecretsByLabelsUsingGETOK, error) {
+func (a *Client) ListSecretsByLabels(params *ListSecretsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSecretsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListSecretsByLabelsUsingGETParams()
+		params = NewListSecretsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listSecretsByLabelsUsingGET",
+		ID:                 "listSecretsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/secrets",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListSecretsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListSecretsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -943,33 +914,33 @@ func (a *Client) ListSecretsByLabelsUsingGET(params *ListSecretsByLabelsUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListSecretsByLabelsUsingGETOK)
+	success, ok := result.(*ListSecretsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listSecretsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listSecretsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListServicesByLabelsUsingGET lists services by labels
+ListServicesByLabels list services by labels API
 */
-func (a *Client) ListServicesByLabelsUsingGET(params *ListServicesByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesByLabelsUsingGETOK, error) {
+func (a *Client) ListServicesByLabels(params *ListServicesByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServicesByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListServicesByLabelsUsingGETParams()
+		params = NewListServicesByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listServicesByLabelsUsingGET",
+		ID:                 "listServicesByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/services",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListServicesByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListServicesByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -982,33 +953,33 @@ func (a *Client) ListServicesByLabelsUsingGET(params *ListServicesByLabelsUsingG
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListServicesByLabelsUsingGETOK)
+	success, ok := result.(*ListServicesByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listServicesByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listServicesByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListStatefulsetsLabelsByLabelsUsingGET lists statefulsets labels by labels
+ListStatefulsetsLabelsByLabels list statefulsets labels by labels API
 */
-func (a *Client) ListStatefulsetsLabelsByLabelsUsingGET(params *ListStatefulsetsLabelsByLabelsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStatefulsetsLabelsByLabelsUsingGETOK, error) {
+func (a *Client) ListStatefulsetsLabelsByLabels(params *ListStatefulsetsLabelsByLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListStatefulsetsLabelsByLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListStatefulsetsLabelsByLabelsUsingGETParams()
+		params = NewListStatefulsetsLabelsByLabelsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listStatefulsetsLabelsByLabelsUsingGET",
+		ID:                 "listStatefulsetsLabelsByLabels",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/k8s-explorer/statefulsets",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListStatefulsetsLabelsByLabelsUsingGETReader{formats: a.formats},
+		Reader:             &ListStatefulsetsLabelsByLabelsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1021,13 +992,13 @@ func (a *Client) ListStatefulsetsLabelsByLabelsUsingGET(params *ListStatefulsets
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListStatefulsetsLabelsByLabelsUsingGETOK)
+	success, ok := result.(*ListStatefulsetsLabelsByLabelsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listStatefulsetsLabelsByLabelsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listStatefulsetsLabelsByLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

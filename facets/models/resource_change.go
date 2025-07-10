@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ResourceChange ResourceChange
+// ResourceChange resource change
 //
 // swagger:model ResourceChange
 type ResourceChange struct {
@@ -27,6 +27,9 @@ type ResourceChange struct {
 
 	// changed attributes
 	ChangedAttributes []*ChangedAttribute `json:"changedAttributes"`
+
+	// flavor
+	Flavor string `json:"flavor,omitempty"`
 
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`

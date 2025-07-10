@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ISCSIVolumeSource ISCSIVolumeSource
+// ISCSIVolumeSource i s c s i volume source
 //
 // swagger:model ISCSIVolumeSource
 type ISCSIVolumeSource struct {

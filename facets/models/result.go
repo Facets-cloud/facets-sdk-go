@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Result Result
+// Result result
 //
 // swagger:model Result
 type Result struct {

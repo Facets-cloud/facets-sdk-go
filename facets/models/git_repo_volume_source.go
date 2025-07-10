@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GitRepoVolumeSource GitRepoVolumeSource
+// GitRepoVolumeSource git repo volume source
 //
 // swagger:model GitRepoVolumeSource
 type GitRepoVolumeSource struct {

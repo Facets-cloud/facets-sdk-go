@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PauseReleaseRequest PauseReleaseRequest
+// PauseReleaseRequest pause release request
 //
 // swagger:model PauseReleaseRequest
 type PauseReleaseRequest struct {

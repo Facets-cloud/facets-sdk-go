@@ -54,114 +54,68 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithContentType allows the client to force the Content-Type header
-// to negotiate a specific Consumer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithContentType(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ConsumesMediaTypes = []string{mime}
-	}
-}
-
-// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
-func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
-	r.ConsumesMediaTypes = []string{"application/json"}
-}
-
-// WithContentTypeMultipartFormData sets the Content-Type header to "multipart/form-data".
-func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
-	r.ConsumesMediaTypes = []string{"multipart/form-data"}
-}
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AttachImageViaRegisterUsingPOST(params *AttachImageViaRegisterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachImageViaRegisterUsingPOSTOK, *AttachImageViaRegisterUsingPOSTCreated, error)
+	AttachImageViaRegister(params *AttachImageViaRegisterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachImageViaRegisterOK, error)
 
-	DeleteArtifactUsingDELETE(params *DeleteArtifactUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactUsingDELETEOK, *DeleteArtifactUsingDELETENoContent, error)
+	DeleteArtifact(params *DeleteArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactOK, error)
 
-	GenerateArtifactPushCredentialsUsingPOST(params *GenerateArtifactPushCredentialsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsUsingPOSTOK, *GenerateArtifactPushCredentialsUsingPOSTCreated, error)
+	GenerateArtifactPushCredentialsV2(params *GenerateArtifactPushCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV2OK, error)
 
-	GenerateArtifactPushCredentialsV2UsingPOST(params *GenerateArtifactPushCredentialsV2UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV2UsingPOSTOK, *GenerateArtifactPushCredentialsV2UsingPOSTCreated, error)
+	GenerateArtifactPushCredentialsV3(params *GenerateArtifactPushCredentialsV3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV3OK, error)
 
-	GenerateArtifactPushCredentialsV3UsingPOST(params *GenerateArtifactPushCredentialsV3UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV3UsingPOSTOK, *GenerateArtifactPushCredentialsV3UsingPOSTCreated, error)
+	GenerateArtifactPushCredentials1(params *GenerateArtifactPushCredentials1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentials1OK, error)
 
-	GetAllUsingGET(params *GetAllUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGETOK, error)
+	GetArtifactByApplicationName(params *GetArtifactByApplicationNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByApplicationNameOK, error)
 
-	GetArtifactByApplicationNameUsingGET(params *GetArtifactByApplicationNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByApplicationNameUsingGETOK, error)
+	GetArtifactByClusterID(params *GetArtifactByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByClusterIDOK, error)
 
-	GetArtifactByClusterIDUsingGET(params *GetArtifactByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByClusterIDUsingGETOK, error)
+	GetArtifactsByResourceNameAndResourceType(params *GetArtifactsByResourceNameAndResourceTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactsByResourceNameAndResourceTypeOK, error)
 
-	GetArtifactsByResourceNameAndResourceTypeUsingGET(params *GetArtifactsByResourceNameAndResourceTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactsByResourceNameAndResourceTypeUsingGETOK, error)
+	GetMetadataKeys(params *GetMetadataKeysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMetadataKeysOK, error)
 
-	GetMetadataKeysUsingGET(params *GetMetadataKeysUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMetadataKeysUsingGETOK, error)
+	PromoteArtifact(params *PromoteArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactOK, error)
 
-	PromoteArtifactByArtifactCiNameUsingPOST(params *PromoteArtifactByArtifactCiNameUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactByArtifactCiNameUsingPOSTOK, *PromoteArtifactByArtifactCiNameUsingPOSTCreated, error)
+	PromoteArtifactByArtifactCiName(params *PromoteArtifactByArtifactCiNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactByArtifactCiNameOK, error)
 
-	PromoteArtifactUsingPOST(params *PromoteArtifactUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactUsingPOSTOK, *PromoteArtifactUsingPOSTCreated, error)
+	PushArtifact(params *PushArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PushArtifactOK, error)
 
-	PushArtifactUsingPOST(params *PushArtifactUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PushArtifactUsingPOSTOK, *PushArtifactUsingPOSTCreated, error)
+	ReclassifyArtifacts(params *ReclassifyArtifactsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReclassifyArtifactsOK, error)
 
-	ReclassifyArtifactsUsingPUT(params *ReclassifyArtifactsUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReclassifyArtifactsUsingPUTOK, *ReclassifyArtifactsUsingPUTCreated, error)
+	RegisterArtifact(params *RegisterArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactOK, error)
 
-	RegisterArtifactByEnvUsingPOST(params *RegisterArtifactByEnvUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByEnvUsingPOSTOK, *RegisterArtifactByEnvUsingPOSTCreated, error)
+	RegisterArtifactByEnv(params *RegisterArtifactByEnvParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByEnvOK, error)
 
-	RegisterArtifactByReleaseStreamUsingPOST(params *RegisterArtifactByReleaseStreamUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByReleaseStreamUsingPOSTOK, *RegisterArtifactByReleaseStreamUsingPOSTCreated, error)
+	RegisterArtifactByReleaseStream(params *RegisterArtifactByReleaseStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByReleaseStreamOK, error)
 
-	RegisterArtifactSaasUsingPOST(params *RegisterArtifactSaasUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasUsingPOSTOK, *RegisterArtifactSaasUsingPOSTCreated, error)
+	RegisterArtifactSaas1(params *RegisterArtifactSaas1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaas1OK, error)
 
-	RegisterArtifactUsingPOST1(params *RegisterArtifactUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactUsingPOST1OK, *RegisterArtifactUsingPOST1Created, error)
+	RegisterArtifactV2(params *RegisterArtifactV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactV2OK, error)
 
-	RegisterArtifactV2UsingPOST(params *RegisterArtifactV2UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactV2UsingPOSTOK, *RegisterArtifactV2UsingPOSTCreated, error)
+	UpdateReleaseStream(params *UpdateReleaseStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateReleaseStreamOK, error)
 
-	UpdateReleaseStreamUsingPOST(params *UpdateReleaseStreamUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateReleaseStreamUsingPOSTOK, *UpdateReleaseStreamUsingPOSTCreated, error)
-
-	UploadArtifactsZipUsingPOST(params *UploadArtifactsZipUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadArtifactsZipUsingPOSTOK, *UploadArtifactsZipUsingPOSTCreated, error)
+	UploadArtifactsZip(params *UploadArtifactsZipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadArtifactsZipOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AttachImageViaRegisterUsingPOST attaches image via register
+AttachImageViaRegister attach image via register API
 */
-func (a *Client) AttachImageViaRegisterUsingPOST(params *AttachImageViaRegisterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachImageViaRegisterUsingPOSTOK, *AttachImageViaRegisterUsingPOSTCreated, error) {
+func (a *Client) AttachImageViaRegister(params *AttachImageViaRegisterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachImageViaRegisterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAttachImageViaRegisterUsingPOSTParams()
+		params = NewAttachImageViaRegisterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "attachImageViaRegisterUsingPOST",
+		ID:                 "attachImageViaRegister",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/attach-image-via-register",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AttachImageViaRegisterUsingPOSTReader{formats: a.formats},
+		Reader:             &AttachImageViaRegisterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -172,36 +126,35 @@ func (a *Client) AttachImageViaRegisterUsingPOST(params *AttachImageViaRegisterU
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AttachImageViaRegisterUsingPOSTOK:
-		return value, nil, nil
-	case *AttachImageViaRegisterUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*AttachImageViaRegisterOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for attachImageViaRegister: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteArtifactUsingDELETE deletes artifact
+DeleteArtifact delete artifact API
 */
-func (a *Client) DeleteArtifactUsingDELETE(params *DeleteArtifactUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactUsingDELETEOK, *DeleteArtifactUsingDELETENoContent, error) {
+func (a *Client) DeleteArtifact(params *DeleteArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteArtifactOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteArtifactUsingDELETEParams()
+		params = NewDeleteArtifactParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteArtifactUsingDELETE",
+		ID:                 "deleteArtifact",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/artifacts/{artifactId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteArtifactUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteArtifactReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -212,76 +165,35 @@ func (a *Client) DeleteArtifactUsingDELETE(params *DeleteArtifactUsingDELETEPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteArtifactUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteArtifactUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteArtifactOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GenerateArtifactPushCredentialsUsingPOST generates artifact push credentials
+GenerateArtifactPushCredentialsV2 generate artifact push credentials v2 API
 */
-func (a *Client) GenerateArtifactPushCredentialsUsingPOST(params *GenerateArtifactPushCredentialsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsUsingPOSTOK, *GenerateArtifactPushCredentialsUsingPOSTCreated, error) {
+func (a *Client) GenerateArtifactPushCredentialsV2(params *GenerateArtifactPushCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGenerateArtifactPushCredentialsUsingPOSTParams()
+		params = NewGenerateArtifactPushCredentialsV2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "generateArtifactPushCredentialsUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/artifacts/pushCredentials/{stackName}/{appName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GenerateArtifactPushCredentialsUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *GenerateArtifactPushCredentialsUsingPOSTOK:
-		return value, nil, nil
-	case *GenerateArtifactPushCredentialsUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GenerateArtifactPushCredentialsV2UsingPOST generates artifact push credentials v2
-*/
-func (a *Client) GenerateArtifactPushCredentialsV2UsingPOST(params *GenerateArtifactPushCredentialsV2UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV2UsingPOSTOK, *GenerateArtifactPushCredentialsV2UsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGenerateArtifactPushCredentialsV2UsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "generateArtifactPushCredentialsV2UsingPOST",
+		ID:                 "generateArtifactPushCredentialsV2",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/pushCredentialsV2/artifactName/{artifactName}/registrationType/{registrationType}/value/{registrationValue}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GenerateArtifactPushCredentialsV2UsingPOSTReader{formats: a.formats},
+		Reader:             &GenerateArtifactPushCredentialsV2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -292,76 +204,35 @@ func (a *Client) GenerateArtifactPushCredentialsV2UsingPOST(params *GenerateArti
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *GenerateArtifactPushCredentialsV2UsingPOSTOK:
-		return value, nil, nil
-	case *GenerateArtifactPushCredentialsV2UsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*GenerateArtifactPushCredentialsV2OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for generateArtifactPushCredentialsV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GenerateArtifactPushCredentialsV3UsingPOST generates artifact push credentials v3
+GenerateArtifactPushCredentialsV3 generate artifact push credentials v3 API
 */
-func (a *Client) GenerateArtifactPushCredentialsV3UsingPOST(params *GenerateArtifactPushCredentialsV3UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV3UsingPOSTOK, *GenerateArtifactPushCredentialsV3UsingPOSTCreated, error) {
+func (a *Client) GenerateArtifactPushCredentialsV3(params *GenerateArtifactPushCredentialsV3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsV3OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGenerateArtifactPushCredentialsV3UsingPOSTParams()
+		params = NewGenerateArtifactPushCredentialsV3Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "generateArtifactPushCredentialsV3UsingPOST",
+		ID:                 "generateArtifactPushCredentialsV3",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/pushCredentialsV3/artifactName/{artifactName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GenerateArtifactPushCredentialsV3UsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *GenerateArtifactPushCredentialsV3UsingPOSTOK:
-		return value, nil, nil
-	case *GenerateArtifactPushCredentialsV3UsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllUsingGET gets all
-*/
-func (a *Client) GetAllUsingGET(params *GetAllUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/artifacts",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllUsingGETReader{formats: a.formats},
+		Reader:             &GenerateArtifactPushCredentialsV3Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -374,33 +245,72 @@ func (a *Client) GetAllUsingGET(params *GetAllUsingGETParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUsingGETOK)
+	success, ok := result.(*GenerateArtifactPushCredentialsV3OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for generateArtifactPushCredentialsV3: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactByApplicationNameUsingGET gets artifact by application name
+GenerateArtifactPushCredentials1 generate artifact push credentials 1 API
 */
-func (a *Client) GetArtifactByApplicationNameUsingGET(params *GetArtifactByApplicationNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByApplicationNameUsingGETOK, error) {
+func (a *Client) GenerateArtifactPushCredentials1(params *GenerateArtifactPushCredentials1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentials1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactByApplicationNameUsingGETParams()
+		params = NewGenerateArtifactPushCredentials1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactByApplicationNameUsingGET",
+		ID:                 "generateArtifactPushCredentials_1",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/artifacts/pushCredentials/{stackName}/{appName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GenerateArtifactPushCredentials1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GenerateArtifactPushCredentials1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generateArtifactPushCredentials_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetArtifactByApplicationName get artifact by application name API
+*/
+func (a *Client) GetArtifactByApplicationName(params *GetArtifactByApplicationNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByApplicationNameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetArtifactByApplicationNameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getArtifactByApplicationName",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifacts/cluster/{clusterId}/application/{applicationName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactByApplicationNameUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactByApplicationNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -413,33 +323,33 @@ func (a *Client) GetArtifactByApplicationNameUsingGET(params *GetArtifactByAppli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactByApplicationNameUsingGETOK)
+	success, ok := result.(*GetArtifactByApplicationNameOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactByApplicationNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactByApplicationName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactByClusterIDUsingGET gets artifact by cluster Id
+GetArtifactByClusterID get artifact by cluster Id API
 */
-func (a *Client) GetArtifactByClusterIDUsingGET(params *GetArtifactByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByClusterIDUsingGETOK, error) {
+func (a *Client) GetArtifactByClusterID(params *GetArtifactByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactByClusterIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactByClusterIDUsingGETParams()
+		params = NewGetArtifactByClusterIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactByClusterIdUsingGET",
+		ID:                 "getArtifactByClusterId",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifacts/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactByClusterIDUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactByClusterIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -452,33 +362,33 @@ func (a *Client) GetArtifactByClusterIDUsingGET(params *GetArtifactByClusterIDUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactByClusterIDUsingGETOK)
+	success, ok := result.(*GetArtifactByClusterIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactByClusterIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactByClusterId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetArtifactsByResourceNameAndResourceTypeUsingGET gets artifacts by resource name and resource type
+GetArtifactsByResourceNameAndResourceType get artifacts by resource name and resource type API
 */
-func (a *Client) GetArtifactsByResourceNameAndResourceTypeUsingGET(params *GetArtifactsByResourceNameAndResourceTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactsByResourceNameAndResourceTypeUsingGETOK, error) {
+func (a *Client) GetArtifactsByResourceNameAndResourceType(params *GetArtifactsByResourceNameAndResourceTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetArtifactsByResourceNameAndResourceTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetArtifactsByResourceNameAndResourceTypeUsingGETParams()
+		params = NewGetArtifactsByResourceNameAndResourceTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getArtifactsByResourceNameAndResourceTypeUsingGET",
+		ID:                 "getArtifactsByResourceNameAndResourceType",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifacts/cluster/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetArtifactsByResourceNameAndResourceTypeUsingGETReader{formats: a.formats},
+		Reader:             &GetArtifactsByResourceNameAndResourceTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -491,33 +401,33 @@ func (a *Client) GetArtifactsByResourceNameAndResourceTypeUsingGET(params *GetAr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetArtifactsByResourceNameAndResourceTypeUsingGETOK)
+	success, ok := result.(*GetArtifactsByResourceNameAndResourceTypeOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getArtifactsByResourceNameAndResourceTypeUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getArtifactsByResourceNameAndResourceType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetMetadataKeysUsingGET gets metadata keys
+GetMetadataKeys get metadata keys API
 */
-func (a *Client) GetMetadataKeysUsingGET(params *GetMetadataKeysUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMetadataKeysUsingGETOK, error) {
+func (a *Client) GetMetadataKeys(params *GetMetadataKeysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMetadataKeysOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetMetadataKeysUsingGETParams()
+		params = NewGetMetadataKeysParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getMetadataKeysUsingGET",
+		ID:                 "getMetadataKeys",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifacts/metadata/keys",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetMetadataKeysUsingGETReader{formats: a.formats},
+		Reader:             &GetMetadataKeysReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -530,73 +440,33 @@ func (a *Client) GetMetadataKeysUsingGET(params *GetMetadataKeysUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetMetadataKeysUsingGETOK)
+	success, ok := result.(*GetMetadataKeysOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getMetadataKeysUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getMetadataKeys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PromoteArtifactByArtifactCiNameUsingPOST promotes artifact by artifact ci name
+PromoteArtifact promote artifact API
 */
-func (a *Client) PromoteArtifactByArtifactCiNameUsingPOST(params *PromoteArtifactByArtifactCiNameUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactByArtifactCiNameUsingPOSTOK, *PromoteArtifactByArtifactCiNameUsingPOSTCreated, error) {
+func (a *Client) PromoteArtifact(params *PromoteArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPromoteArtifactByArtifactCiNameUsingPOSTParams()
+		params = NewPromoteArtifactParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "promoteArtifactByArtifactCiNameUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/artifacts/promote",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &PromoteArtifactByArtifactCiNameUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *PromoteArtifactByArtifactCiNameUsingPOSTOK:
-		return value, nil, nil
-	case *PromoteArtifactByArtifactCiNameUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PromoteArtifactUsingPOST promotes artifact
-*/
-func (a *Client) PromoteArtifactUsingPOST(params *PromoteArtifactUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactUsingPOSTOK, *PromoteArtifactUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewPromoteArtifactUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "promoteArtifactUsingPOST",
+		ID:                 "promoteArtifact",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/{ciId}/promote/{artifactId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PromoteArtifactUsingPOSTReader{formats: a.formats},
+		Reader:             &PromoteArtifactReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -607,36 +477,74 @@ func (a *Client) PromoteArtifactUsingPOST(params *PromoteArtifactUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *PromoteArtifactUsingPOSTOK:
-		return value, nil, nil
-	case *PromoteArtifactUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*PromoteArtifactOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for promoteArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PushArtifactUsingPOST pushes artifact
+PromoteArtifactByArtifactCiName promote artifact by artifact ci name API
 */
-func (a *Client) PushArtifactUsingPOST(params *PushArtifactUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PushArtifactUsingPOSTOK, *PushArtifactUsingPOSTCreated, error) {
+func (a *Client) PromoteArtifactByArtifactCiName(params *PromoteArtifactByArtifactCiNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PromoteArtifactByArtifactCiNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPushArtifactUsingPOSTParams()
+		params = NewPromoteArtifactByArtifactCiNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "pushArtifactUsingPOST",
+		ID:                 "promoteArtifactByArtifactCiName",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/artifacts/promote",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &PromoteArtifactByArtifactCiNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PromoteArtifactByArtifactCiNameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for promoteArtifactByArtifactCiName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PushArtifact push artifact API
+*/
+func (a *Client) PushArtifact(params *PushArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PushArtifactOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPushArtifactParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "pushArtifact",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/push",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PushArtifactUsingPOSTReader{formats: a.formats},
+		Reader:             &PushArtifactReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -647,36 +555,35 @@ func (a *Client) PushArtifactUsingPOST(params *PushArtifactUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *PushArtifactUsingPOSTOK:
-		return value, nil, nil
-	case *PushArtifactUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*PushArtifactOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for pushArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ReclassifyArtifactsUsingPUT reclassifies artifacts
+ReclassifyArtifacts reclassify artifacts API
 */
-func (a *Client) ReclassifyArtifactsUsingPUT(params *ReclassifyArtifactsUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReclassifyArtifactsUsingPUTOK, *ReclassifyArtifactsUsingPUTCreated, error) {
+func (a *Client) ReclassifyArtifacts(params *ReclassifyArtifactsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReclassifyArtifactsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewReclassifyArtifactsUsingPUTParams()
+		params = NewReclassifyArtifactsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "reclassifyArtifactsUsingPUT",
+		ID:                 "reclassifyArtifacts",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/artifacts/reclassify",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ReclassifyArtifactsUsingPUTReader{formats: a.formats},
+		Reader:             &ReclassifyArtifactsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -687,156 +594,35 @@ func (a *Client) ReclassifyArtifactsUsingPUT(params *ReclassifyArtifactsUsingPUT
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ReclassifyArtifactsUsingPUTOK:
-		return value, nil, nil
-	case *ReclassifyArtifactsUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*ReclassifyArtifactsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for reclassifyArtifacts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RegisterArtifactByEnvUsingPOST registers artifact by env
+RegisterArtifact register artifact API
 */
-func (a *Client) RegisterArtifactByEnvUsingPOST(params *RegisterArtifactByEnvUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByEnvUsingPOSTOK, *RegisterArtifactByEnvUsingPOSTCreated, error) {
+func (a *Client) RegisterArtifact(params *RegisterArtifactParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRegisterArtifactByEnvUsingPOSTParams()
+		params = NewRegisterArtifactParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactByEnvUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/artifacts/register-by-env",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RegisterArtifactByEnvUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *RegisterArtifactByEnvUsingPOSTOK:
-		return value, nil, nil
-	case *RegisterArtifactByEnvUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-RegisterArtifactByReleaseStreamUsingPOST registers artifact by release stream
-*/
-func (a *Client) RegisterArtifactByReleaseStreamUsingPOST(params *RegisterArtifactByReleaseStreamUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByReleaseStreamUsingPOSTOK, *RegisterArtifactByReleaseStreamUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRegisterArtifactByReleaseStreamUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactByReleaseStreamUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/artifacts/register-by-release-stream",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RegisterArtifactByReleaseStreamUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *RegisterArtifactByReleaseStreamUsingPOSTOK:
-		return value, nil, nil
-	case *RegisterArtifactByReleaseStreamUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-RegisterArtifactSaasUsingPOST registers artifact saas
-*/
-func (a *Client) RegisterArtifactSaasUsingPOST(params *RegisterArtifactSaasUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasUsingPOSTOK, *RegisterArtifactSaasUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRegisterArtifactSaasUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactSaasUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/artifacts/register-saas",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RegisterArtifactSaasUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *RegisterArtifactSaasUsingPOSTOK:
-		return value, nil, nil
-	case *RegisterArtifactSaasUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-RegisterArtifactUsingPOST1 registers artifact
-*/
-func (a *Client) RegisterArtifactUsingPOST1(params *RegisterArtifactUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactUsingPOST1OK, *RegisterArtifactUsingPOST1Created, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewRegisterArtifactUsingPOST1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactUsingPOST_1",
+		ID:                 "registerArtifact",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/register",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RegisterArtifactUsingPOST1Reader{formats: a.formats},
+		Reader:             &RegisterArtifactReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -847,36 +633,152 @@ func (a *Client) RegisterArtifactUsingPOST1(params *RegisterArtifactUsingPOST1Pa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RegisterArtifactUsingPOST1OK:
-		return value, nil, nil
-	case *RegisterArtifactUsingPOST1Created:
-		return nil, value, nil
+	success, ok := result.(*RegisterArtifactOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for registerArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RegisterArtifactV2UsingPOST registers artifact v2
+RegisterArtifactByEnv register artifact by env API
 */
-func (a *Client) RegisterArtifactV2UsingPOST(params *RegisterArtifactV2UsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactV2UsingPOSTOK, *RegisterArtifactV2UsingPOSTCreated, error) {
+func (a *Client) RegisterArtifactByEnv(params *RegisterArtifactByEnvParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByEnvOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRegisterArtifactV2UsingPOSTParams()
+		params = NewRegisterArtifactByEnvParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactV2UsingPOST",
+		ID:                 "registerArtifactByEnv",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/artifacts/register-by-env",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RegisterArtifactByEnvReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RegisterArtifactByEnvOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for registerArtifactByEnv: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RegisterArtifactByReleaseStream register artifact by release stream API
+*/
+func (a *Client) RegisterArtifactByReleaseStream(params *RegisterArtifactByReleaseStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactByReleaseStreamOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRegisterArtifactByReleaseStreamParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "registerArtifactByReleaseStream",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/artifacts/register-by-release-stream",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RegisterArtifactByReleaseStreamReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RegisterArtifactByReleaseStreamOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for registerArtifactByReleaseStream: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RegisterArtifactSaas1 register artifact saas 1 API
+*/
+func (a *Client) RegisterArtifactSaas1(params *RegisterArtifactSaas1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaas1OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRegisterArtifactSaas1Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "registerArtifactSaas_1",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/artifacts/register-saas",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &RegisterArtifactSaas1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*RegisterArtifactSaas1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for registerArtifactSaas_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RegisterArtifactV2 register artifact v2 API
+*/
+func (a *Client) RegisterArtifactV2(params *RegisterArtifactV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactV2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRegisterArtifactV2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "registerArtifactV2",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/registerV2",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RegisterArtifactV2UsingPOSTReader{formats: a.formats},
+		Reader:             &RegisterArtifactV2Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -887,36 +789,35 @@ func (a *Client) RegisterArtifactV2UsingPOST(params *RegisterArtifactV2UsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RegisterArtifactV2UsingPOSTOK:
-		return value, nil, nil
-	case *RegisterArtifactV2UsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RegisterArtifactV2OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for registerArtifactV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateReleaseStreamUsingPOST updates release stream
+UpdateReleaseStream update release stream API
 */
-func (a *Client) UpdateReleaseStreamUsingPOST(params *UpdateReleaseStreamUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateReleaseStreamUsingPOSTOK, *UpdateReleaseStreamUsingPOSTCreated, error) {
+func (a *Client) UpdateReleaseStream(params *UpdateReleaseStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateReleaseStreamOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateReleaseStreamUsingPOSTParams()
+		params = NewUpdateReleaseStreamParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateReleaseStreamUsingPOST",
+		ID:                 "updateReleaseStream",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/clusterId/{clusterId}/currentReleaseStream/{currentReleaseStream}/updatedReleaseStream/{updatedReleaseStream}/updateStream",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateReleaseStreamUsingPOSTReader{formats: a.formats},
+		Reader:             &UpdateReleaseStreamReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -927,36 +828,35 @@ func (a *Client) UpdateReleaseStreamUsingPOST(params *UpdateReleaseStreamUsingPO
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateReleaseStreamUsingPOSTOK:
-		return value, nil, nil
-	case *UpdateReleaseStreamUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateReleaseStreamOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateReleaseStream: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UploadArtifactsZipUsingPOST uploads artifacts zip
+UploadArtifactsZip upload artifacts zip API
 */
-func (a *Client) UploadArtifactsZipUsingPOST(params *UploadArtifactsZipUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadArtifactsZipUsingPOSTOK, *UploadArtifactsZipUsingPOSTCreated, error) {
+func (a *Client) UploadArtifactsZip(params *UploadArtifactsZipParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadArtifactsZipOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUploadArtifactsZipUsingPOSTParams()
+		params = NewUploadArtifactsZipParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "uploadArtifactsZipUsingPOST",
+		ID:                 "uploadArtifactsZip",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/artifacts/upload",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"multipart/form-data"},
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UploadArtifactsZipUsingPOSTReader{formats: a.formats},
+		Reader:             &UploadArtifactsZipReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -967,16 +867,15 @@ func (a *Client) UploadArtifactsZipUsingPOST(params *UploadArtifactsZipUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UploadArtifactsZipUsingPOSTOK:
-		return value, nil, nil
-	case *UploadArtifactsZipUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*UploadArtifactsZipOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_artifacts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for uploadArtifactsZip: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

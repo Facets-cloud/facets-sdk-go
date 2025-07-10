@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PasswordChange PasswordChange
+// PasswordChange password change
 //
 // swagger:model PasswordChange
 type PasswordChange struct {

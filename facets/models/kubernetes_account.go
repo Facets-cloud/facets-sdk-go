@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// KubernetesAccount KubernetesAccount
+// KubernetesAccount kubernetes account
 //
 // swagger:model KubernetesAccount
 type KubernetesAccount struct {

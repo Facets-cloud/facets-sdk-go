@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterOverrideResponse ClusterOverrideResponse
+// ClusterOverrideResponse cluster override response
 //
 // swagger:model ClusterOverrideResponse
 type ClusterOverrideResponse struct {

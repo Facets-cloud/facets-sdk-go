@@ -54,49 +54,25 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AttachRuleAndWorkflowUsingPUT(params *AttachRuleAndWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachRuleAndWorkflowUsingPUTOK, *AttachRuleAndWorkflowUsingPUTCreated, error)
+	AttachRuleAndWorkflow(params *AttachRuleAndWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachRuleAndWorkflowOK, error)
 
-	DetachRuleAndWorkflowUsingPUT(params *DetachRuleAndWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetachRuleAndWorkflowUsingPUTOK, *DetachRuleAndWorkflowUsingPUTCreated, error)
+	DetachRuleAndWorkflow(params *DetachRuleAndWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetachRuleAndWorkflowOK, error)
 
-	GenerateArtifactPushCredentialsUsingPOST1(params *GenerateArtifactPushCredentialsUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsUsingPOST1OK, *GenerateArtifactPushCredentialsUsingPOST1Created, error)
+	GenerateArtifactPushCredentials(params *GenerateArtifactPushCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsOK, error)
 
-	GetCiCdDetailsUsingGET(params *GetCiCdDetailsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCiCdDetailsUsingGETOK, error)
+	GetCiCdDetails(params *GetCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCiCdDetailsOK, error)
 
-	RegisterArtifactSaasUsingPOST1(params *RegisterArtifactSaasUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasUsingPOST1OK, *RegisterArtifactSaasUsingPOST1Created, error)
+	RegisterArtifactSaas(params *RegisterArtifactSaasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasOK, error)
 
-	SaveCiCdDetailsUsingPOST(params *SaveCiCdDetailsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCiCdDetailsUsingPOSTOK, *SaveCiCdDetailsUsingPOSTCreated, error)
+	SaveCiCdDetails(params *SaveCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCiCdDetailsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-	AttachRuleAndWorkflowUsingPUT attaches rule and workflow
+	AttachRuleAndWorkflow attaches rule and workflow
 
 	- **Description:** Attaches a rule and workflow to an artifact CI.
 
@@ -104,158 +80,20 @@ type ClientService interface {
 - **Permissions:** Requires `ARTIFACT_CI_WRITE` permission.
 - **Audit Logging:** Not applicable.
 */
-func (a *Client) AttachRuleAndWorkflowUsingPUT(params *AttachRuleAndWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachRuleAndWorkflowUsingPUTOK, *AttachRuleAndWorkflowUsingPUTCreated, error) {
+func (a *Client) AttachRuleAndWorkflow(params *AttachRuleAndWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AttachRuleAndWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAttachRuleAndWorkflowUsingPUTParams()
+		params = NewAttachRuleAndWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "attachRuleAndWorkflowUsingPUT",
+		ID:                 "attachRuleAndWorkflow",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/ci-cd/attach",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AttachRuleAndWorkflowUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *AttachRuleAndWorkflowUsingPUTOK:
-		return value, nil, nil
-	case *AttachRuleAndWorkflowUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_ci_cd_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	DetachRuleAndWorkflowUsingPUT detaches rule and workflow
-
-	- **Description:** Detaches a rule and workflow from an artifact CI.
-
-- **Restrictions:** Existing CI registration required.
-- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission.
-- **Audit Logging:** Not applicable.
-*/
-func (a *Client) DetachRuleAndWorkflowUsingPUT(params *DetachRuleAndWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetachRuleAndWorkflowUsingPUTOK, *DetachRuleAndWorkflowUsingPUTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDetachRuleAndWorkflowUsingPUTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "detachRuleAndWorkflowUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/ci-cd/detach",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DetachRuleAndWorkflowUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DetachRuleAndWorkflowUsingPUTOK:
-		return value, nil, nil
-	case *DetachRuleAndWorkflowUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_ci_cd_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	GenerateArtifactPushCredentialsUsingPOST1 generates artifact push credentials
-
-	- **Description:** Generates push credentials for an artifact.
-
-- **Restrictions:** Only for supported artifactory types.
-- **Permissions:** Requires `ARTIFACTS_WRITE` permission.
-- **Audit Logging:** Not applicable.
-*/
-func (a *Client) GenerateArtifactPushCredentialsUsingPOST1(params *GenerateArtifactPushCredentialsUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsUsingPOST1OK, *GenerateArtifactPushCredentialsUsingPOST1Created, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGenerateArtifactPushCredentialsUsingPOST1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "generateArtifactPushCredentialsUsingPOST_1",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/ci-cd/pushCredentials",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GenerateArtifactPushCredentialsUsingPOST1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *GenerateArtifactPushCredentialsUsingPOST1OK:
-		return value, nil, nil
-	case *GenerateArtifactPushCredentialsUsingPOST1Created:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_ci_cd_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	GetCiCdDetailsUsingGET gets c i c d details
-
-	- **Description:** Retrieves CI/CD details for a specified project name.
-
-- **Restrictions:** Requires existing default artifact routing rule or promotion workflow.
-- **Permissions:** None required.
-- **Audit Logging:** Not applicable.
-*/
-func (a *Client) GetCiCdDetailsUsingGET(params *GetCiCdDetailsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCiCdDetailsUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetCiCdDetailsUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getCiCdDetailsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/ci-cd/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetCiCdDetailsUsingGETReader{formats: a.formats},
+		Reader:             &AttachRuleAndWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -268,18 +106,153 @@ func (a *Client) GetCiCdDetailsUsingGET(params *GetCiCdDetailsUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetCiCdDetailsUsingGETOK)
+	success, ok := result.(*AttachRuleAndWorkflowOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getCiCdDetailsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for attachRuleAndWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	RegisterArtifactSaasUsingPOST1 registers artifact saa s
+	DetachRuleAndWorkflow detaches rule and workflow
+
+	- **Description:** Detaches a rule and workflow from an artifact CI.
+
+- **Restrictions:** Existing CI registration required.
+- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission.
+- **Audit Logging:** Not applicable.
+*/
+func (a *Client) DetachRuleAndWorkflow(params *DetachRuleAndWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DetachRuleAndWorkflowOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDetachRuleAndWorkflowParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "detachRuleAndWorkflow",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/ci-cd/detach",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DetachRuleAndWorkflowReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DetachRuleAndWorkflowOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for detachRuleAndWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GenerateArtifactPushCredentials generates artifact push credentials
+
+	- **Description:** Generates push credentials for an artifact.
+
+- **Restrictions:** Only for supported artifactory types.
+- **Permissions:** Requires `ARTIFACTS_WRITE` permission.
+- **Audit Logging:** Not applicable.
+*/
+func (a *Client) GenerateArtifactPushCredentials(params *GenerateArtifactPushCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateArtifactPushCredentialsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGenerateArtifactPushCredentialsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "generateArtifactPushCredentials",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/ci-cd/pushCredentials",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GenerateArtifactPushCredentialsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GenerateArtifactPushCredentialsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for generateArtifactPushCredentials: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetCiCdDetails gets c i c d details
+
+	- **Description:** Retrieves CI/CD details for a specified project name.
+
+- **Restrictions:** Requires existing default artifact routing rule or promotion workflow.
+- **Permissions:** None required.
+- **Audit Logging:** Not applicable.
+*/
+func (a *Client) GetCiCdDetails(params *GetCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCiCdDetailsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCiCdDetailsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getCiCdDetails",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/ci-cd/{stackName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetCiCdDetailsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetCiCdDetailsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCiCdDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	RegisterArtifactSaas registers artifact saa s
 
 	- **Description:** Registers a new artifact within the system for SaaS.
 
@@ -287,20 +260,20 @@ func (a *Client) GetCiCdDetailsUsingGET(params *GetCiCdDetailsUsingGETParams, au
 - **Permissions:** Requires `ARTIFACTS_WRITE` permission.
 - **Audit Logging:** Not applicable.
 */
-func (a *Client) RegisterArtifactSaasUsingPOST1(params *RegisterArtifactSaasUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasUsingPOST1OK, *RegisterArtifactSaasUsingPOST1Created, error) {
+func (a *Client) RegisterArtifactSaas(params *RegisterArtifactSaasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRegisterArtifactSaasUsingPOST1Params()
+		params = NewRegisterArtifactSaasParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "registerArtifactSaasUsingPOST_1",
+		ID:                 "registerArtifactSaas",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/ci-cd/register",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RegisterArtifactSaasUsingPOST1Reader{formats: a.formats},
+		Reader:             &RegisterArtifactSaasReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -311,21 +284,20 @@ func (a *Client) RegisterArtifactSaasUsingPOST1(params *RegisterArtifactSaasUsin
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RegisterArtifactSaasUsingPOST1OK:
-		return value, nil, nil
-	case *RegisterArtifactSaasUsingPOST1Created:
-		return nil, value, nil
+	success, ok := result.(*RegisterArtifactSaasOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_ci_cd_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for registerArtifactSaas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	SaveCiCdDetailsUsingPOST saves c i c d details
+	SaveCiCdDetails saves c i c d details
 
 	- **Description:** Saves CI/CD configuration details.
 
@@ -333,20 +305,20 @@ func (a *Client) RegisterArtifactSaasUsingPOST1(params *RegisterArtifactSaasUsin
 - **Permissions:** Requires `CI_CD_CONFIGURE` permission.
 - **Audit Logging:** This operation is logged for audit purposes.
 */
-func (a *Client) SaveCiCdDetailsUsingPOST(params *SaveCiCdDetailsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCiCdDetailsUsingPOSTOK, *SaveCiCdDetailsUsingPOSTCreated, error) {
+func (a *Client) SaveCiCdDetails(params *SaveCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCiCdDetailsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSaveCiCdDetailsUsingPOSTParams()
+		params = NewSaveCiCdDetailsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "saveCiCdDetailsUsingPOST",
+		ID:                 "saveCiCdDetails",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/ci-cd",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SaveCiCdDetailsUsingPOSTReader{formats: a.formats},
+		Reader:             &SaveCiCdDetailsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -357,16 +329,15 @@ func (a *Client) SaveCiCdDetailsUsingPOST(params *SaveCiCdDetailsUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SaveCiCdDetailsUsingPOSTOK:
-		return value, nil, nil
-	case *SaveCiCdDetailsUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SaveCiCdDetailsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_ci_cd_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for saveCiCdDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

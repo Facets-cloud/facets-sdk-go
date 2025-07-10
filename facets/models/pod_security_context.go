@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodSecurityContext PodSecurityContext
+// PodSecurityContext pod security context
 //
 // swagger:model PodSecurityContext
 type PodSecurityContext struct {

@@ -15,13 +15,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// MaintenanceWindowDTO MaintenanceWindowDTO
+// MaintenanceWindowDTO maintenance window d t o
 //
 // swagger:model MaintenanceWindowDTO
 type MaintenanceWindowDTO struct {
 
 	// cluster Id
-	ClusterID string `json:"clusterId,omitempty"`
+	// Required: true
+	ClusterID *string `json:"clusterId"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -34,14 +35,16 @@ type MaintenanceWindowDTO struct {
 	Cron string `json:"cron,omitempty"`
 
 	// day of week
+	// Required: true
 	// Enum: ["MON","TUE","WED","THU","FRI","SAT","SUN"]
-	DayOfWeek string `json:"dayOfWeek,omitempty"`
+	DayOfWeek *string `json:"dayOfWeek"`
 
 	// disabled
 	Disabled bool `json:"disabled,omitempty"`
 
 	// end time
-	EndTime *LocalTime `json:"endTime,omitempty"`
+	// Required: true
+	EndTime *LocalTime `json:"endTime"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -54,10 +57,12 @@ type MaintenanceWindowDTO struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// start time
-	StartTime *LocalTime `json:"startTime,omitempty"`
+	// Required: true
+	StartTime *LocalTime `json:"startTime"`
 
 	// time zone
-	TimeZone *TimeZone `json:"timeZone,omitempty"`
+	// Required: true
+	TimeZone *MaintenanceWindowDTOTimeZone `json:"timeZone"`
 
 	// triggered
 	Triggered bool `json:"triggered,omitempty"`
@@ -66,6 +71,10 @@ type MaintenanceWindowDTO struct {
 // Validate validates this maintenance window d t o
 func (m *MaintenanceWindowDTO) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
@@ -94,6 +103,15 @@ func (m *MaintenanceWindowDTO) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *MaintenanceWindowDTO) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterId", "body", m.ClusterID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -154,12 +172,13 @@ func (m *MaintenanceWindowDTO) validateDayOfWeekEnum(path, location string, valu
 }
 
 func (m *MaintenanceWindowDTO) validateDayOfWeek(formats strfmt.Registry) error {
-	if swag.IsZero(m.DayOfWeek) { // not required
-		return nil
+
+	if err := validate.Required("dayOfWeek", "body", m.DayOfWeek); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateDayOfWeekEnum("dayOfWeek", "body", m.DayOfWeek); err != nil {
+	if err := m.validateDayOfWeekEnum("dayOfWeek", "body", *m.DayOfWeek); err != nil {
 		return err
 	}
 
@@ -167,8 +186,9 @@ func (m *MaintenanceWindowDTO) validateDayOfWeek(formats strfmt.Registry) error 
 }
 
 func (m *MaintenanceWindowDTO) validateEndTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.EndTime) { // not required
-		return nil
+
+	if err := validate.Required("endTime", "body", m.EndTime); err != nil {
+		return err
 	}
 
 	if m.EndTime != nil {
@@ -198,8 +218,9 @@ func (m *MaintenanceWindowDTO) validateLastModifiedDate(formats strfmt.Registry)
 }
 
 func (m *MaintenanceWindowDTO) validateStartTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.StartTime) { // not required
-		return nil
+
+	if err := validate.Required("startTime", "body", m.StartTime); err != nil {
+		return err
 	}
 
 	if m.StartTime != nil {
@@ -217,8 +238,9 @@ func (m *MaintenanceWindowDTO) validateStartTime(formats strfmt.Registry) error 
 }
 
 func (m *MaintenanceWindowDTO) validateTimeZone(formats strfmt.Registry) error {
-	if swag.IsZero(m.TimeZone) { // not required
-		return nil
+
+	if err := validate.Required("timeZone", "body", m.TimeZone); err != nil {
+		return err
 	}
 
 	if m.TimeZone != nil {
@@ -261,10 +283,6 @@ func (m *MaintenanceWindowDTO) contextValidateEndTime(ctx context.Context, forma
 
 	if m.EndTime != nil {
 
-		if swag.IsZero(m.EndTime) { // not required
-			return nil
-		}
-
 		if err := m.EndTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("endTime")
@@ -282,10 +300,6 @@ func (m *MaintenanceWindowDTO) contextValidateStartTime(ctx context.Context, for
 
 	if m.StartTime != nil {
 
-		if swag.IsZero(m.StartTime) { // not required
-			return nil
-		}
-
 		if err := m.StartTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("startTime")
@@ -302,10 +316,6 @@ func (m *MaintenanceWindowDTO) contextValidateStartTime(ctx context.Context, for
 func (m *MaintenanceWindowDTO) contextValidateTimeZone(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TimeZone != nil {
-
-		if swag.IsZero(m.TimeZone) { // not required
-			return nil
-		}
 
 		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
@@ -331,6 +341,52 @@ func (m *MaintenanceWindowDTO) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *MaintenanceWindowDTO) UnmarshalBinary(b []byte) error {
 	var res MaintenanceWindowDTO
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// MaintenanceWindowDTOTimeZone maintenance window d t o time zone
+//
+// swagger:model MaintenanceWindowDTOTimeZone
+type MaintenanceWindowDTOTimeZone struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this maintenance window d t o time zone
+func (m *MaintenanceWindowDTOTimeZone) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this maintenance window d t o time zone based on context it is used
+func (m *MaintenanceWindowDTOTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *MaintenanceWindowDTOTimeZone) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *MaintenanceWindowDTOTimeZone) UnmarshalBinary(b []byte) error {
+	var res MaintenanceWindowDTOTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

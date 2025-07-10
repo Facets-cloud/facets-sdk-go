@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// StackTemplate StackTemplate
+// StackTemplate stack template
 //
 // swagger:model StackTemplate
 type StackTemplate struct {

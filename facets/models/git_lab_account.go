@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// GitLabAccount GitLabAccount
+// GitLabAccount git lab account
 //
 // swagger:model GitLabAccount
 type GitLabAccount struct {

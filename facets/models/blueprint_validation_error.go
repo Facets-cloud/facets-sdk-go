@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BlueprintValidationError BlueprintValidationError
+// BlueprintValidationError blueprint validation error
 //
 // swagger:model BlueprintValidationError
 type BlueprintValidationError struct {

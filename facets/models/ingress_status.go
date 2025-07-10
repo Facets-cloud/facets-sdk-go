@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressStatus IngressStatus
+// IngressStatus ingress status
 //
 // swagger:model IngressStatus
 type IngressStatus struct {

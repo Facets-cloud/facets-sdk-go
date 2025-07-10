@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DailyCloudCostDTO DailyCloudCostDTO
+// DailyCloudCostDTO daily cloud cost d t o
 //
 // swagger:model DailyCloudCostDTO
 type DailyCloudCostDTO struct {

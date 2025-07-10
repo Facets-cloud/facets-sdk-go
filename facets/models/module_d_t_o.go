@@ -13,13 +13,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ModuleDTO ModuleDTO
+// ModuleDTO module d t o
 //
 // swagger:model ModuleDTO
 type ModuleDTO struct {
 
 	// facets yaml
-	FacetsYaml interface{} `json:"facetsYaml,omitempty"`
+	FacetsYaml map[string]interface{} `json:"facetsYaml,omitempty"`
 
 	// tf module path
 	TfModulePath *TFModulePath `json:"tfModulePath,omitempty"`

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// BranchDTO BranchDTO
+// BranchDTO branch d t o
 //
 // swagger:model BranchDTO
 type BranchDTO struct {

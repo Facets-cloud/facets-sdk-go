@@ -16,9 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TFModule TFModule
-//
-// # Model representing a Terraform Module
+// TFModule Model representing a Terraform Module
 //
 // swagger:model TFModule
 type TFModule struct {
@@ -29,14 +27,19 @@ type TFModule struct {
 
 	// Alias flavors for the module
 	// Example: ["medium","extra-large"]
+	// Unique: true
 	AliasFlavors []string `json:"aliasFlavors"`
 
 	// List of test projects where this module will be available. If absent, it is available globally.
 	// Example: ["project-1","project-2"]
 	AllowedTestProjects []string `json:"allowedTestProjects"`
 
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
+
 	// Supported cloud providers for this module
 	// Example: ["gcp"]
+	// Unique: true
 	Clouds []string `json:"clouds"`
 
 	// contains overridable fields
@@ -70,6 +73,10 @@ type TFModule struct {
 	// Example: https://gitlab.com/repo.git
 	GitURL string `json:"gitUrl,omitempty"`
 
+	// iac tool
+	// Unique: true
+	IacTool []string `json:"iacTool"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -90,13 +97,21 @@ type TFModule struct {
 	// metadata
 	Metadata string `json:"metadata,omitempty"`
 
+	// module group Id
+	ModuleGroupID string `json:"moduleGroupId,omitempty"`
+
+	// Maximum allowed length for resource names using this module
+	// Example: 40
+	// Minimum: 1
+	NameLengthLimit int32 `json:"nameLengthLimit,omitempty"`
+
 	// number of versions
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// outputs
 	Outputs []*IntentOutput `json:"outputs"`
 
-	// Path information related to TF Module
+	// path
 	Path *TFModulePath `json:"path,omitempty"`
 
 	// readme md
@@ -126,6 +141,7 @@ type TFModule struct {
 	Stage string `json:"stage,omitempty"`
 
 	// tags
+	// Unique: true
 	Tags []string `json:"tags"`
 
 	// Type of the TF Module
@@ -145,7 +161,19 @@ type TFModule struct {
 func (m *TFModule) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAliasFlavors(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClouds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreationDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIacTool(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -154,6 +182,10 @@ func (m *TFModule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateNameLengthLimit(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -173,6 +205,10 @@ func (m *TFModule) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,6 +219,30 @@ func (m *TFModule) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *TFModule) validateAliasFlavors(formats strfmt.Registry) error {
+	if swag.IsZero(m.AliasFlavors) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("aliasFlavors", "body", m.AliasFlavors); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TFModule) validateClouds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Clouds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("clouds", "body", m.Clouds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *TFModule) validateCreationDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreationDate) { // not required
 		return nil
@@ -190,6 +250,46 @@ func (m *TFModule) validateCreationDate(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+var tFModuleIacToolItemsEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["TERRAFORM","OPENTOFU"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		tFModuleIacToolItemsEnum = append(tFModuleIacToolItemsEnum, v)
+	}
+}
+
+func (m *TFModule) validateIacToolItemsEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, tFModuleIacToolItemsEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *TFModule) validateIacTool(formats strfmt.Registry) error {
+	if swag.IsZero(m.IacTool) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("iacTool", "body", m.IacTool); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.IacTool); i++ {
+
+		// value enum
+		if err := m.validateIacToolItemsEnum("iacTool"+"."+strconv.Itoa(i), "body", m.IacTool[i]); err != nil {
+			return err
+		}
+
 	}
 
 	return nil
@@ -227,6 +327,18 @@ func (m *TFModule) validateLastModifiedDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TFModule) validateNameLengthLimit(formats strfmt.Registry) error {
+	if swag.IsZero(m.NameLengthLimit) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("nameLengthLimit", "body", int64(m.NameLengthLimit), 1, false); err != nil {
 		return err
 	}
 
@@ -356,6 +468,18 @@ func (m *TFModule) validateStage(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateStageEnum("stage", "body", m.Stage); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TFModule) validateTags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Tags) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("tags", "body", m.Tags); err != nil {
 		return err
 	}
 

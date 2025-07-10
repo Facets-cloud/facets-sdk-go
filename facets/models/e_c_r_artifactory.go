@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ECRArtifactory ECRArtifactory
+// ECRArtifactory e c r artifactory
 //
 // swagger:model ECRArtifactory
 type ECRArtifactory struct {
@@ -25,16 +25,20 @@ type ECRArtifactory struct {
 	ArtifactoryType string `json:"artifactoryType,omitempty"`
 
 	// aws account Id
-	AwsAccountID string `json:"awsAccountId,omitempty"`
+	// Required: true
+	AwsAccountID *string `json:"awsAccountId"`
 
 	// aws key
-	AwsKey string `json:"awsKey,omitempty"`
+	// Required: true
+	AwsKey *string `json:"awsKey"`
 
 	// aws region
-	AwsRegion string `json:"awsRegion,omitempty"`
+	// Required: true
+	AwsRegion *string `json:"awsRegion"`
 
 	// aws secret
-	AwsSecret string `json:"awsSecret,omitempty"`
+	// Required: true
+	AwsSecret *string `json:"awsSecret"`
 
 	// change log
 	ChangeLog string `json:"changeLog,omitempty"`
@@ -61,12 +65,14 @@ type ECRArtifactory struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// number of versions
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stacks associated
+	// Unique: true
 	StacksAssociated []string `json:"stacksAssociated"`
 
 	// system defined
@@ -87,6 +93,22 @@ func (m *ECRArtifactory) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAwsAccountID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAwsKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAwsRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAwsSecret(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -96,6 +118,14 @@ func (m *ECRArtifactory) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStacksAssociated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,6 +189,42 @@ func (m *ECRArtifactory) validateArtifactoryType(formats strfmt.Registry) error 
 
 	// value enum
 	if err := m.validateArtifactoryTypeEnum("artifactoryType", "body", m.ArtifactoryType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateAwsAccountID(formats strfmt.Registry) error {
+
+	if err := validate.Required("awsAccountId", "body", m.AwsAccountID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateAwsKey(formats strfmt.Registry) error {
+
+	if err := validate.Required("awsKey", "body", m.AwsKey); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateAwsRegion(formats strfmt.Registry) error {
+
+	if err := validate.Required("awsRegion", "body", m.AwsRegion); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateAwsSecret(formats strfmt.Registry) error {
+
+	if err := validate.Required("awsSecret", "body", m.AwsSecret); err != nil {
 		return err
 	}
 
@@ -246,6 +312,27 @@ func (m *ECRArtifactory) validateLastModifiedDate(formats strfmt.Registry) error
 	}
 
 	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ECRArtifactory) validateStacksAssociated(formats strfmt.Registry) error {
+	if swag.IsZero(m.StacksAssociated) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("stacksAssociated", "body", m.StacksAssociated); err != nil {
 		return err
 	}
 

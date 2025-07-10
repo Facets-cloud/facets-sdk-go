@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PipelineNode PipelineNode
+// PipelineNode pipeline node
 //
 // swagger:model PipelineNode
 type PipelineNode struct {

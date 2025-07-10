@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Assistant Assistant
+// Assistant assistant
 //
 // swagger:model Assistant
 type Assistant struct {

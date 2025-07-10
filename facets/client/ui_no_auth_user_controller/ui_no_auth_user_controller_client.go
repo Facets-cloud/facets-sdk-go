@@ -54,58 +54,34 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ResetPasswordRequestUsingPOST(params *ResetPasswordRequestUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordRequestUsingPOSTOK, *ResetPasswordRequestUsingPOSTCreated, error)
+	ResetPasswordRequest(params *ResetPasswordRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordRequestOK, error)
 
-	SavePasswordUsingPOST(params *SavePasswordUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SavePasswordUsingPOSTOK, *SavePasswordUsingPOSTCreated, error)
+	SavePassword(params *SavePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SavePasswordOK, error)
 
-	ValidateTokenUsingPOST(params *ValidateTokenUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateTokenUsingPOSTOK, *ValidateTokenUsingPOSTCreated, error)
+	ValidateToken(params *ValidateTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateTokenOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ResetPasswordRequestUsingPOST resets password request
+ResetPasswordRequest reset password request API
 */
-func (a *Client) ResetPasswordRequestUsingPOST(params *ResetPasswordRequestUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordRequestUsingPOSTOK, *ResetPasswordRequestUsingPOSTCreated, error) {
+func (a *Client) ResetPasswordRequest(params *ResetPasswordRequestParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetPasswordRequestOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewResetPasswordRequestUsingPOSTParams()
+		params = NewResetPasswordRequestParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "resetPasswordRequestUsingPOST",
+		ID:                 "resetPasswordRequest",
 		Method:             "POST",
 		PathPattern:        "/public-ui/v1/user/resetPassword",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ResetPasswordRequestUsingPOSTReader{formats: a.formats},
+		Reader:             &ResetPasswordRequestReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -116,36 +92,35 @@ func (a *Client) ResetPasswordRequestUsingPOST(params *ResetPasswordRequestUsing
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ResetPasswordRequestUsingPOSTOK:
-		return value, nil, nil
-	case *ResetPasswordRequestUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ResetPasswordRequestOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_no_auth_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for resetPasswordRequest: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SavePasswordUsingPOST saves password
+SavePassword save password API
 */
-func (a *Client) SavePasswordUsingPOST(params *SavePasswordUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SavePasswordUsingPOSTOK, *SavePasswordUsingPOSTCreated, error) {
+func (a *Client) SavePassword(params *SavePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SavePasswordOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSavePasswordUsingPOSTParams()
+		params = NewSavePasswordParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "savePasswordUsingPOST",
+		ID:                 "savePassword",
 		Method:             "POST",
 		PathPattern:        "/public-ui/v1/user/savePassword",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SavePasswordUsingPOSTReader{formats: a.formats},
+		Reader:             &SavePasswordReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -156,36 +131,35 @@ func (a *Client) SavePasswordUsingPOST(params *SavePasswordUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SavePasswordUsingPOSTOK:
-		return value, nil, nil
-	case *SavePasswordUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SavePasswordOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_no_auth_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for savePassword: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateTokenUsingPOST validates token
+ValidateToken validate token API
 */
-func (a *Client) ValidateTokenUsingPOST(params *ValidateTokenUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateTokenUsingPOSTOK, *ValidateTokenUsingPOSTCreated, error) {
+func (a *Client) ValidateToken(params *ValidateTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateTokenUsingPOSTParams()
+		params = NewValidateTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateTokenUsingPOST",
+		ID:                 "validateToken",
 		Method:             "POST",
 		PathPattern:        "/public-ui/v1/user/token/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateTokenUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -196,16 +170,15 @@ func (a *Client) ValidateTokenUsingPOST(params *ValidateTokenUsingPOSTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateTokenUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateTokenUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateTokenOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_no_auth_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

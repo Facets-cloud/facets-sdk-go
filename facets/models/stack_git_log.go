@@ -13,10 +13,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// StackGitLog StackGitLog
+// StackGitLog stack git log
 //
 // swagger:model StackGitLog
 type StackGitLog struct {
+
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
 
 	// cluster Id
 	ClusterID string `json:"clusterId,omitempty"`

@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PodDTO PodDTO
+// PodDTO pod d t o
 //
 // swagger:model PodDTO
 type PodDTO struct {
@@ -37,7 +37,7 @@ type PodDTO struct {
 	Role string `json:"role,omitempty"`
 
 	// status
-	// Enum: ["Pending","Running","Succeeded","Failed","Unknown","CrashLoopBackOff","ImagePullBackOff","ContainerCreating","Terminating","Evicted","Completed","Restarting","Error","InvalidImageName"]
+	// Enum: ["Pending","Running","Succeeded","Failed","Unknown","CrashLoopBackOff","ImagePullBackOff","ContainerCreating","Terminating","Evicted","Completed","Restarting","Error","InvalidImageName","OOMKilled"]
 	Status string `json:"status,omitempty"`
 }
 
@@ -108,7 +108,7 @@ var podDTOTypeStatusPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["Pending","Running","Succeeded","Failed","Unknown","CrashLoopBackOff","ImagePullBackOff","ContainerCreating","Terminating","Evicted","Completed","Restarting","Error","InvalidImageName"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["Pending","Running","Succeeded","Failed","Unknown","CrashLoopBackOff","ImagePullBackOff","ContainerCreating","Terminating","Evicted","Completed","Restarting","Error","InvalidImageName","OOMKilled"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -159,6 +159,9 @@ const (
 
 	// PodDTOStatusInvalidImageName captures enum value "InvalidImageName"
 	PodDTOStatusInvalidImageName string = "InvalidImageName"
+
+	// PodDTOStatusOOMKilled captures enum value "OOMKilled"
+	PodDTOStatusOOMKilled string = "OOMKilled"
 )
 
 // prop value enum

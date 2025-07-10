@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerStateTerminated ContainerStateTerminated
+// ContainerStateTerminated container state terminated
 //
 // swagger:model ContainerStateTerminated
 type ContainerStateTerminated struct {

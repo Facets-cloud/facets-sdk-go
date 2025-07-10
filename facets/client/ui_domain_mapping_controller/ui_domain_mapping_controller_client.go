@@ -54,140 +54,36 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddDomainMappingUsingPOST(params *AddDomainMappingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddDomainMappingUsingPOSTOK, *AddDomainMappingUsingPOSTCreated, error)
+	AddDomainMapping(params *AddDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddDomainMappingOK, error)
 
-	DeleteDomainMappingUsingDELETE(params *DeleteDomainMappingUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDomainMappingUsingDELETEOK, *DeleteDomainMappingUsingDELETENoContent, error)
+	DeleteDomainMapping(params *DeleteDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDomainMappingOK, error)
 
-	GetAllDomainsUsingGET(params *GetAllDomainsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllDomainsUsingGETOK, error)
+	GetAllDomains(params *GetAllDomainsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllDomainsOK, error)
 
-	UpdateDomainMappingUsingPUT(params *UpdateDomainMappingUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDomainMappingUsingPUTOK, *UpdateDomainMappingUsingPUTCreated, error)
+	UpdateDomainMapping(params *UpdateDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDomainMappingOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddDomainMappingUsingPOST adds domain mapping
+AddDomainMapping add domain mapping API
 */
-func (a *Client) AddDomainMappingUsingPOST(params *AddDomainMappingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddDomainMappingUsingPOSTOK, *AddDomainMappingUsingPOSTCreated, error) {
+func (a *Client) AddDomainMapping(params *AddDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddDomainMappingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddDomainMappingUsingPOSTParams()
+		params = NewAddDomainMappingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addDomainMappingUsingPOST",
+		ID:                 "addDomainMapping",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddDomainMappingUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *AddDomainMappingUsingPOSTOK:
-		return value, nil, nil
-	case *AddDomainMappingUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_domain_mapping_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteDomainMappingUsingDELETE deletes domain mapping
-*/
-func (a *Client) DeleteDomainMappingUsingDELETE(params *DeleteDomainMappingUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDomainMappingUsingDELETEOK, *DeleteDomainMappingUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteDomainMappingUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteDomainMappingUsingDELETE",
-		Method:             "DELETE",
-		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteDomainMappingUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteDomainMappingUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteDomainMappingUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_domain_mapping_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllDomainsUsingGET gets all domains
-*/
-func (a *Client) GetAllDomainsUsingGET(params *GetAllDomainsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllDomainsUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllDomainsUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllDomainsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllDomainsUsingGETReader{formats: a.formats},
+		Reader:             &AddDomainMappingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -200,33 +96,33 @@ func (a *Client) GetAllDomainsUsingGET(params *GetAllDomainsUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllDomainsUsingGETOK)
+	success, ok := result.(*AddDomainMappingOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllDomainsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addDomainMapping: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateDomainMappingUsingPUT updates domain mapping
+DeleteDomainMapping delete domain mapping API
 */
-func (a *Client) UpdateDomainMappingUsingPUT(params *UpdateDomainMappingUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDomainMappingUsingPUTOK, *UpdateDomainMappingUsingPUTCreated, error) {
+func (a *Client) DeleteDomainMapping(params *DeleteDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDomainMappingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateDomainMappingUsingPUTParams()
+		params = NewDeleteDomainMappingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateDomainMappingUsingPUT",
-		Method:             "PUT",
+		ID:                 "deleteDomainMapping",
+		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateDomainMappingUsingPUTReader{formats: a.formats},
+		Reader:             &DeleteDomainMappingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -237,16 +133,93 @@ func (a *Client) UpdateDomainMappingUsingPUT(params *UpdateDomainMappingUsingPUT
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateDomainMappingUsingPUTOK:
-		return value, nil, nil
-	case *UpdateDomainMappingUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*DeleteDomainMappingOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_domain_mapping_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteDomainMapping: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllDomains get all domains API
+*/
+func (a *Client) GetAllDomains(params *GetAllDomainsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllDomainsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllDomainsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllDomains",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllDomainsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllDomainsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllDomains: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateDomainMapping update domain mapping API
+*/
+func (a *Client) UpdateDomainMapping(params *UpdateDomainMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateDomainMappingOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateDomainMappingParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateDomainMapping",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/domain-mapping/clusterId/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateDomainMappingReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateDomainMappingOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateDomainMapping: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

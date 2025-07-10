@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressBackend IngressBackend
+// IngressBackend ingress backend
 //
 // swagger:model IngressBackend
 type IngressBackend struct {

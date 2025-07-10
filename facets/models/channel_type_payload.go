@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ChannelTypePayload ChannelTypePayload
+// ChannelTypePayload channel type payload
 //
 // swagger:model ChannelTypePayload
 type ChannelTypePayload struct {

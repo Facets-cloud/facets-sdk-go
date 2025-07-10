@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Sysctl Sysctl
+// Sysctl sysctl
 //
 // swagger:model Sysctl
 type Sysctl struct {

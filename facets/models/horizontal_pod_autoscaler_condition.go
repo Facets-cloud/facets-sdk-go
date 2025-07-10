@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HorizontalPodAutoscalerCondition HorizontalPodAutoscalerCondition
+// HorizontalPodAutoscalerCondition horizontal pod autoscaler condition
 //
 // swagger:model HorizontalPodAutoscalerCondition
 type HorizontalPodAutoscalerCondition struct {

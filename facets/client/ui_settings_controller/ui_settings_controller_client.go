@@ -54,62 +54,38 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddSettingValueUsingPUT(params *AddSettingValueUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddSettingValueUsingPUTOK, *AddSettingValueUsingPUTCreated, error)
+	AddSettingValue(params *AddSettingValueParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddSettingValueOK, error)
 
-	GetAllSettingsForEntityUsingGET(params *GetAllSettingsForEntityUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsForEntityUsingGETOK, error)
+	GetAllSettingsForEntity(params *GetAllSettingsForEntityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsForEntityOK, error)
 
-	GetAllSettingsYamlUsingGET(params *GetAllSettingsYamlUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsYamlUsingGETOK, error)
+	GetAllSettingsYaml(params *GetAllSettingsYamlParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsYamlOK, error)
 
-	GetSettingValueUsingGET(params *GetSettingValueUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSettingValueUsingGETOK, error)
+	GetSettingValue(params *GetSettingValueParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSettingValueOK, error)
 
-	SetOnboardingDisplayUsingPUT(params *SetOnboardingDisplayUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetOnboardingDisplayUsingPUTOK, *SetOnboardingDisplayUsingPUTCreated, error)
+	SetOnboardingDisplay(params *SetOnboardingDisplayParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetOnboardingDisplayOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddSettingValueUsingPUT adds setting value
+AddSettingValue add setting value API
 */
-func (a *Client) AddSettingValueUsingPUT(params *AddSettingValueUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddSettingValueUsingPUTOK, *AddSettingValueUsingPUTCreated, error) {
+func (a *Client) AddSettingValue(params *AddSettingValueParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddSettingValueOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddSettingValueUsingPUTParams()
+		params = NewAddSettingValueParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addSettingValueUsingPUT",
+		ID:                 "addSettingValue",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/settings/value/{entityType}/{entityId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddSettingValueUsingPUTReader{formats: a.formats},
+		Reader:             &AddSettingValueReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -120,36 +96,35 @@ func (a *Client) AddSettingValueUsingPUT(params *AddSettingValueUsingPUTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AddSettingValueUsingPUTOK:
-		return value, nil, nil
-	case *AddSettingValueUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*AddSettingValueOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_settings_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addSettingValue: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllSettingsForEntityUsingGET gets all settings for entity
+GetAllSettingsForEntity get all settings for entity API
 */
-func (a *Client) GetAllSettingsForEntityUsingGET(params *GetAllSettingsForEntityUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsForEntityUsingGETOK, error) {
+func (a *Client) GetAllSettingsForEntity(params *GetAllSettingsForEntityParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsForEntityOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllSettingsForEntityUsingGETParams()
+		params = NewGetAllSettingsForEntityParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllSettingsForEntityUsingGET",
+		ID:                 "getAllSettingsForEntity",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/settings/entity/{entity}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllSettingsForEntityUsingGETReader{formats: a.formats},
+		Reader:             &GetAllSettingsForEntityReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -162,33 +137,33 @@ func (a *Client) GetAllSettingsForEntityUsingGET(params *GetAllSettingsForEntity
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllSettingsForEntityUsingGETOK)
+	success, ok := result.(*GetAllSettingsForEntityOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllSettingsForEntityUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllSettingsForEntity: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllSettingsYamlUsingGET gets all settings yaml
+GetAllSettingsYaml get all settings yaml API
 */
-func (a *Client) GetAllSettingsYamlUsingGET(params *GetAllSettingsYamlUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsYamlUsingGETOK, error) {
+func (a *Client) GetAllSettingsYaml(params *GetAllSettingsYamlParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSettingsYamlOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllSettingsYamlUsingGETParams()
+		params = NewGetAllSettingsYamlParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllSettingsYamlUsingGET",
+		ID:                 "getAllSettingsYaml",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/settings/ui-yaml",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllSettingsYamlUsingGETReader{formats: a.formats},
+		Reader:             &GetAllSettingsYamlReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -201,33 +176,33 @@ func (a *Client) GetAllSettingsYamlUsingGET(params *GetAllSettingsYamlUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllSettingsYamlUsingGETOK)
+	success, ok := result.(*GetAllSettingsYamlOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllSettingsYamlUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllSettingsYaml: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetSettingValueUsingGET gets setting value
+GetSettingValue get setting value API
 */
-func (a *Client) GetSettingValueUsingGET(params *GetSettingValueUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSettingValueUsingGETOK, error) {
+func (a *Client) GetSettingValue(params *GetSettingValueParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSettingValueOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSettingValueUsingGETParams()
+		params = NewGetSettingValueParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getSettingValueUsingGET",
+		ID:                 "getSettingValue",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/settings/value/{entityType}/{entityId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSettingValueUsingGETReader{formats: a.formats},
+		Reader:             &GetSettingValueReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -240,33 +215,33 @@ func (a *Client) GetSettingValueUsingGET(params *GetSettingValueUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSettingValueUsingGETOK)
+	success, ok := result.(*GetSettingValueOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getSettingValueUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getSettingValue: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SetOnboardingDisplayUsingPUT sets onboarding display
+SetOnboardingDisplay set onboarding display API
 */
-func (a *Client) SetOnboardingDisplayUsingPUT(params *SetOnboardingDisplayUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetOnboardingDisplayUsingPUTOK, *SetOnboardingDisplayUsingPUTCreated, error) {
+func (a *Client) SetOnboardingDisplay(params *SetOnboardingDisplayParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetOnboardingDisplayOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSetOnboardingDisplayUsingPUTParams()
+		params = NewSetOnboardingDisplayParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "setOnboardingDisplayUsingPUT",
+		ID:                 "setOnboardingDisplay",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/settings/onboarding-display/{value}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SetOnboardingDisplayUsingPUTReader{formats: a.formats},
+		Reader:             &SetOnboardingDisplayReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -277,16 +252,15 @@ func (a *Client) SetOnboardingDisplayUsingPUT(params *SetOnboardingDisplayUsingP
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SetOnboardingDisplayUsingPUTOK:
-		return value, nil, nil
-	case *SetOnboardingDisplayUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*SetOnboardingDisplayOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_settings_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for setOnboardingDisplay: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

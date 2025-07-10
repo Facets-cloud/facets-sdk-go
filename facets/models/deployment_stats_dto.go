@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DeploymentStatsDto DeploymentStatsDto
+// DeploymentStatsDto deployment stats dto
 //
 // swagger:model DeploymentStatsDto
 type DeploymentStatsDto struct {

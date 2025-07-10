@@ -8,26 +8,31 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ArtifactByEnvironmentRequest ArtifactByEnvironmentRequest
+// ArtifactByEnvironmentRequest artifact by environment request
 //
 // swagger:model ArtifactByEnvironmentRequest
 type ArtifactByEnvironmentRequest struct {
 
 	// application name
-	ApplicationName string `json:"applicationName,omitempty"`
+	// Required: true
+	ApplicationName *string `json:"applicationName"`
 
 	// artifact Uri
-	ArtifactURI string `json:"artifactUri,omitempty"`
+	// Required: true
+	ArtifactURI *string `json:"artifactUri"`
 
 	// artifactory
 	Artifactory string `json:"artifactory,omitempty"`
 
 	// cluster name
-	ClusterName string `json:"clusterName,omitempty"`
+	// Required: true
+	ClusterName *string `json:"clusterName"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -36,11 +41,69 @@ type ArtifactByEnvironmentRequest struct {
 	ExternalID string `json:"externalId,omitempty"`
 
 	// stack name
-	StackName string `json:"stackName,omitempty"`
+	// Required: true
+	StackName *string `json:"stackName"`
 }
 
 // Validate validates this artifact by environment request
 func (m *ArtifactByEnvironmentRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateApplicationName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateArtifactURI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ArtifactByEnvironmentRequest) validateApplicationName(formats strfmt.Registry) error {
+
+	if err := validate.Required("applicationName", "body", m.ApplicationName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactByEnvironmentRequest) validateArtifactURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("artifactUri", "body", m.ArtifactURI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactByEnvironmentRequest) validateClusterName(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterName", "body", m.ClusterName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactByEnvironmentRequest) validateStackName(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackName", "body", m.StackName); err != nil {
+		return err
+	}
+
 	return nil
 }
 

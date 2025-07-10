@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EphemeralContainer EphemeralContainer
+// EphemeralContainer ephemeral container
 //
 // swagger:model EphemeralContainer
 type EphemeralContainer struct {

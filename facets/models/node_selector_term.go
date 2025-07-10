@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NodeSelectorTerm NodeSelectorTerm
+// NodeSelectorTerm node selector term
 //
 // swagger:model NodeSelectorTerm
 type NodeSelectorTerm struct {

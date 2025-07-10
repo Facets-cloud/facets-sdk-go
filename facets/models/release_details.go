@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ReleaseDetails ReleaseDetails
+// ReleaseDetails release details
 //
 // swagger:model ReleaseDetails
 type ReleaseDetails struct {
@@ -24,7 +24,7 @@ type ReleaseDetails struct {
 	DeploymentLogID string `json:"deploymentLogId,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
 
 	// stack version
@@ -60,7 +60,7 @@ var releaseDetailsTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -108,6 +108,15 @@ const (
 
 	// ReleaseDetailsReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	ReleaseDetailsReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// ReleaseDetailsReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	ReleaseDetailsReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// ReleaseDetailsReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	ReleaseDetailsReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// ReleaseDetailsReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	ReleaseDetailsReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum

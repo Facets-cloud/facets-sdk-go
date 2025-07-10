@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ObjectMetricStatus ObjectMetricStatus
+// ObjectMetricStatus object metric status
 //
 // swagger:model ObjectMetricStatus
 type ObjectMetricStatus struct {

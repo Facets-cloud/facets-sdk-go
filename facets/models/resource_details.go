@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceDetails ResourceDetails
+// ResourceDetails resource details
 //
 // swagger:model ResourceDetails
 type ResourceDetails struct {

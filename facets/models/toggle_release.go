@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ToggleRelease ToggleRelease
+// ToggleRelease toggle release
 //
 // swagger:model ToggleRelease
 type ToggleRelease struct {

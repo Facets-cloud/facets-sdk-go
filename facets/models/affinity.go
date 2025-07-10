@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Affinity Affinity
+// Affinity affinity
 //
 // swagger:model Affinity
 type Affinity struct {

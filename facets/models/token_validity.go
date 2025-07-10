@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TokenValidity TokenValidity
+// TokenValidity token validity
 //
 // swagger:model TokenValidity
 type TokenValidity struct {

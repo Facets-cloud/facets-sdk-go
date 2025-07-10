@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SELinuxOptions SELinuxOptions
+// SELinuxOptions s e linux options
 //
 // swagger:model SELinuxOptions
 type SELinuxOptions struct {

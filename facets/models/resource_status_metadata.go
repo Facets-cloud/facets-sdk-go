@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceStatusMetadata ResourceStatusMetadata
+// ResourceStatusMetadata resource status metadata
 //
 // swagger:model ResourceStatusMetadata
 type ResourceStatusMetadata struct {

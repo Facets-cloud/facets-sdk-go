@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HTTPIngressPath HTTPIngressPath
+// HTTPIngressPath HTTP ingress path
 //
 // swagger:model HTTPIngressPath
 type HTTPIngressPath struct {

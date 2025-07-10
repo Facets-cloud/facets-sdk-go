@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AppDeployment AppDeployment
+// AppDeployment app deployment
 //
 // swagger:model AppDeployment
 type AppDeployment struct {

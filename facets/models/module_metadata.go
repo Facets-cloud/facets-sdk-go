@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ModuleMetadata ModuleMetadata
+// ModuleMetadata module metadata
 //
 // swagger:model ModuleMetadata
 type ModuleMetadata struct {
@@ -28,6 +28,9 @@ type ModuleMetadata struct {
 
 	// git Url
 	GitURL string `json:"gitUrl,omitempty"`
+
+	// skip output write
+	SkipOutputWrite bool `json:"skipOutputWrite,omitempty"`
 }
 
 // Validate validates this module metadata

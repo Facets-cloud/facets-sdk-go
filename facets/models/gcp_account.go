@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// GcpAccount GcpAccount
+// GcpAccount gcp account
 //
 // swagger:model GcpAccount
 type GcpAccount struct {

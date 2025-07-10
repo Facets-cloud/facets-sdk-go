@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ListWorkflowRunsResponse ListWorkflowRunsResponse
+// ListWorkflowRunsResponse list workflow runs response
 //
 // swagger:model ListWorkflowRunsResponse
 type ListWorkflowRunsResponse struct {

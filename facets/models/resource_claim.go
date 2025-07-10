@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceClaim ResourceClaim
+// ResourceClaim resource claim
 //
 // swagger:model ResourceClaim
 type ResourceClaim struct {

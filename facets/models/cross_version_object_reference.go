@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CrossVersionObjectReference CrossVersionObjectReference
+// CrossVersionObjectReference cross version object reference
 //
 // swagger:model CrossVersionObjectReference
 type CrossVersionObjectReference struct {

@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadKubernetesAccount OneTimePayload«KubernetesAccount»
+// OneTimePayloadKubernetesAccount one time payload kubernetes account
 //
-// swagger:model OneTimePayload«KubernetesAccount»
+// swagger:model OneTimePayloadKubernetesAccount
 type OneTimePayloadKubernetesAccount struct {
 
 	// payload

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// WorkflowHierarchy WorkflowHierarchy
+// WorkflowHierarchy workflow hierarchy
 //
 // swagger:model WorkflowHierarchy
 type WorkflowHierarchy struct {

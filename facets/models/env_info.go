@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EnvInfo EnvInfo
+// EnvInfo env info
 //
 // swagger:model EnvInfo
 type EnvInfo struct {

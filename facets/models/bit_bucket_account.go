@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BitBucketAccount BitBucketAccount
+// BitBucketAccount bit bucket account
 //
 // swagger:model BitBucketAccount
 type BitBucketAccount struct {

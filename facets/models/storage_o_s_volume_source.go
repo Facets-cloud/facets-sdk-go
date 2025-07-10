@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// StorageOSVolumeSource StorageOSVolumeSource
+// StorageOSVolumeSource storage o s volume source
 //
 // swagger:model StorageOSVolumeSource
 type StorageOSVolumeSource struct {

@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VolumeProjection VolumeProjection
+// VolumeProjection volume projection
 //
 // swagger:model VolumeProjection
 type VolumeProjection struct {

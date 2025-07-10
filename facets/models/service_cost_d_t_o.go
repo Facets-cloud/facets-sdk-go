@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceCostDTO ServiceCostDTO
+// ServiceCostDTO service cost d t o
 //
 // swagger:model ServiceCostDTO
 type ServiceCostDTO struct {

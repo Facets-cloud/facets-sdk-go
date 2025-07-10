@@ -8,21 +8,52 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ResourceGroupRequest ResourceGroupRequest
+// ResourceGroupRequest resource group request
 //
 // swagger:model ResourceGroupRequest
 type ResourceGroupRequest struct {
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	// Max Length: 2147483647
+	// Min Length: 2
+	Name *string `json:"name"`
 }
 
 // Validate validates this resource group request
 func (m *ResourceGroupRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResourceGroupRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("name", "body", *m.Name, 2); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("name", "body", *m.Name, 2147483647); err != nil {
+		return err
+	}
+
 	return nil
 }
 

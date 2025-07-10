@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// CustomRoleRequest CustomRoleRequest
+// CustomRoleRequest custom role request
 //
 // swagger:model CustomRoleRequest
 type CustomRoleRequest struct {
@@ -27,6 +29,8 @@ type CustomRoleRequest struct {
 	K8sRole string `json:"k8sRole,omitempty"`
 
 	// permissions
+	// Required: true
+	// Unique: true
 	Permissions []string `json:"permissions"`
 
 	// role name
@@ -35,6 +39,28 @@ type CustomRoleRequest struct {
 
 // Validate validates this custom role request
 func (m *CustomRoleRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePermissions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CustomRoleRequest) validatePermissions(formats strfmt.Registry) error {
+
+	if err := validate.Required("permissions", "body", m.Permissions); err != nil {
+		return err
+	}
+
+	if err := validate.UniqueItems("permissions", "body", m.Permissions); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// RegionAndZone RegionAndZone
+// RegionAndZone region and zone
 //
 // swagger:model RegionAndZone
 type RegionAndZone struct {

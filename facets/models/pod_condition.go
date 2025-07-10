@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodCondition PodCondition
+// PodCondition pod condition
 //
 // swagger:model PodCondition
 type PodCondition struct {

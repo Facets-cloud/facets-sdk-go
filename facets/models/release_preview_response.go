@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ReleasePreviewResponse ReleasePreviewResponse
+// ReleasePreviewResponse release preview response
 //
 // swagger:model ReleasePreviewResponse
 type ReleasePreviewResponse struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NFSVolumeSource NFSVolumeSource
+// NFSVolumeSource n f s volume source
 //
 // swagger:model NFSVolumeSource
 type NFSVolumeSource struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ToolsConfig ToolsConfig
+// ToolsConfig tools config
 //
 // swagger:model ToolsConfig
 type ToolsConfig struct {

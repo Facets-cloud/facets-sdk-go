@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterCostDTO ClusterCostDTO
+// ClusterCostDTO cluster cost d t o
 //
 // swagger:model ClusterCostDTO
 type ClusterCostDTO struct {

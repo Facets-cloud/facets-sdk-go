@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadBasicDockerDTO OneTimePayload«BasicDockerDTO»
+// OneTimePayloadBasicDockerDTO one time payload basic docker d t o
 //
-// swagger:model OneTimePayload«BasicDockerDTO»
+// swagger:model OneTimePayloadBasicDockerDTO
 type OneTimePayloadBasicDockerDTO struct {
 
 	// payload

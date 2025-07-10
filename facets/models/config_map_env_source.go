@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ConfigMapEnvSource ConfigMapEnvSource
+// ConfigMapEnvSource config map env source
 //
 // swagger:model ConfigMapEnvSource
 type ConfigMapEnvSource struct {

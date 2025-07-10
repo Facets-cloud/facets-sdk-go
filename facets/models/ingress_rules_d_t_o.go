@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressRulesDTO IngressRulesDTO
+// IngressRulesDTO ingress rules d t o
 //
 // swagger:model IngressRulesDTO
 type IngressRulesDTO struct {

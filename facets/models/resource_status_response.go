@@ -14,10 +14,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceStatusResponse ResourceStatusResponse
+// ResourceStatusResponse resource status response
 //
 // swagger:model ResourceStatusResponse
 type ResourceStatusResponse struct {
+
+	// cluster Id
+	ClusterID string `json:"clusterId,omitempty"`
 
 	// environment name
 	EnvironmentName string `json:"environmentName,omitempty"`

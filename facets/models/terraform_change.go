@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TerraformChange TerraformChange
+// TerraformChange terraform change
 //
 // swagger:model TerraformChange
 type TerraformChange struct {

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -15,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ContentFile ContentFile
+// ContentFile content file
 //
 // swagger:model ContentFile
 type ContentFile struct {
@@ -41,6 +42,7 @@ type ContentFile struct {
 	MdContent string `json:"mdContent,omitempty"`
 
 	// required payload
+	// Read Only: true
 	RequiredPayload []string `json:"requiredPayload"`
 
 	// selectors
@@ -169,6 +171,10 @@ func (m *ContentFile) validateType(formats strfmt.Registry) error {
 func (m *ContentFile) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateRequiredPayload(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSelectors(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -176,6 +182,23 @@ func (m *ContentFile) ContextValidate(ctx context.Context, formats strfmt.Regist
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ContentFile) contextValidateRequiredPayload(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "requiredPayload", "body", []string(m.RequiredPayload)); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.RequiredPayload); i++ {
+
+		if err := validate.ReadOnly(ctx, "requiredPayload"+"."+strconv.Itoa(i), "body", string(m.RequiredPayload[i])); err != nil {
+			return err
+		}
+
+	}
+
 	return nil
 }
 

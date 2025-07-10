@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Commit Commit
+// Commit commit
 //
 // swagger:model Commit
 type Commit struct {

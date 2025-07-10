@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OwnerReference OwnerReference
+// OwnerReference owner reference
 //
 // swagger:model OwnerReference
 type OwnerReference struct {

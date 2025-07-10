@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// MatchedModuleDTO MatchedModuleDTO
+// MatchedModuleDTO matched module d t o
 //
 // swagger:model MatchedModuleDTO
 type MatchedModuleDTO struct {

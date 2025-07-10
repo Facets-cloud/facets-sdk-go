@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NotificationTagPayload NotificationTagPayload
+// NotificationTagPayload notification tag payload
 //
 // swagger:model NotificationTagPayload
 type NotificationTagPayload struct {

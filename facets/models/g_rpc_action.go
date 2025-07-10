@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GRPCAction GRPCAction
+// GRPCAction g RPC action
 //
 // swagger:model GRPCAction
 type GRPCAction struct {

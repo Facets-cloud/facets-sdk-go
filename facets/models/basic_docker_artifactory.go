@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BasicDockerArtifactory BasicDockerArtifactory
+// BasicDockerArtifactory basic docker artifactory
 //
 // swagger:model BasicDockerArtifactory
 type BasicDockerArtifactory struct {
@@ -49,12 +49,18 @@ type BasicDockerArtifactory struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// number of versions
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
+	// password
+	// Required: true
+	Password *string `json:"password"`
+
 	// stacks associated
+	// Unique: true
 	StacksAssociated []string `json:"stacksAssociated"`
 
 	// system defined
@@ -87,6 +93,18 @@ func (m *BasicDockerArtifactory) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePassword(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStacksAssociated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -237,6 +255,36 @@ func (m *BasicDockerArtifactory) validateLastModifiedDate(formats strfmt.Registr
 	}
 
 	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerArtifactory) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerArtifactory) validatePassword(formats strfmt.Registry) error {
+
+	if err := validate.Required("password", "body", m.Password); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerArtifactory) validateStacksAssociated(formats strfmt.Registry) error {
+	if swag.IsZero(m.StacksAssociated) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("stacksAssociated", "body", m.StacksAssociated); err != nil {
 		return err
 	}
 

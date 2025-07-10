@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CoderWorkspaceResponse CoderWorkspaceResponse
+// CoderWorkspaceResponse coder workspace response
 //
 // swagger:model CoderWorkspaceResponse
 type CoderWorkspaceResponse struct {

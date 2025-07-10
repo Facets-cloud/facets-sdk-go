@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClaimSource ClaimSource
+// ClaimSource claim source
 //
 // swagger:model ClaimSource
 type ClaimSource struct {

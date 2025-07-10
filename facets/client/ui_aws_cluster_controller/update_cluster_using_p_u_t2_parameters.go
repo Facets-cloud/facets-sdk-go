@@ -63,17 +63,11 @@ UpdateClusterUsingPUT2Params contains all the parameters to send to the API endp
 */
 type UpdateClusterUsingPUT2Params struct {
 
-	/* ClusterID.
+	// Body.
+	Body *models.AwsClusterRequest
 
-	   clusterId
-	*/
+	// ClusterID.
 	ClusterID string
-
-	/* Request.
-
-	   request
-	*/
-	Request *models.AwsClusterRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,6 +122,17 @@ func (o *UpdateClusterUsingPUT2Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the update cluster using p u t2 params
+func (o *UpdateClusterUsingPUT2Params) WithBody(body *models.AwsClusterRequest) *UpdateClusterUsingPUT2Params {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the update cluster using p u t2 params
+func (o *UpdateClusterUsingPUT2Params) SetBody(body *models.AwsClusterRequest) {
+	o.Body = body
+}
+
 // WithClusterID adds the clusterID to the update cluster using p u t2 params
 func (o *UpdateClusterUsingPUT2Params) WithClusterID(clusterID string) *UpdateClusterUsingPUT2Params {
 	o.SetClusterID(clusterID)
@@ -139,17 +144,6 @@ func (o *UpdateClusterUsingPUT2Params) SetClusterID(clusterID string) {
 	o.ClusterID = clusterID
 }
 
-// WithRequest adds the request to the update cluster using p u t2 params
-func (o *UpdateClusterUsingPUT2Params) WithRequest(request *models.AwsClusterRequest) *UpdateClusterUsingPUT2Params {
-	o.SetRequest(request)
-	return o
-}
-
-// SetRequest adds the request to the update cluster using p u t2 params
-func (o *UpdateClusterUsingPUT2Params) SetRequest(request *models.AwsClusterRequest) {
-	o.Request = request
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *UpdateClusterUsingPUT2Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -157,15 +151,15 @@ func (o *UpdateClusterUsingPUT2Params) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param clusterId
 	if err := r.SetPathParam("clusterId", o.ClusterID); err != nil {
 		return err
-	}
-	if o.Request != nil {
-		if err := r.SetBodyParam(o.Request); err != nil {
-			return err
-		}
 	}
 
 	if len(res) > 0 {

@@ -15,9 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ListResourcesResponse ListResourcesResponse
-//
-// # Response entity containing grouped resources and templates
+// ListResourcesResponse Response entity containing grouped resources and templates
 //
 // swagger:model ListResourcesResponse
 type ListResourcesResponse struct {

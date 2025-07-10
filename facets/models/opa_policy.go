@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// OpaPolicy OpaPolicy
+// OpaPolicy opa policy
 //
 // swagger:model OpaPolicy
 type OpaPolicy struct {
@@ -40,7 +40,7 @@ type OpaPolicy struct {
 	Flavours []string `json:"flavours"`
 
 	// input data
-	InputData interface{} `json:"inputData,omitempty"`
+	InputData map[string]interface{} `json:"inputData,omitempty"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`

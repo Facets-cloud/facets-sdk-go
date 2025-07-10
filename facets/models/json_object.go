@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// JSONObject JSONObject
+// JSONObject JSON object
 //
 // swagger:model JSONObject
 type JSONObject struct {

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodAffinity PodAffinity
+// PodAffinity pod affinity
 //
 // swagger:model PodAffinity
 type PodAffinity struct {

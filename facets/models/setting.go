@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Setting Setting
+// Setting setting
 //
 // swagger:model Setting
 type Setting struct {
@@ -32,14 +32,16 @@ type Setting struct {
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
 	// default value
-	DefaultValue interface{} `json:"defaultValue,omitempty"`
+	// Required: true
+	DefaultValue interface{} `json:"defaultValue"`
 
 	// description
 	Description string `json:"description,omitempty"`
 
 	// entity
+	// Required: true
 	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	Entity string `json:"entity,omitempty"`
+	Entity *string `json:"entity"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -58,13 +60,16 @@ type Setting struct {
 	Min int32 `json:"min,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// setting type
+	// Required: true
 	// Enum: ["NUMBER","STRING","ENUM","BOOLEAN","FLOAT"]
-	SettingType string `json:"settingType,omitempty"`
+	SettingType *string `json:"settingType"`
 
 	// supported for clouds
+	// Required: true
 	SupportedForClouds []string `json:"supportedForClouds"`
 }
 
@@ -76,11 +81,19 @@ func (m *Setting) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDefaultValue(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEntity(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,6 +118,15 @@ func (m *Setting) validateCreationDate(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Setting) validateDefaultValue(formats strfmt.Registry) error {
+
+	if m.DefaultValue == nil {
+		return errors.Required("defaultValue", "body", nil)
 	}
 
 	return nil
@@ -161,12 +183,13 @@ func (m *Setting) validateEntityEnum(path, location string, value string) error 
 }
 
 func (m *Setting) validateEntity(formats strfmt.Registry) error {
-	if swag.IsZero(m.Entity) { // not required
-		return nil
+
+	if err := validate.Required("entity", "body", m.Entity); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateEntityEnum("entity", "body", m.Entity); err != nil {
+	if err := m.validateEntityEnum("entity", "body", *m.Entity); err != nil {
 		return err
 	}
 
@@ -179,6 +202,15 @@ func (m *Setting) validateLastModifiedDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Setting) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
 	}
 
@@ -224,12 +256,13 @@ func (m *Setting) validateSettingTypeEnum(path, location string, value string) e
 }
 
 func (m *Setting) validateSettingType(formats strfmt.Registry) error {
-	if swag.IsZero(m.SettingType) { // not required
-		return nil
+
+	if err := validate.Required("settingType", "body", m.SettingType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateSettingTypeEnum("settingType", "body", m.SettingType); err != nil {
+	if err := m.validateSettingTypeEnum("settingType", "body", *m.SettingType); err != nil {
 		return err
 	}
 
@@ -256,8 +289,9 @@ func (m *Setting) validateSupportedForCloudsItemsEnum(path, location string, val
 }
 
 func (m *Setting) validateSupportedForClouds(formats strfmt.Registry) error {
-	if swag.IsZero(m.SupportedForClouds) { // not required
-		return nil
+
+	if err := validate.Required("supportedForClouds", "body", m.SupportedForClouds); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.SupportedForClouds); i++ {

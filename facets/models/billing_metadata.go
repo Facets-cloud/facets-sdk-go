@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// BillingMetadata BillingMetadata
+// BillingMetadata billing metadata
 //
 // swagger:model BillingMetadata
 type BillingMetadata struct {

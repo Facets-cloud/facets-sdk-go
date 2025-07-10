@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// EventSource EventSource
+// EventSource event source
 //
 // swagger:model EventSource
 type EventSource struct {

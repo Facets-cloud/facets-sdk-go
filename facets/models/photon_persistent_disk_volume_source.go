@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PhotonPersistentDiskVolumeSource PhotonPersistentDiskVolumeSource
+// PhotonPersistentDiskVolumeSource photon persistent disk volume source
 //
 // swagger:model PhotonPersistentDiskVolumeSource
 type PhotonPersistentDiskVolumeSource struct {

@@ -8,24 +8,59 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// CreateWorkspaceExistingBranchRequest CreateWorkspaceExistingBranchRequest
+// CreateWorkspaceExistingBranchRequest create workspace existing branch request
 //
 // swagger:model CreateWorkspaceExistingBranchRequest
 type CreateWorkspaceExistingBranchRequest struct {
 
 	// existing branch
-	ExistingBranch string `json:"existingBranch,omitempty"`
+	// Required: true
+	ExistingBranch *string `json:"existingBranch"`
 
 	// workspace name
-	WorkspaceName string `json:"workspaceName,omitempty"`
+	// Required: true
+	WorkspaceName *string `json:"workspaceName"`
 }
 
 // Validate validates this create workspace existing branch request
 func (m *CreateWorkspaceExistingBranchRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateExistingBranch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkspaceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CreateWorkspaceExistingBranchRequest) validateExistingBranch(formats strfmt.Registry) error {
+
+	if err := validate.Required("existingBranch", "body", m.ExistingBranch); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CreateWorkspaceExistingBranchRequest) validateWorkspaceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("workspaceName", "body", m.WorkspaceName); err != nil {
+		return err
+	}
+
 	return nil
 }
 

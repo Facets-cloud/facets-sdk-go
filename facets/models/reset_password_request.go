@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResetPasswordRequest ResetPasswordRequest
+// ResetPasswordRequest reset password request
 //
 // swagger:model ResetPasswordRequest
 type ResetPasswordRequest struct {

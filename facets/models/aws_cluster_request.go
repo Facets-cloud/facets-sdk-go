@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AwsClusterRequest AwsClusterRequest
+// AwsClusterRequest aws cluster request
 //
 // swagger:model AwsClusterRequest
 type AwsClusterRequest struct {
@@ -85,7 +85,7 @@ type AwsClusterRequest struct {
 	StackName string `json:"stackName,omitempty"`
 
 	// tz
-	Tz *TimeZone `json:"tz,omitempty"`
+	Tz *AwsClusterRequestTz `json:"tz,omitempty"`
 
 	// vpc c ID r
 	VpcCIDR string `json:"vpcCIDR,omitempty"`
@@ -225,6 +225,52 @@ func (m *AwsClusterRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *AwsClusterRequest) UnmarshalBinary(b []byte) error {
 	var res AwsClusterRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// AwsClusterRequestTz aws cluster request tz
+//
+// swagger:model AwsClusterRequestTz
+type AwsClusterRequestTz struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this aws cluster request tz
+func (m *AwsClusterRequestTz) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this aws cluster request tz based on context it is used
+func (m *AwsClusterRequestTz) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *AwsClusterRequestTz) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *AwsClusterRequestTz) UnmarshalBinary(b []byte) error {
+	var res AwsClusterRequestTz
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -15,9 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SaasArtifactRequest SaasArtifactRequest
-//
-// Request details for registering a SaaS artifact.
+// SaasArtifactRequest Request details for registering a SaaS artifact.
 //
 // swagger:model SaasArtifactRequest
 type SaasArtifactRequest struct {

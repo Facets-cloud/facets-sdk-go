@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadAwsAccount OneTimePayload«AwsAccount»
+// OneTimePayloadAwsAccount one time payload aws account
 //
-// swagger:model OneTimePayload«AwsAccount»
+// swagger:model OneTimePayloadAwsAccount
 type OneTimePayloadAwsAccount struct {
 
 	// payload

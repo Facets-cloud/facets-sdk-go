@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HostPathVolumeSource HostPathVolumeSource
+// HostPathVolumeSource host path volume source
 //
 // swagger:model HostPathVolumeSource
 type HostPathVolumeSource struct {

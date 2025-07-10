@@ -16,12 +16,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CreateBlueprintRequest CreateBlueprintRequest
+// CreateBlueprintRequest create blueprint request
 //
 // swagger:model CreateBlueprintRequest
 type CreateBlueprintRequest struct {
 
 	// allowed clouds
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// branch
@@ -117,6 +118,10 @@ func (m *CreateBlueprintRequest) validateAllowedCloudsItemsEnum(path, location s
 func (m *CreateBlueprintRequest) validateAllowedClouds(formats strfmt.Registry) error {
 	if swag.IsZero(m.AllowedClouds) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.AllowedClouds); i++ {

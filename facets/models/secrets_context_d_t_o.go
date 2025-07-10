@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SecretsContextDTO SecretsContextDTO
+// SecretsContextDTO secrets context d t o
 //
 // swagger:model SecretsContextDTO
 type SecretsContextDTO struct {

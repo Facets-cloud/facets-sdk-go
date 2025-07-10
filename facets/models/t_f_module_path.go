@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TFModulePath TFModulePath
+// TFModulePath Path information related to TF Module
 //
 // swagger:model TFModulePath
 type TFModulePath struct {

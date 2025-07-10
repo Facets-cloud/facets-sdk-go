@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DeploymentContext DeploymentContext
+// DeploymentContext deployment context
 //
 // swagger:model DeploymentContext
 type DeploymentContext struct {
@@ -43,6 +43,9 @@ type DeploymentContext struct {
 
 	// parallel release
 	ParallelRelease bool `json:"parallelRelease,omitempty"`
+
+	// project type
+	ProjectType *ProjectType `json:"projectType,omitempty"`
 
 	// provided resources
 	ProvidedResources *ProvidedResources `json:"providedResources,omitempty"`
@@ -96,6 +99,10 @@ func (m *DeploymentContext) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOverrides(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProjectType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -255,6 +262,25 @@ func (m *DeploymentContext) validateOverrides(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DeploymentContext) validateProjectType(formats strfmt.Registry) error {
+	if swag.IsZero(m.ProjectType) { // not required
+		return nil
+	}
+
+	if m.ProjectType != nil {
+		if err := m.ProjectType.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("projectType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("projectType")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -455,6 +481,10 @@ func (m *DeploymentContext) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateProjectType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateProvidedResources(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -589,6 +619,27 @@ func (m *DeploymentContext) contextValidateOverrides(ctx context.Context, format
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DeploymentContext) contextValidateProjectType(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ProjectType != nil {
+
+		if swag.IsZero(m.ProjectType) { // not required
+			return nil
+		}
+
+		if err := m.ProjectType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("projectType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("projectType")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// KeyToPath KeyToPath
+// KeyToPath key to path
 //
 // swagger:model KeyToPath
 type KeyToPath struct {

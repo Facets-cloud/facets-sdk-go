@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ResourceRequirements ResourceRequirements
+// ResourceRequirements resource requirements
 //
 // swagger:model ResourceRequirements
 type ResourceRequirements struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GithubUser GithubUser
+// GithubUser github user
 //
 // swagger:model GithubUser
 type GithubUser struct {

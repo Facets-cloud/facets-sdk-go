@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ObjectFieldSelector ObjectFieldSelector
+// ObjectFieldSelector object field selector
 //
 // swagger:model ObjectFieldSelector
 type ObjectFieldSelector struct {

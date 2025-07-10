@@ -54,58 +54,75 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetReleasePreviewUsingGET(params *GetReleasePreviewUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleasePreviewUsingGETOK, error)
+	GetNamespacesInUseByDependentClusters(params *GetNamespacesInUseByDependentClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNamespacesInUseByDependentClustersOK, error)
 
-	GetResourceStatusUsingGET(params *GetResourceStatusUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceStatusUsingGETOK, error)
+	GetReleasePreview(params *GetReleasePreviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleasePreviewOK, error)
 
-	SyncResourceUsingPOST(params *SyncResourceUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncResourceUsingPOSTOK, *SyncResourceUsingPOSTCreated, error)
+	GetResourceStatus(params *GetResourceStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceStatusOK, error)
+
+	SyncResource(params *SyncResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncResourceOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetReleasePreviewUsingGET gets release preview
+GetNamespacesInUseByDependentClusters get namespaces in use by dependent clusters API
 */
-func (a *Client) GetReleasePreviewUsingGET(params *GetReleasePreviewUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleasePreviewUsingGETOK, error) {
+func (a *Client) GetNamespacesInUseByDependentClusters(params *GetNamespacesInUseByDependentClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNamespacesInUseByDependentClustersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetReleasePreviewUsingGETParams()
+		params = NewGetNamespacesInUseByDependentClustersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getReleasePreviewUsingGET",
+		ID:                 "getNamespacesInUseByDependentClusters",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/resources/{baseClusterId}/base-env-in-use-namespaces",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetNamespacesInUseByDependentClustersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetNamespacesInUseByDependentClustersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getNamespacesInUseByDependentClusters: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetReleasePreview get release preview API
+*/
+func (a *Client) GetReleasePreview(params *GetReleasePreviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleasePreviewOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetReleasePreviewParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getReleasePreview",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/resources/{clusterId}/release-preview",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetReleasePreviewUsingGETReader{formats: a.formats},
+		Reader:             &GetReleasePreviewReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -118,33 +135,33 @@ func (a *Client) GetReleasePreviewUsingGET(params *GetReleasePreviewUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetReleasePreviewUsingGETOK)
+	success, ok := result.(*GetReleasePreviewOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getReleasePreviewUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getReleasePreview: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetResourceStatusUsingGET gets resource status
+GetResourceStatus get resource status API
 */
-func (a *Client) GetResourceStatusUsingGET(params *GetResourceStatusUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceStatusUsingGETOK, error) {
+func (a *Client) GetResourceStatus(params *GetResourceStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceStatusOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetResourceStatusUsingGETParams()
+		params = NewGetResourceStatusParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getResourceStatusUsingGET",
+		ID:                 "getResourceStatus",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/resources/{projectName}/{environmentName}/status",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetResourceStatusUsingGETReader{formats: a.formats},
+		Reader:             &GetResourceStatusReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -157,33 +174,33 @@ func (a *Client) GetResourceStatusUsingGET(params *GetResourceStatusUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetResourceStatusUsingGETOK)
+	success, ok := result.(*GetResourceStatusOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getResourceStatusUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getResourceStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SyncResourceUsingPOST syncs resource
+SyncResource sync resource API
 */
-func (a *Client) SyncResourceUsingPOST(params *SyncResourceUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncResourceUsingPOSTOK, *SyncResourceUsingPOSTCreated, error) {
+func (a *Client) SyncResource(params *SyncResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSyncResourceUsingPOSTParams()
+		params = NewSyncResourceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "syncResourceUsingPOST",
+		ID:                 "syncResource",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/resources/sync",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SyncResourceUsingPOSTReader{formats: a.formats},
+		Reader:             &SyncResourceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -194,16 +211,15 @@ func (a *Client) SyncResourceUsingPOST(params *SyncResourceUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SyncResourceUsingPOSTOK:
-		return value, nil, nil
-	case *SyncResourceUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SyncResourceOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_resource_status_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for syncResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

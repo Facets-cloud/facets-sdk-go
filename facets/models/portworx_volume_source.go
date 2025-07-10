@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PortworxVolumeSource PortworxVolumeSource
+// PortworxVolumeSource portworx volume source
 //
 // swagger:model PortworxVolumeSource
 type PortworxVolumeSource struct {

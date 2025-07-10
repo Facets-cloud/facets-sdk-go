@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TCPSocketAction TCPSocketAction
+// TCPSocketAction TCP socket action
 //
 // swagger:model TCPSocketAction
 type TCPSocketAction struct {

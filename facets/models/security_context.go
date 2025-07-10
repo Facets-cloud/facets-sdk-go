@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecurityContext SecurityContext
+// SecurityContext security context
 //
 // swagger:model SecurityContext
 type SecurityContext struct {

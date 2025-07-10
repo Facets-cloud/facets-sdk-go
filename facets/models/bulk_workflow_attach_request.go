@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// BulkWorkflowAttachRequest BulkWorkflowAttachRequest
+// BulkWorkflowAttachRequest bulk workflow attach request
 //
 // swagger:model BulkWorkflowAttachRequest
 type BulkWorkflowAttachRequest struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ChatRequest ChatRequest
+// ChatRequest chat request
 //
 // swagger:model ChatRequest
 type ChatRequest struct {

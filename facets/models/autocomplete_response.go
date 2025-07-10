@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// AutocompleteResponse AutocompleteResponse
+// AutocompleteResponse autocomplete response
 //
 // swagger:model AutocompleteResponse
 type AutocompleteResponse struct {
@@ -26,6 +28,31 @@ type AutocompleteResponse struct {
 
 // Validate validates this autocomplete response
 func (m *AutocompleteResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResources(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AutocompleteResponse) validateResources(formats strfmt.Registry) error {
+	if swag.IsZero(m.Resources) { // not required
+		return nil
+	}
+
+	for k := range m.Resources {
+
+		if err := validate.UniqueItems("resources"+"."+k, "body", m.Resources[k]); err != nil {
+			return err
+		}
+
+	}
+
 	return nil
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// InviteUserRequest InviteUserRequest
+// InviteUserRequest invite user request
 //
 // swagger:model InviteUserRequest
 type InviteUserRequest struct {

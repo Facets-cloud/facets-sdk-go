@@ -15,12 +15,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TemplateResponseDTO TemplateResponseDTO
+// TemplateResponseDTO Templates associated with the resources
 //
 // swagger:model TemplateResponseDTO
 type TemplateResponseDTO struct {
 
 	// clouds
+	// Unique: true
 	Clouds []string `json:"clouds"`
 
 	// description
@@ -44,6 +45,10 @@ type TemplateResponseDTO struct {
 func (m *TemplateResponseDTO) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClouds(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -51,6 +56,18 @@ func (m *TemplateResponseDTO) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *TemplateResponseDTO) validateClouds(formats strfmt.Registry) error {
+	if swag.IsZero(m.Clouds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("clouds", "body", m.Clouds); err != nil {
+		return err
+	}
+
 	return nil
 }
 

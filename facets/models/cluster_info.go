@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClusterInfo ClusterInfo
+// ClusterInfo cluster info
 //
 // swagger:model ClusterInfo
 type ClusterInfo struct {

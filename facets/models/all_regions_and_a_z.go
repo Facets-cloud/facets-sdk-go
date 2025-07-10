@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AllRegionsAndAZ AllRegionsAndAZ
+// AllRegionsAndAZ all regions and a z
 //
 // swagger:model AllRegionsAndAZ
 type AllRegionsAndAZ struct {

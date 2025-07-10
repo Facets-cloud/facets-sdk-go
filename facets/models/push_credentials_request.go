@@ -14,9 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PushCredentialsRequest PushCredentialsRequest
-//
-// Request details for generating push credentials for an artifact.
+// PushCredentialsRequest Request details for generating push credentials for an artifact.
 //
 // swagger:model PushCredentialsRequest
 type PushCredentialsRequest struct {

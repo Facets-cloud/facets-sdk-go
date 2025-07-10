@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Config Config
+// Config config
 //
 // swagger:model Config
 type Config struct {

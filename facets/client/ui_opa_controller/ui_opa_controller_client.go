@@ -54,68 +54,44 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	BulkEditOpaPolicyStateUsingPOST(params *BulkEditOpaPolicyStateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditOpaPolicyStateUsingPOSTOK, *BulkEditOpaPolicyStateUsingPOSTCreated, error)
+	BulkEditOpaPolicyState(params *BulkEditOpaPolicyStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditOpaPolicyStateOK, error)
 
-	CreatePolicyUsingPOST(params *CreatePolicyUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePolicyUsingPOSTOK, *CreatePolicyUsingPOSTCreated, error)
+	CreatePolicy(params *CreatePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePolicyOK, error)
 
-	DeletePolicyUsingDELETE(params *DeletePolicyUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePolicyUsingDELETEOK, *DeletePolicyUsingDELETENoContent, error)
+	DeletePolicy(params *DeletePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePolicyOK, error)
 
-	EditPolicyUsingPUT(params *EditPolicyUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditPolicyUsingPUTOK, *EditPolicyUsingPUTCreated, error)
+	EditPolicy(params *EditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditPolicyOK, error)
 
-	ExecutePolicyUsingPOST(params *ExecutePolicyUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExecutePolicyUsingPOSTOK, *ExecutePolicyUsingPOSTCreated, error)
+	ExecutePolicy(params *ExecutePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExecutePolicyOK, error)
 
-	GetAllPoliciesUsingGET(params *GetAllPoliciesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPoliciesUsingGETOK, error)
+	GetAllPolicies(params *GetAllPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPoliciesOK, error)
 
-	GetAllPolicyTemplatesUsingGET(params *GetAllPolicyTemplatesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPolicyTemplatesUsingGETOK, error)
+	GetAllPolicyTemplates(params *GetAllPolicyTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPolicyTemplatesOK, error)
 
-	GetPolicyUsingGET(params *GetPolicyUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPolicyUsingGETOK, error)
+	GetPolicy(params *GetPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPolicyOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-BulkEditOpaPolicyStateUsingPOST bulks edit opa policy state
+BulkEditOpaPolicyState bulk edit opa policy state API
 */
-func (a *Client) BulkEditOpaPolicyStateUsingPOST(params *BulkEditOpaPolicyStateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditOpaPolicyStateUsingPOSTOK, *BulkEditOpaPolicyStateUsingPOSTCreated, error) {
+func (a *Client) BulkEditOpaPolicyState(params *BulkEditOpaPolicyStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditOpaPolicyStateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewBulkEditOpaPolicyStateUsingPOSTParams()
+		params = NewBulkEditOpaPolicyStateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "bulkEditOpaPolicyStateUsingPOST",
+		ID:                 "bulkEditOpaPolicyState",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/opa/enable-disable-policies",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &BulkEditOpaPolicyStateUsingPOSTReader{formats: a.formats},
+		Reader:             &BulkEditOpaPolicyStateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,36 +102,35 @@ func (a *Client) BulkEditOpaPolicyStateUsingPOST(params *BulkEditOpaPolicyStateU
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *BulkEditOpaPolicyStateUsingPOSTOK:
-		return value, nil, nil
-	case *BulkEditOpaPolicyStateUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*BulkEditOpaPolicyStateOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_opa_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for bulkEditOpaPolicyState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreatePolicyUsingPOST creates policy
+CreatePolicy create policy API
 */
-func (a *Client) CreatePolicyUsingPOST(params *CreatePolicyUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePolicyUsingPOSTOK, *CreatePolicyUsingPOSTCreated, error) {
+func (a *Client) CreatePolicy(params *CreatePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreatePolicyUsingPOSTParams()
+		params = NewCreatePolicyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createPolicyUsingPOST",
+		ID:                 "createPolicy",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/opa/{policyName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreatePolicyUsingPOSTReader{formats: a.formats},
+		Reader:             &CreatePolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,36 +141,35 @@ func (a *Client) CreatePolicyUsingPOST(params *CreatePolicyUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreatePolicyUsingPOSTOK:
-		return value, nil, nil
-	case *CreatePolicyUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreatePolicyOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_opa_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeletePolicyUsingDELETE deletes policy
+DeletePolicy delete policy API
 */
-func (a *Client) DeletePolicyUsingDELETE(params *DeletePolicyUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePolicyUsingDELETEOK, *DeletePolicyUsingDELETENoContent, error) {
+func (a *Client) DeletePolicy(params *DeletePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeletePolicyUsingDELETEParams()
+		params = NewDeletePolicyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deletePolicyUsingDELETE",
+		ID:                 "deletePolicy",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/opa/{policyName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeletePolicyUsingDELETEReader{formats: a.formats},
+		Reader:             &DeletePolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,36 +180,35 @@ func (a *Client) DeletePolicyUsingDELETE(params *DeletePolicyUsingDELETEParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeletePolicyUsingDELETEOK:
-		return value, nil, nil
-	case *DeletePolicyUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeletePolicyOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_opa_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deletePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-EditPolicyUsingPUT edits policy
+EditPolicy edit policy API
 */
-func (a *Client) EditPolicyUsingPUT(params *EditPolicyUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditPolicyUsingPUTOK, *EditPolicyUsingPUTCreated, error) {
+func (a *Client) EditPolicy(params *EditPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditPolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEditPolicyUsingPUTParams()
+		params = NewEditPolicyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "editPolicyUsingPUT",
+		ID:                 "editPolicy",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/opa/{policyName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &EditPolicyUsingPUTReader{formats: a.formats},
+		Reader:             &EditPolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -246,36 +219,35 @@ func (a *Client) EditPolicyUsingPUT(params *EditPolicyUsingPUTParams, authInfo r
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *EditPolicyUsingPUTOK:
-		return value, nil, nil
-	case *EditPolicyUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*EditPolicyOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_opa_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for editPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ExecutePolicyUsingPOST executes policy
+ExecutePolicy execute policy API
 */
-func (a *Client) ExecutePolicyUsingPOST(params *ExecutePolicyUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExecutePolicyUsingPOSTOK, *ExecutePolicyUsingPOSTCreated, error) {
+func (a *Client) ExecutePolicy(params *ExecutePolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ExecutePolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewExecutePolicyUsingPOSTParams()
+		params = NewExecutePolicyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "executePolicyUsingPOST",
+		ID:                 "executePolicy",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/opa/{policyName}/execute",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ExecutePolicyUsingPOSTReader{formats: a.formats},
+		Reader:             &ExecutePolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -286,36 +258,35 @@ func (a *Client) ExecutePolicyUsingPOST(params *ExecutePolicyUsingPOSTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ExecutePolicyUsingPOSTOK:
-		return value, nil, nil
-	case *ExecutePolicyUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ExecutePolicyOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_opa_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for executePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllPoliciesUsingGET gets all policies
+GetAllPolicies get all policies API
 */
-func (a *Client) GetAllPoliciesUsingGET(params *GetAllPoliciesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPoliciesUsingGETOK, error) {
+func (a *Client) GetAllPolicies(params *GetAllPoliciesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPoliciesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllPoliciesUsingGETParams()
+		params = NewGetAllPoliciesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllPoliciesUsingGET",
+		ID:                 "getAllPolicies",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/opa",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllPoliciesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllPoliciesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -328,33 +299,33 @@ func (a *Client) GetAllPoliciesUsingGET(params *GetAllPoliciesUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllPoliciesUsingGETOK)
+	success, ok := result.(*GetAllPoliciesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllPoliciesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllPolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllPolicyTemplatesUsingGET gets all policy templates
+GetAllPolicyTemplates get all policy templates API
 */
-func (a *Client) GetAllPolicyTemplatesUsingGET(params *GetAllPolicyTemplatesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPolicyTemplatesUsingGETOK, error) {
+func (a *Client) GetAllPolicyTemplates(params *GetAllPolicyTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPolicyTemplatesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllPolicyTemplatesUsingGETParams()
+		params = NewGetAllPolicyTemplatesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllPolicyTemplatesUsingGET",
+		ID:                 "getAllPolicyTemplates",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/opa/policy-templates",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllPolicyTemplatesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllPolicyTemplatesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -367,33 +338,33 @@ func (a *Client) GetAllPolicyTemplatesUsingGET(params *GetAllPolicyTemplatesUsin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllPolicyTemplatesUsingGETOK)
+	success, ok := result.(*GetAllPolicyTemplatesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllPolicyTemplatesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllPolicyTemplates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPolicyUsingGET gets policy
+GetPolicy get policy API
 */
-func (a *Client) GetPolicyUsingGET(params *GetPolicyUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPolicyUsingGETOK, error) {
+func (a *Client) GetPolicy(params *GetPolicyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPolicyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPolicyUsingGETParams()
+		params = NewGetPolicyParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPolicyUsingGET",
+		ID:                 "getPolicy",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/opa/{policyName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPolicyUsingGETReader{formats: a.formats},
+		Reader:             &GetPolicyReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -406,13 +377,13 @@ func (a *Client) GetPolicyUsingGET(params *GetPolicyUsingGETParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPolicyUsingGETOK)
+	success, ok := result.(*GetPolicyOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPolicyUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

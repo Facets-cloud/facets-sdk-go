@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PersistentVolumeDTO PersistentVolumeDTO
+// PersistentVolumeDTO persistent volume d t o
 //
 // swagger:model PersistentVolumeDTO
 type PersistentVolumeDTO struct {

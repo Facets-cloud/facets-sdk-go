@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/go-openapi/runtime"
+	runtime "github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
@@ -41,8 +41,8 @@ func main() {
 	facetsClient := client.New(transport, strfmt.Default)
 
 	// Example: Get current user information
-	params := ui_user_controller.NewGetCurrentUserUsingGETParams()
-	result, err := facetsClient.UIUserController.GetCurrentUserUsingGET(params, auth)
+	params := ui_user_controller.NewGetCurrentUserParams()
+	result, err := facetsClient.UIUserController.GetCurrentUser(params, auth)
 
 	if err != nil {
 		if apiErr, ok := err.(*runtime.APIError); ok {

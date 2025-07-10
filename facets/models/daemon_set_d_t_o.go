@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DaemonSetDTO DaemonSetDTO
+// DaemonSetDTO daemon set d t o
 //
 // swagger:model DaemonSetDTO
 type DaemonSetDTO struct {

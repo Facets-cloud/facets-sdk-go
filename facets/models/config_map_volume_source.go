@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ConfigMapVolumeSource ConfigMapVolumeSource
+// ConfigMapVolumeSource config map volume source
 //
 // swagger:model ConfigMapVolumeSource
 type ConfigMapVolumeSource struct {

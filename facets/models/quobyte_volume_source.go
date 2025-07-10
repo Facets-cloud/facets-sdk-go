@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// QuobyteVolumeSource QuobyteVolumeSource
+// QuobyteVolumeSource quobyte volume source
 //
 // swagger:model QuobyteVolumeSource
 type QuobyteVolumeSource struct {

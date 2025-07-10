@@ -16,15 +16,17 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ProjectTypeResponse ProjectTypeResponse
+// ProjectTypeResponse project type response
 //
 // swagger:model ProjectTypeResponse
 type ProjectTypeResponse struct {
 
 	// allowed clouds
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// associated blueprints
+	// Unique: true
 	AssociatedBlueprints []string `json:"associatedBlueprints"`
 
 	// base project name
@@ -40,6 +42,13 @@ type ProjectTypeResponse struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// iac tool
+	// Enum: ["TERRAFORM","OPENTOFU"]
+	IacTool string `json:"iacTool,omitempty"`
+
+	// iac tool version
+	IacToolVersion string `json:"iacToolVersion,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -51,6 +60,7 @@ type ProjectTypeResponse struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// mapped resources
+	// Unique: true
 	MappedResources []*ProjectTypeMappedResource `json:"mappedResources"`
 
 	// name
@@ -68,7 +78,15 @@ func (m *ProjectTypeResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateAssociatedBlueprints(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreationDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIacTool(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -114,6 +132,10 @@ func (m *ProjectTypeResponse) validateAllowedClouds(formats strfmt.Registry) err
 		return nil
 	}
 
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
+	}
+
 	for i := 0; i < len(m.AllowedClouds); i++ {
 
 		// value enum
@@ -126,12 +148,66 @@ func (m *ProjectTypeResponse) validateAllowedClouds(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *ProjectTypeResponse) validateAssociatedBlueprints(formats strfmt.Registry) error {
+	if swag.IsZero(m.AssociatedBlueprints) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("associatedBlueprints", "body", m.AssociatedBlueprints); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ProjectTypeResponse) validateCreationDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreationDate) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var projectTypeResponseTypeIacToolPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["TERRAFORM","OPENTOFU"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		projectTypeResponseTypeIacToolPropEnum = append(projectTypeResponseTypeIacToolPropEnum, v)
+	}
+}
+
+const (
+
+	// ProjectTypeResponseIacToolTERRAFORM captures enum value "TERRAFORM"
+	ProjectTypeResponseIacToolTERRAFORM string = "TERRAFORM"
+
+	// ProjectTypeResponseIacToolOPENTOFU captures enum value "OPENTOFU"
+	ProjectTypeResponseIacToolOPENTOFU string = "OPENTOFU"
+)
+
+// prop value enum
+func (m *ProjectTypeResponse) validateIacToolEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, projectTypeResponseTypeIacToolPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ProjectTypeResponse) validateIacTool(formats strfmt.Registry) error {
+	if swag.IsZero(m.IacTool) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateIacToolEnum("iacTool", "body", m.IacTool); err != nil {
 		return err
 	}
 
@@ -153,6 +229,10 @@ func (m *ProjectTypeResponse) validateLastModifiedDate(formats strfmt.Registry) 
 func (m *ProjectTypeResponse) validateMappedResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.MappedResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("mappedResources", "body", m.MappedResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.MappedResources); i++ {

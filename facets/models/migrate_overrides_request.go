@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MigrateOverridesRequest MigrateOverridesRequest
+// MigrateOverridesRequest migrate overrides request
 //
 // swagger:model MigrateOverridesRequest
 type MigrateOverridesRequest struct {

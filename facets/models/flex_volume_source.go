@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// FlexVolumeSource FlexVolumeSource
+// FlexVolumeSource flex volume source
 //
 // swagger:model FlexVolumeSource
 type FlexVolumeSource struct {

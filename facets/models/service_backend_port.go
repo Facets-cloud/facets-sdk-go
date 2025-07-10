@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServiceBackendPort ServiceBackendPort
+// ServiceBackendPort service backend port
 //
 // swagger:model ServiceBackendPort
 type ServiceBackendPort struct {

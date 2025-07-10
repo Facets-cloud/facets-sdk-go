@@ -54,62 +54,38 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ConfigureDraftClusterUsingPOST1(params *ConfigureDraftClusterUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOST1OK, *ConfigureDraftClusterUsingPOST1Created, error)
+	ConfigureDraftCluster1(params *ConfigureDraftCluster1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftCluster1OK, error)
 
-	CreateAzureClusterUsingPOST(params *CreateAzureClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureClusterUsingPOSTOK, *CreateAzureClusterUsingPOSTCreated, error)
+	CreateAzureCluster(params *CreateAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureClusterOK, error)
 
-	GetAzureClusterUsingGET(params *GetAzureClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureClusterUsingGETOK, error)
+	GetAzureCluster(params *GetAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureClusterOK, error)
 
-	UpdateAzureClusterUsingPUT(params *UpdateAzureClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureClusterUsingPUTOK, *UpdateAzureClusterUsingPUTCreated, error)
+	UpdateAzureCluster(params *UpdateAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureClusterOK, error)
 
-	ValidateVnetUsingGET(params *ValidateVnetUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVnetUsingGETOK, error)
+	ValidateVnet(params *ValidateVnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVnetOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-ConfigureDraftClusterUsingPOST1 configures draft cluster
+ConfigureDraftCluster1 configure draft cluster 1 API
 */
-func (a *Client) ConfigureDraftClusterUsingPOST1(params *ConfigureDraftClusterUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftClusterUsingPOST1OK, *ConfigureDraftClusterUsingPOST1Created, error) {
+func (a *Client) ConfigureDraftCluster1(params *ConfigureDraftCluster1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConfigureDraftCluster1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewConfigureDraftClusterUsingPOST1Params()
+		params = NewConfigureDraftCluster1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "configureDraftClusterUsingPOST_1",
+		ID:                 "configureDraftCluster_1",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/azure/clusters/configure/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ConfigureDraftClusterUsingPOST1Reader{formats: a.formats},
+		Reader:             &ConfigureDraftCluster1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -120,76 +96,35 @@ func (a *Client) ConfigureDraftClusterUsingPOST1(params *ConfigureDraftClusterUs
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ConfigureDraftClusterUsingPOST1OK:
-		return value, nil, nil
-	case *ConfigureDraftClusterUsingPOST1Created:
-		return nil, value, nil
+	success, ok := result.(*ConfigureDraftCluster1OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_azure_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for configureDraftCluster_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateAzureClusterUsingPOST creates azure cluster
+CreateAzureCluster create azure cluster API
 */
-func (a *Client) CreateAzureClusterUsingPOST(params *CreateAzureClusterUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureClusterUsingPOSTOK, *CreateAzureClusterUsingPOSTCreated, error) {
+func (a *Client) CreateAzureCluster(params *CreateAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateAzureClusterUsingPOSTParams()
+		params = NewCreateAzureClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createAzureClusterUsingPOST",
+		ID:                 "createAzureCluster",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/azure/clusters",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateAzureClusterUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateAzureClusterUsingPOSTOK:
-		return value, nil, nil
-	case *CreateAzureClusterUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_azure_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAzureClusterUsingGET gets azure cluster
-*/
-func (a *Client) GetAzureClusterUsingGET(params *GetAzureClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureClusterUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAzureClusterUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAzureClusterUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/azure/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAzureClusterUsingGETReader{formats: a.formats},
+		Reader:             &CreateAzureClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,73 +137,72 @@ func (a *Client) GetAzureClusterUsingGET(params *GetAzureClusterUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAzureClusterUsingGETOK)
+	success, ok := result.(*CreateAzureClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAzureClusterUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createAzureCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateAzureClusterUsingPUT updates azure cluster
+GetAzureCluster get azure cluster API
 */
-func (a *Client) UpdateAzureClusterUsingPUT(params *UpdateAzureClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureClusterUsingPUTOK, *UpdateAzureClusterUsingPUTCreated, error) {
+func (a *Client) GetAzureCluster(params *GetAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAzureClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateAzureClusterUsingPUTParams()
+		params = NewGetAzureClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateAzureClusterUsingPUT",
+		ID:                 "getAzureCluster",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/azure/clusters/{clusterId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAzureClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAzureClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAzureCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateAzureCluster update azure cluster API
+*/
+func (a *Client) UpdateAzureCluster(params *UpdateAzureClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateAzureClusterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateAzureCluster",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/azure/clusters/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateAzureClusterUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *UpdateAzureClusterUsingPUTOK:
-		return value, nil, nil
-	case *UpdateAzureClusterUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_azure_cluster_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-ValidateVnetUsingGET validates vnet
-*/
-func (a *Client) ValidateVnetUsingGET(params *ValidateVnetUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVnetUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewValidateVnetUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "validateVnetUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/azure/clusters/validate-vnet",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ValidateVnetUsingGETReader{formats: a.formats},
+		Reader:             &UpdateAzureClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -281,13 +215,52 @@ func (a *Client) ValidateVnetUsingGET(params *ValidateVnetUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ValidateVnetUsingGETOK)
+	success, ok := result.(*UpdateAzureClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for validateVnetUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateAzureCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ValidateVnet validate vnet API
+*/
+func (a *Client) ValidateVnet(params *ValidateVnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateVnetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewValidateVnetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "validateVnet",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/azure/clusters/validate-vnet",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ValidateVnetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ValidateVnetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for validateVnet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

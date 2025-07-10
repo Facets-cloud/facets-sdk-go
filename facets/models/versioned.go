@@ -12,10 +12,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Versioned Versioned
+// Versioned versioned
 //
 // swagger:model Versioned
 type Versioned struct {
+
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
 
 	// number of versions
 	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`

@@ -54,56 +54,32 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetHelmValuesUsingGET(params *GetHelmValuesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmValuesUsingGETOK, error)
+	GetHelmValues(params *GetHelmValuesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmValuesOK, error)
 
-	SearchPackagesUsingGET(params *SearchPackagesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPackagesUsingGETOK, error)
+	SearchPackages(params *SearchPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPackagesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetHelmValuesUsingGET gets helm values
+GetHelmValues get helm values API
 */
-func (a *Client) GetHelmValuesUsingGET(params *GetHelmValuesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmValuesUsingGETOK, error) {
+func (a *Client) GetHelmValues(params *GetHelmValuesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetHelmValuesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetHelmValuesUsingGETParams()
+		params = NewGetHelmValuesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getHelmValuesUsingGET",
+		ID:                 "getHelmValues",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactHub/packages/{packageId}/values",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetHelmValuesUsingGETReader{formats: a.formats},
+		Reader:             &GetHelmValuesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -116,33 +92,33 @@ func (a *Client) GetHelmValuesUsingGET(params *GetHelmValuesUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetHelmValuesUsingGETOK)
+	success, ok := result.(*GetHelmValuesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getHelmValuesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getHelmValues: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SearchPackagesUsingGET searches packages
+SearchPackages search packages API
 */
-func (a *Client) SearchPackagesUsingGET(params *SearchPackagesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPackagesUsingGETOK, error) {
+func (a *Client) SearchPackages(params *SearchPackagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SearchPackagesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSearchPackagesUsingGETParams()
+		params = NewSearchPackagesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "searchPackagesUsingGET",
+		ID:                 "searchPackages",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/artifactHub/search-packages",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SearchPackagesUsingGETReader{formats: a.formats},
+		Reader:             &SearchPackagesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -155,13 +131,13 @@ func (a *Client) SearchPackagesUsingGET(params *SearchPackagesUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SearchPackagesUsingGETOK)
+	success, ok := result.(*SearchPackagesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for searchPackagesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for searchPackages: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

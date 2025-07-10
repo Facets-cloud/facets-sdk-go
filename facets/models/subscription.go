@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Subscription Subscription
+// Subscription subscription
 //
 // swagger:model Subscription
 type Subscription struct {
@@ -24,7 +24,8 @@ type Subscription struct {
 	ChannelAddress string `json:"channelAddress,omitempty"`
 
 	// channel Id
-	ChannelID string `json:"channelId,omitempty"`
+	// Required: true
+	ChannelID *string `json:"channelId"`
 
 	// channel type
 	// Enum: ["SLACK","CAPILLARY_VALIDATOR","WEBHOOK","PAGER_DUTY","ZEN_DUTY","EMAIL","MS_TEAMS","MS_TEAMS_WORKFLOW"]
@@ -60,6 +61,10 @@ type Subscription struct {
 func (m *Subscription) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateChannelID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateChannelType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -71,6 +76,15 @@ func (m *Subscription) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Subscription) validateChannelID(formats strfmt.Registry) error {
+
+	if err := validate.Required("channelId", "body", m.ChannelID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

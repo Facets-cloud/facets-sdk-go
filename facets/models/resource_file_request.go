@@ -8,17 +8,19 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ResourceFileRequest ResourceFileRequest
+// ResourceFileRequest resource file request
 //
 // swagger:model ResourceFileRequest
 type ResourceFileRequest struct {
 
 	// content
-	Content interface{} `json:"content,omitempty"`
+	Content map[string]interface{} `json:"content,omitempty"`
 
 	// directory
 	Directory string `json:"directory,omitempty"`
@@ -30,17 +32,50 @@ type ResourceFileRequest struct {
 	Flavor string `json:"flavor,omitempty"`
 
 	// merge content
-	MergeContent interface{} `json:"mergeContent,omitempty"`
+	MergeContent map[string]interface{} `json:"mergeContent,omitempty"`
 
 	// resource name
-	ResourceName string `json:"resourceName,omitempty"`
+	// Required: true
+	ResourceName *string `json:"resourceName"`
 
 	// resource type
-	ResourceType string `json:"resourceType,omitempty"`
+	// Required: true
+	ResourceType *string `json:"resourceType"`
 }
 
 // Validate validates this resource file request
 func (m *ResourceFileRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResourceFileRequest) validateResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceName", "body", m.ResourceName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ResourceFileRequest) validateResourceType(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceType", "body", m.ResourceType); err != nil {
+		return err
+	}
+
 	return nil
 }
 

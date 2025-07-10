@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodSchedulingGate PodSchedulingGate
+// PodSchedulingGate pod scheduling gate
 //
 // swagger:model PodSchedulingGate
 type PodSchedulingGate struct {

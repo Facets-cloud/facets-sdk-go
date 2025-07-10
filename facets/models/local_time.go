@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// LocalTime LocalTime
+// LocalTime local time
 //
 // swagger:model LocalTime
 type LocalTime struct {

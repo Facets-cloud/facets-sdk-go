@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProvidedCloudResource ProvidedCloudResource
+// ProvidedCloudResource provided cloud resource
 //
 // swagger:model ProvidedCloudResource
 type ProvidedCloudResource struct {

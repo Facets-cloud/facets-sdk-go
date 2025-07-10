@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ReplicaStatus ReplicaStatus
+// ReplicaStatus replica status
 //
 // swagger:model ReplicaStatus
 type ReplicaStatus struct {

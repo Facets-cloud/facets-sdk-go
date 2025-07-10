@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Probe Probe
+// Probe probe
 //
 // swagger:model Probe
 type Probe struct {

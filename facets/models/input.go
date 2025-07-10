@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Input Input
+// Input Input parameters for this module
 //
 // swagger:model Input
 type Input struct {

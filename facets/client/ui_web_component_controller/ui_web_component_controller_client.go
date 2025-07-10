@@ -54,62 +54,38 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateComponentUsingPOST(params *CreateComponentUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentUsingPOSTOK, *CreateComponentUsingPOSTCreated, error)
+	CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentOK, error)
 
-	DeleteComponentUsingDELETE(params *DeleteComponentUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentUsingDELETEOK, *DeleteComponentUsingDELETENoContent, error)
+	DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error)
 
-	GetAllComponentsUsingGET(params *GetAllComponentsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllComponentsUsingGETOK, error)
+	GetAllComponents(params *GetAllComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllComponentsOK, error)
 
-	GetComponentUsingGET(params *GetComponentUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentUsingGETOK, error)
+	GetComponent(params *GetComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentOK, error)
 
-	UpdateComponentUsingPUT(params *UpdateComponentUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentUsingPUTOK, *UpdateComponentUsingPUTCreated, error)
+	UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateComponentUsingPOST creates component
+CreateComponent create component API
 */
-func (a *Client) CreateComponentUsingPOST(params *CreateComponentUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentUsingPOSTOK, *CreateComponentUsingPOSTCreated, error) {
+func (a *Client) CreateComponent(params *CreateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateComponentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateComponentUsingPOSTParams()
+		params = NewCreateComponentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createComponentUsingPOST",
+		ID:                 "createComponent",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/web-components",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateComponentUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateComponentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -120,36 +96,35 @@ func (a *Client) CreateComponentUsingPOST(params *CreateComponentUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateComponentUsingPOSTOK:
-		return value, nil, nil
-	case *CreateComponentUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateComponentOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_web_component_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteComponentUsingDELETE deletes component
+DeleteComponent delete component API
 */
-func (a *Client) DeleteComponentUsingDELETE(params *DeleteComponentUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentUsingDELETEOK, *DeleteComponentUsingDELETENoContent, error) {
+func (a *Client) DeleteComponent(params *DeleteComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteComponentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteComponentUsingDELETEParams()
+		params = NewDeleteComponentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteComponentUsingDELETE",
+		ID:                 "deleteComponent",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/web-components/{webComponentId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteComponentUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteComponentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -160,36 +135,35 @@ func (a *Client) DeleteComponentUsingDELETE(params *DeleteComponentUsingDELETEPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteComponentUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteComponentUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteComponentOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_web_component_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllComponentsUsingGET gets all components
+GetAllComponents get all components API
 */
-func (a *Client) GetAllComponentsUsingGET(params *GetAllComponentsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllComponentsUsingGETOK, error) {
+func (a *Client) GetAllComponents(params *GetAllComponentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllComponentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllComponentsUsingGETParams()
+		params = NewGetAllComponentsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllComponentsUsingGET",
+		ID:                 "getAllComponents",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/web-components",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllComponentsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllComponentsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -202,33 +176,33 @@ func (a *Client) GetAllComponentsUsingGET(params *GetAllComponentsUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllComponentsUsingGETOK)
+	success, ok := result.(*GetAllComponentsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllComponentsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllComponents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetComponentUsingGET gets component
+GetComponent get component API
 */
-func (a *Client) GetComponentUsingGET(params *GetComponentUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentUsingGETOK, error) {
+func (a *Client) GetComponent(params *GetComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetComponentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetComponentUsingGETParams()
+		params = NewGetComponentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getComponentUsingGET",
+		ID:                 "getComponent",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/web-components/{webComponentId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetComponentUsingGETReader{formats: a.formats},
+		Reader:             &GetComponentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -241,33 +215,33 @@ func (a *Client) GetComponentUsingGET(params *GetComponentUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetComponentUsingGETOK)
+	success, ok := result.(*GetComponentOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getComponentUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateComponentUsingPUT updates component
+UpdateComponent update component API
 */
-func (a *Client) UpdateComponentUsingPUT(params *UpdateComponentUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentUsingPUTOK, *UpdateComponentUsingPUTCreated, error) {
+func (a *Client) UpdateComponent(params *UpdateComponentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateComponentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateComponentUsingPUTParams()
+		params = NewUpdateComponentParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateComponentUsingPUT",
+		ID:                 "updateComponent",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/web-components/{webComponentId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateComponentUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateComponentReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -278,16 +252,15 @@ func (a *Client) UpdateComponentUsingPUT(params *UpdateComponentUsingPUTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateComponentUsingPUTOK:
-		return value, nil, nil
-	case *UpdateComponentUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateComponentOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_web_component_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateComponent: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

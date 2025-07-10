@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ReleaseButtonStatus ReleaseButtonStatus
+// ReleaseButtonStatus release button status
 //
 // swagger:model ReleaseButtonStatus
 type ReleaseButtonStatus struct {

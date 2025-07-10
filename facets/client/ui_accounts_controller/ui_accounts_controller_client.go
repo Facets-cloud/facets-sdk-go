@@ -54,126 +54,102 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateAwsAccountUsingPOST(params *CreateAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsAccountUsingPOSTOK, *CreateAwsAccountUsingPOSTCreated, error)
+	CreateAwsAccount(params *CreateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsAccountOK, error)
 
-	CreateAzureAccountUsingPOST(params *CreateAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureAccountUsingPOSTOK, *CreateAzureAccountUsingPOSTCreated, error)
+	CreateAzureAccount(params *CreateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureAccountOK, error)
 
-	CreateBitBucketAccountUsingPOST(params *CreateBitBucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBitBucketAccountUsingPOSTOK, *CreateBitBucketAccountUsingPOSTCreated, error)
+	CreateBitBucketAccount(params *CreateBitBucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBitBucketAccountOK, error)
 
-	CreateCoderAccountUsingPOST(params *CreateCoderAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCoderAccountUsingPOSTOK, *CreateCoderAccountUsingPOSTCreated, error)
+	CreateCoderAccount(params *CreateCoderAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCoderAccountOK, error)
 
-	CreateGcpAccountUsingPOST(params *CreateGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpAccountUsingPOSTOK, *CreateGcpAccountUsingPOSTCreated, error)
+	CreateGcpAccount(params *CreateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpAccountOK, error)
 
-	CreateGitHubAccountUsingPOST(params *CreateGitHubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitHubAccountUsingPOSTOK, *CreateGitHubAccountUsingPOSTCreated, error)
+	CreateGitHubAccount(params *CreateGitHubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitHubAccountOK, error)
 
-	CreateGitLabAccountUsingPOST(params *CreateGitLabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitLabAccountUsingPOSTOK, *CreateGitLabAccountUsingPOSTCreated, error)
+	CreateGitLabAccount(params *CreateGitLabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitLabAccountOK, error)
 
-	CreateKubernetesAccountUsingPOST(params *CreateKubernetesAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesAccountUsingPOSTOK, *CreateKubernetesAccountUsingPOSTCreated, error)
+	CreateKubernetesAccount(params *CreateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesAccountOK, error)
 
-	DeleteAccountUsingDELETE(params *DeleteAccountUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAccountUsingDELETEOK, *DeleteAccountUsingDELETENoContent, error)
+	DeleteAccount(params *DeleteAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAccountOK, error)
 
-	GetAccountByNameUsingGET(params *GetAccountByNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountByNameUsingGETOK, error)
+	GetAccount(params *GetAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountOK, error)
 
-	GetAccountUsingGET(params *GetAccountUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountUsingGETOK, error)
+	GetAccountByName(params *GetAccountByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountByNameOK, error)
 
-	GetAccountsByTypeUsingGET(params *GetAccountsByTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountsByTypeUsingGETOK, error)
+	GetAccountsByType(params *GetAccountsByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountsByTypeOK, error)
 
-	GetAllAccountsUsingGET(params *GetAllAccountsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllAccountsUsingGETOK, error)
+	GetAllAccounts(params *GetAllAccountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllAccountsOK, error)
 
-	GetAllVCSTokenDetailsUsingGET(params *GetAllVCSTokenDetailsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSTokenDetailsUsingGETOK, error)
+	GetAllVCSTokenDetails(params *GetAllVCSTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSTokenDetailsOK, error)
 
-	GetBitbucketProjectsForWorkspaceUsingGET(params *GetBitbucketProjectsForWorkspaceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBitbucketProjectsForWorkspaceUsingGETOK, error)
+	GetBitbucketProjectsForWorkspace(params *GetBitbucketProjectsForWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBitbucketProjectsForWorkspaceOK, error)
 
-	GetVCSOrganisationsUsingPOST(params *GetVCSOrganisationsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSOrganisationsUsingPOSTOK, *GetVCSOrganisationsUsingPOSTCreated, error)
+	GetVCSOrganisations(params *GetVCSOrganisationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSOrganisationsOK, error)
 
-	GetVCSTokenDetailsByStackNameUsingGET(params *GetVCSTokenDetailsByStackNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSTokenDetailsByStackNameUsingGETOK, error)
+	GetVCSTokenDetailsByStackName(params *GetVCSTokenDetailsByStackNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSTokenDetailsByStackNameOK, error)
 
-	GetVcsOrganizationsByAccountIDUsingGET(params *GetVcsOrganizationsByAccountIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVcsOrganizationsByAccountIDUsingGETOK, error)
+	GetVcsOrganizationsByAccountID(params *GetVcsOrganizationsByAccountIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVcsOrganizationsByAccountIDOK, error)
 
-	RefreshAllVCSTokenDetailsUsingPOST(params *RefreshAllVCSTokenDetailsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshAllVCSTokenDetailsUsingPOSTOK, *RefreshAllVCSTokenDetailsUsingPOSTCreated, error)
+	RefreshAllVCSTokenDetails(params *RefreshAllVCSTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshAllVCSTokenDetailsOK, error)
 
-	RequestCloudAccountLinkingUsingPOST(params *RequestCloudAccountLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestCloudAccountLinkingUsingPOSTOK, *RequestCloudAccountLinkingUsingPOSTCreated, error)
+	RequestCloudAccountLinking(params *RequestCloudAccountLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestCloudAccountLinkingOK, error)
 
-	RequestVCSLinkingUsingPOST(params *RequestVCSLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestVCSLinkingUsingPOSTOK, *RequestVCSLinkingUsingPOSTCreated, error)
+	RequestVCSLinking(params *RequestVCSLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestVCSLinkingOK, error)
 
-	UpdateAwsAccountUsingPUT(params *UpdateAwsAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsAccountUsingPUTOK, *UpdateAwsAccountUsingPUTCreated, error)
+	UpdateAwsAccount(params *UpdateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsAccountOK, error)
 
-	UpdateAzureAccountUsingPUT(params *UpdateAzureAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureAccountUsingPUTOK, *UpdateAzureAccountUsingPUTCreated, error)
+	UpdateAzureAccount(params *UpdateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureAccountOK, error)
 
-	UpdateBitBucketAccountUsingPUT(params *UpdateBitBucketAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBitBucketAccountUsingPUTOK, *UpdateBitBucketAccountUsingPUTCreated, error)
+	UpdateBitBucketAccount(params *UpdateBitBucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBitBucketAccountOK, error)
 
-	UpdateCoderAccountUsingPUT(params *UpdateCoderAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCoderAccountUsingPUTOK, *UpdateCoderAccountUsingPUTCreated, error)
+	UpdateCoderAccount(params *UpdateCoderAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCoderAccountOK, error)
 
-	UpdateGcpAccountUsingPUT(params *UpdateGcpAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpAccountUsingPUTOK, *UpdateGcpAccountUsingPUTCreated, error)
+	UpdateGcpAccount(params *UpdateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpAccountOK, error)
 
-	UpdateGitHubAccountUsingPUT(params *UpdateGitHubAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitHubAccountUsingPUTOK, *UpdateGitHubAccountUsingPUTCreated, error)
+	UpdateGitHubAccount(params *UpdateGitHubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitHubAccountOK, error)
 
-	UpdateGitLabAccountUsingPUT(params *UpdateGitLabAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitLabAccountUsingPUTOK, *UpdateGitLabAccountUsingPUTCreated, error)
+	UpdateGitLabAccount(params *UpdateGitLabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitLabAccountOK, error)
 
-	UpdateKubernetesAccountUsingPUT(params *UpdateKubernetesAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesAccountUsingPUTOK, *UpdateKubernetesAccountUsingPUTCreated, error)
+	UpdateKubernetesAccount(params *UpdateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesAccountOK, error)
 
-	UpdateVCSAccountUsingPATCH(params *UpdateVCSAccountUsingPATCHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSAccountUsingPATCHOK, *UpdateVCSAccountUsingPATCHNoContent, error)
+	UpdateVCSAccount(params *UpdateVCSAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSAccountOK, error)
 
-	ValidateAwsAccountUsingPOST(params *ValidateAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAwsAccountUsingPOSTOK, *ValidateAwsAccountUsingPOSTCreated, error)
+	ValidateAwsAccount(params *ValidateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAwsAccountOK, error)
 
-	ValidateAzureAccountUsingPOST(params *ValidateAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAzureAccountUsingPOSTOK, *ValidateAzureAccountUsingPOSTCreated, error)
+	ValidateAzureAccount(params *ValidateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAzureAccountOK, error)
 
-	ValidateBitbucketAccountUsingPOST(params *ValidateBitbucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateBitbucketAccountUsingPOSTOK, *ValidateBitbucketAccountUsingPOSTCreated, error)
+	ValidateBitbucketAccount(params *ValidateBitbucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateBitbucketAccountOK, error)
 
-	ValidateGcpAccountUsingPOST(params *ValidateGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGcpAccountUsingPOSTOK, *ValidateGcpAccountUsingPOSTCreated, error)
+	ValidateGcpAccount(params *ValidateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGcpAccountOK, error)
 
-	ValidateGithubAccountUsingPOST(params *ValidateGithubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGithubAccountUsingPOSTOK, *ValidateGithubAccountUsingPOSTCreated, error)
+	ValidateGithubAccount(params *ValidateGithubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGithubAccountOK, error)
 
-	ValidateGitlabAccountUsingPOST(params *ValidateGitlabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGitlabAccountUsingPOSTOK, *ValidateGitlabAccountUsingPOSTCreated, error)
+	ValidateGitlabAccount(params *ValidateGitlabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGitlabAccountOK, error)
 
-	ValidateKubernetesAccountUsingPOST(params *ValidateKubernetesAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateKubernetesAccountUsingPOSTOK, *ValidateKubernetesAccountUsingPOSTCreated, error)
+	ValidateKubernetesAccount(params *ValidateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateKubernetesAccountOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateAwsAccountUsingPOST creates aws account
+CreateAwsAccount create aws account API
 */
-func (a *Client) CreateAwsAccountUsingPOST(params *CreateAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsAccountUsingPOSTOK, *CreateAwsAccountUsingPOSTCreated, error) {
+func (a *Client) CreateAwsAccount(params *CreateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAwsAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateAwsAccountUsingPOSTParams()
+		params = NewCreateAwsAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createAwsAccountUsingPOST",
+		ID:                 "createAwsAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/aws/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateAwsAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateAwsAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -184,36 +160,35 @@ func (a *Client) CreateAwsAccountUsingPOST(params *CreateAwsAccountUsingPOSTPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateAwsAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateAwsAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateAwsAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createAwsAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateAzureAccountUsingPOST creates azure account
+CreateAzureAccount create azure account API
 */
-func (a *Client) CreateAzureAccountUsingPOST(params *CreateAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureAccountUsingPOSTOK, *CreateAzureAccountUsingPOSTCreated, error) {
+func (a *Client) CreateAzureAccount(params *CreateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateAzureAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateAzureAccountUsingPOSTParams()
+		params = NewCreateAzureAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createAzureAccountUsingPOST",
+		ID:                 "createAzureAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/azure/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateAzureAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateAzureAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -224,36 +199,35 @@ func (a *Client) CreateAzureAccountUsingPOST(params *CreateAzureAccountUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateAzureAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateAzureAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateAzureAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createAzureAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateBitBucketAccountUsingPOST creates bit bucket account
+CreateBitBucketAccount create bit bucket account API
 */
-func (a *Client) CreateBitBucketAccountUsingPOST(params *CreateBitBucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBitBucketAccountUsingPOSTOK, *CreateBitBucketAccountUsingPOSTCreated, error) {
+func (a *Client) CreateBitBucketAccount(params *CreateBitBucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBitBucketAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateBitBucketAccountUsingPOSTParams()
+		params = NewCreateBitBucketAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createBitBucketAccountUsingPOST",
+		ID:                 "createBitBucketAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/bitbucket/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateBitBucketAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateBitBucketAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,36 +238,35 @@ func (a *Client) CreateBitBucketAccountUsingPOST(params *CreateBitBucketAccountU
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateBitBucketAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateBitBucketAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateBitBucketAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createBitBucketAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateCoderAccountUsingPOST creates coder account
+CreateCoderAccount create coder account API
 */
-func (a *Client) CreateCoderAccountUsingPOST(params *CreateCoderAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCoderAccountUsingPOSTOK, *CreateCoderAccountUsingPOSTCreated, error) {
+func (a *Client) CreateCoderAccount(params *CreateCoderAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCoderAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateCoderAccountUsingPOSTParams()
+		params = NewCreateCoderAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createCoderAccountUsingPOST",
+		ID:                 "createCoderAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/coder/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateCoderAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateCoderAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -304,36 +277,35 @@ func (a *Client) CreateCoderAccountUsingPOST(params *CreateCoderAccountUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateCoderAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateCoderAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateCoderAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createCoderAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateGcpAccountUsingPOST creates gcp account
+CreateGcpAccount create gcp account API
 */
-func (a *Client) CreateGcpAccountUsingPOST(params *CreateGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpAccountUsingPOSTOK, *CreateGcpAccountUsingPOSTCreated, error) {
+func (a *Client) CreateGcpAccount(params *CreateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGcpAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGcpAccountUsingPOSTParams()
+		params = NewCreateGcpAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createGcpAccountUsingPOST",
+		ID:                 "createGcpAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/gcp/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGcpAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateGcpAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -344,36 +316,35 @@ func (a *Client) CreateGcpAccountUsingPOST(params *CreateGcpAccountUsingPOSTPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateGcpAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateGcpAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateGcpAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createGcpAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateGitHubAccountUsingPOST creates git hub account
+CreateGitHubAccount create git hub account API
 */
-func (a *Client) CreateGitHubAccountUsingPOST(params *CreateGitHubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitHubAccountUsingPOSTOK, *CreateGitHubAccountUsingPOSTCreated, error) {
+func (a *Client) CreateGitHubAccount(params *CreateGitHubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitHubAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGitHubAccountUsingPOSTParams()
+		params = NewCreateGitHubAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createGitHubAccountUsingPOST",
+		ID:                 "createGitHubAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/github/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGitHubAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateGitHubAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -384,36 +355,35 @@ func (a *Client) CreateGitHubAccountUsingPOST(params *CreateGitHubAccountUsingPO
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateGitHubAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateGitHubAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateGitHubAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createGitHubAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateGitLabAccountUsingPOST creates git lab account
+CreateGitLabAccount create git lab account API
 */
-func (a *Client) CreateGitLabAccountUsingPOST(params *CreateGitLabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitLabAccountUsingPOSTOK, *CreateGitLabAccountUsingPOSTCreated, error) {
+func (a *Client) CreateGitLabAccount(params *CreateGitLabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateGitLabAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateGitLabAccountUsingPOSTParams()
+		params = NewCreateGitLabAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createGitLabAccountUsingPOST",
+		ID:                 "createGitLabAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/gitlab/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateGitLabAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateGitLabAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -424,36 +394,35 @@ func (a *Client) CreateGitLabAccountUsingPOST(params *CreateGitLabAccountUsingPO
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateGitLabAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateGitLabAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateGitLabAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createGitLabAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateKubernetesAccountUsingPOST creates kubernetes account
+CreateKubernetesAccount create kubernetes account API
 */
-func (a *Client) CreateKubernetesAccountUsingPOST(params *CreateKubernetesAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesAccountUsingPOSTOK, *CreateKubernetesAccountUsingPOSTCreated, error) {
+func (a *Client) CreateKubernetesAccount(params *CreateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateKubernetesAccountUsingPOSTParams()
+		params = NewCreateKubernetesAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createKubernetesAccountUsingPOST",
+		ID:                 "createKubernetesAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/kubernetes/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateKubernetesAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateKubernetesAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -464,76 +433,35 @@ func (a *Client) CreateKubernetesAccountUsingPOST(params *CreateKubernetesAccoun
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateKubernetesAccountUsingPOSTOK:
-		return value, nil, nil
-	case *CreateKubernetesAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateKubernetesAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createKubernetesAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteAccountUsingDELETE deletes account
+DeleteAccount delete account API
 */
-func (a *Client) DeleteAccountUsingDELETE(params *DeleteAccountUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAccountUsingDELETEOK, *DeleteAccountUsingDELETENoContent, error) {
+func (a *Client) DeleteAccount(params *DeleteAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteAccountUsingDELETEParams()
+		params = NewDeleteAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteAccountUsingDELETE",
+		ID:                 "deleteAccount",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/accounts/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteAccountUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteAccountUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteAccountUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAccountByNameUsingGET gets account by name
-*/
-func (a *Client) GetAccountByNameUsingGET(params *GetAccountByNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountByNameUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAccountByNameUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAccountByNameUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/accounts/name/{name}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAccountByNameUsingGETReader{formats: a.formats},
+		Reader:             &DeleteAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -546,33 +474,33 @@ func (a *Client) GetAccountByNameUsingGET(params *GetAccountByNameUsingGETParams
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAccountByNameUsingGETOK)
+	success, ok := result.(*DeleteAccountOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAccountByNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAccountUsingGET gets account
+GetAccount get account API
 */
-func (a *Client) GetAccountUsingGET(params *GetAccountUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountUsingGETOK, error) {
+func (a *Client) GetAccount(params *GetAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAccountUsingGETParams()
+		params = NewGetAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAccountUsingGET",
+		ID:                 "getAccount",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAccountUsingGETReader{formats: a.formats},
+		Reader:             &GetAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -585,33 +513,72 @@ func (a *Client) GetAccountUsingGET(params *GetAccountUsingGETParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAccountUsingGETOK)
+	success, ok := result.(*GetAccountOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAccountUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAccountsByTypeUsingGET gets accounts by type
+GetAccountByName get account by name API
 */
-func (a *Client) GetAccountsByTypeUsingGET(params *GetAccountsByTypeUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountsByTypeUsingGETOK, error) {
+func (a *Client) GetAccountByName(params *GetAccountByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAccountsByTypeUsingGETParams()
+		params = NewGetAccountByNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAccountsByTypeUsingGET",
+		ID:                 "getAccountByName",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/accounts/name/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAccountByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAccountByNameOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAccountByName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAccountsByType get accounts by type API
+*/
+func (a *Client) GetAccountsByType(params *GetAccountsByTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAccountsByTypeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAccountsByTypeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAccountsByType",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/type/{type}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAccountsByTypeUsingGETReader{formats: a.formats},
+		Reader:             &GetAccountsByTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -624,33 +591,33 @@ func (a *Client) GetAccountsByTypeUsingGET(params *GetAccountsByTypeUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAccountsByTypeUsingGETOK)
+	success, ok := result.(*GetAccountsByTypeOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAccountsByTypeUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAccountsByType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllAccountsUsingGET gets all accounts
+GetAllAccounts get all accounts API
 */
-func (a *Client) GetAllAccountsUsingGET(params *GetAllAccountsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllAccountsUsingGETOK, error) {
+func (a *Client) GetAllAccounts(params *GetAllAccountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllAccountsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllAccountsUsingGETParams()
+		params = NewGetAllAccountsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllAccountsUsingGET",
+		ID:                 "getAllAccounts",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllAccountsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllAccountsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -663,33 +630,33 @@ func (a *Client) GetAllAccountsUsingGET(params *GetAllAccountsUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllAccountsUsingGETOK)
+	success, ok := result.(*GetAllAccountsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllAccountsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllAccounts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllVCSTokenDetailsUsingGET gets all v c s token details
+GetAllVCSTokenDetails get all v c s token details API
 */
-func (a *Client) GetAllVCSTokenDetailsUsingGET(params *GetAllVCSTokenDetailsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSTokenDetailsUsingGETOK, error) {
+func (a *Client) GetAllVCSTokenDetails(params *GetAllVCSTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVCSTokenDetailsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllVCSTokenDetailsUsingGETParams()
+		params = NewGetAllVCSTokenDetailsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllVCSTokenDetailsUsingGET",
+		ID:                 "getAllVCSTokenDetails",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/token-details",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllVCSTokenDetailsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllVCSTokenDetailsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -702,33 +669,33 @@ func (a *Client) GetAllVCSTokenDetailsUsingGET(params *GetAllVCSTokenDetailsUsin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllVCSTokenDetailsUsingGETOK)
+	success, ok := result.(*GetAllVCSTokenDetailsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllVCSTokenDetailsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllVCSTokenDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetBitbucketProjectsForWorkspaceUsingGET gets bitbucket projects for workspace
+GetBitbucketProjectsForWorkspace get bitbucket projects for workspace API
 */
-func (a *Client) GetBitbucketProjectsForWorkspaceUsingGET(params *GetBitbucketProjectsForWorkspaceUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBitbucketProjectsForWorkspaceUsingGETOK, error) {
+func (a *Client) GetBitbucketProjectsForWorkspace(params *GetBitbucketProjectsForWorkspaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBitbucketProjectsForWorkspaceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetBitbucketProjectsForWorkspaceUsingGETParams()
+		params = NewGetBitbucketProjectsForWorkspaceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getBitbucketProjectsForWorkspaceUsingGET",
+		ID:                 "getBitbucketProjectsForWorkspace",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/{accountId}/workspaces/{workspace}/projects",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetBitbucketProjectsForWorkspaceUsingGETReader{formats: a.formats},
+		Reader:             &GetBitbucketProjectsForWorkspaceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -741,33 +708,33 @@ func (a *Client) GetBitbucketProjectsForWorkspaceUsingGET(params *GetBitbucketPr
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetBitbucketProjectsForWorkspaceUsingGETOK)
+	success, ok := result.(*GetBitbucketProjectsForWorkspaceOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getBitbucketProjectsForWorkspaceUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getBitbucketProjectsForWorkspace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetVCSOrganisationsUsingPOST gets v c s organisations
+GetVCSOrganisations get v c s organisations API
 */
-func (a *Client) GetVCSOrganisationsUsingPOST(params *GetVCSOrganisationsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSOrganisationsUsingPOSTOK, *GetVCSOrganisationsUsingPOSTCreated, error) {
+func (a *Client) GetVCSOrganisations(params *GetVCSOrganisationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSOrganisationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVCSOrganisationsUsingPOSTParams()
+		params = NewGetVCSOrganisationsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVCSOrganisationsUsingPOST",
+		ID:                 "getVCSOrganisations",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/get-organisations",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVCSOrganisationsUsingPOSTReader{formats: a.formats},
+		Reader:             &GetVCSOrganisationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -778,36 +745,35 @@ func (a *Client) GetVCSOrganisationsUsingPOST(params *GetVCSOrganisationsUsingPO
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *GetVCSOrganisationsUsingPOSTOK:
-		return value, nil, nil
-	case *GetVCSOrganisationsUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetVCSOrganisationsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVCSOrganisations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetVCSTokenDetailsByStackNameUsingGET gets v c s token details by stack name
+GetVCSTokenDetailsByStackName get v c s token details by stack name API
 */
-func (a *Client) GetVCSTokenDetailsByStackNameUsingGET(params *GetVCSTokenDetailsByStackNameUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSTokenDetailsByStackNameUsingGETOK, error) {
+func (a *Client) GetVCSTokenDetailsByStackName(params *GetVCSTokenDetailsByStackNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVCSTokenDetailsByStackNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVCSTokenDetailsByStackNameUsingGETParams()
+		params = NewGetVCSTokenDetailsByStackNameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVCSTokenDetailsByStackNameUsingGET",
+		ID:                 "getVCSTokenDetailsByStackName",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/stack/{stackName}/token-details",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVCSTokenDetailsByStackNameUsingGETReader{formats: a.formats},
+		Reader:             &GetVCSTokenDetailsByStackNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -820,33 +786,33 @@ func (a *Client) GetVCSTokenDetailsByStackNameUsingGET(params *GetVCSTokenDetail
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetVCSTokenDetailsByStackNameUsingGETOK)
+	success, ok := result.(*GetVCSTokenDetailsByStackNameOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getVCSTokenDetailsByStackNameUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVCSTokenDetailsByStackName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetVcsOrganizationsByAccountIDUsingGET gets vcs organizations by account Id
+GetVcsOrganizationsByAccountID get vcs organizations by account Id API
 */
-func (a *Client) GetVcsOrganizationsByAccountIDUsingGET(params *GetVcsOrganizationsByAccountIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVcsOrganizationsByAccountIDUsingGETOK, error) {
+func (a *Client) GetVcsOrganizationsByAccountID(params *GetVcsOrganizationsByAccountIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVcsOrganizationsByAccountIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetVcsOrganizationsByAccountIDUsingGETParams()
+		params = NewGetVcsOrganizationsByAccountIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getVcsOrganizationsByAccountIdUsingGET",
+		ID:                 "getVcsOrganizationsByAccountId",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/accounts/vcs-orgs/{accountId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetVcsOrganizationsByAccountIDUsingGETReader{formats: a.formats},
+		Reader:             &GetVcsOrganizationsByAccountIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -859,33 +825,33 @@ func (a *Client) GetVcsOrganizationsByAccountIDUsingGET(params *GetVcsOrganizati
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetVcsOrganizationsByAccountIDUsingGETOK)
+	success, ok := result.(*GetVcsOrganizationsByAccountIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getVcsOrganizationsByAccountIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getVcsOrganizationsByAccountId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RefreshAllVCSTokenDetailsUsingPOST refreshes all v c s token details
+RefreshAllVCSTokenDetails refresh all v c s token details API
 */
-func (a *Client) RefreshAllVCSTokenDetailsUsingPOST(params *RefreshAllVCSTokenDetailsUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshAllVCSTokenDetailsUsingPOSTOK, *RefreshAllVCSTokenDetailsUsingPOSTCreated, error) {
+func (a *Client) RefreshAllVCSTokenDetails(params *RefreshAllVCSTokenDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RefreshAllVCSTokenDetailsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRefreshAllVCSTokenDetailsUsingPOSTParams()
+		params = NewRefreshAllVCSTokenDetailsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "refreshAllVCSTokenDetailsUsingPOST",
+		ID:                 "refreshAllVCSTokenDetails",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/token-details/refresh",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RefreshAllVCSTokenDetailsUsingPOSTReader{formats: a.formats},
+		Reader:             &RefreshAllVCSTokenDetailsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -896,36 +862,35 @@ func (a *Client) RefreshAllVCSTokenDetailsUsingPOST(params *RefreshAllVCSTokenDe
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RefreshAllVCSTokenDetailsUsingPOSTOK:
-		return value, nil, nil
-	case *RefreshAllVCSTokenDetailsUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RefreshAllVCSTokenDetailsOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for refreshAllVCSTokenDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RequestCloudAccountLinkingUsingPOST requests cloud account linking
+RequestCloudAccountLinking request cloud account linking API
 */
-func (a *Client) RequestCloudAccountLinkingUsingPOST(params *RequestCloudAccountLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestCloudAccountLinkingUsingPOSTOK, *RequestCloudAccountLinkingUsingPOSTCreated, error) {
+func (a *Client) RequestCloudAccountLinking(params *RequestCloudAccountLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestCloudAccountLinkingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRequestCloudAccountLinkingUsingPOSTParams()
+		params = NewRequestCloudAccountLinkingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "requestCloudAccountLinkingUsingPOST",
+		ID:                 "requestCloudAccountLinking",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/link-cloud",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RequestCloudAccountLinkingUsingPOSTReader{formats: a.formats},
+		Reader:             &RequestCloudAccountLinkingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -936,36 +901,35 @@ func (a *Client) RequestCloudAccountLinkingUsingPOST(params *RequestCloudAccount
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RequestCloudAccountLinkingUsingPOSTOK:
-		return value, nil, nil
-	case *RequestCloudAccountLinkingUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RequestCloudAccountLinkingOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for requestCloudAccountLinking: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RequestVCSLinkingUsingPOST requests v c s linking
+RequestVCSLinking request v c s linking API
 */
-func (a *Client) RequestVCSLinkingUsingPOST(params *RequestVCSLinkingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestVCSLinkingUsingPOSTOK, *RequestVCSLinkingUsingPOSTCreated, error) {
+func (a *Client) RequestVCSLinking(params *RequestVCSLinkingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RequestVCSLinkingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRequestVCSLinkingUsingPOSTParams()
+		params = NewRequestVCSLinkingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "requestVCSLinkingUsingPOST",
+		ID:                 "requestVCSLinking",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/link-vcs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RequestVCSLinkingUsingPOSTReader{formats: a.formats},
+		Reader:             &RequestVCSLinkingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -976,36 +940,35 @@ func (a *Client) RequestVCSLinkingUsingPOST(params *RequestVCSLinkingUsingPOSTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RequestVCSLinkingUsingPOSTOK:
-		return value, nil, nil
-	case *RequestVCSLinkingUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*RequestVCSLinkingOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for requestVCSLinking: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateAwsAccountUsingPUT updates aws account
+UpdateAwsAccount update aws account API
 */
-func (a *Client) UpdateAwsAccountUsingPUT(params *UpdateAwsAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsAccountUsingPUTOK, *UpdateAwsAccountUsingPUTCreated, error) {
+func (a *Client) UpdateAwsAccount(params *UpdateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAwsAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateAwsAccountUsingPUTParams()
+		params = NewUpdateAwsAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateAwsAccountUsingPUT",
+		ID:                 "updateAwsAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/aws/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateAwsAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateAwsAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1016,36 +979,35 @@ func (a *Client) UpdateAwsAccountUsingPUT(params *UpdateAwsAccountUsingPUTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateAwsAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateAwsAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateAwsAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateAwsAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateAzureAccountUsingPUT updates azure account
+UpdateAzureAccount update azure account API
 */
-func (a *Client) UpdateAzureAccountUsingPUT(params *UpdateAzureAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureAccountUsingPUTOK, *UpdateAzureAccountUsingPUTCreated, error) {
+func (a *Client) UpdateAzureAccount(params *UpdateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateAzureAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateAzureAccountUsingPUTParams()
+		params = NewUpdateAzureAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateAzureAccountUsingPUT",
+		ID:                 "updateAzureAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/azure/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateAzureAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateAzureAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1056,36 +1018,35 @@ func (a *Client) UpdateAzureAccountUsingPUT(params *UpdateAzureAccountUsingPUTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateAzureAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateAzureAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateAzureAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateAzureAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateBitBucketAccountUsingPUT updates bit bucket account
+UpdateBitBucketAccount update bit bucket account API
 */
-func (a *Client) UpdateBitBucketAccountUsingPUT(params *UpdateBitBucketAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBitBucketAccountUsingPUTOK, *UpdateBitBucketAccountUsingPUTCreated, error) {
+func (a *Client) UpdateBitBucketAccount(params *UpdateBitBucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateBitBucketAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateBitBucketAccountUsingPUTParams()
+		params = NewUpdateBitBucketAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateBitBucketAccountUsingPUT",
+		ID:                 "updateBitBucketAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/bitbucket/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateBitBucketAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateBitBucketAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1096,36 +1057,35 @@ func (a *Client) UpdateBitBucketAccountUsingPUT(params *UpdateBitBucketAccountUs
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateBitBucketAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateBitBucketAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateBitBucketAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateBitBucketAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateCoderAccountUsingPUT updates coder account
+UpdateCoderAccount update coder account API
 */
-func (a *Client) UpdateCoderAccountUsingPUT(params *UpdateCoderAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCoderAccountUsingPUTOK, *UpdateCoderAccountUsingPUTCreated, error) {
+func (a *Client) UpdateCoderAccount(params *UpdateCoderAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateCoderAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateCoderAccountUsingPUTParams()
+		params = NewUpdateCoderAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateCoderAccountUsingPUT",
+		ID:                 "updateCoderAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/coder/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateCoderAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateCoderAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1136,36 +1096,35 @@ func (a *Client) UpdateCoderAccountUsingPUT(params *UpdateCoderAccountUsingPUTPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateCoderAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateCoderAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateCoderAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateCoderAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateGcpAccountUsingPUT updates gcp account
+UpdateGcpAccount update gcp account API
 */
-func (a *Client) UpdateGcpAccountUsingPUT(params *UpdateGcpAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpAccountUsingPUTOK, *UpdateGcpAccountUsingPUTCreated, error) {
+func (a *Client) UpdateGcpAccount(params *UpdateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGcpAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGcpAccountUsingPUTParams()
+		params = NewUpdateGcpAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateGcpAccountUsingPUT",
+		ID:                 "updateGcpAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/gcp/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGcpAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateGcpAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1176,36 +1135,35 @@ func (a *Client) UpdateGcpAccountUsingPUT(params *UpdateGcpAccountUsingPUTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateGcpAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateGcpAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateGcpAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateGcpAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateGitHubAccountUsingPUT updates git hub account
+UpdateGitHubAccount update git hub account API
 */
-func (a *Client) UpdateGitHubAccountUsingPUT(params *UpdateGitHubAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitHubAccountUsingPUTOK, *UpdateGitHubAccountUsingPUTCreated, error) {
+func (a *Client) UpdateGitHubAccount(params *UpdateGitHubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitHubAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGitHubAccountUsingPUTParams()
+		params = NewUpdateGitHubAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateGitHubAccountUsingPUT",
+		ID:                 "updateGitHubAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/github/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGitHubAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateGitHubAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1216,36 +1174,35 @@ func (a *Client) UpdateGitHubAccountUsingPUT(params *UpdateGitHubAccountUsingPUT
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateGitHubAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateGitHubAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateGitHubAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateGitHubAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateGitLabAccountUsingPUT updates git lab account
+UpdateGitLabAccount update git lab account API
 */
-func (a *Client) UpdateGitLabAccountUsingPUT(params *UpdateGitLabAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitLabAccountUsingPUTOK, *UpdateGitLabAccountUsingPUTCreated, error) {
+func (a *Client) UpdateGitLabAccount(params *UpdateGitLabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateGitLabAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateGitLabAccountUsingPUTParams()
+		params = NewUpdateGitLabAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateGitLabAccountUsingPUT",
+		ID:                 "updateGitLabAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/gitlab/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateGitLabAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateGitLabAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1256,36 +1213,35 @@ func (a *Client) UpdateGitLabAccountUsingPUT(params *UpdateGitLabAccountUsingPUT
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateGitLabAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateGitLabAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateGitLabAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateGitLabAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateKubernetesAccountUsingPUT updates kubernetes account
+UpdateKubernetesAccount update kubernetes account API
 */
-func (a *Client) UpdateKubernetesAccountUsingPUT(params *UpdateKubernetesAccountUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesAccountUsingPUTOK, *UpdateKubernetesAccountUsingPUTCreated, error) {
+func (a *Client) UpdateKubernetesAccount(params *UpdateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateKubernetesAccountUsingPUTParams()
+		params = NewUpdateKubernetesAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateKubernetesAccountUsingPUT",
+		ID:                 "updateKubernetesAccount",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/accounts/kubernetes/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateKubernetesAccountUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateKubernetesAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1296,36 +1252,35 @@ func (a *Client) UpdateKubernetesAccountUsingPUT(params *UpdateKubernetesAccount
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateKubernetesAccountUsingPUTOK:
-		return value, nil, nil
-	case *UpdateKubernetesAccountUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateKubernetesAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateVCSAccountUsingPATCH updates v c s account
+UpdateVCSAccount update v c s account API
 */
-func (a *Client) UpdateVCSAccountUsingPATCH(params *UpdateVCSAccountUsingPATCHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSAccountUsingPATCHOK, *UpdateVCSAccountUsingPATCHNoContent, error) {
+func (a *Client) UpdateVCSAccount(params *UpdateVCSAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVCSAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateVCSAccountUsingPATCHParams()
+		params = NewUpdateVCSAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateVCSAccountUsingPATCH",
+		ID:                 "updateVCSAccount",
 		Method:             "PATCH",
 		PathPattern:        "/cc-ui/v1/accounts/vcs/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateVCSAccountUsingPATCHReader{formats: a.formats},
+		Reader:             &UpdateVCSAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1336,36 +1291,35 @@ func (a *Client) UpdateVCSAccountUsingPATCH(params *UpdateVCSAccountUsingPATCHPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateVCSAccountUsingPATCHOK:
-		return value, nil, nil
-	case *UpdateVCSAccountUsingPATCHNoContent:
-		return nil, value, nil
+	success, ok := result.(*UpdateVCSAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateVCSAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateAwsAccountUsingPOST validates aws account
+ValidateAwsAccount validate aws account API
 */
-func (a *Client) ValidateAwsAccountUsingPOST(params *ValidateAwsAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAwsAccountUsingPOSTOK, *ValidateAwsAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateAwsAccount(params *ValidateAwsAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAwsAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateAwsAccountUsingPOSTParams()
+		params = NewValidateAwsAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateAwsAccountUsingPOST",
+		ID:                 "validateAwsAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/aws/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateAwsAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateAwsAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1376,36 +1330,35 @@ func (a *Client) ValidateAwsAccountUsingPOST(params *ValidateAwsAccountUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateAwsAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateAwsAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateAwsAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateAwsAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateAzureAccountUsingPOST validates azure account
+ValidateAzureAccount validate azure account API
 */
-func (a *Client) ValidateAzureAccountUsingPOST(params *ValidateAzureAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAzureAccountUsingPOSTOK, *ValidateAzureAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateAzureAccount(params *ValidateAzureAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateAzureAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateAzureAccountUsingPOSTParams()
+		params = NewValidateAzureAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateAzureAccountUsingPOST",
+		ID:                 "validateAzureAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/azure/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateAzureAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateAzureAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1416,36 +1369,35 @@ func (a *Client) ValidateAzureAccountUsingPOST(params *ValidateAzureAccountUsing
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateAzureAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateAzureAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateAzureAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateAzureAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateBitbucketAccountUsingPOST validates bitbucket account
+ValidateBitbucketAccount validate bitbucket account API
 */
-func (a *Client) ValidateBitbucketAccountUsingPOST(params *ValidateBitbucketAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateBitbucketAccountUsingPOSTOK, *ValidateBitbucketAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateBitbucketAccount(params *ValidateBitbucketAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateBitbucketAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateBitbucketAccountUsingPOSTParams()
+		params = NewValidateBitbucketAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateBitbucketAccountUsingPOST",
+		ID:                 "validateBitbucketAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/bitbucket/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateBitbucketAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateBitbucketAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1456,36 +1408,35 @@ func (a *Client) ValidateBitbucketAccountUsingPOST(params *ValidateBitbucketAcco
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateBitbucketAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateBitbucketAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateBitbucketAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateBitbucketAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateGcpAccountUsingPOST validates gcp account
+ValidateGcpAccount validate gcp account API
 */
-func (a *Client) ValidateGcpAccountUsingPOST(params *ValidateGcpAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGcpAccountUsingPOSTOK, *ValidateGcpAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateGcpAccount(params *ValidateGcpAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGcpAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateGcpAccountUsingPOSTParams()
+		params = NewValidateGcpAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateGcpAccountUsingPOST",
+		ID:                 "validateGcpAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/gcp/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateGcpAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateGcpAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1496,36 +1447,35 @@ func (a *Client) ValidateGcpAccountUsingPOST(params *ValidateGcpAccountUsingPOST
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateGcpAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateGcpAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateGcpAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateGcpAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateGithubAccountUsingPOST validates github account
+ValidateGithubAccount validate github account API
 */
-func (a *Client) ValidateGithubAccountUsingPOST(params *ValidateGithubAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGithubAccountUsingPOSTOK, *ValidateGithubAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateGithubAccount(params *ValidateGithubAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGithubAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateGithubAccountUsingPOSTParams()
+		params = NewValidateGithubAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateGithubAccountUsingPOST",
+		ID:                 "validateGithubAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/github/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateGithubAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateGithubAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1536,36 +1486,35 @@ func (a *Client) ValidateGithubAccountUsingPOST(params *ValidateGithubAccountUsi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateGithubAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateGithubAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateGithubAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateGithubAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateGitlabAccountUsingPOST validates gitlab account
+ValidateGitlabAccount validate gitlab account API
 */
-func (a *Client) ValidateGitlabAccountUsingPOST(params *ValidateGitlabAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGitlabAccountUsingPOSTOK, *ValidateGitlabAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateGitlabAccount(params *ValidateGitlabAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateGitlabAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateGitlabAccountUsingPOSTParams()
+		params = NewValidateGitlabAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateGitlabAccountUsingPOST",
+		ID:                 "validateGitlabAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/gitlab/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateGitlabAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateGitlabAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1576,36 +1525,35 @@ func (a *Client) ValidateGitlabAccountUsingPOST(params *ValidateGitlabAccountUsi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateGitlabAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateGitlabAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateGitlabAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateGitlabAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ValidateKubernetesAccountUsingPOST validates kubernetes account
+ValidateKubernetesAccount validate kubernetes account API
 */
-func (a *Client) ValidateKubernetesAccountUsingPOST(params *ValidateKubernetesAccountUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateKubernetesAccountUsingPOSTOK, *ValidateKubernetesAccountUsingPOSTCreated, error) {
+func (a *Client) ValidateKubernetesAccount(params *ValidateKubernetesAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ValidateKubernetesAccountOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewValidateKubernetesAccountUsingPOSTParams()
+		params = NewValidateKubernetesAccountParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "validateKubernetesAccountUsingPOST",
+		ID:                 "validateKubernetesAccount",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/accounts/kubernetes/validate",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ValidateKubernetesAccountUsingPOSTReader{formats: a.formats},
+		Reader:             &ValidateKubernetesAccountReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1616,16 +1564,15 @@ func (a *Client) ValidateKubernetesAccountUsingPOST(params *ValidateKubernetesAc
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ValidateKubernetesAccountUsingPOSTOK:
-		return value, nil, nil
-	case *ValidateKubernetesAccountUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ValidateKubernetesAccountOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_accounts_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for validateKubernetesAccount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

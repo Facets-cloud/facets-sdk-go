@@ -54,66 +54,42 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateUserGroupUsingPOST(params *CreateUserGroupUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserGroupUsingPOSTOK, *CreateUserGroupUsingPOSTCreated, error)
+	CreateUserGroup(params *CreateUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserGroupOK, error)
 
-	DeleteUserGroupUsingDELETE(params *DeleteUserGroupUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserGroupUsingDELETEOK, *DeleteUserGroupUsingDELETENoContent, error)
+	DeleteUserGroup(params *DeleteUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserGroupOK, error)
 
-	GetAllGroupUsingGET(params *GetAllGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllGroupUsingGETOK, error)
+	GetAllGroup(params *GetAllGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllGroupOK, error)
 
-	GetAllUserGroupsExpandedUsingGET(params *GetAllUserGroupsExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUserGroupsExpandedUsingGETOK, error)
+	GetAllUserGroupsExpanded(params *GetAllUserGroupsExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUserGroupsExpandedOK, error)
 
-	GetUserGroupExpandedUsingGET(params *GetUserGroupExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupExpandedUsingGETOK, error)
+	GetUserGroup(params *GetUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupOK, error)
 
-	GetUserGroupUsingGET(params *GetUserGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupUsingGETOK, error)
+	GetUserGroupExpanded(params *GetUserGroupExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupExpandedOK, error)
 
-	UpdateUserGroupUsingPUT(params *UpdateUserGroupUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserGroupUsingPUTOK, *UpdateUserGroupUsingPUTCreated, error)
+	UpdateUserGroup(params *UpdateUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserGroupOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateUserGroupUsingPOST creates user group
+CreateUserGroup create user group API
 */
-func (a *Client) CreateUserGroupUsingPOST(params *CreateUserGroupUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserGroupUsingPOSTOK, *CreateUserGroupUsingPOSTCreated, error) {
+func (a *Client) CreateUserGroup(params *CreateUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateUserGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateUserGroupUsingPOSTParams()
+		params = NewCreateUserGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createUserGroupUsingPOST",
+		ID:                 "createUserGroup",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/user-groups/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateUserGroupUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateUserGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -124,76 +100,35 @@ func (a *Client) CreateUserGroupUsingPOST(params *CreateUserGroupUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateUserGroupUsingPOSTOK:
-		return value, nil, nil
-	case *CreateUserGroupUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateUserGroupOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createUserGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteUserGroupUsingDELETE deletes user group
+DeleteUserGroup delete user group API
 */
-func (a *Client) DeleteUserGroupUsingDELETE(params *DeleteUserGroupUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserGroupUsingDELETEOK, *DeleteUserGroupUsingDELETENoContent, error) {
+func (a *Client) DeleteUserGroup(params *DeleteUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteUserGroupUsingDELETEParams()
+		params = NewDeleteUserGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteUserGroupUsingDELETE",
+		ID:                 "deleteUserGroup",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/user-groups/{groupId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteUserGroupUsingDELETEReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteUserGroupUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteUserGroupUsingDELETENoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllGroupUsingGET gets all group
-*/
-func (a *Client) GetAllGroupUsingGET(params *GetAllGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllGroupUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllGroupUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllGroupUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/user-groups/",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllGroupUsingGETReader{formats: a.formats},
+		Reader:             &DeleteUserGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -206,33 +141,72 @@ func (a *Client) GetAllGroupUsingGET(params *GetAllGroupUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllGroupUsingGETOK)
+	success, ok := result.(*DeleteUserGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllGroupUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteUserGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllUserGroupsExpandedUsingGET gets all user groups expanded
+GetAllGroup get all group API
 */
-func (a *Client) GetAllUserGroupsExpandedUsingGET(params *GetAllUserGroupsExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUserGroupsExpandedUsingGETOK, error) {
+func (a *Client) GetAllGroup(params *GetAllGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllUserGroupsExpandedUsingGETParams()
+		params = NewGetAllGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllUserGroupsExpandedUsingGET",
+		ID:                 "getAllGroup",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/user-groups/",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllGroupReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllGroupOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllUserGroupsExpanded get all user groups expanded API
+*/
+func (a *Client) GetAllUserGroupsExpanded(params *GetAllUserGroupsExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUserGroupsExpandedOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllUserGroupsExpandedParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllUserGroupsExpanded",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/user-groups/list/groups-expanded",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllUserGroupsExpandedUsingGETReader{formats: a.formats},
+		Reader:             &GetAllUserGroupsExpandedReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -245,72 +219,33 @@ func (a *Client) GetAllUserGroupsExpandedUsingGET(params *GetAllUserGroupsExpand
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUserGroupsExpandedUsingGETOK)
+	success, ok := result.(*GetAllUserGroupsExpandedOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUserGroupsExpandedUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllUserGroupsExpanded: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetUserGroupExpandedUsingGET gets user group expanded
+GetUserGroup get user group API
 */
-func (a *Client) GetUserGroupExpandedUsingGET(params *GetUserGroupExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupExpandedUsingGETOK, error) {
+func (a *Client) GetUserGroup(params *GetUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetUserGroupExpandedUsingGETParams()
+		params = NewGetUserGroupParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getUserGroupExpandedUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/user-groups/{groupId}/group-expanded",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetUserGroupExpandedUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetUserGroupExpandedUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getUserGroupExpandedUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetUserGroupUsingGET gets user group
-*/
-func (a *Client) GetUserGroupUsingGET(params *GetUserGroupUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUserGroupUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getUserGroupUsingGET",
+		ID:                 "getUserGroup",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/user-groups/{groupId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetUserGroupUsingGETReader{formats: a.formats},
+		Reader:             &GetUserGroupReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -323,33 +258,33 @@ func (a *Client) GetUserGroupUsingGET(params *GetUserGroupUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetUserGroupUsingGETOK)
+	success, ok := result.(*GetUserGroupOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getUserGroupUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getUserGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateUserGroupUsingPUT updates user group
+GetUserGroupExpanded get user group expanded API
 */
-func (a *Client) UpdateUserGroupUsingPUT(params *UpdateUserGroupUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserGroupUsingPUTOK, *UpdateUserGroupUsingPUTCreated, error) {
+func (a *Client) GetUserGroupExpanded(params *GetUserGroupExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserGroupExpandedOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateUserGroupUsingPUTParams()
+		params = NewGetUserGroupExpandedParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateUserGroupUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/user-groups/",
-		ProducesMediaTypes: []string{"*/*"},
+		ID:                 "getUserGroupExpanded",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/user-groups/{groupId}/group-expanded",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateUserGroupUsingPUTReader{formats: a.formats},
+		Reader:             &GetUserGroupExpandedReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -360,16 +295,54 @@ func (a *Client) UpdateUserGroupUsingPUT(params *UpdateUserGroupUsingPUTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateUserGroupUsingPUTOK:
-		return value, nil, nil
-	case *UpdateUserGroupUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*GetUserGroupExpandedOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_group_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getUserGroupExpanded: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateUserGroup update user group API
+*/
+func (a *Client) UpdateUserGroup(params *UpdateUserGroupParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateUserGroupOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateUserGroupParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateUserGroup",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/user-groups/",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateUserGroupReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateUserGroupOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateUserGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MetricTarget MetricTarget
+// MetricTarget metric target
 //
 // swagger:model MetricTarget
 type MetricTarget struct {

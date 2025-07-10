@@ -54,60 +54,36 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetDailyCloudCostUsingGET(params *GetDailyCloudCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDailyCloudCostUsingGETOK, error)
+	GetDailyCloudCost(params *GetDailyCloudCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDailyCloudCostOK, error)
 
-	GetServiceWiseCostUsingGET(params *GetServiceWiseCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceWiseCostUsingGETOK, error)
+	GetServiceWiseCost(params *GetServiceWiseCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceWiseCostOK, error)
 
-	IsAwsCostExplorerEnabledUsingGET(params *IsAwsCostExplorerEnabledUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IsAwsCostExplorerEnabledUsingGETOK, error)
+	IsAwsCostExplorerEnabled(params *IsAwsCostExplorerEnabledParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IsAwsCostExplorerEnabledOK, error)
 
-	SyncCloudCostUsingGET(params *SyncCloudCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncCloudCostUsingGETOK, error)
+	SyncCloudCost(params *SyncCloudCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncCloudCostOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetDailyCloudCostUsingGET gets daily cloud cost
+GetDailyCloudCost get daily cloud cost API
 */
-func (a *Client) GetDailyCloudCostUsingGET(params *GetDailyCloudCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDailyCloudCostUsingGETOK, error) {
+func (a *Client) GetDailyCloudCost(params *GetDailyCloudCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDailyCloudCostOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetDailyCloudCostUsingGETParams()
+		params = NewGetDailyCloudCostParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getDailyCloudCostUsingGET",
+		ID:                 "getDailyCloudCost",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/cost-explorer/stack/{stackName}/daily-cost",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetDailyCloudCostUsingGETReader{formats: a.formats},
+		Reader:             &GetDailyCloudCostReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -120,33 +96,33 @@ func (a *Client) GetDailyCloudCostUsingGET(params *GetDailyCloudCostUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetDailyCloudCostUsingGETOK)
+	success, ok := result.(*GetDailyCloudCostOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getDailyCloudCostUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getDailyCloudCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetServiceWiseCostUsingGET gets service wise cost
+GetServiceWiseCost get service wise cost API
 */
-func (a *Client) GetServiceWiseCostUsingGET(params *GetServiceWiseCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceWiseCostUsingGETOK, error) {
+func (a *Client) GetServiceWiseCost(params *GetServiceWiseCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetServiceWiseCostOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetServiceWiseCostUsingGETParams()
+		params = NewGetServiceWiseCostParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getServiceWiseCostUsingGET",
+		ID:                 "getServiceWiseCost",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/cost-explorer/service-wise-cost/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetServiceWiseCostUsingGETReader{formats: a.formats},
+		Reader:             &GetServiceWiseCostReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -159,33 +135,33 @@ func (a *Client) GetServiceWiseCostUsingGET(params *GetServiceWiseCostUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetServiceWiseCostUsingGETOK)
+	success, ok := result.(*GetServiceWiseCostOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getServiceWiseCostUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getServiceWiseCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-IsAwsCostExplorerEnabledUsingGET is aws cost explorer enabled
+IsAwsCostExplorerEnabled is aws cost explorer enabled API
 */
-func (a *Client) IsAwsCostExplorerEnabledUsingGET(params *IsAwsCostExplorerEnabledUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IsAwsCostExplorerEnabledUsingGETOK, error) {
+func (a *Client) IsAwsCostExplorerEnabled(params *IsAwsCostExplorerEnabledParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IsAwsCostExplorerEnabledOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewIsAwsCostExplorerEnabledUsingGETParams()
+		params = NewIsAwsCostExplorerEnabledParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "isAwsCostExplorerEnabledUsingGET",
+		ID:                 "isAwsCostExplorerEnabled",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/cost-explorer/aws/enabled",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &IsAwsCostExplorerEnabledUsingGETReader{formats: a.formats},
+		Reader:             &IsAwsCostExplorerEnabledReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -198,33 +174,33 @@ func (a *Client) IsAwsCostExplorerEnabledUsingGET(params *IsAwsCostExplorerEnabl
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IsAwsCostExplorerEnabledUsingGETOK)
+	success, ok := result.(*IsAwsCostExplorerEnabledOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for isAwsCostExplorerEnabledUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for isAwsCostExplorerEnabled: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SyncCloudCostUsingGET syncs cloud cost
+SyncCloudCost sync cloud cost API
 */
-func (a *Client) SyncCloudCostUsingGET(params *SyncCloudCostUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncCloudCostUsingGETOK, error) {
+func (a *Client) SyncCloudCost(params *SyncCloudCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncCloudCostOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSyncCloudCostUsingGETParams()
+		params = NewSyncCloudCostParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "syncCloudCostUsingGET",
+		ID:                 "syncCloudCost",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/cost-explorer/sync-cost",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SyncCloudCostUsingGETReader{formats: a.formats},
+		Reader:             &SyncCloudCostReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -237,13 +213,13 @@ func (a *Client) SyncCloudCostUsingGET(params *SyncCloudCostUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SyncCloudCostUsingGETOK)
+	success, ok := result.(*SyncCloudCostOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for syncCloudCostUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for syncCloudCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

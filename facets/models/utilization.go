@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Utilization Utilization
+// Utilization utilization
 //
 // swagger:model Utilization
 type Utilization struct {

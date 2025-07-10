@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// VolumeMount VolumeMount
+// VolumeMount volume mount
 //
 // swagger:model VolumeMount
 type VolumeMount struct {

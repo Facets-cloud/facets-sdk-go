@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GrantedAuthority GrantedAuthority
+// GrantedAuthority granted authority
 //
 // swagger:model GrantedAuthority
 type GrantedAuthority struct {

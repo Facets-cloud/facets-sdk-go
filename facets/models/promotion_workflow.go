@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PromotionWorkflow PromotionWorkflow
+// PromotionWorkflow promotion workflow
 //
 // swagger:model PromotionWorkflow
 type PromotionWorkflow struct {
@@ -45,14 +45,16 @@ type PromotionWorkflow struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// registration type
+	// Required: true
 	// Enum: ["ENVIRONMENT","RELEASE_STREAM","HYBRID"]
-	RegistrationType string `json:"registrationType,omitempty"`
+	RegistrationType *string `json:"registrationType"`
 
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 
 	// workflow name
-	WorkflowName string `json:"workflowName,omitempty"`
+	// Required: true
+	WorkflowName *string `json:"workflowName"`
 }
 
 // Validate validates this promotion workflow
@@ -72,6 +74,10 @@ func (m *PromotionWorkflow) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRegistrationType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkflowName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -164,12 +170,22 @@ func (m *PromotionWorkflow) validateRegistrationTypeEnum(path, location string, 
 }
 
 func (m *PromotionWorkflow) validateRegistrationType(formats strfmt.Registry) error {
-	if swag.IsZero(m.RegistrationType) { // not required
-		return nil
+
+	if err := validate.Required("registrationType", "body", m.RegistrationType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateRegistrationTypeEnum("registrationType", "body", m.RegistrationType); err != nil {
+	if err := m.validateRegistrationTypeEnum("registrationType", "body", *m.RegistrationType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PromotionWorkflow) validateWorkflowName(formats strfmt.Registry) error {
+
+	if err := validate.Required("workflowName", "body", m.WorkflowName); err != nil {
 		return err
 	}
 

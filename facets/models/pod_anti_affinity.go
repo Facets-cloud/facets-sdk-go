@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodAntiAffinity PodAntiAffinity
+// PodAntiAffinity pod anti affinity
 //
 // swagger:model PodAntiAffinity
 type PodAntiAffinity struct {

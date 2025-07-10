@@ -16,15 +16,17 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SaveAsTemplateRequest SaveAsTemplateRequest
+// SaveAsTemplateRequest save as template request
 //
 // swagger:model SaveAsTemplateRequest
 type SaveAsTemplateRequest struct {
 
 	// account Id
-	AccountID string `json:"accountId,omitempty"`
+	// Required: true
+	AccountID *string `json:"accountId"`
 
 	// clouds
+	// Unique: true
 	Clouds []string `json:"clouds"`
 
 	// description
@@ -40,7 +42,8 @@ type SaveAsTemplateRequest struct {
 	Group string `json:"group,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// organisation name
 	OrganisationName string `json:"organisationName,omitempty"`
@@ -57,7 +60,15 @@ type SaveAsTemplateRequest struct {
 func (m *SaveAsTemplateRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAccountID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClouds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -68,6 +79,15 @@ func (m *SaveAsTemplateRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SaveAsTemplateRequest) validateAccountID(formats strfmt.Registry) error {
+
+	if err := validate.Required("accountId", "body", m.AccountID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -95,6 +115,10 @@ func (m *SaveAsTemplateRequest) validateClouds(formats strfmt.Registry) error {
 		return nil
 	}
 
+	if err := validate.UniqueItems("clouds", "body", m.Clouds); err != nil {
+		return err
+	}
+
 	for i := 0; i < len(m.Clouds); i++ {
 
 		// value enum
@@ -102,6 +126,15 @@ func (m *SaveAsTemplateRequest) validateClouds(formats strfmt.Registry) error {
 			return err
 		}
 
+	}
+
+	return nil
+}
+
+func (m *SaveAsTemplateRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
 	}
 
 	return nil

@@ -15,41 +15,53 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// GenericOAuth2ClientRegistration GenericOAuth2ClientRegistration
+// GenericOAuth2ClientRegistration generic o auth2 client registration
 //
 // swagger:model GenericOAuth2ClientRegistration
 type GenericOAuth2ClientRegistration struct {
 
 	// authorization Uri
-	AuthorizationURI string `json:"authorizationUri,omitempty"`
+	// Required: true
+	AuthorizationURI *string `json:"authorizationUri"`
 
 	// client authentication method
 	ClientAuthenticationMethod *ClientAuthenticationMethod `json:"clientAuthenticationMethod,omitempty"`
 
 	// client Id
-	ClientID string `json:"clientId,omitempty"`
+	// Required: true
+	ClientID *string `json:"clientId"`
 
 	// client secret
-	ClientSecret string `json:"clientSecret,omitempty"`
+	// Required: true
+	ClientSecret *string `json:"clientSecret"`
+
+	// is system configured
+	// Read Only: true
+	IsSystemConfigured *bool `json:"isSystemConfigured,omitempty"`
 
 	// issuer Url
 	IssuerURL string `json:"issuerUrl,omitempty"`
 
 	// jwk set Uri
-	JwkSetURI string `json:"jwkSetUri,omitempty"`
+	// Required: true
+	JwkSetURI *string `json:"jwkSetUri"`
 
 	// login button text
-	LoginButtonText string `json:"loginButtonText,omitempty"`
+	// Required: true
+	LoginButtonText *string `json:"loginButtonText"`
 
 	// provider
+	// Required: true
 	// Enum: ["GOOGLE","OKTA","ONE_LOGIN","AZURE_AD","JUMP_CLOUD","OPEN_ID"]
-	Provider string `json:"provider,omitempty"`
+	Provider *string `json:"provider"`
 
 	// registration Id
-	RegistrationID string `json:"registrationId,omitempty"`
+	// Required: true
+	RegistrationID *string `json:"registrationId"`
 
 	// scope
-	Scope string `json:"scope,omitempty"`
+	// Required: true
+	Scope *string `json:"scope"`
 
 	// secrets Uid
 	SecretsUID string `json:"secretsUid,omitempty"`
@@ -58,17 +70,39 @@ type GenericOAuth2ClientRegistration struct {
 	SystemConfigured bool `json:"systemConfigured,omitempty"`
 
 	// token Uri
-	TokenURI string `json:"tokenUri,omitempty"`
+	// Required: true
+	TokenURI *string `json:"tokenUri"`
 
 	// user info Uri
-	UserInfoURI string `json:"userInfoUri,omitempty"`
+	// Required: true
+	UserInfoURI *string `json:"userInfoUri"`
 }
 
 // Validate validates this generic o auth2 client registration
 func (m *GenericOAuth2ClientRegistration) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAuthorizationURI(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateClientAuthenticationMethod(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClientID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClientSecret(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateJwkSetURI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLoginButtonText(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -76,9 +110,34 @@ func (m *GenericOAuth2ClientRegistration) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateRegistrationID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScope(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTokenURI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUserInfoURI(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateAuthorizationURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("authorizationUri", "body", m.AuthorizationURI); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -96,6 +155,42 @@ func (m *GenericOAuth2ClientRegistration) validateClientAuthenticationMethod(for
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateClientID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clientId", "body", m.ClientID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateClientSecret(formats strfmt.Registry) error {
+
+	if err := validate.Required("clientSecret", "body", m.ClientSecret); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateJwkSetURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("jwkSetUri", "body", m.JwkSetURI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateLoginButtonText(formats strfmt.Registry) error {
+
+	if err := validate.Required("loginButtonText", "body", m.LoginButtonText); err != nil {
+		return err
 	}
 
 	return nil
@@ -143,12 +238,49 @@ func (m *GenericOAuth2ClientRegistration) validateProviderEnum(path, location st
 }
 
 func (m *GenericOAuth2ClientRegistration) validateProvider(formats strfmt.Registry) error {
-	if swag.IsZero(m.Provider) { // not required
-		return nil
+
+	if err := validate.Required("provider", "body", m.Provider); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateProviderEnum("provider", "body", m.Provider); err != nil {
+	if err := m.validateProviderEnum("provider", "body", *m.Provider); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateRegistrationID(formats strfmt.Registry) error {
+
+	if err := validate.Required("registrationId", "body", m.RegistrationID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateScope(formats strfmt.Registry) error {
+
+	if err := validate.Required("scope", "body", m.Scope); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateTokenURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("tokenUri", "body", m.TokenURI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) validateUserInfoURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("userInfoUri", "body", m.UserInfoURI); err != nil {
 		return err
 	}
 
@@ -160,6 +292,10 @@ func (m *GenericOAuth2ClientRegistration) ContextValidate(ctx context.Context, f
 	var res []error
 
 	if err := m.contextValidateClientAuthenticationMethod(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateIsSystemConfigured(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -185,6 +321,15 @@ func (m *GenericOAuth2ClientRegistration) contextValidateClientAuthenticationMet
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *GenericOAuth2ClientRegistration) contextValidateIsSystemConfigured(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "isSystemConfigured", "body", m.IsSystemConfigured); err != nil {
+		return err
 	}
 
 	return nil

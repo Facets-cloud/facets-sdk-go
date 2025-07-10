@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CSIVolumeSource CSIVolumeSource
+// CSIVolumeSource c s i volume source
 //
 // swagger:model CSIVolumeSource
 type CSIVolumeSource struct {

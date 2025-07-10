@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Container Container
+// Container container
 //
 // swagger:model Container
 type Container struct {

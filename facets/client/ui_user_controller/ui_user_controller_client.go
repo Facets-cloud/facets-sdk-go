@@ -54,82 +54,58 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AnalyzeAccessUsingGET(params *AnalyzeAccessUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AnalyzeAccessUsingGETOK, error)
+	AnalyzeAccess(params *AnalyzeAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AnalyzeAccessOK, error)
 
-	CreateTokenUsingPOST(params *CreateTokenUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTokenUsingPOSTOK, *CreateTokenUsingPOSTCreated, error)
+	CreateToken(params *CreateTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTokenOK, error)
 
-	DeleteALlLoggedInUsersUsingDELETE(params *DeleteALlLoggedInUsersUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteALlLoggedInUsersUsingDELETEOK, *DeleteALlLoggedInUsersUsingDELETENoContent, error)
+	DeleteALlLoggedInUsers(params *DeleteALlLoggedInUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteALlLoggedInUsersOK, error)
 
-	DeleteTokenUsingDELETE(params *DeleteTokenUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTokenUsingDELETEOK, *DeleteTokenUsingDELETENoContent, error)
+	DeleteToken(params *DeleteTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTokenOK, error)
 
-	DeleteUserUsingDELETE(params *DeleteUserUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserUsingDELETEOK, *DeleteUserUsingDELETENoContent, error)
+	DeleteUser(params *DeleteUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserOK, error)
 
-	GetALlLoggedInUsersUsingGET(params *GetALlLoggedInUsersUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetALlLoggedInUsersUsingGETOK, error)
+	GetALlLoggedInUsers(params *GetALlLoggedInUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetALlLoggedInUsersOK, error)
 
-	GetAllSystemRolesUsingGET(params *GetAllSystemRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSystemRolesUsingGETOK, error)
+	GetAllSystemRoles(params *GetAllSystemRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSystemRolesOK, error)
 
-	GetAllUsersExpandedUsingGET(params *GetAllUsersExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersExpandedUsingGETOK, error)
+	GetAllUsers(params *GetAllUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersOK, error)
 
-	GetAllUsersUsingGET(params *GetAllUsersUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersUsingGETOK, error)
+	GetAllUsersExpanded(params *GetAllUsersExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersExpandedOK, error)
 
-	GetCurrentUserUsingGET(params *GetCurrentUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserUsingGETOK, error)
+	GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error)
 
-	GetTokenUsingGET(params *GetTokenUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTokenUsingGETOK, error)
+	GetToken(params *GetTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTokenOK, error)
 
-	GetUserExpandedUsingGET(params *GetUserExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserExpandedUsingGETOK, error)
+	GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserOK, error)
 
-	GetUserUsingGET(params *GetUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserUsingGETOK, error)
+	GetUserExpanded(params *GetUserExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserExpandedOK, error)
 
-	InviteUsersUsingPOST(params *InviteUsersUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InviteUsersUsingPOSTOK, *InviteUsersUsingPOSTCreated, error)
+	InviteUsers(params *InviteUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InviteUsersOK, error)
 
-	UpdatePasswordUsingPOST(params *UpdatePasswordUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePasswordUsingPOSTOK, *UpdatePasswordUsingPOSTCreated, error)
+	UpdatePassword(params *UpdatePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePasswordOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AnalyzeAccessUsingGET analyzes access
+AnalyzeAccess analyze access API
 */
-func (a *Client) AnalyzeAccessUsingGET(params *AnalyzeAccessUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AnalyzeAccessUsingGETOK, error) {
+func (a *Client) AnalyzeAccess(params *AnalyzeAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AnalyzeAccessOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAnalyzeAccessUsingGETParams()
+		params = NewAnalyzeAccessParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "analyzeAccessUsingGET",
+		ID:                 "analyzeAccess",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/analyze-access",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AnalyzeAccessUsingGETReader{formats: a.formats},
+		Reader:             &AnalyzeAccessReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -142,33 +118,33 @@ func (a *Client) AnalyzeAccessUsingGET(params *AnalyzeAccessUsingGETParams, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AnalyzeAccessUsingGETOK)
+	success, ok := result.(*AnalyzeAccessOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for analyzeAccessUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for analyzeAccess: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateTokenUsingPOST creates token
+CreateToken create token API
 */
-func (a *Client) CreateTokenUsingPOST(params *CreateTokenUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTokenUsingPOSTOK, *CreateTokenUsingPOSTCreated, error) {
+func (a *Client) CreateToken(params *CreateTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateTokenUsingPOSTParams()
+		params = NewCreateTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createTokenUsingPOST",
+		ID:                 "createToken",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/users/createAccessToken",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateTokenUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -179,36 +155,35 @@ func (a *Client) CreateTokenUsingPOST(params *CreateTokenUsingPOSTParams, authIn
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateTokenUsingPOSTOK:
-		return value, nil, nil
-	case *CreateTokenUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateTokenOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteALlLoggedInUsersUsingDELETE deletes a ll logged in users
+DeleteALlLoggedInUsers delete a ll logged in users API
 */
-func (a *Client) DeleteALlLoggedInUsersUsingDELETE(params *DeleteALlLoggedInUsersUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteALlLoggedInUsersUsingDELETEOK, *DeleteALlLoggedInUsersUsingDELETENoContent, error) {
+func (a *Client) DeleteALlLoggedInUsers(params *DeleteALlLoggedInUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteALlLoggedInUsersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteALlLoggedInUsersUsingDELETEParams()
+		params = NewDeleteALlLoggedInUsersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteALlLoggedInUsersUsingDELETE",
+		ID:                 "deleteALlLoggedInUsers",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/users/loggedIn/session",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteALlLoggedInUsersUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteALlLoggedInUsersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -219,36 +194,35 @@ func (a *Client) DeleteALlLoggedInUsersUsingDELETE(params *DeleteALlLoggedInUser
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteALlLoggedInUsersUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteALlLoggedInUsersUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteALlLoggedInUsersOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteALlLoggedInUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteTokenUsingDELETE deletes token
+DeleteToken delete token API
 */
-func (a *Client) DeleteTokenUsingDELETE(params *DeleteTokenUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTokenUsingDELETEOK, *DeleteTokenUsingDELETENoContent, error) {
+func (a *Client) DeleteToken(params *DeleteTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTokenUsingDELETEParams()
+		params = NewDeleteTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteTokenUsingDELETE",
+		ID:                 "deleteToken",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/users/tokens/{tokenId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteTokenUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -259,36 +233,35 @@ func (a *Client) DeleteTokenUsingDELETE(params *DeleteTokenUsingDELETEParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteTokenUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteTokenUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteTokenOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteUserUsingDELETE deletes user
+DeleteUser delete user API
 */
-func (a *Client) DeleteUserUsingDELETE(params *DeleteUserUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserUsingDELETEOK, *DeleteUserUsingDELETENoContent, error) {
+func (a *Client) DeleteUser(params *DeleteUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteUserUsingDELETEParams()
+		params = NewDeleteUserParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteUserUsingDELETE",
+		ID:                 "deleteUser",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/users/{userId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteUserUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -299,36 +272,35 @@ func (a *Client) DeleteUserUsingDELETE(params *DeleteUserUsingDELETEParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteUserUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteUserUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteUserOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetALlLoggedInUsersUsingGET gets a ll logged in users
+GetALlLoggedInUsers get a ll logged in users API
 */
-func (a *Client) GetALlLoggedInUsersUsingGET(params *GetALlLoggedInUsersUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetALlLoggedInUsersUsingGETOK, error) {
+func (a *Client) GetALlLoggedInUsers(params *GetALlLoggedInUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetALlLoggedInUsersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetALlLoggedInUsersUsingGETParams()
+		params = NewGetALlLoggedInUsersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getALlLoggedInUsersUsingGET",
+		ID:                 "getALlLoggedInUsers",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/loggedIn",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetALlLoggedInUsersUsingGETReader{formats: a.formats},
+		Reader:             &GetALlLoggedInUsersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -341,33 +313,33 @@ func (a *Client) GetALlLoggedInUsersUsingGET(params *GetALlLoggedInUsersUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetALlLoggedInUsersUsingGETOK)
+	success, ok := result.(*GetALlLoggedInUsersOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getALlLoggedInUsersUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getALlLoggedInUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllSystemRolesUsingGET gets all system roles
+GetAllSystemRoles get all system roles API
 */
-func (a *Client) GetAllSystemRolesUsingGET(params *GetAllSystemRolesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSystemRolesUsingGETOK, error) {
+func (a *Client) GetAllSystemRoles(params *GetAllSystemRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllSystemRolesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllSystemRolesUsingGETParams()
+		params = NewGetAllSystemRolesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllSystemRolesUsingGET",
+		ID:                 "getAllSystemRoles",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/roles",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllSystemRolesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllSystemRolesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -380,72 +352,33 @@ func (a *Client) GetAllSystemRolesUsingGET(params *GetAllSystemRolesUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllSystemRolesUsingGETOK)
+	success, ok := result.(*GetAllSystemRolesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllSystemRolesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllSystemRoles: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllUsersExpandedUsingGET gets all users expanded
+GetAllUsers get all users API
 */
-func (a *Client) GetAllUsersExpandedUsingGET(params *GetAllUsersExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersExpandedUsingGETOK, error) {
+func (a *Client) GetAllUsers(params *GetAllUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllUsersExpandedUsingGETParams()
+		params = NewGetAllUsersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllUsersExpandedUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/users/list/users-expanded",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllUsersExpandedUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAllUsersExpandedUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsersExpandedUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllUsersUsingGET gets all users
-*/
-func (a *Client) GetAllUsersUsingGET(params *GetAllUsersUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllUsersUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllUsersUsingGET",
+		ID:                 "getAllUsers",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllUsersUsingGETReader{formats: a.formats},
+		Reader:             &GetAllUsersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -458,33 +391,72 @@ func (a *Client) GetAllUsersUsingGET(params *GetAllUsersUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUsersUsingGETOK)
+	success, ok := result.(*GetAllUsersOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsersUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetCurrentUserUsingGET gets current user
+GetAllUsersExpanded get all users expanded API
 */
-func (a *Client) GetCurrentUserUsingGET(params *GetCurrentUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserUsingGETOK, error) {
+func (a *Client) GetAllUsersExpanded(params *GetAllUsersExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsersExpandedOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetCurrentUserUsingGETParams()
+		params = NewGetAllUsersExpandedParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getCurrentUserUsingGET",
+		ID:                 "getAllUsersExpanded",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/users/list/users-expanded",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllUsersExpandedReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllUsersExpandedOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllUsersExpanded: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCurrentUser get current user API
+*/
+func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetCurrentUserParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getCurrentUser",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/current-user",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetCurrentUserUsingGETReader{formats: a.formats},
+		Reader:             &GetCurrentUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -497,33 +469,33 @@ func (a *Client) GetCurrentUserUsingGET(params *GetCurrentUserUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetCurrentUserUsingGETOK)
+	success, ok := result.(*GetCurrentUserOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getCurrentUserUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getCurrentUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetTokenUsingGET gets token
+GetToken get token API
 */
-func (a *Client) GetTokenUsingGET(params *GetTokenUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTokenUsingGETOK, error) {
+func (a *Client) GetToken(params *GetTokenParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTokenOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTokenUsingGETParams()
+		params = NewGetTokenParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getTokenUsingGET",
+		ID:                 "getToken",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/tokens",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTokenUsingGETReader{formats: a.formats},
+		Reader:             &GetTokenReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -536,72 +508,33 @@ func (a *Client) GetTokenUsingGET(params *GetTokenUsingGETParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTokenUsingGETOK)
+	success, ok := result.(*GetTokenOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getTokenUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetUserExpandedUsingGET gets user expanded
+GetUser get user API
 */
-func (a *Client) GetUserExpandedUsingGET(params *GetUserExpandedUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserExpandedUsingGETOK, error) {
+func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetUserExpandedUsingGETParams()
+		params = NewGetUserParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getUserExpandedUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/users/{userId}/user-expanded",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetUserExpandedUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetUserExpandedUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getUserExpandedUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetUserUsingGET gets user
-*/
-func (a *Client) GetUserUsingGET(params *GetUserUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserUsingGETOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetUserUsingGETParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getUserUsingGET",
+		ID:                 "getUser",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/users/{userId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetUserUsingGETReader{formats: a.formats},
+		Reader:             &GetUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -614,33 +547,72 @@ func (a *Client) GetUserUsingGET(params *GetUserUsingGETParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetUserUsingGETOK)
+	success, ok := result.(*GetUserOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getUserUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-InviteUsersUsingPOST invites users
+GetUserExpanded get user expanded API
 */
-func (a *Client) InviteUsersUsingPOST(params *InviteUsersUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InviteUsersUsingPOSTOK, *InviteUsersUsingPOSTCreated, error) {
+func (a *Client) GetUserExpanded(params *GetUserExpandedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserExpandedOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewInviteUsersUsingPOSTParams()
+		params = NewGetUserExpandedParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "inviteUsersUsingPOST",
+		ID:                 "getUserExpanded",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/users/{userId}/user-expanded",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetUserExpandedReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetUserExpandedOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getUserExpanded: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+InviteUsers invite users API
+*/
+func (a *Client) InviteUsers(params *InviteUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InviteUsersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewInviteUsersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "inviteUsers",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/users/invite-users",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &InviteUsersUsingPOSTReader{formats: a.formats},
+		Reader:             &InviteUsersReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -651,36 +623,35 @@ func (a *Client) InviteUsersUsingPOST(params *InviteUsersUsingPOSTParams, authIn
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *InviteUsersUsingPOSTOK:
-		return value, nil, nil
-	case *InviteUsersUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*InviteUsersOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for inviteUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdatePasswordUsingPOST updates password
+UpdatePassword update password API
 */
-func (a *Client) UpdatePasswordUsingPOST(params *UpdatePasswordUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePasswordUsingPOSTOK, *UpdatePasswordUsingPOSTCreated, error) {
+func (a *Client) UpdatePassword(params *UpdatePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePasswordOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdatePasswordUsingPOSTParams()
+		params = NewUpdatePasswordParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updatePasswordUsingPOST",
+		ID:                 "updatePassword",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/users/updatePassword",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdatePasswordUsingPOSTReader{formats: a.formats},
+		Reader:             &UpdatePasswordReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -691,16 +662,15 @@ func (a *Client) UpdatePasswordUsingPOST(params *UpdatePasswordUsingPOSTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdatePasswordUsingPOSTOK:
-		return value, nil, nil
-	case *UpdatePasswordUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdatePasswordOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_user_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updatePassword: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

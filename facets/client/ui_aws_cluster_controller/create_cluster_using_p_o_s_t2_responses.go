@@ -30,26 +30,26 @@ func (o *CreateClusterUsingPOST2Reader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return result, nil
-	case 201:
-		result := NewCreateClusterUsingPOST2Created()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
-	case 401:
-		result := NewCreateClusterUsingPOST2Unauthorized()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
-	case 403:
-		result := NewCreateClusterUsingPOST2Forbidden()
+	case 400:
+		result := NewCreateClusterUsingPOST2BadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
 	case 404:
 		result := NewCreateClusterUsingPOST2NotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 405:
+		result := NewCreateClusterUsingPOST2MethodNotAllowed()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewCreateClusterUsingPOST2InternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -129,170 +129,72 @@ func (o *CreateClusterUsingPOST2OK) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-// NewCreateClusterUsingPOST2Created creates a CreateClusterUsingPOST2Created with default headers values
-func NewCreateClusterUsingPOST2Created() *CreateClusterUsingPOST2Created {
-	return &CreateClusterUsingPOST2Created{}
+// NewCreateClusterUsingPOST2BadRequest creates a CreateClusterUsingPOST2BadRequest with default headers values
+func NewCreateClusterUsingPOST2BadRequest() *CreateClusterUsingPOST2BadRequest {
+	return &CreateClusterUsingPOST2BadRequest{}
 }
 
 /*
-CreateClusterUsingPOST2Created describes a response with status code 201, with default header values.
+CreateClusterUsingPOST2BadRequest describes a response with status code 400, with default header values.
 
-Created
+Bad Request
 */
-type CreateClusterUsingPOST2Created struct {
+type CreateClusterUsingPOST2BadRequest struct {
+	Payload *models.ErrorDetails
 }
 
-// IsSuccess returns true when this create cluster using p o s t2 created response has a 2xx status code
-func (o *CreateClusterUsingPOST2Created) IsSuccess() bool {
+// IsSuccess returns true when this create cluster using p o s t2 bad request response has a 2xx status code
+func (o *CreateClusterUsingPOST2BadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create cluster using p o s t2 bad request response has a 3xx status code
+func (o *CreateClusterUsingPOST2BadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create cluster using p o s t2 bad request response has a 4xx status code
+func (o *CreateClusterUsingPOST2BadRequest) IsClientError() bool {
 	return true
 }
 
-// IsRedirect returns true when this create cluster using p o s t2 created response has a 3xx status code
-func (o *CreateClusterUsingPOST2Created) IsRedirect() bool {
+// IsServerError returns true when this create cluster using p o s t2 bad request response has a 5xx status code
+func (o *CreateClusterUsingPOST2BadRequest) IsServerError() bool {
 	return false
 }
 
-// IsClientError returns true when this create cluster using p o s t2 created response has a 4xx status code
-func (o *CreateClusterUsingPOST2Created) IsClientError() bool {
-	return false
+// IsCode returns true when this create cluster using p o s t2 bad request response a status code equal to that given
+func (o *CreateClusterUsingPOST2BadRequest) IsCode(code int) bool {
+	return code == 400
 }
 
-// IsServerError returns true when this create cluster using p o s t2 created response has a 5xx status code
-func (o *CreateClusterUsingPOST2Created) IsServerError() bool {
-	return false
+// Code gets the status code for the create cluster using p o s t2 bad request response
+func (o *CreateClusterUsingPOST2BadRequest) Code() int {
+	return 400
 }
 
-// IsCode returns true when this create cluster using p o s t2 created response a status code equal to that given
-func (o *CreateClusterUsingPOST2Created) IsCode(code int) bool {
-	return code == 201
+func (o *CreateClusterUsingPOST2BadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2BadRequest %s", 400, payload)
 }
 
-// Code gets the status code for the create cluster using p o s t2 created response
-func (o *CreateClusterUsingPOST2Created) Code() int {
-	return 201
+func (o *CreateClusterUsingPOST2BadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2BadRequest %s", 400, payload)
 }
 
-func (o *CreateClusterUsingPOST2Created) Error() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Created", 201)
+func (o *CreateClusterUsingPOST2BadRequest) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
-func (o *CreateClusterUsingPOST2Created) String() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Created", 201)
-}
+func (o *CreateClusterUsingPOST2BadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-func (o *CreateClusterUsingPOST2Created) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	o.Payload = new(models.ErrorDetails)
 
-	return nil
-}
-
-// NewCreateClusterUsingPOST2Unauthorized creates a CreateClusterUsingPOST2Unauthorized with default headers values
-func NewCreateClusterUsingPOST2Unauthorized() *CreateClusterUsingPOST2Unauthorized {
-	return &CreateClusterUsingPOST2Unauthorized{}
-}
-
-/*
-CreateClusterUsingPOST2Unauthorized describes a response with status code 401, with default header values.
-
-Unauthorized
-*/
-type CreateClusterUsingPOST2Unauthorized struct {
-}
-
-// IsSuccess returns true when this create cluster using p o s t2 unauthorized response has a 2xx status code
-func (o *CreateClusterUsingPOST2Unauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create cluster using p o s t2 unauthorized response has a 3xx status code
-func (o *CreateClusterUsingPOST2Unauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create cluster using p o s t2 unauthorized response has a 4xx status code
-func (o *CreateClusterUsingPOST2Unauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create cluster using p o s t2 unauthorized response has a 5xx status code
-func (o *CreateClusterUsingPOST2Unauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create cluster using p o s t2 unauthorized response a status code equal to that given
-func (o *CreateClusterUsingPOST2Unauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the create cluster using p o s t2 unauthorized response
-func (o *CreateClusterUsingPOST2Unauthorized) Code() int {
-	return 401
-}
-
-func (o *CreateClusterUsingPOST2Unauthorized) Error() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Unauthorized", 401)
-}
-
-func (o *CreateClusterUsingPOST2Unauthorized) String() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Unauthorized", 401)
-}
-
-func (o *CreateClusterUsingPOST2Unauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewCreateClusterUsingPOST2Forbidden creates a CreateClusterUsingPOST2Forbidden with default headers values
-func NewCreateClusterUsingPOST2Forbidden() *CreateClusterUsingPOST2Forbidden {
-	return &CreateClusterUsingPOST2Forbidden{}
-}
-
-/*
-CreateClusterUsingPOST2Forbidden describes a response with status code 403, with default header values.
-
-Forbidden
-*/
-type CreateClusterUsingPOST2Forbidden struct {
-}
-
-// IsSuccess returns true when this create cluster using p o s t2 forbidden response has a 2xx status code
-func (o *CreateClusterUsingPOST2Forbidden) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this create cluster using p o s t2 forbidden response has a 3xx status code
-func (o *CreateClusterUsingPOST2Forbidden) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this create cluster using p o s t2 forbidden response has a 4xx status code
-func (o *CreateClusterUsingPOST2Forbidden) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this create cluster using p o s t2 forbidden response has a 5xx status code
-func (o *CreateClusterUsingPOST2Forbidden) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this create cluster using p o s t2 forbidden response a status code equal to that given
-func (o *CreateClusterUsingPOST2Forbidden) IsCode(code int) bool {
-	return code == 403
-}
-
-// Code gets the status code for the create cluster using p o s t2 forbidden response
-func (o *CreateClusterUsingPOST2Forbidden) Code() int {
-	return 403
-}
-
-func (o *CreateClusterUsingPOST2Forbidden) Error() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Forbidden", 403)
-}
-
-func (o *CreateClusterUsingPOST2Forbidden) String() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2Forbidden", 403)
-}
-
-func (o *CreateClusterUsingPOST2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -308,6 +210,7 @@ CreateClusterUsingPOST2NotFound describes a response with status code 404, with 
 Not Found
 */
 type CreateClusterUsingPOST2NotFound struct {
+	Payload *models.ErrorDetails
 }
 
 // IsSuccess returns true when this create cluster using p o s t2 not found response has a 2xx status code
@@ -341,14 +244,167 @@ func (o *CreateClusterUsingPOST2NotFound) Code() int {
 }
 
 func (o *CreateClusterUsingPOST2NotFound) Error() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2NotFound %s", 404, payload)
 }
 
 func (o *CreateClusterUsingPOST2NotFound) String() string {
-	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2NotFound %s", 404, payload)
+}
+
+func (o *CreateClusterUsingPOST2NotFound) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
 func (o *CreateClusterUsingPOST2NotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClusterUsingPOST2MethodNotAllowed creates a CreateClusterUsingPOST2MethodNotAllowed with default headers values
+func NewCreateClusterUsingPOST2MethodNotAllowed() *CreateClusterUsingPOST2MethodNotAllowed {
+	return &CreateClusterUsingPOST2MethodNotAllowed{}
+}
+
+/*
+CreateClusterUsingPOST2MethodNotAllowed describes a response with status code 405, with default header values.
+
+Method Not Allowed
+*/
+type CreateClusterUsingPOST2MethodNotAllowed struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this create cluster using p o s t2 method not allowed response has a 2xx status code
+func (o *CreateClusterUsingPOST2MethodNotAllowed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create cluster using p o s t2 method not allowed response has a 3xx status code
+func (o *CreateClusterUsingPOST2MethodNotAllowed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create cluster using p o s t2 method not allowed response has a 4xx status code
+func (o *CreateClusterUsingPOST2MethodNotAllowed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create cluster using p o s t2 method not allowed response has a 5xx status code
+func (o *CreateClusterUsingPOST2MethodNotAllowed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create cluster using p o s t2 method not allowed response a status code equal to that given
+func (o *CreateClusterUsingPOST2MethodNotAllowed) IsCode(code int) bool {
+	return code == 405
+}
+
+// Code gets the status code for the create cluster using p o s t2 method not allowed response
+func (o *CreateClusterUsingPOST2MethodNotAllowed) Code() int {
+	return 405
+}
+
+func (o *CreateClusterUsingPOST2MethodNotAllowed) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *CreateClusterUsingPOST2MethodNotAllowed) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *CreateClusterUsingPOST2MethodNotAllowed) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *CreateClusterUsingPOST2MethodNotAllowed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateClusterUsingPOST2InternalServerError creates a CreateClusterUsingPOST2InternalServerError with default headers values
+func NewCreateClusterUsingPOST2InternalServerError() *CreateClusterUsingPOST2InternalServerError {
+	return &CreateClusterUsingPOST2InternalServerError{}
+}
+
+/*
+CreateClusterUsingPOST2InternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type CreateClusterUsingPOST2InternalServerError struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this create cluster using p o s t2 internal server error response has a 2xx status code
+func (o *CreateClusterUsingPOST2InternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create cluster using p o s t2 internal server error response has a 3xx status code
+func (o *CreateClusterUsingPOST2InternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create cluster using p o s t2 internal server error response has a 4xx status code
+func (o *CreateClusterUsingPOST2InternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create cluster using p o s t2 internal server error response has a 5xx status code
+func (o *CreateClusterUsingPOST2InternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create cluster using p o s t2 internal server error response a status code equal to that given
+func (o *CreateClusterUsingPOST2InternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create cluster using p o s t2 internal server error response
+func (o *CreateClusterUsingPOST2InternalServerError) Code() int {
+	return 500
+}
+
+func (o *CreateClusterUsingPOST2InternalServerError) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2InternalServerError %s", 500, payload)
+}
+
+func (o *CreateClusterUsingPOST2InternalServerError) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/aws/clusters][%d] createClusterUsingPOST2InternalServerError %s", 500, payload)
+}
+
+func (o *CreateClusterUsingPOST2InternalServerError) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *CreateClusterUsingPOST2InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

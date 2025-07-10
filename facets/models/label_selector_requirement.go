@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// LabelSelectorRequirement LabelSelectorRequirement
+// LabelSelectorRequirement label selector requirement
 //
 // swagger:model LabelSelectorRequirement
 type LabelSelectorRequirement struct {

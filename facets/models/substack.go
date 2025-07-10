@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Substack Substack
+// Substack substack
 //
 // swagger:model Substack
 type Substack struct {
@@ -25,6 +25,7 @@ type Substack struct {
 	AccountID string `json:"accountId,omitempty"`
 
 	// allowed clouds
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// alpha blueprint
@@ -110,7 +111,7 @@ type Substack struct {
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
-	// preview modules allowed
+	// Alternatively called isTestProject
 	PreviewModulesAllowed bool `json:"previewModulesAllowed,omitempty"`
 
 	// primary cloud
@@ -124,6 +125,7 @@ type Substack struct {
 	ProjectTypeName string `json:"projectTypeName,omitempty"`
 
 	// provided resources
+	// Unique: true
 	ProvidedResources []*FacetsResource `json:"providedResources"`
 
 	// relative path
@@ -228,6 +230,10 @@ func (m *Substack) validateAllowedCloudsItemsEnum(path, location string, value s
 func (m *Substack) validateAllowedClouds(formats strfmt.Registry) error {
 	if swag.IsZero(m.AllowedClouds) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.AllowedClouds); i++ {
@@ -416,6 +422,10 @@ func (m *Substack) validatePrimaryCloud(formats strfmt.Registry) error {
 func (m *Substack) validateProvidedResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.ProvidedResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("providedResources", "body", m.ProvidedResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.ProvidedResources); i++ {

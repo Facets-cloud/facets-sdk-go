@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProvidedAuthenticatedResource ProvidedAuthenticatedResource
+// ProvidedAuthenticatedResource provided authenticated resource
 //
 // swagger:model ProvidedAuthenticatedResource
 type ProvidedAuthenticatedResource struct {

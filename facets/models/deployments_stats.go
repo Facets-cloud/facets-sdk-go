@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DeploymentsStats DeploymentsStats
+// DeploymentsStats deployments stats
 //
 // swagger:model DeploymentsStats
 type DeploymentsStats struct {

@@ -54,106 +54,42 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateWorkspaceWithExistingBranchUsingPOST(params *CreateWorkspaceWithExistingBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchUsingPOSTOK, *CreateWorkspaceWithExistingBranchUsingPOSTCreated, error)
+	CreateWorkspaceWithExistingBranch(params *CreateWorkspaceWithExistingBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchOK, error)
 
-	CreateWorkspaceWithExistingBranchUsingPOST1(params *CreateWorkspaceWithExistingBranchUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchUsingPOST1OK, *CreateWorkspaceWithExistingBranchUsingPOST1Created, error)
+	CreateWorkspaceWithExistingBranch1(params *CreateWorkspaceWithExistingBranch1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranch1OK, error)
 
-	CreateWorkspaceWithNewBranchUsingPOST(params *CreateWorkspaceWithNewBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchUsingPOSTOK, *CreateWorkspaceWithNewBranchUsingPOSTCreated, error)
+	CreateWorkspaceWithNewBranch(params *CreateWorkspaceWithNewBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchOK, error)
 
-	CreateWorkspaceWithNewBranchUsingPOST1(params *CreateWorkspaceWithNewBranchUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchUsingPOST1OK, *CreateWorkspaceWithNewBranchUsingPOST1Created, error)
+	CreateWorkspaceWithNewBranch1(params *CreateWorkspaceWithNewBranch1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranch1OK, error)
 
-	GetAllUsingGET1(params *GetAllUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET1OK, error)
+	GetAll3(params *GetAll3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll3OK, error)
 
-	GetAllUsingGET2(params *GetAllUsingGET2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET2OK, error)
+	GetAll4(params *GetAll4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll4OK, error)
 
-	IdentifyCoderLaunchEligibleUsingGET(params *IdentifyCoderLaunchEligibleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IdentifyCoderLaunchEligibleUsingGETOK, error)
+	IdentifyCoderLaunchEligible(params *IdentifyCoderLaunchEligibleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IdentifyCoderLaunchEligibleOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateWorkspaceWithExistingBranchUsingPOST creates workspace with existing branch
+CreateWorkspaceWithExistingBranch create workspace with existing branch API
 */
-func (a *Client) CreateWorkspaceWithExistingBranchUsingPOST(params *CreateWorkspaceWithExistingBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchUsingPOSTOK, *CreateWorkspaceWithExistingBranchUsingPOSTCreated, error) {
+func (a *Client) CreateWorkspaceWithExistingBranch(params *CreateWorkspaceWithExistingBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateWorkspaceWithExistingBranchUsingPOSTParams()
+		params = NewCreateWorkspaceWithExistingBranchParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createWorkspaceWithExistingBranchUsingPOST",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/existing-branch",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateWorkspaceWithExistingBranchUsingPOSTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateWorkspaceWithExistingBranchUsingPOSTOK:
-		return value, nil, nil
-	case *CreateWorkspaceWithExistingBranchUsingPOSTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_coder_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-CreateWorkspaceWithExistingBranchUsingPOST1 creates workspace with existing branch
-*/
-func (a *Client) CreateWorkspaceWithExistingBranchUsingPOST1(params *CreateWorkspaceWithExistingBranchUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranchUsingPOST1OK, *CreateWorkspaceWithExistingBranchUsingPOST1Created, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateWorkspaceWithExistingBranchUsingPOST1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createWorkspaceWithExistingBranchUsingPOST_1",
+		ID:                 "createWorkspaceWithExistingBranch",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/existing-branch",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateWorkspaceWithExistingBranchUsingPOST1Reader{formats: a.formats},
+		Reader:             &CreateWorkspaceWithExistingBranchReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -164,36 +100,35 @@ func (a *Client) CreateWorkspaceWithExistingBranchUsingPOST1(params *CreateWorks
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateWorkspaceWithExistingBranchUsingPOST1OK:
-		return value, nil, nil
-	case *CreateWorkspaceWithExistingBranchUsingPOST1Created:
-		return nil, value, nil
+	success, ok := result.(*CreateWorkspaceWithExistingBranchOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_coder_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createWorkspaceWithExistingBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateWorkspaceWithNewBranchUsingPOST creates workspace with new branch
+CreateWorkspaceWithExistingBranch1 create workspace with existing branch 1 API
 */
-func (a *Client) CreateWorkspaceWithNewBranchUsingPOST(params *CreateWorkspaceWithNewBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchUsingPOSTOK, *CreateWorkspaceWithNewBranchUsingPOSTCreated, error) {
+func (a *Client) CreateWorkspaceWithExistingBranch1(params *CreateWorkspaceWithExistingBranch1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithExistingBranch1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateWorkspaceWithNewBranchUsingPOSTParams()
+		params = NewCreateWorkspaceWithExistingBranch1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createWorkspaceWithNewBranchUsingPOST",
+		ID:                 "createWorkspaceWithExistingBranch_1",
 		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/new-branch",
-		ProducesMediaTypes: []string{"*/*"},
+		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/existing-branch",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateWorkspaceWithNewBranchUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateWorkspaceWithExistingBranch1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -204,76 +139,35 @@ func (a *Client) CreateWorkspaceWithNewBranchUsingPOST(params *CreateWorkspaceWi
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateWorkspaceWithNewBranchUsingPOSTOK:
-		return value, nil, nil
-	case *CreateWorkspaceWithNewBranchUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateWorkspaceWithExistingBranch1OK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_coder_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createWorkspaceWithExistingBranch_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateWorkspaceWithNewBranchUsingPOST1 creates workspace with new branch
+CreateWorkspaceWithNewBranch create workspace with new branch API
 */
-func (a *Client) CreateWorkspaceWithNewBranchUsingPOST1(params *CreateWorkspaceWithNewBranchUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchUsingPOST1OK, *CreateWorkspaceWithNewBranchUsingPOST1Created, error) {
+func (a *Client) CreateWorkspaceWithNewBranch(params *CreateWorkspaceWithNewBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranchOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateWorkspaceWithNewBranchUsingPOST1Params()
+		params = NewCreateWorkspaceWithNewBranchParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createWorkspaceWithNewBranchUsingPOST_1",
+		ID:                 "createWorkspaceWithNewBranch",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/new-branch",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateWorkspaceWithNewBranchUsingPOST1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateWorkspaceWithNewBranchUsingPOST1OK:
-		return value, nil, nil
-	case *CreateWorkspaceWithNewBranchUsingPOST1Created:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_coder_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetAllUsingGET1 gets all
-*/
-func (a *Client) GetAllUsingGET1(params *GetAllUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET1OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAllUsingGET1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAllUsingGET_1",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workspaces",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetAllUsingGET1Reader{formats: a.formats},
+		Reader:             &CreateWorkspaceWithNewBranchReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -286,33 +180,72 @@ func (a *Client) GetAllUsingGET1(params *GetAllUsingGET1Params, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUsingGET1OK)
+	success, ok := result.(*CreateWorkspaceWithNewBranchOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createWorkspaceWithNewBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllUsingGET2 gets all
+CreateWorkspaceWithNewBranch1 create workspace with new branch 1 API
 */
-func (a *Client) GetAllUsingGET2(params *GetAllUsingGET2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllUsingGET2OK, error) {
+func (a *Client) CreateWorkspaceWithNewBranch1(params *CreateWorkspaceWithNewBranch1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkspaceWithNewBranch1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllUsingGET2Params()
+		params = NewCreateWorkspaceWithNewBranch1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllUsingGET_2",
+		ID:                 "createWorkspaceWithNewBranch_1",
+		Method:             "POST",
+		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/new-branch",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateWorkspaceWithNewBranch1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateWorkspaceWithNewBranch1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createWorkspaceWithNewBranch_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAll3 get all 3 API
+*/
+func (a *Client) GetAll3(params *GetAll3Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll3OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAll3Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAll_3",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/workspaces",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllUsingGET2Reader{formats: a.formats},
+		Reader:             &GetAll3Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -325,33 +258,33 @@ func (a *Client) GetAllUsingGET2(params *GetAllUsingGET2Params, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllUsingGET2OK)
+	success, ok := result.(*GetAll3OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllUsingGET_2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAll_3: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-IdentifyCoderLaunchEligibleUsingGET identifies coder launch eligible
+GetAll4 get all 4 API
 */
-func (a *Client) IdentifyCoderLaunchEligibleUsingGET(params *IdentifyCoderLaunchEligibleUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IdentifyCoderLaunchEligibleUsingGETOK, error) {
+func (a *Client) GetAll4(params *GetAll4Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAll4OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewIdentifyCoderLaunchEligibleUsingGETParams()
+		params = NewGetAll4Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "identifyCoderLaunchEligibleUsingGET",
+		ID:                 "getAll_4",
 		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/coder-eligibility",
-		ProducesMediaTypes: []string{"*/*"},
+		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workspaces",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &IdentifyCoderLaunchEligibleUsingGETReader{formats: a.formats},
+		Reader:             &GetAll4Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -364,13 +297,52 @@ func (a *Client) IdentifyCoderLaunchEligibleUsingGET(params *IdentifyCoderLaunch
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IdentifyCoderLaunchEligibleUsingGETOK)
+	success, ok := result.(*GetAll4OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for identifyCoderLaunchEligibleUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAll_4: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+IdentifyCoderLaunchEligible identify coder launch eligible API
+*/
+func (a *Client) IdentifyCoderLaunchEligible(params *IdentifyCoderLaunchEligibleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IdentifyCoderLaunchEligibleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewIdentifyCoderLaunchEligibleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "identifyCoderLaunchEligible",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/coder/stack/{stackName}/coder-eligibility",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &IdentifyCoderLaunchEligibleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*IdentifyCoderLaunchEligibleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for identifyCoderLaunchEligible: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

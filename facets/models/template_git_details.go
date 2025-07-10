@@ -14,9 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TemplateGitDetails TemplateGitDetails
-//
-// # Git details for the template used in Project Type
+// TemplateGitDetails Git details for the template used in Project Type
 //
 // swagger:model TemplateGitDetails
 type TemplateGitDetails struct {

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Version Version
+// Version version
 //
 // swagger:model Version
 type Version struct {
@@ -28,6 +28,9 @@ type Version struct {
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// sequence
+	Sequence int64 `json:"sequence,omitempty"`
 
 	// sequence key
 	SequenceKey string `json:"sequenceKey,omitempty"`

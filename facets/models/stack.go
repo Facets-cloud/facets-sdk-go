@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Stack Stack
+// Stack stack
 //
 // swagger:model Stack
 type Stack struct {
@@ -25,6 +25,7 @@ type Stack struct {
 	AccountID string `json:"accountId,omitempty"`
 
 	// allowed clouds
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// alpha blueprint
@@ -107,7 +108,7 @@ type Stack struct {
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
-	// preview modules allowed
+	// Alternatively called isTestProject
 	PreviewModulesAllowed bool `json:"previewModulesAllowed,omitempty"`
 
 	// primary cloud
@@ -121,6 +122,7 @@ type Stack struct {
 	ProjectTypeName string `json:"projectTypeName,omitempty"`
 
 	// provided resources
+	// Unique: true
 	ProvidedResources []*FacetsResource `json:"providedResources"`
 
 	// relative path
@@ -222,6 +224,10 @@ func (m *Stack) validateAllowedCloudsItemsEnum(path, location string, value stri
 func (m *Stack) validateAllowedClouds(formats strfmt.Registry) error {
 	if swag.IsZero(m.AllowedClouds) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.AllowedClouds); i++ {
@@ -410,6 +416,10 @@ func (m *Stack) validatePrimaryCloud(formats strfmt.Registry) error {
 func (m *Stack) validateProvidedResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.ProvidedResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("providedResources", "body", m.ProvidedResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.ProvidedResources); i++ {

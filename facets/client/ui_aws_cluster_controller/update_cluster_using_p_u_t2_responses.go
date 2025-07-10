@@ -30,26 +30,26 @@ func (o *UpdateClusterUsingPUT2Reader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return result, nil
-	case 201:
-		result := NewUpdateClusterUsingPUT2Created()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
-	case 401:
-		result := NewUpdateClusterUsingPUT2Unauthorized()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
-	case 403:
-		result := NewUpdateClusterUsingPUT2Forbidden()
+	case 400:
+		result := NewUpdateClusterUsingPUT2BadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
 	case 404:
 		result := NewUpdateClusterUsingPUT2NotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 405:
+		result := NewUpdateClusterUsingPUT2MethodNotAllowed()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewUpdateClusterUsingPUT2InternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -129,170 +129,72 @@ func (o *UpdateClusterUsingPUT2OK) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
-// NewUpdateClusterUsingPUT2Created creates a UpdateClusterUsingPUT2Created with default headers values
-func NewUpdateClusterUsingPUT2Created() *UpdateClusterUsingPUT2Created {
-	return &UpdateClusterUsingPUT2Created{}
+// NewUpdateClusterUsingPUT2BadRequest creates a UpdateClusterUsingPUT2BadRequest with default headers values
+func NewUpdateClusterUsingPUT2BadRequest() *UpdateClusterUsingPUT2BadRequest {
+	return &UpdateClusterUsingPUT2BadRequest{}
 }
 
 /*
-UpdateClusterUsingPUT2Created describes a response with status code 201, with default header values.
+UpdateClusterUsingPUT2BadRequest describes a response with status code 400, with default header values.
 
-Created
+Bad Request
 */
-type UpdateClusterUsingPUT2Created struct {
+type UpdateClusterUsingPUT2BadRequest struct {
+	Payload *models.ErrorDetails
 }
 
-// IsSuccess returns true when this update cluster using p u t2 created response has a 2xx status code
-func (o *UpdateClusterUsingPUT2Created) IsSuccess() bool {
+// IsSuccess returns true when this update cluster using p u t2 bad request response has a 2xx status code
+func (o *UpdateClusterUsingPUT2BadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update cluster using p u t2 bad request response has a 3xx status code
+func (o *UpdateClusterUsingPUT2BadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update cluster using p u t2 bad request response has a 4xx status code
+func (o *UpdateClusterUsingPUT2BadRequest) IsClientError() bool {
 	return true
 }
 
-// IsRedirect returns true when this update cluster using p u t2 created response has a 3xx status code
-func (o *UpdateClusterUsingPUT2Created) IsRedirect() bool {
+// IsServerError returns true when this update cluster using p u t2 bad request response has a 5xx status code
+func (o *UpdateClusterUsingPUT2BadRequest) IsServerError() bool {
 	return false
 }
 
-// IsClientError returns true when this update cluster using p u t2 created response has a 4xx status code
-func (o *UpdateClusterUsingPUT2Created) IsClientError() bool {
-	return false
+// IsCode returns true when this update cluster using p u t2 bad request response a status code equal to that given
+func (o *UpdateClusterUsingPUT2BadRequest) IsCode(code int) bool {
+	return code == 400
 }
 
-// IsServerError returns true when this update cluster using p u t2 created response has a 5xx status code
-func (o *UpdateClusterUsingPUT2Created) IsServerError() bool {
-	return false
+// Code gets the status code for the update cluster using p u t2 bad request response
+func (o *UpdateClusterUsingPUT2BadRequest) Code() int {
+	return 400
 }
 
-// IsCode returns true when this update cluster using p u t2 created response a status code equal to that given
-func (o *UpdateClusterUsingPUT2Created) IsCode(code int) bool {
-	return code == 201
+func (o *UpdateClusterUsingPUT2BadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2BadRequest %s", 400, payload)
 }
 
-// Code gets the status code for the update cluster using p u t2 created response
-func (o *UpdateClusterUsingPUT2Created) Code() int {
-	return 201
+func (o *UpdateClusterUsingPUT2BadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2BadRequest %s", 400, payload)
 }
 
-func (o *UpdateClusterUsingPUT2Created) Error() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Created", 201)
+func (o *UpdateClusterUsingPUT2BadRequest) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
-func (o *UpdateClusterUsingPUT2Created) String() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Created", 201)
-}
+func (o *UpdateClusterUsingPUT2BadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-func (o *UpdateClusterUsingPUT2Created) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	o.Payload = new(models.ErrorDetails)
 
-	return nil
-}
-
-// NewUpdateClusterUsingPUT2Unauthorized creates a UpdateClusterUsingPUT2Unauthorized with default headers values
-func NewUpdateClusterUsingPUT2Unauthorized() *UpdateClusterUsingPUT2Unauthorized {
-	return &UpdateClusterUsingPUT2Unauthorized{}
-}
-
-/*
-UpdateClusterUsingPUT2Unauthorized describes a response with status code 401, with default header values.
-
-Unauthorized
-*/
-type UpdateClusterUsingPUT2Unauthorized struct {
-}
-
-// IsSuccess returns true when this update cluster using p u t2 unauthorized response has a 2xx status code
-func (o *UpdateClusterUsingPUT2Unauthorized) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update cluster using p u t2 unauthorized response has a 3xx status code
-func (o *UpdateClusterUsingPUT2Unauthorized) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update cluster using p u t2 unauthorized response has a 4xx status code
-func (o *UpdateClusterUsingPUT2Unauthorized) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update cluster using p u t2 unauthorized response has a 5xx status code
-func (o *UpdateClusterUsingPUT2Unauthorized) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update cluster using p u t2 unauthorized response a status code equal to that given
-func (o *UpdateClusterUsingPUT2Unauthorized) IsCode(code int) bool {
-	return code == 401
-}
-
-// Code gets the status code for the update cluster using p u t2 unauthorized response
-func (o *UpdateClusterUsingPUT2Unauthorized) Code() int {
-	return 401
-}
-
-func (o *UpdateClusterUsingPUT2Unauthorized) Error() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Unauthorized", 401)
-}
-
-func (o *UpdateClusterUsingPUT2Unauthorized) String() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Unauthorized", 401)
-}
-
-func (o *UpdateClusterUsingPUT2Unauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewUpdateClusterUsingPUT2Forbidden creates a UpdateClusterUsingPUT2Forbidden with default headers values
-func NewUpdateClusterUsingPUT2Forbidden() *UpdateClusterUsingPUT2Forbidden {
-	return &UpdateClusterUsingPUT2Forbidden{}
-}
-
-/*
-UpdateClusterUsingPUT2Forbidden describes a response with status code 403, with default header values.
-
-Forbidden
-*/
-type UpdateClusterUsingPUT2Forbidden struct {
-}
-
-// IsSuccess returns true when this update cluster using p u t2 forbidden response has a 2xx status code
-func (o *UpdateClusterUsingPUT2Forbidden) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this update cluster using p u t2 forbidden response has a 3xx status code
-func (o *UpdateClusterUsingPUT2Forbidden) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this update cluster using p u t2 forbidden response has a 4xx status code
-func (o *UpdateClusterUsingPUT2Forbidden) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this update cluster using p u t2 forbidden response has a 5xx status code
-func (o *UpdateClusterUsingPUT2Forbidden) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this update cluster using p u t2 forbidden response a status code equal to that given
-func (o *UpdateClusterUsingPUT2Forbidden) IsCode(code int) bool {
-	return code == 403
-}
-
-// Code gets the status code for the update cluster using p u t2 forbidden response
-func (o *UpdateClusterUsingPUT2Forbidden) Code() int {
-	return 403
-}
-
-func (o *UpdateClusterUsingPUT2Forbidden) Error() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Forbidden", 403)
-}
-
-func (o *UpdateClusterUsingPUT2Forbidden) String() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2Forbidden", 403)
-}
-
-func (o *UpdateClusterUsingPUT2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -308,6 +210,7 @@ UpdateClusterUsingPUT2NotFound describes a response with status code 404, with d
 Not Found
 */
 type UpdateClusterUsingPUT2NotFound struct {
+	Payload *models.ErrorDetails
 }
 
 // IsSuccess returns true when this update cluster using p u t2 not found response has a 2xx status code
@@ -341,14 +244,167 @@ func (o *UpdateClusterUsingPUT2NotFound) Code() int {
 }
 
 func (o *UpdateClusterUsingPUT2NotFound) Error() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2NotFound %s", 404, payload)
 }
 
 func (o *UpdateClusterUsingPUT2NotFound) String() string {
-	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2NotFound %s", 404, payload)
+}
+
+func (o *UpdateClusterUsingPUT2NotFound) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
 func (o *UpdateClusterUsingPUT2NotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateClusterUsingPUT2MethodNotAllowed creates a UpdateClusterUsingPUT2MethodNotAllowed with default headers values
+func NewUpdateClusterUsingPUT2MethodNotAllowed() *UpdateClusterUsingPUT2MethodNotAllowed {
+	return &UpdateClusterUsingPUT2MethodNotAllowed{}
+}
+
+/*
+UpdateClusterUsingPUT2MethodNotAllowed describes a response with status code 405, with default header values.
+
+Method Not Allowed
+*/
+type UpdateClusterUsingPUT2MethodNotAllowed struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this update cluster using p u t2 method not allowed response has a 2xx status code
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update cluster using p u t2 method not allowed response has a 3xx status code
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update cluster using p u t2 method not allowed response has a 4xx status code
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update cluster using p u t2 method not allowed response has a 5xx status code
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update cluster using p u t2 method not allowed response a status code equal to that given
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) IsCode(code int) bool {
+	return code == 405
+}
+
+// Code gets the status code for the update cluster using p u t2 method not allowed response
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) Code() int {
+	return 405
+}
+
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *UpdateClusterUsingPUT2MethodNotAllowed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateClusterUsingPUT2InternalServerError creates a UpdateClusterUsingPUT2InternalServerError with default headers values
+func NewUpdateClusterUsingPUT2InternalServerError() *UpdateClusterUsingPUT2InternalServerError {
+	return &UpdateClusterUsingPUT2InternalServerError{}
+}
+
+/*
+UpdateClusterUsingPUT2InternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type UpdateClusterUsingPUT2InternalServerError struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this update cluster using p u t2 internal server error response has a 2xx status code
+func (o *UpdateClusterUsingPUT2InternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update cluster using p u t2 internal server error response has a 3xx status code
+func (o *UpdateClusterUsingPUT2InternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update cluster using p u t2 internal server error response has a 4xx status code
+func (o *UpdateClusterUsingPUT2InternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update cluster using p u t2 internal server error response has a 5xx status code
+func (o *UpdateClusterUsingPUT2InternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update cluster using p u t2 internal server error response a status code equal to that given
+func (o *UpdateClusterUsingPUT2InternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update cluster using p u t2 internal server error response
+func (o *UpdateClusterUsingPUT2InternalServerError) Code() int {
+	return 500
+}
+
+func (o *UpdateClusterUsingPUT2InternalServerError) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2InternalServerError %s", 500, payload)
+}
+
+func (o *UpdateClusterUsingPUT2InternalServerError) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cc-ui/v1/aws/clusters/{clusterId}][%d] updateClusterUsingPUT2InternalServerError %s", 500, payload)
+}
+
+func (o *UpdateClusterUsingPUT2InternalServerError) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *UpdateClusterUsingPUT2InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

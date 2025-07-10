@@ -7,12 +7,15 @@ package models
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// TFOutputRequestDTO TFOutputRequestDTO
+// TFOutputRequestDTO t f output request d t o
 //
 // swagger:model TFOutputRequestDTO
 type TFOutputRequestDTO struct {
@@ -24,16 +27,113 @@ type TFOutputRequestDTO struct {
 	LookupTree string `json:"lookupTree,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
+
+	// namespace
+	Namespace string `json:"namespace,omitempty"`
+
+	// properties
+	Properties JSONNode `json:"properties,omitempty"`
+
+	// providers
+	// Unique: true
+	Providers []*TFProvider `json:"providers"`
 }
 
 // Validate validates this t f output request d t o
 func (m *TFOutputRequestDTO) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProviders(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this t f output request d t o based on context it is used
+func (m *TFOutputRequestDTO) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TFOutputRequestDTO) validateProviders(formats strfmt.Registry) error {
+	if swag.IsZero(m.Providers) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("providers", "body", m.Providers); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Providers); i++ {
+		if swag.IsZero(m.Providers[i]) { // not required
+			continue
+		}
+
+		if m.Providers[i] != nil {
+			if err := m.Providers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this t f output request d t o based on the context it is used
 func (m *TFOutputRequestDTO) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *TFOutputRequestDTO) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Providers); i++ {
+
+		if m.Providers[i] != nil {
+
+			if swag.IsZero(m.Providers[i]) { // not required
+				return nil
+			}
+
+			if err := m.Providers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

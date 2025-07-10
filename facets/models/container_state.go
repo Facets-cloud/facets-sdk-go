@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerState ContainerState
+// ContainerState container state
 //
 // swagger:model ContainerState
 type ContainerState struct {

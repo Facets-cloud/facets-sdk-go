@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// TopologySpreadConstraint TopologySpreadConstraint
+// TopologySpreadConstraint topology spread constraint
 //
 // swagger:model TopologySpreadConstraint
 type TopologySpreadConstraint struct {

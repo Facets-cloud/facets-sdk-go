@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ReleaseStreamRequest ReleaseStreamRequest
+// ReleaseStreamRequest release stream request
 //
 // swagger:model ReleaseStreamRequest
 type ReleaseStreamRequest struct {
@@ -21,7 +23,8 @@ type ReleaseStreamRequest struct {
 	Description string `json:"description,omitempty"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// prod
 	Prod bool `json:"prod,omitempty"`
@@ -29,6 +32,24 @@ type ReleaseStreamRequest struct {
 
 // Validate validates this release stream request
 func (m *ReleaseStreamRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReleaseStreamRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
 	return nil
 }
 

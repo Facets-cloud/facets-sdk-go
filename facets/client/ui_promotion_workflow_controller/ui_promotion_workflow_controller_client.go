@@ -54,68 +54,44 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateWorkflowUsingPOST(params *CreateWorkflowUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowUsingPOSTOK, *CreateWorkflowUsingPOSTCreated, error)
+	CreateWorkflow(params *CreateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowOK, error)
 
-	DeleteWorkflowUsingDELETE(params *DeleteWorkflowUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkflowUsingDELETEOK, *DeleteWorkflowUsingDELETENoContent, error)
+	DeleteWorkflow(params *DeleteWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkflowOK, error)
 
-	GetAllWorkflowsUsingGET(params *GetAllWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllWorkflowsUsingGETOK, error)
+	GetAllWorkflows(params *GetAllWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllWorkflowsOK, error)
 
-	GetDefaultWorkflowUsingGET(params *GetDefaultWorkflowUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDefaultWorkflowUsingGETOK, error)
+	GetDefaultWorkflow(params *GetDefaultWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDefaultWorkflowOK, error)
 
-	GetRegistrationSpecificWorkflowsUsingGET(params *GetRegistrationSpecificWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegistrationSpecificWorkflowsUsingGETOK, error)
+	GetRegistrationSpecificWorkflows(params *GetRegistrationSpecificWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegistrationSpecificWorkflowsOK, error)
 
-	GetWorkflowUsingGET(params *GetWorkflowUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowUsingGETOK, error)
+	GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowOK, error)
 
-	GetWorkflowsByStackUsingGET(params *GetWorkflowsByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsByStackUsingGETOK, error)
+	GetWorkflowsByStack(params *GetWorkflowsByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsByStackOK, error)
 
-	UpdateWorkflowUsingPUT(params *UpdateWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowUsingPUTOK, *UpdateWorkflowUsingPUTCreated, error)
+	UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-CreateWorkflowUsingPOST creates workflow
+CreateWorkflow create workflow API
 */
-func (a *Client) CreateWorkflowUsingPOST(params *CreateWorkflowUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowUsingPOSTOK, *CreateWorkflowUsingPOSTCreated, error) {
+func (a *Client) CreateWorkflow(params *CreateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateWorkflowUsingPOSTParams()
+		params = NewCreateWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createWorkflowUsingPOST",
+		ID:                 "createWorkflow",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/workflow",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateWorkflowUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,36 +102,35 @@ func (a *Client) CreateWorkflowUsingPOST(params *CreateWorkflowUsingPOSTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateWorkflowUsingPOSTOK:
-		return value, nil, nil
-	case *CreateWorkflowUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateWorkflowOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_promotion_workflow_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteWorkflowUsingDELETE deletes workflow
+DeleteWorkflow delete workflow API
 */
-func (a *Client) DeleteWorkflowUsingDELETE(params *DeleteWorkflowUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkflowUsingDELETEOK, *DeleteWorkflowUsingDELETENoContent, error) {
+func (a *Client) DeleteWorkflow(params *DeleteWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteWorkflowUsingDELETEParams()
+		params = NewDeleteWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteWorkflowUsingDELETE",
+		ID:                 "deleteWorkflow",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/workflow/{workflowId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteWorkflowUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,36 +141,35 @@ func (a *Client) DeleteWorkflowUsingDELETE(params *DeleteWorkflowUsingDELETEPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteWorkflowUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteWorkflowUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteWorkflowOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_promotion_workflow_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllWorkflowsUsingGET gets all workflows
+GetAllWorkflows get all workflows API
 */
-func (a *Client) GetAllWorkflowsUsingGET(params *GetAllWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllWorkflowsUsingGETOK, error) {
+func (a *Client) GetAllWorkflows(params *GetAllWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllWorkflowsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllWorkflowsUsingGETParams()
+		params = NewGetAllWorkflowsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllWorkflowsUsingGET",
+		ID:                 "getAllWorkflows",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/workflow",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllWorkflowsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllWorkflowsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -208,33 +182,33 @@ func (a *Client) GetAllWorkflowsUsingGET(params *GetAllWorkflowsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllWorkflowsUsingGETOK)
+	success, ok := result.(*GetAllWorkflowsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllWorkflowsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetDefaultWorkflowUsingGET gets default workflow
+GetDefaultWorkflow get default workflow API
 */
-func (a *Client) GetDefaultWorkflowUsingGET(params *GetDefaultWorkflowUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDefaultWorkflowUsingGETOK, error) {
+func (a *Client) GetDefaultWorkflow(params *GetDefaultWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDefaultWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetDefaultWorkflowUsingGETParams()
+		params = NewGetDefaultWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getDefaultWorkflowUsingGET",
+		ID:                 "getDefaultWorkflow",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/workflow/default-workflow/registration-type/{registrationType}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetDefaultWorkflowUsingGETReader{formats: a.formats},
+		Reader:             &GetDefaultWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -247,33 +221,33 @@ func (a *Client) GetDefaultWorkflowUsingGET(params *GetDefaultWorkflowUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetDefaultWorkflowUsingGETOK)
+	success, ok := result.(*GetDefaultWorkflowOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getDefaultWorkflowUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getDefaultWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetRegistrationSpecificWorkflowsUsingGET gets registration specific workflows
+GetRegistrationSpecificWorkflows get registration specific workflows API
 */
-func (a *Client) GetRegistrationSpecificWorkflowsUsingGET(params *GetRegistrationSpecificWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegistrationSpecificWorkflowsUsingGETOK, error) {
+func (a *Client) GetRegistrationSpecificWorkflows(params *GetRegistrationSpecificWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRegistrationSpecificWorkflowsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetRegistrationSpecificWorkflowsUsingGETParams()
+		params = NewGetRegistrationSpecificWorkflowsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getRegistrationSpecificWorkflowsUsingGET",
+		ID:                 "getRegistrationSpecificWorkflows",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/workflow/registration-specific",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetRegistrationSpecificWorkflowsUsingGETReader{formats: a.formats},
+		Reader:             &GetRegistrationSpecificWorkflowsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -286,33 +260,33 @@ func (a *Client) GetRegistrationSpecificWorkflowsUsingGET(params *GetRegistratio
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetRegistrationSpecificWorkflowsUsingGETOK)
+	success, ok := result.(*GetRegistrationSpecificWorkflowsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getRegistrationSpecificWorkflowsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getRegistrationSpecificWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetWorkflowUsingGET gets workflow
+GetWorkflow get workflow API
 */
-func (a *Client) GetWorkflowUsingGET(params *GetWorkflowUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowUsingGETOK, error) {
+func (a *Client) GetWorkflow(params *GetWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkflowUsingGETParams()
+		params = NewGetWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowUsingGET",
+		ID:                 "getWorkflow",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/workflow/{workflowId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkflowUsingGETReader{formats: a.formats},
+		Reader:             &GetWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -325,33 +299,33 @@ func (a *Client) GetWorkflowUsingGET(params *GetWorkflowUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkflowUsingGETOK)
+	success, ok := result.(*GetWorkflowOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetWorkflowsByStackUsingGET gets workflows by stack
+GetWorkflowsByStack get workflows by stack API
 */
-func (a *Client) GetWorkflowsByStackUsingGET(params *GetWorkflowsByStackUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsByStackUsingGETOK, error) {
+func (a *Client) GetWorkflowsByStack(params *GetWorkflowsByStackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsByStackOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkflowsByStackUsingGETParams()
+		params = NewGetWorkflowsByStackParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowsByStackUsingGET",
+		ID:                 "getWorkflowsByStack",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/workflow/blueprint/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkflowsByStackUsingGETReader{formats: a.formats},
+		Reader:             &GetWorkflowsByStackReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -364,33 +338,33 @@ func (a *Client) GetWorkflowsByStackUsingGET(params *GetWorkflowsByStackUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkflowsByStackUsingGETOK)
+	success, ok := result.(*GetWorkflowsByStackOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowsByStackUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflowsByStack: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateWorkflowUsingPUT updates workflow
+UpdateWorkflow update workflow API
 */
-func (a *Client) UpdateWorkflowUsingPUT(params *UpdateWorkflowUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowUsingPUTOK, *UpdateWorkflowUsingPUTCreated, error) {
+func (a *Client) UpdateWorkflow(params *UpdateWorkflowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateWorkflowOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateWorkflowUsingPUTParams()
+		params = NewUpdateWorkflowParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateWorkflowUsingPUT",
+		ID:                 "updateWorkflow",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/workflow/{workflowId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateWorkflowUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateWorkflowReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -401,16 +375,15 @@ func (a *Client) UpdateWorkflowUsingPUT(params *UpdateWorkflowUsingPUTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateWorkflowUsingPUTOK:
-		return value, nil, nil
-	case *UpdateWorkflowUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateWorkflowOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_promotion_workflow_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateWorkflow: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

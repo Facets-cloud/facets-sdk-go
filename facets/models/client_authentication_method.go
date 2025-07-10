@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ClientAuthenticationMethod ClientAuthenticationMethod
+// ClientAuthenticationMethod client authentication method
 //
 // swagger:model ClientAuthenticationMethod
 type ClientAuthenticationMethod struct {

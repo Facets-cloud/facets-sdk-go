@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecretVolumeSource SecretVolumeSource
+// SecretVolumeSource secret volume source
 //
 // swagger:model SecretVolumeSource
 type SecretVolumeSource struct {

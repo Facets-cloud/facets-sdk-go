@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// PodSpec PodSpec
+// PodSpec pod spec
 //
 // swagger:model PodSpec
 type PodSpec struct {

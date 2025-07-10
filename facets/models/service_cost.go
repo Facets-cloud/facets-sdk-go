@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ServiceCost ServiceCost
+// ServiceCost service cost
 //
 // swagger:model ServiceCost
 type ServiceCost struct {

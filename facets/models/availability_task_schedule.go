@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AvailabilityTaskSchedule AvailabilityTaskSchedule
+// AvailabilityTaskSchedule availability task schedule
 //
 // swagger:model AvailabilityTaskSchedule
 type AvailabilityTaskSchedule struct {
@@ -41,11 +41,12 @@ type AvailabilityTaskSchedule struct {
 	Interval int32 `json:"interval,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
-	ReleaseType string `json:"releaseType,omitempty"`
+	// Required: true
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
+	ReleaseType *string `json:"releaseType"`
 
 	// time zone
-	TimeZone *TimeZone `json:"timeZone,omitempty"`
+	TimeZone *AvailabilityTaskScheduleTimeZone `json:"timeZone,omitempty"`
 }
 
 // Validate validates this availability task schedule
@@ -185,7 +186,7 @@ var availabilityTaskScheduleTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -233,6 +234,15 @@ const (
 
 	// AvailabilityTaskScheduleReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	AvailabilityTaskScheduleReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// AvailabilityTaskScheduleReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	AvailabilityTaskScheduleReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// AvailabilityTaskScheduleReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	AvailabilityTaskScheduleReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// AvailabilityTaskScheduleReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	AvailabilityTaskScheduleReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum
@@ -244,12 +254,13 @@ func (m *AvailabilityTaskSchedule) validateReleaseTypeEnum(path, location string
 }
 
 func (m *AvailabilityTaskSchedule) validateReleaseType(formats strfmt.Registry) error {
-	if swag.IsZero(m.ReleaseType) { // not required
-		return nil
+
+	if err := validate.Required("releaseType", "body", m.ReleaseType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateReleaseTypeEnum("releaseType", "body", m.ReleaseType); err != nil {
+	if err := m.validateReleaseTypeEnum("releaseType", "body", *m.ReleaseType); err != nil {
 		return err
 	}
 
@@ -346,6 +357,52 @@ func (m *AvailabilityTaskSchedule) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *AvailabilityTaskSchedule) UnmarshalBinary(b []byte) error {
 	var res AvailabilityTaskSchedule
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// AvailabilityTaskScheduleTimeZone availability task schedule time zone
+//
+// swagger:model AvailabilityTaskScheduleTimeZone
+type AvailabilityTaskScheduleTimeZone struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this availability task schedule time zone
+func (m *AvailabilityTaskScheduleTimeZone) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this availability task schedule time zone based on context it is used
+func (m *AvailabilityTaskScheduleTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *AvailabilityTaskScheduleTimeZone) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *AvailabilityTaskScheduleTimeZone) UnmarshalBinary(b []byte) error {
+	var res AvailabilityTaskScheduleTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

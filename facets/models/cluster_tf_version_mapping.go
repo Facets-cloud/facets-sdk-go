@@ -14,13 +14,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ClusterTfVersionMapping ClusterTfVersionMapping
+// ClusterTfVersionMapping cluster tf version mapping
 //
 // swagger:model ClusterTfVersionMapping
 type ClusterTfVersionMapping struct {
 
 	// cluster Id
-	ClusterID string `json:"clusterId,omitempty"`
+	// Required: true
+	ClusterID *string `json:"clusterId"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -40,12 +41,17 @@ type ClusterTfVersionMapping struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// version
-	Version *TfVersion `json:"version,omitempty"`
+	// Required: true
+	Version *TfVersion `json:"version"`
 }
 
 // Validate validates this cluster tf version mapping
 func (m *ClusterTfVersionMapping) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
@@ -62,6 +68,15 @@ func (m *ClusterTfVersionMapping) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ClusterTfVersionMapping) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterId", "body", m.ClusterID); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -90,8 +105,9 @@ func (m *ClusterTfVersionMapping) validateLastModifiedDate(formats strfmt.Regist
 }
 
 func (m *ClusterTfVersionMapping) validateVersion(formats strfmt.Registry) error {
-	if swag.IsZero(m.Version) { // not required
-		return nil
+
+	if err := validate.Required("version", "body", m.Version); err != nil {
+		return err
 	}
 
 	if m.Version != nil {
@@ -125,10 +141,6 @@ func (m *ClusterTfVersionMapping) ContextValidate(ctx context.Context, formats s
 func (m *ClusterTfVersionMapping) contextValidateVersion(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Version != nil {
-
-		if swag.IsZero(m.Version) { // not required
-			return nil
-		}
 
 		if err := m.Version.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

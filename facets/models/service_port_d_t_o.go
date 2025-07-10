@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ServicePortDTO ServicePortDTO
+// ServicePortDTO service port d t o
 //
 // swagger:model ServicePortDTO
 type ServicePortDTO struct {

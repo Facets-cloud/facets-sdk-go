@@ -12,9 +12,10 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ProvidedResources ProvidedResources
+// ProvidedResources provided resources
 //
 // swagger:model ProvidedResources
 type ProvidedResources struct {
@@ -26,15 +27,19 @@ type ProvidedResources struct {
 	ID string `json:"id,omitempty"`
 
 	// provided authenticated resources
+	// Unique: true
 	ProvidedAuthenticatedResources []*ProvidedAuthenticatedResource `json:"providedAuthenticatedResources"`
 
 	// provided cloud resources
+	// Unique: true
 	ProvidedCloudResources []*ProvidedCloudResource `json:"providedCloudResources"`
 
 	// provided sharded resources
+	// Unique: true
 	ProvidedShardedResources []*ProvidedShardedService `json:"providedShardedResources"`
 
 	// provided unauthenticated resources
+	// Unique: true
 	ProvidedUnauthenticatedResources []*ProvidedUnauthenticatedResource `json:"providedUnauthenticatedResources"`
 }
 
@@ -69,6 +74,10 @@ func (m *ProvidedResources) validateProvidedAuthenticatedResources(formats strfm
 		return nil
 	}
 
+	if err := validate.UniqueItems("providedAuthenticatedResources", "body", m.ProvidedAuthenticatedResources); err != nil {
+		return err
+	}
+
 	for i := 0; i < len(m.ProvidedAuthenticatedResources); i++ {
 		if swag.IsZero(m.ProvidedAuthenticatedResources[i]) { // not required
 			continue
@@ -93,6 +102,10 @@ func (m *ProvidedResources) validateProvidedAuthenticatedResources(formats strfm
 func (m *ProvidedResources) validateProvidedCloudResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.ProvidedCloudResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("providedCloudResources", "body", m.ProvidedCloudResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.ProvidedCloudResources); i++ {
@@ -121,6 +134,10 @@ func (m *ProvidedResources) validateProvidedShardedResources(formats strfmt.Regi
 		return nil
 	}
 
+	if err := validate.UniqueItems("providedShardedResources", "body", m.ProvidedShardedResources); err != nil {
+		return err
+	}
+
 	for i := 0; i < len(m.ProvidedShardedResources); i++ {
 		if swag.IsZero(m.ProvidedShardedResources[i]) { // not required
 			continue
@@ -145,6 +162,10 @@ func (m *ProvidedResources) validateProvidedShardedResources(formats strfmt.Regi
 func (m *ProvidedResources) validateProvidedUnauthenticatedResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.ProvidedUnauthenticatedResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("providedUnauthenticatedResources", "body", m.ProvidedUnauthenticatedResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.ProvidedUnauthenticatedResources); i++ {

@@ -15,16 +15,18 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ArtifactRequest ArtifactRequest
+// ArtifactRequest artifact request
 //
 // swagger:model ArtifactRequest
 type ArtifactRequest struct {
 
 	// application name
-	ApplicationName string `json:"applicationName,omitempty"`
+	// Required: true
+	ApplicationName *string `json:"applicationName"`
 
 	// artifact Uri
-	ArtifactURI string `json:"artifactUri,omitempty"`
+	// Required: true
+	ArtifactURI *string `json:"artifactUri"`
 
 	// artifactory
 	Artifactory string `json:"artifactory,omitempty"`
@@ -75,6 +77,14 @@ type ArtifactRequest struct {
 func (m *ArtifactRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateApplicationName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateArtifactURI(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateRegisteredFor(formats); err != nil {
 		res = append(res, err)
 	}
@@ -86,6 +96,24 @@ func (m *ArtifactRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ArtifactRequest) validateApplicationName(formats strfmt.Registry) error {
+
+	if err := validate.Required("applicationName", "body", m.ApplicationName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ArtifactRequest) validateArtifactURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("artifactUri", "body", m.ArtifactURI); err != nil {
+		return err
+	}
+
 	return nil
 }
 

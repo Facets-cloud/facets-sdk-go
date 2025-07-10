@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AssistantMessage AssistantMessage
+// AssistantMessage assistant message
 //
 // swagger:model AssistantMessage
 type AssistantMessage struct {

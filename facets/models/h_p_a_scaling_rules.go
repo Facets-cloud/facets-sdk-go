@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HPAScalingRules HPAScalingRules
+// HPAScalingRules h p a scaling rules
 //
 // swagger:model HPAScalingRules
 type HPAScalingRules struct {

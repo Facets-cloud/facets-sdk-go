@@ -15,9 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AttachDetachCiRequest AttachDetachCiRequest
-//
-// Request details for attaching or detaching a rule and workflow to/from a CI.
+// AttachDetachCiRequest Request details for attaching or detaching a rule and workflow to/from a CI.
 //
 // swagger:model AttachDetachCiRequest
 type AttachDetachCiRequest struct {

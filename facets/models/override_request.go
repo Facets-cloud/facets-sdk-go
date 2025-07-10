@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// OverrideRequest OverrideRequest
+// OverrideRequest override request
 //
 // swagger:model OverrideRequest
 type OverrideRequest struct {
@@ -21,17 +23,50 @@ type OverrideRequest struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// overrides
-	Overrides interface{} `json:"overrides,omitempty"`
+	Overrides map[string]interface{} `json:"overrides,omitempty"`
 
 	// resource name
-	ResourceName string `json:"resourceName,omitempty"`
+	// Required: true
+	ResourceName *string `json:"resourceName"`
 
 	// resource type
-	ResourceType string `json:"resourceType,omitempty"`
+	// Required: true
+	ResourceType *string `json:"resourceType"`
 }
 
 // Validate validates this override request
 func (m *OverrideRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *OverrideRequest) validateResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceName", "body", m.ResourceName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *OverrideRequest) validateResourceType(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceType", "body", m.ResourceType); err != nil {
+		return err
+	}
+
 	return nil
 }
 

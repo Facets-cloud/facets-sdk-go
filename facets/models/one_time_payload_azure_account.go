@@ -13,9 +13,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// OneTimePayloadAzureAccount OneTimePayload«AzureAccount»
+// OneTimePayloadAzureAccount one time payload azure account
 //
-// swagger:model OneTimePayload«AzureAccount»
+// swagger:model OneTimePayloadAzureAccount
 type OneTimePayloadAzureAccount struct {
 
 	// payload

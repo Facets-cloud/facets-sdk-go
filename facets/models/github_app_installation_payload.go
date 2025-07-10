@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// GithubAppInstallationPayload GithubAppInstallationPayload
+// GithubAppInstallationPayload github app installation payload
 //
 // swagger:model GithubAppInstallationPayload
 type GithubAppInstallationPayload struct {

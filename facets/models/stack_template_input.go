@@ -15,39 +15,77 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// StackTemplateInput StackTemplateInput
+// StackTemplateInput stack template input
 //
 // swagger:model StackTemplateInput
 type StackTemplateInput struct {
 
 	// cluster Id
-	ClusterID string `json:"clusterId,omitempty"`
+	// Required: true
+	ClusterID *string `json:"clusterId"`
 
 	// data
-	Data map[string]string `json:"data,omitempty"`
+	// Required: true
+	Data map[string]string `json:"data"`
 
 	// entity type
 	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
 	EntityType string `json:"entityType,omitempty"`
 
 	// input type
-	InputType string `json:"inputType,omitempty"`
+	// Required: true
+	InputType *string `json:"inputType"`
 
 	// uid
-	UID string `json:"uid,omitempty"`
+	// Required: true
+	UID *string `json:"uid"`
 }
 
 // Validate validates this stack template input
 func (m *StackTemplateInput) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateData(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEntityType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInputType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUID(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *StackTemplateInput) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterId", "body", m.ClusterID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *StackTemplateInput) validateData(formats strfmt.Registry) error {
+
+	if err := validate.Required("data", "body", m.Data); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -108,6 +146,24 @@ func (m *StackTemplateInput) validateEntityType(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *StackTemplateInput) validateInputType(formats strfmt.Registry) error {
+
+	if err := validate.Required("inputType", "body", m.InputType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *StackTemplateInput) validateUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("uid", "body", m.UID); err != nil {
 		return err
 	}
 

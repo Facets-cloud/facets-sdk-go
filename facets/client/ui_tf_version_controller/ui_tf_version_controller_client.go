@@ -54,66 +54,42 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteTfStreamForClusterUsingDELETE(params *DeleteTfStreamForClusterUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTfStreamForClusterUsingDELETEOK, *DeleteTfStreamForClusterUsingDELETENoContent, error)
+	DeleteTfStreamForCluster(params *DeleteTfStreamForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTfStreamForClusterOK, error)
 
-	GetAllVersionsUsingGET(params *GetAllVersionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVersionsUsingGETOK, error)
+	GetAllVersions(params *GetAllVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVersionsOK, error)
 
-	GetPendingMigrationScriptsByClusterIDUsingGET(params *GetPendingMigrationScriptsByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPendingMigrationScriptsByClusterIDUsingGETOK, error)
+	GetPendingMigrationScriptsByClusterID(params *GetPendingMigrationScriptsByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPendingMigrationScriptsByClusterIDOK, error)
 
-	GetTfStreamForClusterUsingGET(params *GetTfStreamForClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfStreamForClusterUsingGETOK, error)
+	GetTfStreamForCluster(params *GetTfStreamForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfStreamForClusterOK, error)
 
-	GetTfVersionsForStreamUsingGET(params *GetTfVersionsForStreamUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfVersionsForStreamUsingGETOK, error)
+	GetTfVersionsForStream(params *GetTfVersionsForStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfVersionsForStreamOK, error)
 
-	PopulateReleaseStreamTfVersionMappingUsingPOST(params *PopulateReleaseStreamTfVersionMappingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PopulateReleaseStreamTfVersionMappingUsingPOSTOK, *PopulateReleaseStreamTfVersionMappingUsingPOSTCreated, error)
+	PopulateReleaseStreamTfVersionMapping(params *PopulateReleaseStreamTfVersionMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PopulateReleaseStreamTfVersionMappingOK, error)
 
-	SetTfVersionForClusterUsingPUT(params *SetTfVersionForClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTfVersionForClusterUsingPUTOK, *SetTfVersionForClusterUsingPUTCreated, error)
+	SetTfVersionForCluster(params *SetTfVersionForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTfVersionForClusterOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-DeleteTfStreamForClusterUsingDELETE deletes tf stream for cluster
+DeleteTfStreamForCluster delete tf stream for cluster API
 */
-func (a *Client) DeleteTfStreamForClusterUsingDELETE(params *DeleteTfStreamForClusterUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTfStreamForClusterUsingDELETEOK, *DeleteTfStreamForClusterUsingDELETENoContent, error) {
+func (a *Client) DeleteTfStreamForCluster(params *DeleteTfStreamForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTfStreamForClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteTfStreamForClusterUsingDELETEParams()
+		params = NewDeleteTfStreamForClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteTfStreamForClusterUsingDELETE",
+		ID:                 "deleteTfStreamForCluster",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/terraform/cluster/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteTfStreamForClusterUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteTfStreamForClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -124,36 +100,35 @@ func (a *Client) DeleteTfStreamForClusterUsingDELETE(params *DeleteTfStreamForCl
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteTfStreamForClusterUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteTfStreamForClusterUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteTfStreamForClusterOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_tf_version_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteTfStreamForCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAllVersionsUsingGET gets all versions
+GetAllVersions get all versions API
 */
-func (a *Client) GetAllVersionsUsingGET(params *GetAllVersionsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVersionsUsingGETOK, error) {
+func (a *Client) GetAllVersions(params *GetAllVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVersionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllVersionsUsingGETParams()
+		params = NewGetAllVersionsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllVersionsUsingGET",
+		ID:                 "getAllVersions",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/terraform/versions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllVersionsUsingGETReader{formats: a.formats},
+		Reader:             &GetAllVersionsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,33 +141,33 @@ func (a *Client) GetAllVersionsUsingGET(params *GetAllVersionsUsingGETParams, au
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllVersionsUsingGETOK)
+	success, ok := result.(*GetAllVersionsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllVersionsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPendingMigrationScriptsByClusterIDUsingGET gets pending migration scripts by cluster Id
+GetPendingMigrationScriptsByClusterID get pending migration scripts by cluster Id API
 */
-func (a *Client) GetPendingMigrationScriptsByClusterIDUsingGET(params *GetPendingMigrationScriptsByClusterIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPendingMigrationScriptsByClusterIDUsingGETOK, error) {
+func (a *Client) GetPendingMigrationScriptsByClusterID(params *GetPendingMigrationScriptsByClusterIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPendingMigrationScriptsByClusterIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPendingMigrationScriptsByClusterIDUsingGETParams()
+		params = NewGetPendingMigrationScriptsByClusterIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPendingMigrationScriptsByClusterIdUsingGET",
+		ID:                 "getPendingMigrationScriptsByClusterId",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/terraform/cluster/{clusterId}/pending-migration-scripts",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPendingMigrationScriptsByClusterIDUsingGETReader{formats: a.formats},
+		Reader:             &GetPendingMigrationScriptsByClusterIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -205,33 +180,33 @@ func (a *Client) GetPendingMigrationScriptsByClusterIDUsingGET(params *GetPendin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPendingMigrationScriptsByClusterIDUsingGETOK)
+	success, ok := result.(*GetPendingMigrationScriptsByClusterIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPendingMigrationScriptsByClusterIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPendingMigrationScriptsByClusterId: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetTfStreamForClusterUsingGET gets tf stream for cluster
+GetTfStreamForCluster get tf stream for cluster API
 */
-func (a *Client) GetTfStreamForClusterUsingGET(params *GetTfStreamForClusterUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfStreamForClusterUsingGETOK, error) {
+func (a *Client) GetTfStreamForCluster(params *GetTfStreamForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfStreamForClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTfStreamForClusterUsingGETParams()
+		params = NewGetTfStreamForClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getTfStreamForClusterUsingGET",
+		ID:                 "getTfStreamForCluster",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/terraform/cluster/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTfStreamForClusterUsingGETReader{formats: a.formats},
+		Reader:             &GetTfStreamForClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -244,33 +219,33 @@ func (a *Client) GetTfStreamForClusterUsingGET(params *GetTfStreamForClusterUsin
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTfStreamForClusterUsingGETOK)
+	success, ok := result.(*GetTfStreamForClusterOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getTfStreamForClusterUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getTfStreamForCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetTfVersionsForStreamUsingGET gets tf versions for stream
+GetTfVersionsForStream get tf versions for stream API
 */
-func (a *Client) GetTfVersionsForStreamUsingGET(params *GetTfVersionsForStreamUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfVersionsForStreamUsingGETOK, error) {
+func (a *Client) GetTfVersionsForStream(params *GetTfVersionsForStreamParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTfVersionsForStreamOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTfVersionsForStreamUsingGETParams()
+		params = NewGetTfVersionsForStreamParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getTfVersionsForStreamUsingGET",
+		ID:                 "getTfVersionsForStream",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/terraform/stream/{tfStream}/versions",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTfVersionsForStreamUsingGETReader{formats: a.formats},
+		Reader:             &GetTfVersionsForStreamReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -283,33 +258,33 @@ func (a *Client) GetTfVersionsForStreamUsingGET(params *GetTfVersionsForStreamUs
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTfVersionsForStreamUsingGETOK)
+	success, ok := result.(*GetTfVersionsForStreamOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getTfVersionsForStreamUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getTfVersionsForStream: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PopulateReleaseStreamTfVersionMappingUsingPOST populates release stream tf version mapping
+PopulateReleaseStreamTfVersionMapping populate release stream tf version mapping API
 */
-func (a *Client) PopulateReleaseStreamTfVersionMappingUsingPOST(params *PopulateReleaseStreamTfVersionMappingUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PopulateReleaseStreamTfVersionMappingUsingPOSTOK, *PopulateReleaseStreamTfVersionMappingUsingPOSTCreated, error) {
+func (a *Client) PopulateReleaseStreamTfVersionMapping(params *PopulateReleaseStreamTfVersionMappingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PopulateReleaseStreamTfVersionMappingOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPopulateReleaseStreamTfVersionMappingUsingPOSTParams()
+		params = NewPopulateReleaseStreamTfVersionMappingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "populateReleaseStreamTfVersionMappingUsingPOST",
+		ID:                 "populateReleaseStreamTfVersionMapping",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/terraform/sync-release-stream-mapping",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &PopulateReleaseStreamTfVersionMappingUsingPOSTReader{formats: a.formats},
+		Reader:             &PopulateReleaseStreamTfVersionMappingReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -320,36 +295,35 @@ func (a *Client) PopulateReleaseStreamTfVersionMappingUsingPOST(params *Populate
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *PopulateReleaseStreamTfVersionMappingUsingPOSTOK:
-		return value, nil, nil
-	case *PopulateReleaseStreamTfVersionMappingUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*PopulateReleaseStreamTfVersionMappingOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_tf_version_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for populateReleaseStreamTfVersionMapping: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-SetTfVersionForClusterUsingPUT sets tf version for cluster
+SetTfVersionForCluster set tf version for cluster API
 */
-func (a *Client) SetTfVersionForClusterUsingPUT(params *SetTfVersionForClusterUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTfVersionForClusterUsingPUTOK, *SetTfVersionForClusterUsingPUTCreated, error) {
+func (a *Client) SetTfVersionForCluster(params *SetTfVersionForClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SetTfVersionForClusterOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSetTfVersionForClusterUsingPUTParams()
+		params = NewSetTfVersionForClusterParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "setTfVersionForClusterUsingPUT",
+		ID:                 "setTfVersionForCluster",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/terraform/cluster/{clusterId}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SetTfVersionForClusterUsingPUTReader{formats: a.formats},
+		Reader:             &SetTfVersionForClusterReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -360,16 +334,15 @@ func (a *Client) SetTfVersionForClusterUsingPUT(params *SetTfVersionForClusterUs
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SetTfVersionForClusterUsingPUTOK:
-		return value, nil, nil
-	case *SetTfVersionForClusterUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*SetTfVersionForClusterOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_tf_version_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for setTfVersionForCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

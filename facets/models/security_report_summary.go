@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SecurityReportSummary SecurityReportSummary
+// SecurityReportSummary security report summary
 //
 // swagger:model SecurityReportSummary
 type SecurityReportSummary struct {

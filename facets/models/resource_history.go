@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ResourceHistory ResourceHistory
+// ResourceHistory resource history
 //
 // swagger:model ResourceHistory
 type ResourceHistory struct {

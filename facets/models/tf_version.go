@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// TfVersion TfVersion
+// TfVersion tf version
 //
 // swagger:model TfVersion
 type TfVersion struct {
@@ -24,14 +24,17 @@ type TfVersion struct {
 	LastModified strfmt.DateTime `json:"lastModified,omitempty"`
 
 	// major version
-	MajorVersion int32 `json:"majorVersion,omitempty"`
+	// Required: true
+	MajorVersion *int32 `json:"majorVersion"`
 
 	// LATEST
 	// Example: LATEST
-	MinorVersion string `json:"minorVersion,omitempty"`
+	// Required: true
+	MinorVersion *string `json:"minorVersion"`
 
 	// tf stream
-	TfStream string `json:"tfStream,omitempty"`
+	// Required: true
+	TfStream *string `json:"tfStream"`
 }
 
 // Validate validates this tf version
@@ -39,6 +42,18 @@ func (m *TfVersion) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLastModified(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMajorVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMinorVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTfStream(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -54,6 +69,33 @@ func (m *TfVersion) validateLastModified(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("lastModified", "body", "date-time", m.LastModified.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TfVersion) validateMajorVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("majorVersion", "body", m.MajorVersion); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TfVersion) validateMinorVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("minorVersion", "body", m.MinorVersion); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *TfVersion) validateTfStream(formats strfmt.Registry) error {
+
+	if err := validate.Required("tfStream", "body", m.TfStream); err != nil {
 		return err
 	}
 

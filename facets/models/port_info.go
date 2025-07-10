@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PortInfo PortInfo
+// PortInfo port info
 //
 // swagger:model PortInfo
 type PortInfo struct {

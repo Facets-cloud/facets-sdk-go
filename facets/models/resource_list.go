@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResourceList ResourceList
+// ResourceList resource list
 //
 // swagger:model ResourceList
 type ResourceList struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodIP PodIP
+// PodIP pod IP
 //
 // swagger:model PodIP
 type PodIP struct {

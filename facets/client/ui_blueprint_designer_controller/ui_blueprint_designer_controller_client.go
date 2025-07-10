@@ -54,110 +54,82 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddVariablesUsingPOST(params *AddVariablesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddVariablesUsingPOSTOK, *AddVariablesUsingPOSTCreated, error)
+	AddVariables(params *AddVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddVariablesOK, error)
 
-	ApplyTemplateUsingPOST(params *ApplyTemplateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ApplyTemplateUsingPOSTOK, *ApplyTemplateUsingPOSTCreated, error)
+	ApplyTemplate(params *ApplyTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ApplyTemplateOK, error)
 
-	BulkEditDisabledForResourcesUsingPUT(params *BulkEditDisabledForResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesUsingPUTOK, *BulkEditDisabledForResourcesUsingPUTCreated, error)
+	BulkEditDisabledForResources(params *BulkEditDisabledForResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesOK, error)
 
-	BulkEditDisabledForResourcesUsingPUT1(params *BulkEditDisabledForResourcesUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesUsingPUT1OK, *BulkEditDisabledForResourcesUsingPUT1Created, error)
+	BulkEditDisabledForResources1(params *BulkEditDisabledForResources1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResources1OK, error)
 
-	CreateBranchUsingPOST(params *CreateBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBranchUsingPOSTOK, *CreateBranchUsingPOSTCreated, error)
+	CreateBranch(params *CreateBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBranchOK, error)
 
-	CreateResourcesUsingPOST(params *CreateResourcesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesUsingPOSTOK, *CreateResourcesUsingPOSTCreated, error)
+	CreateResources(params *CreateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesOK, error)
 
-	CreateResourcesUsingPOST1(params *CreateResourcesUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesUsingPOST1OK, *CreateResourcesUsingPOST1Created, error)
+	DeleteResources(params *DeleteResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesOK, error)
 
-	DeleteResourcesUsingDELETE(params *DeleteResourcesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesUsingDELETEOK, *DeleteResourcesUsingDELETENoContent, error)
+	DeleteVariables(params *DeleteVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVariablesOK, error)
 
-	DeleteResourcesUsingDELETE1(params *DeleteResourcesUsingDELETE1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesUsingDELETE1OK, *DeleteResourcesUsingDELETE1NoContent, error)
+	GetAddOnModules(params *GetAddOnModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddOnModulesOK, error)
 
-	DeleteVariablesUsingDELETE(params *DeleteVariablesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVariablesUsingDELETEOK, *DeleteVariablesUsingDELETENoContent, error)
+	GetAutocompleteData(params *GetAutocompleteDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataOK, error)
 
-	GetAddOnModulesUsingGET(params *GetAddOnModulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddOnModulesUsingGETOK, error)
+	GetAutocompleteDataV2(params *GetAutocompleteDataV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataV2OK, error)
 
-	GetAutocompleteDataUsingGET(params *GetAutocompleteDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataUsingGETOK, error)
+	GetDesignerResources(params *GetDesignerResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDesignerResourcesOK, error)
 
-	GetDesignerResourcesUsingGET(params *GetDesignerResourcesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDesignerResourcesUsingGETOK, error)
+	GetModuleInputs(params *GetModuleInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModuleInputsOK, error)
 
-	GetModuleInputsUsingGET(params *GetModuleInputsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModuleInputsUsingGETOK, error)
+	GetPullRequests(params *GetPullRequestsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsOK, error)
 
-	GetPullRequestsUsingGET(params *GetPullRequestsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsUsingGETOK, error)
+	GetPullRequests1(params *GetPullRequests1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequests1OK, error)
 
-	GetPullRequestsUsingGET1(params *GetPullRequestsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsUsingGET1OK, error)
+	GetSchemaMetadata(params *GetSchemaMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchemaMetadataOK, error)
 
-	GetSchemaMetadataUsingGET(params *GetSchemaMetadataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchemaMetadataUsingGETOK, error)
+	GetWorkflowRuns(params *GetWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsOK, error)
 
-	GetWorkflowRunsUsingGET(params *GetWorkflowRunsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsUsingGETOK, error)
+	GetWorkflowRuns1(params *GetWorkflowRuns1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRuns1OK, error)
 
-	GetWorkflowRunsUsingGET1(params *GetWorkflowRunsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsUsingGET1OK, error)
+	GetWorkflows(params *GetWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsOK, error)
 
-	GetWorkflowsUsingGET(params *GetWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsUsingGETOK, error)
+	GetWorkflows1(params *GetWorkflows1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflows1OK, error)
 
-	GetWorkflowsUsingGET1(params *GetWorkflowsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsUsingGET1OK, error)
+	ListBranches(params *ListBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesOK, error)
 
-	ListBranchesUsingGET(params *ListBranchesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesUsingGETOK, error)
+	ListBranches1(params *ListBranches1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranches1OK, error)
 
-	ListBranchesUsingGET1(params *ListBranchesUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesUsingGET1OK, error)
+	ListProvidersExposedByModule(params *ListProvidersExposedByModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersExposedByModuleOK, error)
 
-	RenameResourceUsingPUT(params *RenameResourceUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceUsingPUTOK, *RenameResourceUsingPUTCreated, error)
+	RenameResource(params *RenameResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceOK, error)
 
-	RenameResourceUsingPUT1(params *RenameResourceUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceUsingPUT1OK, *RenameResourceUsingPUT1Created, error)
+	SyncSpecifiedBlueprintsWithTemplates(params *SyncSpecifiedBlueprintsWithTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSpecifiedBlueprintsWithTemplatesOK, error)
 
-	SyncSpecifiedBlueprintsWithTemplatesUsingPOST(params *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSpecifiedBlueprintsWithTemplatesUsingPOSTOK, *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTCreated, error)
+	UpdateResources(params *UpdateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesOK, error)
 
-	UpdateResourcesUsingPUT(params *UpdateResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesUsingPUTOK, *UpdateResourcesUsingPUTCreated, error)
-
-	UpdateResourcesUsingPUT1(params *UpdateResourcesUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesUsingPUT1OK, *UpdateResourcesUsingPUT1Created, error)
-
-	UpdateVariablesUsingPUT(params *UpdateVariablesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVariablesUsingPUTOK, *UpdateVariablesUsingPUTCreated, error)
+	UpdateVariables(params *UpdateVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVariablesOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-AddVariablesUsingPOST adds variables
+AddVariables add variables API
 */
-func (a *Client) AddVariablesUsingPOST(params *AddVariablesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddVariablesUsingPOSTOK, *AddVariablesUsingPOSTCreated, error) {
+func (a *Client) AddVariables(params *AddVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddVariablesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddVariablesUsingPOSTParams()
+		params = NewAddVariablesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addVariablesUsingPOST",
+		ID:                 "addVariables",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/variables",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddVariablesUsingPOSTReader{formats: a.formats},
+		Reader:             &AddVariablesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -168,36 +140,35 @@ func (a *Client) AddVariablesUsingPOST(params *AddVariablesUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AddVariablesUsingPOSTOK:
-		return value, nil, nil
-	case *AddVariablesUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*AddVariablesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addVariables: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ApplyTemplateUsingPOST applies template
+ApplyTemplate apply template API
 */
-func (a *Client) ApplyTemplateUsingPOST(params *ApplyTemplateUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ApplyTemplateUsingPOSTOK, *ApplyTemplateUsingPOSTCreated, error) {
+func (a *Client) ApplyTemplate(params *ApplyTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ApplyTemplateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewApplyTemplateUsingPOSTParams()
+		params = NewApplyTemplateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "applyTemplateUsingPOST",
+		ID:                 "applyTemplate",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/{templateName}/apply",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ApplyTemplateUsingPOSTReader{formats: a.formats},
+		Reader:             &ApplyTemplateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -208,76 +179,35 @@ func (a *Client) ApplyTemplateUsingPOST(params *ApplyTemplateUsingPOSTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *ApplyTemplateUsingPOSTOK:
-		return value, nil, nil
-	case *ApplyTemplateUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*ApplyTemplateOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for applyTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-BulkEditDisabledForResourcesUsingPUT bulks edit disabled for resources
+BulkEditDisabledForResources bulk edit disabled for resources API
 */
-func (a *Client) BulkEditDisabledForResourcesUsingPUT(params *BulkEditDisabledForResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesUsingPUTOK, *BulkEditDisabledForResourcesUsingPUTCreated, error) {
+func (a *Client) BulkEditDisabledForResources(params *BulkEditDisabledForResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewBulkEditDisabledForResourcesUsingPUTParams()
+		params = NewBulkEditDisabledForResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "bulkEditDisabledForResourcesUsingPUT",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}/resource-enable-disable",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &BulkEditDisabledForResourcesUsingPUTReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *BulkEditDisabledForResourcesUsingPUTOK:
-		return value, nil, nil
-	case *BulkEditDisabledForResourcesUsingPUTCreated:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-BulkEditDisabledForResourcesUsingPUT1 bulks edit disabled for resources
-*/
-func (a *Client) BulkEditDisabledForResourcesUsingPUT1(params *BulkEditDisabledForResourcesUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResourcesUsingPUT1OK, *BulkEditDisabledForResourcesUsingPUT1Created, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewBulkEditDisabledForResourcesUsingPUT1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "bulkEditDisabledForResourcesUsingPUT_1",
+		ID:                 "bulkEditDisabledForResources",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/resource-enable-disable",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &BulkEditDisabledForResourcesUsingPUT1Reader{formats: a.formats},
+		Reader:             &BulkEditDisabledForResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -288,36 +218,74 @@ func (a *Client) BulkEditDisabledForResourcesUsingPUT1(params *BulkEditDisabledF
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *BulkEditDisabledForResourcesUsingPUT1OK:
-		return value, nil, nil
-	case *BulkEditDisabledForResourcesUsingPUT1Created:
-		return nil, value, nil
+	success, ok := result.(*BulkEditDisabledForResourcesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for bulkEditDisabledForResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateBranchUsingPOST creates branch
+BulkEditDisabledForResources1 bulk edit disabled for resources 1 API
 */
-func (a *Client) CreateBranchUsingPOST(params *CreateBranchUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBranchUsingPOSTOK, *CreateBranchUsingPOSTCreated, error) {
+func (a *Client) BulkEditDisabledForResources1(params *BulkEditDisabledForResources1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BulkEditDisabledForResources1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateBranchUsingPOSTParams()
+		params = NewBulkEditDisabledForResources1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createBranchUsingPOST",
+		ID:                 "bulkEditDisabledForResources_1",
+		Method:             "PUT",
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}/resource-enable-disable",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &BulkEditDisabledForResources1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*BulkEditDisabledForResources1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for bulkEditDisabledForResources_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateBranch create branch API
+*/
+func (a *Client) CreateBranch(params *CreateBranchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateBranchOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateBranchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createBranch",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/{branch}/create-branch",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateBranchUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateBranchReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -328,36 +296,35 @@ func (a *Client) CreateBranchUsingPOST(params *CreateBranchUsingPOSTParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateBranchUsingPOSTOK:
-		return value, nil, nil
-	case *CreateBranchUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateBranchOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createBranch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateResourcesUsingPOST creates resources
+CreateResources create resources API
 */
-func (a *Client) CreateResourcesUsingPOST(params *CreateResourcesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesUsingPOSTOK, *CreateResourcesUsingPOSTCreated, error) {
+func (a *Client) CreateResources(params *CreateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateResourcesUsingPOSTParams()
+		params = NewCreateResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createResourcesUsingPOST",
+		ID:                 "createResources",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateResourcesUsingPOSTReader{formats: a.formats},
+		Reader:             &CreateResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -368,76 +335,35 @@ func (a *Client) CreateResourcesUsingPOST(params *CreateResourcesUsingPOSTParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *CreateResourcesUsingPOSTOK:
-		return value, nil, nil
-	case *CreateResourcesUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*CreateResourcesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for createResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateResourcesUsingPOST1 creates resources
+DeleteResources delete resources API
 */
-func (a *Client) CreateResourcesUsingPOST1(params *CreateResourcesUsingPOST1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateResourcesUsingPOST1OK, *CreateResourcesUsingPOST1Created, error) {
+func (a *Client) DeleteResources(params *DeleteResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateResourcesUsingPOST1Params()
+		params = NewDeleteResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "createResourcesUsingPOST_1",
-		Method:             "POST",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &CreateResourcesUsingPOST1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *CreateResourcesUsingPOST1OK:
-		return value, nil, nil
-	case *CreateResourcesUsingPOST1Created:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteResourcesUsingDELETE deletes resources
-*/
-func (a *Client) DeleteResourcesUsingDELETE(params *DeleteResourcesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesUsingDELETEOK, *DeleteResourcesUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteResourcesUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteResourcesUsingDELETE",
+		ID:                 "deleteResources",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteResourcesUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -448,76 +374,35 @@ func (a *Client) DeleteResourcesUsingDELETE(params *DeleteResourcesUsingDELETEPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteResourcesUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteResourcesUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteResourcesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-DeleteResourcesUsingDELETE1 deletes resources
+DeleteVariables delete variables API
 */
-func (a *Client) DeleteResourcesUsingDELETE1(params *DeleteResourcesUsingDELETE1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourcesUsingDELETE1OK, *DeleteResourcesUsingDELETE1NoContent, error) {
+func (a *Client) DeleteVariables(params *DeleteVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVariablesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteResourcesUsingDELETE1Params()
+		params = NewDeleteVariablesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteResourcesUsingDELETE_1",
-		Method:             "DELETE",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteResourcesUsingDELETE1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *DeleteResourcesUsingDELETE1OK:
-		return value, nil, nil
-	case *DeleteResourcesUsingDELETE1NoContent:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteVariablesUsingDELETE deletes variables
-*/
-func (a *Client) DeleteVariablesUsingDELETE(params *DeleteVariablesUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVariablesUsingDELETEOK, *DeleteVariablesUsingDELETENoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteVariablesUsingDELETEParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteVariablesUsingDELETE",
+		ID:                 "deleteVariables",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/variables",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteVariablesUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteVariablesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -528,36 +413,35 @@ func (a *Client) DeleteVariablesUsingDELETE(params *DeleteVariablesUsingDELETEPa
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteVariablesUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteVariablesUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteVariablesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteVariables: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAddOnModulesUsingGET gets add ons for this resource
+GetAddOnModules gets add ons for this resource
 */
-func (a *Client) GetAddOnModulesUsingGET(params *GetAddOnModulesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddOnModulesUsingGETOK, error) {
+func (a *Client) GetAddOnModules(params *GetAddOnModulesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddOnModulesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAddOnModulesUsingGETParams()
+		params = NewGetAddOnModulesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAddOnModulesUsingGET",
+		ID:                 "getAddOnModules",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/add-ons",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAddOnModulesUsingGETReader{formats: a.formats},
+		Reader:             &GetAddOnModulesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -570,33 +454,33 @@ func (a *Client) GetAddOnModulesUsingGET(params *GetAddOnModulesUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAddOnModulesUsingGETOK)
+	success, ok := result.(*GetAddOnModulesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAddOnModulesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAddOnModules: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetAutocompleteDataUsingGET gets autocomplete data
+GetAutocompleteData get autocomplete data API
 */
-func (a *Client) GetAutocompleteDataUsingGET(params *GetAutocompleteDataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataUsingGETOK, error) {
+func (a *Client) GetAutocompleteData(params *GetAutocompleteDataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAutocompleteDataUsingGETParams()
+		params = NewGetAutocompleteDataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAutocompleteDataUsingGET",
+		ID:                 "getAutocompleteData",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/ref-autocomplete-data",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAutocompleteDataUsingGETReader{formats: a.formats},
+		Reader:             &GetAutocompleteDataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -609,33 +493,74 @@ func (a *Client) GetAutocompleteDataUsingGET(params *GetAutocompleteDataUsingGET
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAutocompleteDataUsingGETOK)
+	success, ok := result.(*GetAutocompleteDataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAutocompleteDataUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAutocompleteData: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetDesignerResourcesUsingGET gets designer resources
+GetAutocompleteDataV2 gets autocomplete data with module specific output trees
+
+Returns module-specific output trees for each resource with automatic fallback to intent-level outputs
 */
-func (a *Client) GetDesignerResourcesUsingGET(params *GetDesignerResourcesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDesignerResourcesUsingGETOK, error) {
+func (a *Client) GetAutocompleteDataV2(params *GetAutocompleteDataV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAutocompleteDataV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetDesignerResourcesUsingGETParams()
+		params = NewGetAutocompleteDataV2Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getDesignerResourcesUsingGET",
+		ID:                 "getAutocompleteDataV2",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/ref-autocomplete-data-v2",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAutocompleteDataV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAutocompleteDataV2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAutocompleteDataV2: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetDesignerResources get designer resources API
+*/
+func (a *Client) GetDesignerResources(params *GetDesignerResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDesignerResourcesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDesignerResourcesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getDesignerResources",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/{branchName}/files",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetDesignerResourcesUsingGETReader{formats: a.formats},
+		Reader:             &GetDesignerResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -648,33 +573,33 @@ func (a *Client) GetDesignerResourcesUsingGET(params *GetDesignerResourcesUsingG
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetDesignerResourcesUsingGETOK)
+	success, ok := result.(*GetDesignerResourcesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getDesignerResourcesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getDesignerResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetModuleInputsUsingGET gets module inputs
+GetModuleInputs get module inputs API
 */
-func (a *Client) GetModuleInputsUsingGET(params *GetModuleInputsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModuleInputsUsingGETOK, error) {
+func (a *Client) GetModuleInputs(params *GetModuleInputsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModuleInputsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetModuleInputsUsingGETParams()
+		params = NewGetModuleInputsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getModuleInputsUsingGET",
+		ID:                 "getModuleInputs",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/intent/{intent}/flavor/{flavor}/input",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetModuleInputsUsingGETReader{formats: a.formats},
+		Reader:             &GetModuleInputsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -687,72 +612,33 @@ func (a *Client) GetModuleInputsUsingGET(params *GetModuleInputsUsingGETParams, 
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetModuleInputsUsingGETOK)
+	success, ok := result.(*GetModuleInputsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getModuleInputsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getModuleInputs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPullRequestsUsingGET gets pull requests
+GetPullRequests get pull requests API
 */
-func (a *Client) GetPullRequestsUsingGET(params *GetPullRequestsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsUsingGETOK, error) {
+func (a *Client) GetPullRequests(params *GetPullRequestsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetPullRequestsUsingGETParams()
+		params = NewGetPullRequestsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPullRequestsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/pulls",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetPullRequestsUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetPullRequestsUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPullRequestsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPullRequestsUsingGET1 gets pull requests
-*/
-func (a *Client) GetPullRequestsUsingGET1(params *GetPullRequestsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequestsUsingGET1OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetPullRequestsUsingGET1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPullRequestsUsingGET_1",
+		ID:                 "getPullRequests",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/pulls",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetPullRequestsUsingGET1Reader{formats: a.formats},
+		Reader:             &GetPullRequestsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -765,33 +651,72 @@ func (a *Client) GetPullRequestsUsingGET1(params *GetPullRequestsUsingGET1Params
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetPullRequestsUsingGET1OK)
+	success, ok := result.(*GetPullRequestsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPullRequestsUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPullRequests: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetSchemaMetadataUsingGET gets schema metadata
+GetPullRequests1 get pull requests 1 API
 */
-func (a *Client) GetSchemaMetadataUsingGET(params *GetSchemaMetadataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchemaMetadataUsingGETOK, error) {
+func (a *Client) GetPullRequests1(params *GetPullRequests1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPullRequests1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetSchemaMetadataUsingGETParams()
+		params = NewGetPullRequests1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getSchemaMetadataUsingGET",
+		ID:                 "getPullRequests_1",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/pulls",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPullRequests1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPullRequests1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPullRequests_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetSchemaMetadata get schema metadata API
+*/
+func (a *Client) GetSchemaMetadata(params *GetSchemaMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchemaMetadataOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetSchemaMetadataParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getSchemaMetadata",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/facets-components",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetSchemaMetadataUsingGETReader{formats: a.formats},
+		Reader:             &GetSchemaMetadataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -804,72 +729,33 @@ func (a *Client) GetSchemaMetadataUsingGET(params *GetSchemaMetadataUsingGETPara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetSchemaMetadataUsingGETOK)
+	success, ok := result.(*GetSchemaMetadataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getSchemaMetadataUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getSchemaMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetWorkflowRunsUsingGET gets workflow runs
+GetWorkflowRuns get workflow runs API
 */
-func (a *Client) GetWorkflowRunsUsingGET(params *GetWorkflowRunsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsUsingGETOK, error) {
+func (a *Client) GetWorkflowRuns(params *GetWorkflowRunsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkflowRunsUsingGETParams()
+		params = NewGetWorkflowRunsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowRunsUsingGET",
-		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workflow-runs",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetWorkflowRunsUsingGETReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetWorkflowRunsUsingGETOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowRunsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetWorkflowRunsUsingGET1 gets workflow runs
-*/
-func (a *Client) GetWorkflowRunsUsingGET1(params *GetWorkflowRunsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRunsUsingGET1OK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetWorkflowRunsUsingGET1Params()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowRunsUsingGET_1",
+		ID:                 "getWorkflowRuns",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/workflow-runs",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkflowRunsUsingGET1Reader{formats: a.formats},
+		Reader:             &GetWorkflowRunsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -882,33 +768,33 @@ func (a *Client) GetWorkflowRunsUsingGET1(params *GetWorkflowRunsUsingGET1Params
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkflowRunsUsingGET1OK)
+	success, ok := result.(*GetWorkflowRunsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowRunsUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflowRuns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetWorkflowsUsingGET gets workflows
+GetWorkflowRuns1 get workflow runs 1 API
 */
-func (a *Client) GetWorkflowsUsingGET(params *GetWorkflowsUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsUsingGETOK, error) {
+func (a *Client) GetWorkflowRuns1(params *GetWorkflowRuns1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowRuns1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkflowsUsingGETParams()
+		params = NewGetWorkflowRuns1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowsUsingGET",
+		ID:                 "getWorkflowRuns_1",
 		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workflows",
-		ProducesMediaTypes: []string{"*/*"},
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workflow-runs",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkflowsUsingGETReader{formats: a.formats},
+		Reader:             &GetWorkflowRuns1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -921,33 +807,33 @@ func (a *Client) GetWorkflowsUsingGET(params *GetWorkflowsUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkflowsUsingGETOK)
+	success, ok := result.(*GetWorkflowRuns1OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowsUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflowRuns_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetWorkflowsUsingGET1 gets workflows
+GetWorkflows get workflows API
 */
-func (a *Client) GetWorkflowsUsingGET1(params *GetWorkflowsUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsUsingGET1OK, error) {
+func (a *Client) GetWorkflows(params *GetWorkflowsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflowsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetWorkflowsUsingGET1Params()
+		params = NewGetWorkflowsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getWorkflowsUsingGET_1",
+		ID:                 "getWorkflows",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/workflows",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetWorkflowsUsingGET1Reader{formats: a.formats},
+		Reader:             &GetWorkflowsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -960,33 +846,33 @@ func (a *Client) GetWorkflowsUsingGET1(params *GetWorkflowsUsingGET1Params, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetWorkflowsUsingGET1OK)
+	success, ok := result.(*GetWorkflowsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getWorkflowsUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflows: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListBranchesUsingGET lists branches
+GetWorkflows1 get workflows 1 API
 */
-func (a *Client) ListBranchesUsingGET(params *ListBranchesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesUsingGETOK, error) {
+func (a *Client) GetWorkflows1(params *GetWorkflows1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWorkflows1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListBranchesUsingGETParams()
+		params = NewGetWorkflows1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listBranchesUsingGET",
+		ID:                 "getWorkflows_1",
 		Method:             "GET",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch-list",
-		ProducesMediaTypes: []string{"*/*"},
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/workflows",
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListBranchesUsingGETReader{formats: a.formats},
+		Reader:             &GetWorkflows1Reader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -999,33 +885,33 @@ func (a *Client) ListBranchesUsingGET(params *ListBranchesUsingGETParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListBranchesUsingGETOK)
+	success, ok := result.(*GetWorkflows1OK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listBranchesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getWorkflows_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ListBranchesUsingGET1 lists branches
+ListBranches list branches API
 */
-func (a *Client) ListBranchesUsingGET1(params *ListBranchesUsingGET1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesUsingGET1OK, error) {
+func (a *Client) ListBranches(params *ListBranchesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranchesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewListBranchesUsingGET1Params()
+		params = NewListBranchesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "listBranchesUsingGET_1",
+		ID:                 "listBranches",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/resourceType/{resourceType}/resourceName/{resourceName}/branch-list",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ListBranchesUsingGET1Reader{formats: a.formats},
+		Reader:             &ListBranchesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1038,33 +924,111 @@ func (a *Client) ListBranchesUsingGET1(params *ListBranchesUsingGET1Params, auth
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ListBranchesUsingGET1OK)
+	success, ok := result.(*ListBranchesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for listBranchesUsingGET_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for listBranches: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RenameResourceUsingPUT renames resource
+ListBranches1 list branches 1 API
 */
-func (a *Client) RenameResourceUsingPUT(params *RenameResourceUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceUsingPUTOK, *RenameResourceUsingPUTCreated, error) {
+func (a *Client) ListBranches1(params *ListBranches1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListBranches1OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRenameResourceUsingPUTParams()
+		params = NewListBranches1Params()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "renameResourceUsingPUT",
+		ID:                 "listBranches_1",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch-list",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListBranches1Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListBranches1OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listBranches_1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListProvidersExposedByModule list providers exposed by module API
+*/
+func (a *Client) ListProvidersExposedByModule(params *ListProvidersExposedByModuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProvidersExposedByModuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListProvidersExposedByModuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listProvidersExposedByModule",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/designer/{stackName}/intent/{intent}/flavor/{flavor}/output-providers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &ListProvidersExposedByModuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListProvidersExposedByModuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listProvidersExposedByModule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+RenameResource rename resource API
+*/
+func (a *Client) RenameResource(params *RenameResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewRenameResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "renameResource",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}/rename",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &RenameResourceUsingPUTReader{formats: a.formats},
+		Reader:             &RenameResourceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1075,76 +1039,35 @@ func (a *Client) RenameResourceUsingPUT(params *RenameResourceUsingPUTParams, au
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *RenameResourceUsingPUTOK:
-		return value, nil, nil
-	case *RenameResourceUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*RenameResourceOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for renameResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-RenameResourceUsingPUT1 renames resource
+SyncSpecifiedBlueprintsWithTemplates sync specified blueprints with templates API
 */
-func (a *Client) RenameResourceUsingPUT1(params *RenameResourceUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RenameResourceUsingPUT1OK, *RenameResourceUsingPUT1Created, error) {
+func (a *Client) SyncSpecifiedBlueprintsWithTemplates(params *SyncSpecifiedBlueprintsWithTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSpecifiedBlueprintsWithTemplatesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewRenameResourceUsingPUT1Params()
+		params = NewSyncSpecifiedBlueprintsWithTemplatesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "renameResourceUsingPUT_1",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}/rename",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &RenameResourceUsingPUT1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *RenameResourceUsingPUT1OK:
-		return value, nil, nil
-	case *RenameResourceUsingPUT1Created:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-SyncSpecifiedBlueprintsWithTemplatesUsingPOST syncs specified blueprints with templates
-*/
-func (a *Client) SyncSpecifiedBlueprintsWithTemplatesUsingPOST(params *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SyncSpecifiedBlueprintsWithTemplatesUsingPOSTOK, *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSyncSpecifiedBlueprintsWithTemplatesUsingPOSTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "syncSpecifiedBlueprintsWithTemplatesUsingPOST",
+		ID:                 "syncSpecifiedBlueprintsWithTemplates",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/designer/{templateName}/sync",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &SyncSpecifiedBlueprintsWithTemplatesUsingPOSTReader{formats: a.formats},
+		Reader:             &SyncSpecifiedBlueprintsWithTemplatesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1155,36 +1078,35 @@ func (a *Client) SyncSpecifiedBlueprintsWithTemplatesUsingPOST(params *SyncSpeci
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTOK:
-		return value, nil, nil
-	case *SyncSpecifiedBlueprintsWithTemplatesUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*SyncSpecifiedBlueprintsWithTemplatesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for syncSpecifiedBlueprintsWithTemplates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateResourcesUsingPUT updates resources
+UpdateResources update resources API
 */
-func (a *Client) UpdateResourcesUsingPUT(params *UpdateResourcesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesUsingPUTOK, *UpdateResourcesUsingPUTCreated, error) {
+func (a *Client) UpdateResources(params *UpdateResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateResourcesUsingPUTParams()
+		params = NewUpdateResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateResourcesUsingPUT",
+		ID:                 "updateResources",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/branch/{branch}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateResourcesUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1195,76 +1117,35 @@ func (a *Client) UpdateResourcesUsingPUT(params *UpdateResourcesUsingPUTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateResourcesUsingPUTOK:
-		return value, nil, nil
-	case *UpdateResourcesUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateResourcesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-UpdateResourcesUsingPUT1 updates resources
+UpdateVariables update variables API
 */
-func (a *Client) UpdateResourcesUsingPUT1(params *UpdateResourcesUsingPUT1Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateResourcesUsingPUT1OK, *UpdateResourcesUsingPUT1Created, error) {
+func (a *Client) UpdateVariables(params *UpdateVariablesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVariablesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateResourcesUsingPUT1Params()
+		params = NewUpdateVariablesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateResourcesUsingPUT_1",
-		Method:             "PUT",
-		PathPattern:        "/cc-ui/v1/designer/{stackName}",
-		ProducesMediaTypes: []string{"*/*"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateResourcesUsingPUT1Reader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, nil, err
-	}
-	switch value := result.(type) {
-	case *UpdateResourcesUsingPUT1OK:
-		return value, nil, nil
-	case *UpdateResourcesUsingPUT1Created:
-		return nil, value, nil
-	}
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-UpdateVariablesUsingPUT updates variables
-*/
-func (a *Client) UpdateVariablesUsingPUT(params *UpdateVariablesUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVariablesUsingPUTOK, *UpdateVariablesUsingPUTCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateVariablesUsingPUTParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "updateVariablesUsingPUT",
+		ID:                 "updateVariables",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/designer/{stackName}/variables",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateVariablesUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateVariablesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -1275,16 +1156,15 @@ func (a *Client) UpdateVariablesUsingPUT(params *UpdateVariablesUsingPUTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateVariablesUsingPUTOK:
-		return value, nil, nil
-	case *UpdateVariablesUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateVariablesOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_blueprint_designer_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateVariables: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

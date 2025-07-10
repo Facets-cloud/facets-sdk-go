@@ -15,13 +15,14 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// AvailabilitySchedule AvailabilitySchedule
+// AvailabilitySchedule availability schedule
 //
 // swagger:model AvailabilitySchedule
 type AvailabilitySchedule struct {
 
 	// cluster Id
-	ClusterID string `json:"clusterId,omitempty"`
+	// Required: true
+	ClusterID *string `json:"clusterId"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -48,6 +49,10 @@ type AvailabilitySchedule struct {
 func (m *AvailabilitySchedule) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -63,6 +68,15 @@ func (m *AvailabilitySchedule) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AvailabilitySchedule) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterId", "body", m.ClusterID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

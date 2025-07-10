@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// IngressLoadBalancerStatus IngressLoadBalancerStatus
+// IngressLoadBalancerStatus ingress load balancer status
 //
 // swagger:model IngressLoadBalancerStatus
 type IngressLoadBalancerStatus struct {

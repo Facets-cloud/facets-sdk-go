@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// ResourceRenameRequest ResourceRenameRequest
+// ResourceRenameRequest resource rename request
 //
 // swagger:model ResourceRenameRequest
 type ResourceRenameRequest struct {
@@ -21,20 +23,67 @@ type ResourceRenameRequest struct {
 	Directory string `json:"directory,omitempty"`
 
 	// new resource name
-	NewResourceName string `json:"newResourceName,omitempty"`
+	// Required: true
+	NewResourceName *string `json:"newResourceName"`
 
 	// old file name
 	OldFileName string `json:"oldFileName,omitempty"`
 
 	// old resource name
-	OldResourceName string `json:"oldResourceName,omitempty"`
+	// Required: true
+	OldResourceName *string `json:"oldResourceName"`
 
 	// resource type
-	ResourceType string `json:"resourceType,omitempty"`
+	// Required: true
+	ResourceType *string `json:"resourceType"`
 }
 
 // Validate validates this resource rename request
 func (m *ResourceRenameRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateNewResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOldResourceName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResourceRenameRequest) validateNewResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("newResourceName", "body", m.NewResourceName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ResourceRenameRequest) validateOldResourceName(formats strfmt.Registry) error {
+
+	if err := validate.Required("oldResourceName", "body", m.OldResourceName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ResourceRenameRequest) validateResourceType(formats strfmt.Registry) error {
+
+	if err := validate.Required("resourceType", "body", m.ResourceType); err != nil {
+		return err
+	}
+
 	return nil
 }
 

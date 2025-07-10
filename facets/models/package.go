@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Package Package
+// Package package
 //
 // swagger:model Package
 type Package struct {

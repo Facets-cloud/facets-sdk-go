@@ -12,14 +12,16 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// StackResource StackResource
+// StackResource stack resource
 //
 // swagger:model StackResource
 type StackResource struct {
 
 	// resources
+	// Unique: true
 	Resources []*FacetsResource `json:"resources"`
 
 	// stack name
@@ -43,6 +45,10 @@ func (m *StackResource) Validate(formats strfmt.Registry) error {
 func (m *StackResource) validateResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.Resources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("resources", "body", m.Resources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Resources); i++ {

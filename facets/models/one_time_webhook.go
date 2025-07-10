@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// OneTimeWebhook OneTimeWebhook
+// OneTimeWebhook one time webhook
 //
 // swagger:model OneTimeWebhook
 type OneTimeWebhook struct {
@@ -28,6 +28,7 @@ type OneTimeWebhook struct {
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
 	// delete at
+	// Read Only: true
 	// Format: date-time
 	DeleteAt strfmt.DateTime `json:"deleteAt,omitempty"`
 
@@ -35,6 +36,7 @@ type OneTimeWebhook struct {
 	ErrorMessage string `json:"errorMessage,omitempty"`
 
 	// expires at
+	// Read Only: true
 	// Format: date-time
 	ExpiresAt strfmt.DateTime `json:"expiresAt,omitempty"`
 
@@ -49,6 +51,7 @@ type OneTimeWebhook struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// status
+	// Read Only: true
 	// Enum: ["WAITING","SUCCESS","FAILED","EXPIRED"]
 	Status string `json:"status,omitempty"`
 
@@ -250,8 +253,52 @@ func (m *OneTimeWebhook) validateType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this one time webhook based on context it is used
+// ContextValidate validate this one time webhook based on the context it is used
 func (m *OneTimeWebhook) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDeleteAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExpiresAt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *OneTimeWebhook) contextValidateDeleteAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "deleteAt", "body", strfmt.DateTime(m.DeleteAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *OneTimeWebhook) contextValidateExpiresAt(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "expiresAt", "body", strfmt.DateTime(m.ExpiresAt)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *OneTimeWebhook) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "status", "body", string(m.Status)); err != nil {
+		return err
+	}
+
 	return nil
 }
 

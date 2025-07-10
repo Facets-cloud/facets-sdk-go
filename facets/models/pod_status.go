@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PodStatus PodStatus
+// PodStatus pod status
 //
 // swagger:model PodStatus
 type PodStatus struct {

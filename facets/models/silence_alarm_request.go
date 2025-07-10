@@ -8,30 +8,79 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// SilenceAlarmRequest SilenceAlarmRequest
+// SilenceAlarmRequest silence alarm request
 //
 // swagger:model SilenceAlarmRequest
 type SilenceAlarmRequest struct {
 
 	// comment
-	Comment string `json:"comment,omitempty"`
+	// Required: true
+	Comment *string `json:"comment"`
 
 	// id
 	ID string `json:"id,omitempty"`
 
 	// labels
-	Labels map[string]string `json:"labels,omitempty"`
+	// Required: true
+	Labels map[string]string `json:"labels"`
 
 	// snooze in minutes
-	SnoozeInMinutes int32 `json:"snoozeInMinutes,omitempty"`
+	// Required: true
+	SnoozeInMinutes *int32 `json:"snoozeInMinutes"`
 }
 
 // Validate validates this silence alarm request
 func (m *SilenceAlarmRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateComment(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLabels(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSnoozeInMinutes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SilenceAlarmRequest) validateComment(formats strfmt.Registry) error {
+
+	if err := validate.Required("comment", "body", m.Comment); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SilenceAlarmRequest) validateLabels(formats strfmt.Registry) error {
+
+	if err := validate.Required("labels", "body", m.Labels); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SilenceAlarmRequest) validateSnoozeInMinutes(formats strfmt.Registry) error {
+
+	if err := validate.Required("snoozeInMinutes", "body", m.SnoozeInMinutes); err != nil {
+		return err
+	}
+
 	return nil
 }
 

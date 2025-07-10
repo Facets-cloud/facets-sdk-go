@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AssistantResponse AssistantResponse
+// AssistantResponse assistant response
 //
 // swagger:model AssistantResponse
 type AssistantResponse struct {

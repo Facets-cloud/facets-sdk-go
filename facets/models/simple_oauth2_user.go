@@ -12,27 +12,31 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// SimpleOauth2User SimpleOauth2User
+// SimpleOauth2User simple oauth2 user
 //
 // swagger:model SimpleOauth2User
 type SimpleOauth2User struct {
 
 	// allowed accounts
+	// Unique: true
 	AllowedAccounts []string `json:"allowedAccounts"`
 
 	// allowed cluster ids
+	// Unique: true
 	AllowedClusterIds []string `json:"allowedClusterIds"`
 
 	// allowed stack names
+	// Unique: true
 	AllowedStackNames []string `json:"allowedStackNames"`
 
 	// associated to resource group
 	AssociatedToResourceGroup bool `json:"associatedToResourceGroup,omitempty"`
 
 	// attributes
-	Attributes interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 
 	// authorities
 	Authorities []*GrantedAuthority `json:"authorities"`
@@ -40,10 +44,14 @@ type SimpleOauth2User struct {
 	// cluster role binding
 	ClusterRoleBinding map[string]string `json:"clusterRoleBinding,omitempty"`
 
+	// granted authorities
+	GrantedAuthorities []*GrantedAuthority `json:"grantedAuthorities"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
 	// stack resources
+	// Unique: true
 	StackResources []*StackResource `json:"stackResources"`
 
 	// user Id
@@ -54,7 +62,23 @@ type SimpleOauth2User struct {
 func (m *SimpleOauth2User) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAllowedAccounts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAllowedClusterIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAllowedStackNames(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAuthorities(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGrantedAuthorities(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -65,6 +89,42 @@ func (m *SimpleOauth2User) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SimpleOauth2User) validateAllowedAccounts(formats strfmt.Registry) error {
+	if swag.IsZero(m.AllowedAccounts) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("allowedAccounts", "body", m.AllowedAccounts); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SimpleOauth2User) validateAllowedClusterIds(formats strfmt.Registry) error {
+	if swag.IsZero(m.AllowedClusterIds) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("allowedClusterIds", "body", m.AllowedClusterIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SimpleOauth2User) validateAllowedStackNames(formats strfmt.Registry) error {
+	if swag.IsZero(m.AllowedStackNames) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("allowedStackNames", "body", m.AllowedStackNames); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -94,9 +154,39 @@ func (m *SimpleOauth2User) validateAuthorities(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *SimpleOauth2User) validateGrantedAuthorities(formats strfmt.Registry) error {
+	if swag.IsZero(m.GrantedAuthorities) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.GrantedAuthorities); i++ {
+		if swag.IsZero(m.GrantedAuthorities[i]) { // not required
+			continue
+		}
+
+		if m.GrantedAuthorities[i] != nil {
+			if err := m.GrantedAuthorities[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *SimpleOauth2User) validateStackResources(formats strfmt.Registry) error {
 	if swag.IsZero(m.StackResources) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("stackResources", "body", m.StackResources); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.StackResources); i++ {
@@ -128,6 +218,10 @@ func (m *SimpleOauth2User) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGrantedAuthorities(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStackResources(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -153,6 +247,31 @@ func (m *SimpleOauth2User) contextValidateAuthorities(ctx context.Context, forma
 					return ve.ValidateName("authorities" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("authorities" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *SimpleOauth2User) contextValidateGrantedAuthorities(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.GrantedAuthorities); i++ {
+
+		if m.GrantedAuthorities[i] != nil {
+
+			if swag.IsZero(m.GrantedAuthorities[i]) { // not required
+				return nil
+			}
+
+			if err := m.GrantedAuthorities[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

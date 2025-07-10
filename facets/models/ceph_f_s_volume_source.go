@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// CephFSVolumeSource CephFSVolumeSource
+// CephFSVolumeSource ceph f s volume source
 //
 // swagger:model CephFSVolumeSource
 type CephFSVolumeSource struct {

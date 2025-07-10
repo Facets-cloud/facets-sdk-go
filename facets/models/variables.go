@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// Variables Variables
+// Variables variables
 //
 // swagger:model Variables
 type Variables struct {

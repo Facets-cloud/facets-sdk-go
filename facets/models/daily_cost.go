@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DailyCost DailyCost
+// DailyCost daily cost
 //
 // swagger:model DailyCost
 type DailyCost struct {

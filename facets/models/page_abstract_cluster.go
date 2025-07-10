@@ -14,9 +14,9 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PageAbstractCluster Page«AbstractCluster»
+// PageAbstractCluster page abstract cluster
 //
-// swagger:model Page«AbstractCluster»
+// swagger:model PageAbstractCluster
 type PageAbstractCluster struct {
 
 	// content
@@ -38,13 +38,13 @@ type PageAbstractCluster struct {
 	NumberOfElements int32 `json:"numberOfElements,omitempty"`
 
 	// pageable
-	Pageable *Pageable `json:"pageable,omitempty"`
+	Pageable *PageableObject `json:"pageable,omitempty"`
 
 	// size
 	Size int32 `json:"size,omitempty"`
 
 	// sort
-	Sort *Sort `json:"sort,omitempty"`
+	Sort *SortObject `json:"sort,omitempty"`
 
 	// total elements
 	TotalElements int64 `json:"totalElements,omitempty"`

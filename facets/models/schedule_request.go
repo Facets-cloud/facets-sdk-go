@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ScheduleRequest ScheduleRequest
+// ScheduleRequest schedule request
 //
 // swagger:model ScheduleRequest
 type ScheduleRequest struct {
@@ -38,11 +38,11 @@ type ScheduleRequest struct {
 	PauseReleaseSchedule bool `json:"pauseReleaseSchedule,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
 
 	// time zone
-	TimeZone *TimeZone `json:"timeZone,omitempty"`
+	TimeZone *ScheduleRequestTimeZone `json:"timeZone,omitempty"`
 }
 
 // Validate validates this schedule request
@@ -182,7 +182,7 @@ var scheduleRequestTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -230,6 +230,15 @@ const (
 
 	// ScheduleRequestReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	ScheduleRequestReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// ScheduleRequestReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	ScheduleRequestReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// ScheduleRequestReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	ScheduleRequestReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// ScheduleRequestReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	ScheduleRequestReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum
@@ -343,6 +352,52 @@ func (m *ScheduleRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *ScheduleRequest) UnmarshalBinary(b []byte) error {
 	var res ScheduleRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// ScheduleRequestTimeZone schedule request time zone
+//
+// swagger:model ScheduleRequestTimeZone
+type ScheduleRequestTimeZone struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this schedule request time zone
+func (m *ScheduleRequestTimeZone) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this schedule request time zone based on context it is used
+func (m *ScheduleRequestTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ScheduleRequestTimeZone) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ScheduleRequestTimeZone) UnmarshalBinary(b []byte) error {
+	var res ScheduleRequestTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

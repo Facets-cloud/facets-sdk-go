@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Pod Pod
+// Pod pod
 //
 // swagger:model Pod
 type Pod struct {

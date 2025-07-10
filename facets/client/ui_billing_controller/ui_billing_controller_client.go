@@ -54,60 +54,36 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	BuySupportPlanUsingPOST(params *BuySupportPlanUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BuySupportPlanUsingPOSTOK, *BuySupportPlanUsingPOSTCreated, error)
+	BuySupportPlan(params *BuySupportPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BuySupportPlanOK, error)
 
-	GetBillingMetadataUsingGET(params *GetBillingMetadataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBillingMetadataUsingGETOK, error)
+	GetBillingMetadata(params *GetBillingMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBillingMetadataOK, error)
 
-	ReportUsageUsingGET(params *ReportUsageUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReportUsageUsingGETOK, error)
+	ReportUsage(params *ReportUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReportUsageOK, error)
 
-	StartStripeCustomerPortalSessionUsingGET(params *StartStripeCustomerPortalSessionUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StartStripeCustomerPortalSessionUsingGETOK, error)
+	StartStripeCustomerPortalSession(params *StartStripeCustomerPortalSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StartStripeCustomerPortalSessionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-BuySupportPlanUsingPOST buys support plan
+BuySupportPlan buy support plan API
 */
-func (a *Client) BuySupportPlanUsingPOST(params *BuySupportPlanUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BuySupportPlanUsingPOSTOK, *BuySupportPlanUsingPOSTCreated, error) {
+func (a *Client) BuySupportPlan(params *BuySupportPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BuySupportPlanOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewBuySupportPlanUsingPOSTParams()
+		params = NewBuySupportPlanParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "buySupportPlanUsingPOST",
+		ID:                 "buySupportPlan",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/billing/buy-support-plan",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &BuySupportPlanUsingPOSTReader{formats: a.formats},
+		Reader:             &BuySupportPlanReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -118,36 +94,35 @@ func (a *Client) BuySupportPlanUsingPOST(params *BuySupportPlanUsingPOSTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *BuySupportPlanUsingPOSTOK:
-		return value, nil, nil
-	case *BuySupportPlanUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*BuySupportPlanOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_billing_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for buySupportPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetBillingMetadataUsingGET gets billing metadata
+GetBillingMetadata get billing metadata API
 */
-func (a *Client) GetBillingMetadataUsingGET(params *GetBillingMetadataUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBillingMetadataUsingGETOK, error) {
+func (a *Client) GetBillingMetadata(params *GetBillingMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBillingMetadataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetBillingMetadataUsingGETParams()
+		params = NewGetBillingMetadataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getBillingMetadataUsingGET",
+		ID:                 "getBillingMetadata",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/billing/metadata",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetBillingMetadataUsingGETReader{formats: a.formats},
+		Reader:             &GetBillingMetadataReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -160,33 +135,33 @@ func (a *Client) GetBillingMetadataUsingGET(params *GetBillingMetadataUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetBillingMetadataUsingGETOK)
+	success, ok := result.(*GetBillingMetadataOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getBillingMetadataUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getBillingMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-ReportUsageUsingGET reports usage
+ReportUsage report usage API
 */
-func (a *Client) ReportUsageUsingGET(params *ReportUsageUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReportUsageUsingGETOK, error) {
+func (a *Client) ReportUsage(params *ReportUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ReportUsageOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewReportUsageUsingGETParams()
+		params = NewReportUsageParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "reportUsageUsingGET",
+		ID:                 "reportUsage",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/billing/report-usage",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &ReportUsageUsingGETReader{formats: a.formats},
+		Reader:             &ReportUsageReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -199,33 +174,33 @@ func (a *Client) ReportUsageUsingGET(params *ReportUsageUsingGETParams, authInfo
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ReportUsageUsingGETOK)
+	success, ok := result.(*ReportUsageOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for reportUsageUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for reportUsage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-StartStripeCustomerPortalSessionUsingGET starts stripe customer portal session
+StartStripeCustomerPortalSession start stripe customer portal session API
 */
-func (a *Client) StartStripeCustomerPortalSessionUsingGET(params *StartStripeCustomerPortalSessionUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StartStripeCustomerPortalSessionUsingGETOK, error) {
+func (a *Client) StartStripeCustomerPortalSession(params *StartStripeCustomerPortalSessionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StartStripeCustomerPortalSessionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewStartStripeCustomerPortalSessionUsingGETParams()
+		params = NewStartStripeCustomerPortalSessionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "startStripeCustomerPortalSessionUsingGET",
+		ID:                 "startStripeCustomerPortalSession",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/billing/manage-billing",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &StartStripeCustomerPortalSessionUsingGETReader{formats: a.formats},
+		Reader:             &StartStripeCustomerPortalSessionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -238,13 +213,13 @@ func (a *Client) StartStripeCustomerPortalSessionUsingGET(params *StartStripeCus
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*StartStripeCustomerPortalSessionUsingGETOK)
+	success, ok := result.(*StartStripeCustomerPortalSessionOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for startStripeCustomerPortalSessionUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for startStripeCustomerPortalSession: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

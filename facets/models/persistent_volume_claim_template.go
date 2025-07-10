@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PersistentVolumeClaimTemplate PersistentVolumeClaimTemplate
+// PersistentVolumeClaimTemplate persistent volume claim template
 //
 // swagger:model PersistentVolumeClaimTemplate
 type PersistentVolumeClaimTemplate struct {

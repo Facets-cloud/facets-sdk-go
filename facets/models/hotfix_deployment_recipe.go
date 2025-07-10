@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HotfixDeploymentRecipe HotfixDeploymentRecipe
+// HotfixDeploymentRecipe hotfix deployment recipe
 //
 // swagger:model HotfixDeploymentRecipe
 type HotfixDeploymentRecipe struct {

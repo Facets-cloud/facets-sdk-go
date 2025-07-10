@@ -30,20 +30,26 @@ func (o *GetClusterUsingGET2Reader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
-	case 401:
-		result := NewGetClusterUsingGET2Unauthorized()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
-	case 403:
-		result := NewGetClusterUsingGET2Forbidden()
+	case 400:
+		result := NewGetClusterUsingGET2BadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return nil, result
 	case 404:
 		result := NewGetClusterUsingGET2NotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 405:
+		result := NewGetClusterUsingGET2MethodNotAllowed()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 500:
+		result := NewGetClusterUsingGET2InternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -123,114 +129,72 @@ func (o *GetClusterUsingGET2OK) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-// NewGetClusterUsingGET2Unauthorized creates a GetClusterUsingGET2Unauthorized with default headers values
-func NewGetClusterUsingGET2Unauthorized() *GetClusterUsingGET2Unauthorized {
-	return &GetClusterUsingGET2Unauthorized{}
+// NewGetClusterUsingGET2BadRequest creates a GetClusterUsingGET2BadRequest with default headers values
+func NewGetClusterUsingGET2BadRequest() *GetClusterUsingGET2BadRequest {
+	return &GetClusterUsingGET2BadRequest{}
 }
 
 /*
-GetClusterUsingGET2Unauthorized describes a response with status code 401, with default header values.
+GetClusterUsingGET2BadRequest describes a response with status code 400, with default header values.
 
-Unauthorized
+Bad Request
 */
-type GetClusterUsingGET2Unauthorized struct {
+type GetClusterUsingGET2BadRequest struct {
+	Payload *models.ErrorDetails
 }
 
-// IsSuccess returns true when this get cluster using g e t2 unauthorized response has a 2xx status code
-func (o *GetClusterUsingGET2Unauthorized) IsSuccess() bool {
+// IsSuccess returns true when this get cluster using g e t2 bad request response has a 2xx status code
+func (o *GetClusterUsingGET2BadRequest) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this get cluster using g e t2 unauthorized response has a 3xx status code
-func (o *GetClusterUsingGET2Unauthorized) IsRedirect() bool {
+// IsRedirect returns true when this get cluster using g e t2 bad request response has a 3xx status code
+func (o *GetClusterUsingGET2BadRequest) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this get cluster using g e t2 unauthorized response has a 4xx status code
-func (o *GetClusterUsingGET2Unauthorized) IsClientError() bool {
+// IsClientError returns true when this get cluster using g e t2 bad request response has a 4xx status code
+func (o *GetClusterUsingGET2BadRequest) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this get cluster using g e t2 unauthorized response has a 5xx status code
-func (o *GetClusterUsingGET2Unauthorized) IsServerError() bool {
+// IsServerError returns true when this get cluster using g e t2 bad request response has a 5xx status code
+func (o *GetClusterUsingGET2BadRequest) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this get cluster using g e t2 unauthorized response a status code equal to that given
-func (o *GetClusterUsingGET2Unauthorized) IsCode(code int) bool {
-	return code == 401
+// IsCode returns true when this get cluster using g e t2 bad request response a status code equal to that given
+func (o *GetClusterUsingGET2BadRequest) IsCode(code int) bool {
+	return code == 400
 }
 
-// Code gets the status code for the get cluster using g e t2 unauthorized response
-func (o *GetClusterUsingGET2Unauthorized) Code() int {
-	return 401
+// Code gets the status code for the get cluster using g e t2 bad request response
+func (o *GetClusterUsingGET2BadRequest) Code() int {
+	return 400
 }
 
-func (o *GetClusterUsingGET2Unauthorized) Error() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2Unauthorized", 401)
+func (o *GetClusterUsingGET2BadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2BadRequest %s", 400, payload)
 }
 
-func (o *GetClusterUsingGET2Unauthorized) String() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2Unauthorized", 401)
+func (o *GetClusterUsingGET2BadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2BadRequest %s", 400, payload)
 }
 
-func (o *GetClusterUsingGET2Unauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
+func (o *GetClusterUsingGET2BadRequest) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
-// NewGetClusterUsingGET2Forbidden creates a GetClusterUsingGET2Forbidden with default headers values
-func NewGetClusterUsingGET2Forbidden() *GetClusterUsingGET2Forbidden {
-	return &GetClusterUsingGET2Forbidden{}
-}
+func (o *GetClusterUsingGET2BadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-/*
-GetClusterUsingGET2Forbidden describes a response with status code 403, with default header values.
+	o.Payload = new(models.ErrorDetails)
 
-Forbidden
-*/
-type GetClusterUsingGET2Forbidden struct {
-}
-
-// IsSuccess returns true when this get cluster using g e t2 forbidden response has a 2xx status code
-func (o *GetClusterUsingGET2Forbidden) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this get cluster using g e t2 forbidden response has a 3xx status code
-func (o *GetClusterUsingGET2Forbidden) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this get cluster using g e t2 forbidden response has a 4xx status code
-func (o *GetClusterUsingGET2Forbidden) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this get cluster using g e t2 forbidden response has a 5xx status code
-func (o *GetClusterUsingGET2Forbidden) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this get cluster using g e t2 forbidden response a status code equal to that given
-func (o *GetClusterUsingGET2Forbidden) IsCode(code int) bool {
-	return code == 403
-}
-
-// Code gets the status code for the get cluster using g e t2 forbidden response
-func (o *GetClusterUsingGET2Forbidden) Code() int {
-	return 403
-}
-
-func (o *GetClusterUsingGET2Forbidden) Error() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2Forbidden", 403)
-}
-
-func (o *GetClusterUsingGET2Forbidden) String() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2Forbidden", 403)
-}
-
-func (o *GetClusterUsingGET2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -246,6 +210,7 @@ GetClusterUsingGET2NotFound describes a response with status code 404, with defa
 Not Found
 */
 type GetClusterUsingGET2NotFound struct {
+	Payload *models.ErrorDetails
 }
 
 // IsSuccess returns true when this get cluster using g e t2 not found response has a 2xx status code
@@ -279,14 +244,167 @@ func (o *GetClusterUsingGET2NotFound) Code() int {
 }
 
 func (o *GetClusterUsingGET2NotFound) Error() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2NotFound %s", 404, payload)
 }
 
 func (o *GetClusterUsingGET2NotFound) String() string {
-	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2NotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2NotFound %s", 404, payload)
+}
+
+func (o *GetClusterUsingGET2NotFound) GetPayload() *models.ErrorDetails {
+	return o.Payload
 }
 
 func (o *GetClusterUsingGET2NotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClusterUsingGET2MethodNotAllowed creates a GetClusterUsingGET2MethodNotAllowed with default headers values
+func NewGetClusterUsingGET2MethodNotAllowed() *GetClusterUsingGET2MethodNotAllowed {
+	return &GetClusterUsingGET2MethodNotAllowed{}
+}
+
+/*
+GetClusterUsingGET2MethodNotAllowed describes a response with status code 405, with default header values.
+
+Method Not Allowed
+*/
+type GetClusterUsingGET2MethodNotAllowed struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this get cluster using g e t2 method not allowed response has a 2xx status code
+func (o *GetClusterUsingGET2MethodNotAllowed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get cluster using g e t2 method not allowed response has a 3xx status code
+func (o *GetClusterUsingGET2MethodNotAllowed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cluster using g e t2 method not allowed response has a 4xx status code
+func (o *GetClusterUsingGET2MethodNotAllowed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get cluster using g e t2 method not allowed response has a 5xx status code
+func (o *GetClusterUsingGET2MethodNotAllowed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get cluster using g e t2 method not allowed response a status code equal to that given
+func (o *GetClusterUsingGET2MethodNotAllowed) IsCode(code int) bool {
+	return code == 405
+}
+
+// Code gets the status code for the get cluster using g e t2 method not allowed response
+func (o *GetClusterUsingGET2MethodNotAllowed) Code() int {
+	return 405
+}
+
+func (o *GetClusterUsingGET2MethodNotAllowed) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *GetClusterUsingGET2MethodNotAllowed) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2MethodNotAllowed %s", 405, payload)
+}
+
+func (o *GetClusterUsingGET2MethodNotAllowed) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *GetClusterUsingGET2MethodNotAllowed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetClusterUsingGET2InternalServerError creates a GetClusterUsingGET2InternalServerError with default headers values
+func NewGetClusterUsingGET2InternalServerError() *GetClusterUsingGET2InternalServerError {
+	return &GetClusterUsingGET2InternalServerError{}
+}
+
+/*
+GetClusterUsingGET2InternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type GetClusterUsingGET2InternalServerError struct {
+	Payload *models.ErrorDetails
+}
+
+// IsSuccess returns true when this get cluster using g e t2 internal server error response has a 2xx status code
+func (o *GetClusterUsingGET2InternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get cluster using g e t2 internal server error response has a 3xx status code
+func (o *GetClusterUsingGET2InternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cluster using g e t2 internal server error response has a 4xx status code
+func (o *GetClusterUsingGET2InternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get cluster using g e t2 internal server error response has a 5xx status code
+func (o *GetClusterUsingGET2InternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get cluster using g e t2 internal server error response a status code equal to that given
+func (o *GetClusterUsingGET2InternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get cluster using g e t2 internal server error response
+func (o *GetClusterUsingGET2InternalServerError) Code() int {
+	return 500
+}
+
+func (o *GetClusterUsingGET2InternalServerError) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2InternalServerError %s", 500, payload)
+}
+
+func (o *GetClusterUsingGET2InternalServerError) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cc-ui/v1/aws/clusters/{clusterId}][%d] getClusterUsingGET2InternalServerError %s", 500, payload)
+}
+
+func (o *GetClusterUsingGET2InternalServerError) GetPayload() *models.ErrorDetails {
+	return o.Payload
+}
+
+func (o *GetClusterUsingGET2InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorDetails)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

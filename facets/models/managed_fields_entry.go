@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ManagedFieldsEntry ManagedFieldsEntry
+// ManagedFieldsEntry managed fields entry
 //
 // swagger:model ManagedFieldsEntry
 type ManagedFieldsEntry struct {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// HTTPHeader HTTPHeader
+// HTTPHeader HTTP header
 //
 // swagger:model HTTPHeader
 type HTTPHeader struct {

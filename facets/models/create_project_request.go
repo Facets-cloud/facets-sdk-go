@@ -16,12 +16,13 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// CreateProjectRequest CreateProjectRequest
+// CreateProjectRequest create project request
 //
 // swagger:model CreateProjectRequest
 type CreateProjectRequest struct {
 
 	// allowed clouds
+	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
 	// bitbucket project key
@@ -104,6 +105,10 @@ func (m *CreateProjectRequest) validateAllowedCloudsItemsEnum(path, location str
 func (m *CreateProjectRequest) validateAllowedClouds(formats strfmt.Registry) error {
 	if swag.IsZero(m.AllowedClouds) { // not required
 		return nil
+	}
+
+	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.AllowedClouds); i++ {

@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// QueuedRelease QueuedRelease
+// QueuedRelease queued release
 //
 // swagger:model QueuedRelease
 type QueuedRelease struct {
@@ -56,8 +56,11 @@ type QueuedRelease struct {
 	ReleaseTraceID string `json:"releaseTraceId,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
+
+	// skip state check
+	SkipStateCheck bool `json:"skipStateCheck,omitempty"`
 
 	// tf version
 	TfVersion *TfVersion `json:"tfVersion,omitempty"`
@@ -137,7 +140,7 @@ var queuedReleaseTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -185,6 +188,15 @@ const (
 
 	// QueuedReleaseReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	QueuedReleaseReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// QueuedReleaseReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	QueuedReleaseReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// QueuedReleaseReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	QueuedReleaseReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// QueuedReleaseReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	QueuedReleaseReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum

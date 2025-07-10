@@ -15,42 +15,77 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// BasicDockerDTO BasicDockerDTO
+// BasicDockerDTO basic docker d t o
 //
 // swagger:model BasicDockerDTO
 type BasicDockerDTO struct {
 
 	// artifactory name
-	ArtifactoryName string `json:"artifactoryName,omitempty"`
+	// Required: true
+	ArtifactoryName *string `json:"artifactoryName"`
 
 	// artifactory type
+	// Required: true
 	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]
-	ArtifactoryType string `json:"artifactoryType,omitempty"`
+	ArtifactoryType *string `json:"artifactoryType"`
 
 	// password
-	Password string `json:"password,omitempty"`
+	// Required: true
+	Password *string `json:"password"`
 
 	// stacks associated
+	// Unique: true
 	StacksAssociated []string `json:"stacksAssociated"`
 
 	// uri
-	URI string `json:"uri,omitempty"`
+	// Required: true
+	URI *string `json:"uri"`
 
 	// username
-	Username string `json:"username,omitempty"`
+	// Required: true
+	Username *string `json:"username"`
 }
 
 // Validate validates this basic docker d t o
 func (m *BasicDockerDTO) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateArtifactoryName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateArtifactoryType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePassword(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStacksAssociated(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateURI(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsername(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *BasicDockerDTO) validateArtifactoryName(formats strfmt.Registry) error {
+
+	if err := validate.Required("artifactoryName", "body", m.ArtifactoryName); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -102,12 +137,52 @@ func (m *BasicDockerDTO) validateArtifactoryTypeEnum(path, location string, valu
 }
 
 func (m *BasicDockerDTO) validateArtifactoryType(formats strfmt.Registry) error {
-	if swag.IsZero(m.ArtifactoryType) { // not required
-		return nil
+
+	if err := validate.Required("artifactoryType", "body", m.ArtifactoryType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateArtifactoryTypeEnum("artifactoryType", "body", m.ArtifactoryType); err != nil {
+	if err := m.validateArtifactoryTypeEnum("artifactoryType", "body", *m.ArtifactoryType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerDTO) validatePassword(formats strfmt.Registry) error {
+
+	if err := validate.Required("password", "body", m.Password); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerDTO) validateStacksAssociated(formats strfmt.Registry) error {
+	if swag.IsZero(m.StacksAssociated) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("stacksAssociated", "body", m.StacksAssociated); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerDTO) validateURI(formats strfmt.Registry) error {
+
+	if err := validate.Required("uri", "body", m.URI); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BasicDockerDTO) validateUsername(formats strfmt.Registry) error {
+
+	if err := validate.Required("username", "body", m.Username); err != nil {
 		return err
 	}
 

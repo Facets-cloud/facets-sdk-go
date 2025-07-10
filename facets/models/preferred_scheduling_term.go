@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PreferredSchedulingTerm PreferredSchedulingTerm
+// PreferredSchedulingTerm preferred scheduling term
 //
 // swagger:model PreferredSchedulingTerm
 type PreferredSchedulingTerm struct {

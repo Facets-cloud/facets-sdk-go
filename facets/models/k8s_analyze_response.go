@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// K8sAnalyzeResponse K8sAnalyzeResponse
+// K8sAnalyzeResponse k8s analyze response
 //
 // swagger:model K8sAnalyzeResponse
 type K8sAnalyzeResponse struct {

@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ClusterSchedule ClusterSchedule
+// ClusterSchedule cluster schedule
 //
 // swagger:model ClusterSchedule
 type ClusterSchedule struct {
@@ -28,7 +28,8 @@ type ClusterSchedule struct {
 	ByTime *LocalTime `json:"byTime,omitempty"`
 
 	// cluster Id
-	ClusterID string `json:"clusterId,omitempty"`
+	// Required: true
+	ClusterID *string `json:"clusterId"`
 
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
@@ -61,14 +62,15 @@ type ClusterSchedule struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
-	ReleaseType string `json:"releaseType,omitempty"`
+	// Required: true
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
+	ReleaseType *string `json:"releaseType"`
 
 	// server time zone
 	ServerTimeZone string `json:"serverTimeZone,omitempty"`
 
 	// time zone
-	TimeZone *TimeZone `json:"timeZone,omitempty"`
+	TimeZone *ClusterScheduleTimeZone `json:"timeZone,omitempty"`
 }
 
 // Validate validates this cluster schedule
@@ -80,6 +82,10 @@ func (m *ClusterSchedule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateByTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -164,6 +170,15 @@ func (m *ClusterSchedule) validateByTime(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ClusterSchedule) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("clusterId", "body", m.ClusterID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ClusterSchedule) validateCreationDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreationDate) { // not required
 		return nil
@@ -240,7 +255,7 @@ var clusterScheduleTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -288,6 +303,15 @@ const (
 
 	// ClusterScheduleReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	ClusterScheduleReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// ClusterScheduleReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	ClusterScheduleReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// ClusterScheduleReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	ClusterScheduleReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// ClusterScheduleReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	ClusterScheduleReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum
@@ -299,12 +323,13 @@ func (m *ClusterSchedule) validateReleaseTypeEnum(path, location string, value s
 }
 
 func (m *ClusterSchedule) validateReleaseType(formats strfmt.Registry) error {
-	if swag.IsZero(m.ReleaseType) { // not required
-		return nil
+
+	if err := validate.Required("releaseType", "body", m.ReleaseType); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validateReleaseTypeEnum("releaseType", "body", m.ReleaseType); err != nil {
+	if err := m.validateReleaseTypeEnum("releaseType", "body", *m.ReleaseType); err != nil {
 		return err
 	}
 
@@ -401,6 +426,52 @@ func (m *ClusterSchedule) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *ClusterSchedule) UnmarshalBinary(b []byte) error {
 	var res ClusterSchedule
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// ClusterScheduleTimeZone cluster schedule time zone
+//
+// swagger:model ClusterScheduleTimeZone
+type ClusterScheduleTimeZone struct {
+
+	// display name
+	DisplayName string `json:"displayName,omitempty"`
+
+	// dstsavings
+	Dstsavings int32 `json:"dstsavings,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// raw offset
+	RawOffset int32 `json:"rawOffset,omitempty"`
+}
+
+// Validate validates this cluster schedule time zone
+func (m *ClusterScheduleTimeZone) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this cluster schedule time zone based on context it is used
+func (m *ClusterScheduleTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ClusterScheduleTimeZone) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ClusterScheduleTimeZone) UnmarshalBinary(b []byte) error {
+	var res ClusterScheduleTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

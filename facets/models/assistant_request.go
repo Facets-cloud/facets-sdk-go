@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// AssistantRequest AssistantRequest
+// AssistantRequest assistant request
 //
 // swagger:model AssistantRequest
 type AssistantRequest struct {

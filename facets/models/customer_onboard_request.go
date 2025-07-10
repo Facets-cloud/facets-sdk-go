@@ -8,11 +8,13 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// CustomerOnboardRequest CustomerOnboardRequest
+// CustomerOnboardRequest customer onboard request
 //
 // swagger:model CustomerOnboardRequest
 type CustomerOnboardRequest struct {
@@ -21,19 +23,26 @@ type CustomerOnboardRequest struct {
 	Azs []string `json:"azs"`
 
 	// customer name
-	CustomerName string `json:"customerName,omitempty"`
+	// Required: true
+	// Max Length: 50
+	// Min Length: 3
+	CustomerName *string `json:"customerName"`
 
 	// external Id
-	ExternalID string `json:"externalId,omitempty"`
+	// Required: true
+	ExternalID *string `json:"externalId"`
 
 	// region
-	Region string `json:"region,omitempty"`
+	// Required: true
+	Region *string `json:"region"`
 
 	// release stream
-	ReleaseStream string `json:"releaseStream,omitempty"`
+	// Required: true
+	ReleaseStream *string `json:"releaseStream"`
 
 	// role a r n
-	RoleARN string `json:"roleARN,omitempty"`
+	// Required: true
+	RoleARN *string `json:"roleARN"`
 
 	// timezone
 	Timezone string `json:"timezone,omitempty"`
@@ -41,6 +50,84 @@ type CustomerOnboardRequest struct {
 
 // Validate validates this customer onboard request
 func (m *CustomerOnboardRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCustomerName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExternalID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRegion(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReleaseStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRoleARN(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CustomerOnboardRequest) validateCustomerName(formats strfmt.Registry) error {
+
+	if err := validate.Required("customerName", "body", m.CustomerName); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("customerName", "body", *m.CustomerName, 3); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("customerName", "body", *m.CustomerName, 50); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomerOnboardRequest) validateExternalID(formats strfmt.Registry) error {
+
+	if err := validate.Required("externalId", "body", m.ExternalID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomerOnboardRequest) validateRegion(formats strfmt.Registry) error {
+
+	if err := validate.Required("region", "body", m.Region); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomerOnboardRequest) validateReleaseStream(formats strfmt.Registry) error {
+
+	if err := validate.Required("releaseStream", "body", m.ReleaseStream); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomerOnboardRequest) validateRoleARN(formats strfmt.Registry) error {
+
+	if err := validate.Required("roleARN", "body", m.RoleARN); err != nil {
+		return err
+	}
+
 	return nil
 }
 

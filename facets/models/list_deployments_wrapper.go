@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ListDeploymentsWrapper ListDeploymentsWrapper
+// ListDeploymentsWrapper list deployments wrapper
 //
 // swagger:model ListDeploymentsWrapper
 type ListDeploymentsWrapper struct {

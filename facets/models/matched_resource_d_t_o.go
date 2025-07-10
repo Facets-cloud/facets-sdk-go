@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MatchedResourceDTO MatchedResourceDTO
+// MatchedResourceDTO matched resource d t o
 //
 // swagger:model MatchedResourceDTO
 type MatchedResourceDTO struct {

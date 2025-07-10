@@ -54,47 +54,23 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// This client is generated with a few options you might find useful for your swagger spec.
-//
-// Feel free to add you own set of options.
-
-// WithAccept allows the client to force the Accept header
-// to negotiate a specific Producer from the server.
-//
-// You may use this option to set arbitrary extensions to your MIME media type.
-func WithAccept(mime string) ClientOption {
-	return func(r *runtime.ClientOperation) {
-		r.ProducesMediaTypes = []string{mime}
-	}
-}
-
-// WithAcceptStarStar sets the Accept header to "*/*".
-func WithAcceptStarStar(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"*/*"}
-}
-
-// WithAcceptApplicationJSON sets the Accept header to "application/json".
-func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
-	r.ProducesMediaTypes = []string{"application/json"}
-}
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddProjectTypeUsingPOST(params *AddProjectTypeUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddProjectTypeUsingPOSTOK, *AddProjectTypeUsingPOSTCreated, error)
+	AddProjectType(params *AddProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddProjectTypeOK, error)
 
-	DeleteProjectTypeUsingDELETE(params *DeleteProjectTypeUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectTypeUsingDELETEOK, *DeleteProjectTypeUsingDELETENoContent, error)
+	DeleteProjectType(params *DeleteProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectTypeOK, error)
 
-	GetAllProjectTypesUsingGET(params *GetAllProjectTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectTypesUsingGETOK, error)
+	GetAllProjectTypes(params *GetAllProjectTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectTypesOK, error)
 
-	GetProjectTypeByIDUsingGET(params *GetProjectTypeByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectTypeByIDUsingGETOK, error)
+	GetProjectTypeByID(params *GetProjectTypeByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectTypeByIDOK, error)
 
-	UpdateProjectTypeUsingPUT(params *UpdateProjectTypeUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectTypeUsingPUTOK, *UpdateProjectTypeUsingPUTCreated, error)
+	UpdateProjectType(params *UpdateProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectTypeOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-	AddProjectTypeUsingPOST adds a new project type
+	AddProjectType adds a new project type
 
 	- **Description:** Creates a new project type from the provided request details.
 
@@ -102,20 +78,20 @@ type ClientService interface {
 - **Permissions:** Requires `PROJECT_TYPE_WRITE` permission.
 - **Audit Logging:** This operation is logged for audit purposes.
 */
-func (a *Client) AddProjectTypeUsingPOST(params *AddProjectTypeUsingPOSTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddProjectTypeUsingPOSTOK, *AddProjectTypeUsingPOSTCreated, error) {
+func (a *Client) AddProjectType(params *AddProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddProjectTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewAddProjectTypeUsingPOSTParams()
+		params = NewAddProjectTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "addProjectTypeUsingPOST",
+		ID:                 "addProjectType",
 		Method:             "POST",
 		PathPattern:        "/cc-ui/v1/project-types",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &AddProjectTypeUsingPOSTReader{formats: a.formats},
+		Reader:             &AddProjectTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -126,21 +102,20 @@ func (a *Client) AddProjectTypeUsingPOST(params *AddProjectTypeUsingPOSTParams, 
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *AddProjectTypeUsingPOSTOK:
-		return value, nil, nil
-	case *AddProjectTypeUsingPOSTCreated:
-		return nil, value, nil
+	success, ok := result.(*AddProjectTypeOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_project_type_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for addProjectType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	DeleteProjectTypeUsingDELETE deletes a project type
+	DeleteProjectType deletes a project type
 
 	- **Description:** Deletes an existing project type based on its ID.
 
@@ -148,20 +123,20 @@ func (a *Client) AddProjectTypeUsingPOST(params *AddProjectTypeUsingPOSTParams, 
 - **Permissions:** Requires `PROJECT_TYPE_DELETE` permission.
 - **Audit Logging:** This operation is logged for audit purposes.
 */
-func (a *Client) DeleteProjectTypeUsingDELETE(params *DeleteProjectTypeUsingDELETEParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectTypeUsingDELETEOK, *DeleteProjectTypeUsingDELETENoContent, error) {
+func (a *Client) DeleteProjectType(params *DeleteProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteProjectTypeUsingDELETEParams()
+		params = NewDeleteProjectTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "deleteProjectTypeUsingDELETE",
+		ID:                 "deleteProjectType",
 		Method:             "DELETE",
 		PathPattern:        "/cc-ui/v1/project-types/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &DeleteProjectTypeUsingDELETEReader{formats: a.formats},
+		Reader:             &DeleteProjectTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -172,21 +147,20 @@ func (a *Client) DeleteProjectTypeUsingDELETE(params *DeleteProjectTypeUsingDELE
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *DeleteProjectTypeUsingDELETEOK:
-		return value, nil, nil
-	case *DeleteProjectTypeUsingDELETENoContent:
-		return nil, value, nil
+	success, ok := result.(*DeleteProjectTypeOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_project_type_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for deleteProjectType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	GetAllProjectTypesUsingGET gets all project types
+	GetAllProjectTypes gets all project types
 
 	- **Description:** Retrieve a list of all existing project types.
 
@@ -194,20 +168,20 @@ func (a *Client) DeleteProjectTypeUsingDELETE(params *DeleteProjectTypeUsingDELE
 - **Permissions:** No specific permissions required.
 - **Audit Logging:** Not applicable.
 */
-func (a *Client) GetAllProjectTypesUsingGET(params *GetAllProjectTypesUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectTypesUsingGETOK, error) {
+func (a *Client) GetAllProjectTypes(params *GetAllProjectTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectTypesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetAllProjectTypesUsingGETParams()
+		params = NewGetAllProjectTypesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getAllProjectTypesUsingGET",
+		ID:                 "getAllProjectTypes",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/project-types",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetAllProjectTypesUsingGETReader{formats: a.formats},
+		Reader:             &GetAllProjectTypesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -220,18 +194,18 @@ func (a *Client) GetAllProjectTypesUsingGET(params *GetAllProjectTypesUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetAllProjectTypesUsingGETOK)
+	success, ok := result.(*GetAllProjectTypesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getAllProjectTypesUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAllProjectTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	GetProjectTypeByIDUsingGET gets project type by ID
+	GetProjectTypeByID gets project type by ID
 
 	- **Description:** Retrieve a specific project type by its ID.
 
@@ -239,20 +213,20 @@ func (a *Client) GetAllProjectTypesUsingGET(params *GetAllProjectTypesUsingGETPa
 - **Permissions:** No specific permissions required.
 - **Audit Logging:** Not applicable.
 */
-func (a *Client) GetProjectTypeByIDUsingGET(params *GetProjectTypeByIDUsingGETParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectTypeByIDUsingGETOK, error) {
+func (a *Client) GetProjectTypeByID(params *GetProjectTypeByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectTypeByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetProjectTypeByIDUsingGETParams()
+		params = NewGetProjectTypeByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getProjectTypeByIdUsingGET",
+		ID:                 "getProjectTypeById",
 		Method:             "GET",
 		PathPattern:        "/cc-ui/v1/project-types/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetProjectTypeByIDUsingGETReader{formats: a.formats},
+		Reader:             &GetProjectTypeByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -265,18 +239,18 @@ func (a *Client) GetProjectTypeByIDUsingGET(params *GetProjectTypeByIDUsingGETPa
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetProjectTypeByIDUsingGETOK)
+	success, ok := result.(*GetProjectTypeByIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getProjectTypeByIdUsingGET: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getProjectTypeById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	UpdateProjectTypeUsingPUT updates an existing project type
+	UpdateProjectType updates an existing project type
 
 	- **Description:** Updates details of a specified project type by its ID.
 
@@ -284,20 +258,20 @@ func (a *Client) GetProjectTypeByIDUsingGET(params *GetProjectTypeByIDUsingGETPa
 - **Permissions:** Requires `PROJECT_TYPE_WRITE` permission.
 - **Audit Logging:** This operation is logged for audit purposes.
 */
-func (a *Client) UpdateProjectTypeUsingPUT(params *UpdateProjectTypeUsingPUTParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectTypeUsingPUTOK, *UpdateProjectTypeUsingPUTCreated, error) {
+func (a *Client) UpdateProjectType(params *UpdateProjectTypeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewUpdateProjectTypeUsingPUTParams()
+		params = NewUpdateProjectTypeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "updateProjectTypeUsingPUT",
+		ID:                 "updateProjectType",
 		Method:             "PUT",
 		PathPattern:        "/cc-ui/v1/project-types/{id}",
-		ProducesMediaTypes: []string{"*/*"},
+		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &UpdateProjectTypeUsingPUTReader{formats: a.formats},
+		Reader:             &UpdateProjectTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -308,16 +282,15 @@ func (a *Client) UpdateProjectTypeUsingPUT(params *UpdateProjectTypeUsingPUTPara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *UpdateProjectTypeUsingPUTOK:
-		return value, nil, nil
-	case *UpdateProjectTypeUsingPUTCreated:
-		return nil, value, nil
+	success, ok := result.(*UpdateProjectTypeOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ui_project_type_controller: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for updateProjectType: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

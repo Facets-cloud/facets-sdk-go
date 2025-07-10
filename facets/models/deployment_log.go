@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DeploymentLog DeploymentLog
+// DeploymentLog deployment log
 //
 // swagger:model DeploymentLog
 type DeploymentLog struct {
@@ -98,8 +98,11 @@ type DeploymentLog struct {
 	ReleaseTraceID string `json:"releaseTraceId,omitempty"`
 
 	// release type
-	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]
+	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
+
+	// rollback deployment Id
+	RollbackDeploymentID string `json:"rollbackDeploymentId,omitempty"`
 
 	// signed off
 	SignedOff bool `json:"signedOff,omitempty"`
@@ -110,10 +113,6 @@ type DeploymentLog struct {
 	// status
 	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","REJECTED"]
 	Status string `json:"status,omitempty"`
-
-	// status deprecated
-	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","null"]
-	StatusDeprecated string `json:"statusDeprecated,omitempty"`
 
 	// tf version
 	TfVersion string `json:"tfVersion,omitempty"`
@@ -179,10 +178,6 @@ func (m *DeploymentLog) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStatusDeprecated(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -445,7 +440,7 @@ var deploymentLogTypeReleaseTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -493,6 +488,15 @@ const (
 
 	// DeploymentLogReleaseTypeMAINTENANCE captures enum value "MAINTENANCE"
 	DeploymentLogReleaseTypeMAINTENANCE string = "MAINTENANCE"
+
+	// DeploymentLogReleaseTypeTERRAFORMEXPORT captures enum value "TERRAFORM_EXPORT"
+	DeploymentLogReleaseTypeTERRAFORMEXPORT string = "TERRAFORM_EXPORT"
+
+	// DeploymentLogReleaseTypeROLLBACKPLAN captures enum value "ROLLBACK_PLAN"
+	DeploymentLogReleaseTypeROLLBACKPLAN string = "ROLLBACK_PLAN"
+
+	// DeploymentLogReleaseTypeAPPLYROLLBACKPLAN captures enum value "APPLY_ROLLBACK_PLAN"
+	DeploymentLogReleaseTypeAPPLYROLLBACKPLAN string = "APPLY_ROLLBACK_PLAN"
 )
 
 // prop value enum
@@ -585,63 +589,6 @@ func (m *DeploymentLog) validateStatus(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateStatusEnum("status", "body", m.Status); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var deploymentLogTypeStatusDeprecatedPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","null"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		deploymentLogTypeStatusDeprecatedPropEnum = append(deploymentLogTypeStatusDeprecatedPropEnum, v)
-	}
-}
-
-const (
-
-	// DeploymentLogStatusDeprecatedSUCCEEDED captures enum value "SUCCEEDED"
-	DeploymentLogStatusDeprecatedSUCCEEDED string = "SUCCEEDED"
-
-	// DeploymentLogStatusDeprecatedFAILED captures enum value "FAILED"
-	DeploymentLogStatusDeprecatedFAILED string = "FAILED"
-
-	// DeploymentLogStatusDeprecatedFAULT captures enum value "FAULT"
-	DeploymentLogStatusDeprecatedFAULT string = "FAULT"
-
-	// DeploymentLogStatusDeprecatedTIMEDOUT captures enum value "TIMED_OUT"
-	DeploymentLogStatusDeprecatedTIMEDOUT string = "TIMED_OUT"
-
-	// DeploymentLogStatusDeprecatedINPROGRESS captures enum value "IN_PROGRESS"
-	DeploymentLogStatusDeprecatedINPROGRESS string = "IN_PROGRESS"
-
-	// DeploymentLogStatusDeprecatedSTOPPED captures enum value "STOPPED"
-	DeploymentLogStatusDeprecatedSTOPPED string = "STOPPED"
-
-	// DeploymentLogStatusDeprecatedNull captures enum value "null"
-	DeploymentLogStatusDeprecatedNull string = "null"
-)
-
-// prop value enum
-func (m *DeploymentLog) validateStatusDeprecatedEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, deploymentLogTypeStatusDeprecatedPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *DeploymentLog) validateStatusDeprecated(formats strfmt.Registry) error {
-	if swag.IsZero(m.StatusDeprecated) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateStatusDeprecatedEnum("statusDeprecated", "body", m.StatusDeprecated); err != nil {
 		return err
 	}
 
