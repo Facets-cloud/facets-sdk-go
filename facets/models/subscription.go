@@ -88,7 +88,7 @@ func (m *Subscription) validateChannelID(formats strfmt.Registry) error {
 	return nil
 }
 
-var subscriptionTypeChannelTypePropEnum []interface{}
+var subscriptionTypeChannelTypePropEnum []any
 
 func init() {
 	var res []string
@@ -148,7 +148,7 @@ func (m *Subscription) validateChannelType(formats strfmt.Registry) error {
 	return nil
 }
 
-var subscriptionTypeNotificationTypePropEnum []interface{}
+var subscriptionTypeNotificationTypePropEnum []any
 
 func init() {
 	var res []string

@@ -62,7 +62,7 @@ func (m *TestNotificationRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var testNotificationRequestTypeChannelTypePropEnum []interface{}
+var testNotificationRequestTypeChannelTypePropEnum []any
 
 func init() {
 	var res []string
@@ -122,7 +122,7 @@ func (m *TestNotificationRequest) validateChannelType(formats strfmt.Registry) e
 	return nil
 }
 
-var testNotificationRequestTypeNotificationTypePropEnum []interface{}
+var testNotificationRequestTypeNotificationTypePropEnum []any
 
 func init() {
 	var res []string

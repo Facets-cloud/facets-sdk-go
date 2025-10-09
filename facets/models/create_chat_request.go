@@ -39,7 +39,7 @@ func (m *CreateChatRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var createChatRequestTypeStarterPropEnum []interface{}
+var createChatRequestTypeStarterPropEnum []any
 
 func init() {
 	var res []string

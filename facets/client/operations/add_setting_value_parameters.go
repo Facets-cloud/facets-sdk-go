@@ -62,7 +62,7 @@ AddSettingValueParams contains all the parameters to send to the API endpoint
 type AddSettingValueParams struct {
 
 	// Body.
-	Body map[string]interface{}
+	Body map[string]any
 
 	// EntityID.
 	EntityID
@@ -124,13 +124,13 @@ func (o *AddSettingValueParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the add setting value params
-func (o *AddSettingValueParams) WithBody(body map[string]interface{}) *AddSettingValueParams {
+func (o *AddSettingValueParams) WithBody(body map[string]any) *AddSettingValueParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the add setting value params
-func (o *AddSettingValueParams) SetBody(body map[string]interface{}) {
+func (o *AddSettingValueParams) SetBody(body map[string]any) {
 	o.Body = body
 }
 

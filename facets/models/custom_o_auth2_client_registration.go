@@ -117,7 +117,7 @@ func (m *CustomOAuth2ClientRegistration) validateLoginButtonText(formats strfmt.
 	return nil
 }
 
-var customOAuth2ClientRegistrationTypeProviderPropEnum []interface{}
+var customOAuth2ClientRegistrationTypeProviderPropEnum []any
 
 func init() {
 	var res []string

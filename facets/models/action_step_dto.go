@@ -115,7 +115,7 @@ func (m *ActionStepDto) validateStartTime(formats strfmt.Registry) error {
 	return nil
 }
 
-var actionStepDtoTypeStatusPropEnum []interface{}
+var actionStepDtoTypeStatusPropEnum []any
 
 func init() {
 	var res []string

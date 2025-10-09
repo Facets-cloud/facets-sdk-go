@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -27,7 +28,7 @@ type OverrideRequest struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// overrides
-	Overrides map[string]interface{} `json:"overrides,omitempty"`
+	Overrides map[string]any `json:"overrides,omitempty"`
 
 	// resource name
 	// Required: true
@@ -72,11 +73,15 @@ func (m *OverrideRequest) validateAffectedResources(formats strfmt.Registry) err
 
 		if m.AffectedResources[i] != nil {
 			if err := m.AffectedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("affectedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("affectedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -129,11 +134,15 @@ func (m *OverrideRequest) contextValidateAffectedResources(ctx context.Context, 
 			}
 
 			if err := m.AffectedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("affectedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("affectedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

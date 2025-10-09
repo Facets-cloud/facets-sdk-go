@@ -92,7 +92,7 @@ func (m *Artifactory) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactoryTypeArtifactoryTypePropEnum []interface{}
+var artifactoryTypeArtifactoryTypePropEnum []any
 
 func init() {
 	var res []string

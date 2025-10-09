@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -74,11 +75,15 @@ func (m *MetricSpec) validateContainerResource(formats strfmt.Registry) error {
 
 	if m.ContainerResource != nil {
 		if err := m.ContainerResource.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("containerResource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("containerResource")
 			}
+
 			return err
 		}
 	}
@@ -93,11 +98,15 @@ func (m *MetricSpec) validateExternal(formats strfmt.Registry) error {
 
 	if m.External != nil {
 		if err := m.External.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("external")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("external")
 			}
+
 			return err
 		}
 	}
@@ -112,11 +121,15 @@ func (m *MetricSpec) validateObject(formats strfmt.Registry) error {
 
 	if m.Object != nil {
 		if err := m.Object.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("object")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("object")
 			}
+
 			return err
 		}
 	}
@@ -131,11 +144,15 @@ func (m *MetricSpec) validatePods(formats strfmt.Registry) error {
 
 	if m.Pods != nil {
 		if err := m.Pods.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("pods")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("pods")
 			}
+
 			return err
 		}
 	}
@@ -150,11 +167,15 @@ func (m *MetricSpec) validateResource(formats strfmt.Registry) error {
 
 	if m.Resource != nil {
 		if err := m.Resource.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resource")
 			}
+
 			return err
 		}
 	}
@@ -201,11 +222,15 @@ func (m *MetricSpec) contextValidateContainerResource(ctx context.Context, forma
 		}
 
 		if err := m.ContainerResource.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("containerResource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("containerResource")
 			}
+
 			return err
 		}
 	}
@@ -222,11 +247,15 @@ func (m *MetricSpec) contextValidateExternal(ctx context.Context, formats strfmt
 		}
 
 		if err := m.External.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("external")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("external")
 			}
+
 			return err
 		}
 	}
@@ -243,11 +272,15 @@ func (m *MetricSpec) contextValidateObject(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.Object.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("object")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("object")
 			}
+
 			return err
 		}
 	}
@@ -264,11 +297,15 @@ func (m *MetricSpec) contextValidatePods(ctx context.Context, formats strfmt.Reg
 		}
 
 		if err := m.Pods.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("pods")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("pods")
 			}
+
 			return err
 		}
 	}
@@ -285,11 +322,15 @@ func (m *MetricSpec) contextValidateResource(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Resource.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resource")
 			}
+
 			return err
 		}
 	}

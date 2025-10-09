@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -56,11 +57,15 @@ func (m *PodAffinityTerm) validateLabelSelector(formats strfmt.Registry) error {
 
 	if m.LabelSelector != nil {
 		if err := m.LabelSelector.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("labelSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("labelSelector")
 			}
+
 			return err
 		}
 	}
@@ -75,11 +80,15 @@ func (m *PodAffinityTerm) validateNamespaceSelector(formats strfmt.Registry) err
 
 	if m.NamespaceSelector != nil {
 		if err := m.NamespaceSelector.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("namespaceSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("namespaceSelector")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +123,15 @@ func (m *PodAffinityTerm) contextValidateLabelSelector(ctx context.Context, form
 		}
 
 		if err := m.LabelSelector.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("labelSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("labelSelector")
 			}
+
 			return err
 		}
 	}
@@ -135,11 +148,15 @@ func (m *PodAffinityTerm) contextValidateNamespaceSelector(ctx context.Context, 
 		}
 
 		if err := m.NamespaceSelector.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("namespaceSelector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("namespaceSelector")
 			}
+
 			return err
 		}
 	}

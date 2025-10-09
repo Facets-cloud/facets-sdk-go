@@ -77,7 +77,7 @@ func (m *RoleMapping) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var roleMappingEntitiesItemsEnum []interface{}
+var roleMappingEntitiesItemsEnum []any
 
 func init() {
 	var res []string
@@ -129,7 +129,7 @@ func (m *RoleMapping) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var roleMappingTypeRoleTypePropEnum []interface{}
+var roleMappingTypeRoleTypePropEnum []any
 
 func init() {
 	var res []string

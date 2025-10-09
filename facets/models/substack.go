@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -197,7 +198,7 @@ func (m *Substack) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var substackAllowedCloudsItemsEnum []interface{}
+var substackAllowedCloudsItemsEnum []any
 
 func init() {
 	var res []string
@@ -249,11 +250,15 @@ func (m *Substack) validateClusterVariablesMeta(formats strfmt.Registry) error {
 		}
 		if val, ok := m.ClusterVariablesMeta[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("clusterVariablesMeta" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("clusterVariablesMeta" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -282,11 +287,15 @@ func (m *Substack) validateOverrideConfig(formats strfmt.Registry) error {
 
 	if m.OverrideConfig != nil {
 		if err := m.OverrideConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideConfig")
 			}
+
 			return err
 		}
 	}
@@ -294,7 +303,7 @@ func (m *Substack) validateOverrideConfig(formats strfmt.Registry) error {
 	return nil
 }
 
-var substackTypePrimaryCloudPropEnum []interface{}
+var substackTypePrimaryCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -364,11 +373,15 @@ func (m *Substack) validateProvidedResources(formats strfmt.Registry) error {
 
 		if m.ProvidedResources[i] != nil {
 			if err := m.ProvidedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -378,7 +391,7 @@ func (m *Substack) validateProvidedResources(formats strfmt.Registry) error {
 	return nil
 }
 
-var substackTypeVcsPropEnum []interface{}
+var substackTypeVcsPropEnum []any
 
 func init() {
 	var res []string
@@ -469,11 +482,15 @@ func (m *Substack) contextValidateOverrideConfig(ctx context.Context, formats st
 		}
 
 		if err := m.OverrideConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideConfig")
 			}
+
 			return err
 		}
 	}
@@ -492,11 +509,15 @@ func (m *Substack) contextValidateProvidedResources(ctx context.Context, formats
 			}
 
 			if err := m.ProvidedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

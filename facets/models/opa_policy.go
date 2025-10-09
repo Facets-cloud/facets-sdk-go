@@ -40,7 +40,7 @@ type OpaPolicy struct {
 	Flavours []string `json:"flavours"`
 
 	// input data
-	InputData map[string]interface{} `json:"inputData,omitempty"`
+	InputData map[string]any `json:"inputData,omitempty"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
@@ -129,7 +129,7 @@ func (m *OpaPolicy) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var opaPolicyTypePolicyTypePropEnum []interface{}
+var opaPolicyTypePolicyTypePropEnum []any
 
 func init() {
 	var res []string
@@ -171,7 +171,7 @@ func (m *OpaPolicy) validatePolicyType(formats strfmt.Registry) error {
 	return nil
 }
 
-var opaPolicyTypeSeverityPropEnum []interface{}
+var opaPolicyTypeSeverityPropEnum []any
 
 func init() {
 	var res []string

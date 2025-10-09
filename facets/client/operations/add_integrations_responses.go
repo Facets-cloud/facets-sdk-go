@@ -7,6 +7,7 @@ package operations
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type AddIntegrationsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *AddIntegrationsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *AddIntegrationsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewAddIntegrationsOK()
@@ -126,7 +127,7 @@ func (o *AddIntegrationsOK) GetPayload() []*models.CustomOAuth2ClientRegistratio
 func (o *AddIntegrationsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -196,7 +197,7 @@ func (o *AddIntegrationsBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -264,7 +265,7 @@ func (o *AddIntegrationsForbidden) GetPayload() string {
 func (o *AddIntegrationsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -334,7 +335,7 @@ func (o *AddIntegrationsNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -404,7 +405,7 @@ func (o *AddIntegrationsMethodNotAllowed) readResponse(response runtime.ClientRe
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -474,7 +475,7 @@ func (o *AddIntegrationsInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

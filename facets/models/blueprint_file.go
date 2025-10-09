@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -60,7 +61,7 @@ type BlueprintFile struct {
 	Overridden bool `json:"overridden,omitempty"`
 
 	// override
-	Override map[string]interface{} `json:"override,omitempty"`
+	Override map[string]any `json:"override,omitempty"`
 
 	// parent resource Id
 	ParentResourceID string `json:"parentResourceId,omitempty"`
@@ -148,11 +149,15 @@ func (m *BlueprintFile) validateEdges(formats strfmt.Registry) error {
 
 		if m.Edges[i] != nil {
 			if err := m.Edges[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("edges" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("edges" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -174,11 +179,15 @@ func (m *BlueprintFile) validateErrors(formats strfmt.Registry) error {
 
 		if m.Errors[i] != nil {
 			if err := m.Errors[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("errors" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("errors" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -204,11 +213,15 @@ func (m *BlueprintFile) validateExpressions(formats strfmt.Registry) error {
 
 		if m.Expressions[i] != nil {
 			if err := m.Expressions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expressions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expressions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -225,11 +238,15 @@ func (m *BlueprintFile) validateInfo(formats strfmt.Registry) error {
 
 	if m.Info != nil {
 		if err := m.Info.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("info")
 			}
+
 			return err
 		}
 	}
@@ -274,11 +291,15 @@ func (m *BlueprintFile) contextValidateEdges(ctx context.Context, formats strfmt
 			}
 
 			if err := m.Edges[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("edges" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("edges" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -299,11 +320,15 @@ func (m *BlueprintFile) contextValidateErrors(ctx context.Context, formats strfm
 			}
 
 			if err := m.Errors[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("errors" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("errors" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -324,11 +349,15 @@ func (m *BlueprintFile) contextValidateExpressions(ctx context.Context, formats 
 			}
 
 			if err := m.Expressions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("expressions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("expressions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -347,11 +376,15 @@ func (m *BlueprintFile) contextValidateInfo(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Info.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("info")
 			}
+
 			return err
 		}
 	}

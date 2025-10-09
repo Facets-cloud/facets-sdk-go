@@ -24,7 +24,7 @@ type IntOrString struct {
 	StrVal string `json:"strVal,omitempty"`
 
 	// value
-	Value interface{} `json:"value,omitempty"`
+	Value any `json:"value,omitempty"`
 }
 
 // Validate validates this int or string

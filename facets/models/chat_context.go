@@ -42,7 +42,7 @@ func (m *ChatContext) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var chatContextTypeRolePropEnum []interface{}
+var chatContextTypeRolePropEnum []any
 
 func init() {
 	var res []string

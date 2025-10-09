@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -79,7 +80,7 @@ func (m *CiCdDto) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var ciCdDtoTypeCiSystemPropEnum []interface{}
+var ciCdDtoTypeCiSystemPropEnum []any
 
 func init() {
 	var res []string
@@ -137,11 +138,15 @@ func (m *CiCdDto) validatePromotionHierarchies(formats strfmt.Registry) error {
 
 		if m.PromotionHierarchies[i] != nil {
 			if err := m.PromotionHierarchies[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("promotionHierarchies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("promotionHierarchies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -151,7 +156,7 @@ func (m *CiCdDto) validatePromotionHierarchies(formats strfmt.Registry) error {
 	return nil
 }
 
-var ciCdDtoTypeRegistrationTypePropEnum []interface{}
+var ciCdDtoTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string
@@ -210,11 +215,15 @@ func (m *CiCdDto) validateRoutingRules(formats strfmt.Registry) error {
 
 		if m.RoutingRules[i] != nil {
 			if err := m.RoutingRules[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("routingRules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("routingRules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -262,11 +271,15 @@ func (m *CiCdDto) contextValidatePromotionHierarchies(ctx context.Context, forma
 			}
 
 			if err := m.PromotionHierarchies[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("promotionHierarchies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("promotionHierarchies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -287,11 +300,15 @@ func (m *CiCdDto) contextValidateRoutingRules(ctx context.Context, formats strfm
 			}
 
 			if err := m.RoutingRules[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("routingRules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("routingRules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -33,7 +33,7 @@ type Setting struct {
 
 	// default value
 	// Required: true
-	DefaultValue interface{} `json:"defaultValue"`
+	DefaultValue any `json:"defaultValue"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -132,7 +132,7 @@ func (m *Setting) validateDefaultValue(formats strfmt.Registry) error {
 	return nil
 }
 
-var settingTypeEntityPropEnum []interface{}
+var settingTypeEntityPropEnum []any
 
 func init() {
 	var res []string
@@ -217,7 +217,7 @@ func (m *Setting) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-var settingTypeSettingTypePropEnum []interface{}
+var settingTypeSettingTypePropEnum []any
 
 func init() {
 	var res []string
@@ -269,7 +269,7 @@ func (m *Setting) validateSettingType(formats strfmt.Registry) error {
 	return nil
 }
 
-var settingSupportedForCloudsItemsEnum []interface{}
+var settingSupportedForCloudsItemsEnum []any
 
 func init() {
 	var res []string

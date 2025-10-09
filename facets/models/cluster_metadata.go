@@ -59,7 +59,7 @@ func (m *ClusterMetadata) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterMetadataTypeCloudPropEnum []interface{}
+var clusterMetadataTypeCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -113,7 +113,7 @@ func (m *ClusterMetadata) validateCloud(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterMetadataTypeClusterStatePropEnum []interface{}
+var clusterMetadataTypeClusterStatePropEnum []any
 
 func init() {
 	var res []string

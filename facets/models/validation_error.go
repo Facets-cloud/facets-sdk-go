@@ -51,7 +51,7 @@ func (m *ValidationError) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var validationErrorTypeTypePropEnum []interface{}
+var validationErrorTypeTypePropEnum []any
 
 func init() {
 	var res []string

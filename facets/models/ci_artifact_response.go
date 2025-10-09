@@ -110,7 +110,7 @@ func (m *CiArtifactResponse) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-var ciArtifactResponseTypeRegistrationTypePropEnum []interface{}
+var ciArtifactResponseTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string

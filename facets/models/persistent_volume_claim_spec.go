@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -76,11 +77,15 @@ func (m *PersistentVolumeClaimSpec) validateDataSource(formats strfmt.Registry) 
 
 	if m.DataSource != nil {
 		if err := m.DataSource.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dataSource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dataSource")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +100,15 @@ func (m *PersistentVolumeClaimSpec) validateDataSourceRef(formats strfmt.Registr
 
 	if m.DataSourceRef != nil {
 		if err := m.DataSourceRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dataSourceRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dataSourceRef")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +123,15 @@ func (m *PersistentVolumeClaimSpec) validateResources(formats strfmt.Registry) e
 
 	if m.Resources != nil {
 		if err := m.Resources.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resources")
 			}
+
 			return err
 		}
 	}
@@ -133,11 +146,15 @@ func (m *PersistentVolumeClaimSpec) validateSelector(formats strfmt.Registry) er
 
 	if m.Selector != nil {
 		if err := m.Selector.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("selector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("selector")
 			}
+
 			return err
 		}
 	}
@@ -180,11 +197,15 @@ func (m *PersistentVolumeClaimSpec) contextValidateDataSource(ctx context.Contex
 		}
 
 		if err := m.DataSource.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dataSource")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dataSource")
 			}
+
 			return err
 		}
 	}
@@ -201,11 +222,15 @@ func (m *PersistentVolumeClaimSpec) contextValidateDataSourceRef(ctx context.Con
 		}
 
 		if err := m.DataSourceRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dataSourceRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dataSourceRef")
 			}
+
 			return err
 		}
 	}
@@ -222,11 +247,15 @@ func (m *PersistentVolumeClaimSpec) contextValidateResources(ctx context.Context
 		}
 
 		if err := m.Resources.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resources")
 			}
+
 			return err
 		}
 	}
@@ -243,11 +272,15 @@ func (m *PersistentVolumeClaimSpec) contextValidateSelector(ctx context.Context,
 		}
 
 		if err := m.Selector.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("selector")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("selector")
 			}
+
 			return err
 		}
 	}

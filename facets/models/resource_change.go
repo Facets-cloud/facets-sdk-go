@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -56,7 +57,7 @@ func (m *ResourceChange) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var resourceChangeTypeChangeTypePropEnum []interface{}
+var resourceChangeTypeChangeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -113,11 +114,15 @@ func (m *ResourceChange) validateChangedAttributes(formats strfmt.Registry) erro
 
 		if m.ChangedAttributes[i] != nil {
 			if err := m.ChangedAttributes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changedAttributes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changedAttributes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -152,11 +157,15 @@ func (m *ResourceChange) contextValidateChangedAttributes(ctx context.Context, f
 			}
 
 			if err := m.ChangedAttributes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changedAttributes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changedAttributes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -25,7 +25,7 @@ type ModuleSchemaResponseDTO struct {
 	AdditionalProperties bool `json:"additionalProperties,omitempty"`
 
 	// Schema properties
-	Properties map[string]interface{} `json:"properties,omitempty"`
+	Properties map[string]any `json:"properties,omitempty"`
 
 	// Required fields
 	Required []string `json:"required"`

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -70,11 +71,15 @@ func (m *StackGitLog) validateCommitLog(formats strfmt.Registry) error {
 
 	if m.CommitLog != nil {
 		if err := m.CommitLog.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("commitLog")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("commitLog")
 			}
+
 			return err
 		}
 	}
@@ -105,11 +110,15 @@ func (m *StackGitLog) contextValidateCommitLog(ctx context.Context, formats strf
 		}
 
 		if err := m.CommitLog.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("commitLog")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("commitLog")
 			}
+
 			return err
 		}
 	}

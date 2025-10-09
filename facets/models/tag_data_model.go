@@ -8,4 +8,4 @@ package models
 // TagDataModel tag data model
 //
 // swagger:model TagDataModel
-type TagDataModel interface{}
+type TagDataModel any

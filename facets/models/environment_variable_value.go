@@ -51,7 +51,7 @@ func (m *EnvironmentVariableValue) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var environmentVariableValueTypeStatusPropEnum []interface{}
+var environmentVariableValueTypeStatusPropEnum []any
 
 func init() {
 	var res []string

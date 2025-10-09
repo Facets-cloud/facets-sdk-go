@@ -45,7 +45,7 @@ func (m *TerraformChange) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var terraformChangeTypeTypePropEnum []interface{}
+var terraformChangeTypeTypePropEnum []any
 
 func init() {
 	var res []string

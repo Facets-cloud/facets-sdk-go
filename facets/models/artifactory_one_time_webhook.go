@@ -162,7 +162,7 @@ func (m *ArtifactoryOneTimeWebhook) validateStackAssociated(formats strfmt.Regis
 	return nil
 }
 
-var artifactoryOneTimeWebhookTypeStatusPropEnum []interface{}
+var artifactoryOneTimeWebhookTypeStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -210,7 +210,7 @@ func (m *ArtifactoryOneTimeWebhook) validateStatus(formats strfmt.Registry) erro
 	return nil
 }
 
-var artifactoryOneTimeWebhookTypeTypePropEnum []interface{}
+var artifactoryOneTimeWebhookTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -297,7 +297,7 @@ func (m *ArtifactoryOneTimeWebhook) ContextValidate(ctx context.Context, formats
 
 func (m *ArtifactoryOneTimeWebhook) contextValidateDeleteAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "deleteAt", "body", strfmt.DateTime(m.DeleteAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "deleteAt", "body", m.DeleteAt); err != nil {
 		return err
 	}
 
@@ -306,7 +306,7 @@ func (m *ArtifactoryOneTimeWebhook) contextValidateDeleteAt(ctx context.Context,
 
 func (m *ArtifactoryOneTimeWebhook) contextValidateExpiresAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "expiresAt", "body", strfmt.DateTime(m.ExpiresAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "expiresAt", "body", m.ExpiresAt); err != nil {
 		return err
 	}
 
@@ -315,7 +315,7 @@ func (m *ArtifactoryOneTimeWebhook) contextValidateExpiresAt(ctx context.Context
 
 func (m *ArtifactoryOneTimeWebhook) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "status", "body", string(m.Status)); err != nil {
+	if err := validate.ReadOnly(ctx, "status", "body", m.Status); err != nil {
 		return err
 	}
 

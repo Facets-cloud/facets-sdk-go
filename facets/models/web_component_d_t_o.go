@@ -22,7 +22,7 @@ type WebComponentDTO struct {
 
 	// Additional contextual attributes for component configuration
 	// Example: {"theme":"dark","width":"100%"}
-	ContextualAttributes map[string]interface{} `json:"contextualAttributes,omitempty"`
+	ContextualAttributes map[string]any `json:"contextualAttributes,omitempty"`
 
 	// Flag to enable/disable component visibility
 	// Example: true
@@ -140,7 +140,7 @@ func (m *WebComponentDTO) validateRemoteURL(formats strfmt.Registry) error {
 	return nil
 }
 
-var webComponentDTOTypeTypePropEnum []interface{}
+var webComponentDTOTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -203,7 +203,7 @@ func (m *WebComponentDTO) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *WebComponentDTO) contextValidateLastModifiedBy(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "lastModifiedBy", "body", string(m.LastModifiedBy)); err != nil {
+	if err := validate.ReadOnly(ctx, "lastModifiedBy", "body", m.LastModifiedBy); err != nil {
 		return err
 	}
 
@@ -212,7 +212,7 @@ func (m *WebComponentDTO) contextValidateLastModifiedBy(ctx context.Context, for
 
 func (m *WebComponentDTO) contextValidateLastModifiedDate(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "lastModifiedDate", "body", strfmt.DateTime(m.LastModifiedDate)); err != nil {
+	if err := validate.ReadOnly(ctx, "lastModifiedDate", "body", m.LastModifiedDate); err != nil {
 		return err
 	}
 

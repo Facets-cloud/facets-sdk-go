@@ -33,7 +33,7 @@ type OpaPolicyRequest struct {
 	Flavours []string `json:"flavours"`
 
 	// input data
-	InputData map[string]interface{} `json:"inputData,omitempty"`
+	InputData map[string]any `json:"inputData,omitempty"`
 
 	// package name
 	PackageName string `json:"packageName,omitempty"`
@@ -83,7 +83,7 @@ func (m *OpaPolicyRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var opaPolicyRequestTypePolicyTypePropEnum []interface{}
+var opaPolicyRequestTypePolicyTypePropEnum []any
 
 func init() {
 	var res []string
@@ -125,7 +125,7 @@ func (m *OpaPolicyRequest) validatePolicyType(formats strfmt.Registry) error {
 	return nil
 }
 
-var opaPolicyRequestTypeSeverityPropEnum []interface{}
+var opaPolicyRequestTypeSeverityPropEnum []any
 
 func init() {
 	var res []string

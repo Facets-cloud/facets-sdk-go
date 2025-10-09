@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -95,11 +96,15 @@ func (m *ObjectMeta) validateManagedFields(formats strfmt.Registry) error {
 
 		if m.ManagedFields[i] != nil {
 			if err := m.ManagedFields[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("managedFields" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("managedFields" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -121,11 +126,15 @@ func (m *ObjectMeta) validateOwnerReferences(formats strfmt.Registry) error {
 
 		if m.OwnerReferences[i] != nil {
 			if err := m.OwnerReferences[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ownerReferences" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ownerReferences" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -164,11 +173,15 @@ func (m *ObjectMeta) contextValidateManagedFields(ctx context.Context, formats s
 			}
 
 			if err := m.ManagedFields[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("managedFields" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("managedFields" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -189,11 +202,15 @@ func (m *ObjectMeta) contextValidateOwnerReferences(ctx context.Context, formats
 			}
 
 			if err := m.OwnerReferences[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ownerReferences" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ownerReferences" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

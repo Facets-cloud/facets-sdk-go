@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -122,11 +123,15 @@ func (m *QueuedRelease) validateHotfixResources(formats strfmt.Registry) error {
 
 		if m.HotfixResources[i] != nil {
 			if err := m.HotfixResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -136,7 +141,7 @@ func (m *QueuedRelease) validateHotfixResources(formats strfmt.Registry) error {
 	return nil
 }
 
-var queuedReleaseTypeReleaseTypePropEnum []interface{}
+var queuedReleaseTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string
@@ -227,11 +232,15 @@ func (m *QueuedRelease) validateTfVersion(formats strfmt.Registry) error {
 
 	if m.TfVersion != nil {
 		if err := m.TfVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfVersion")
 			}
+
 			return err
 		}
 	}
@@ -268,11 +277,15 @@ func (m *QueuedRelease) contextValidateHotfixResources(ctx context.Context, form
 			}
 
 			if err := m.HotfixResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -291,11 +304,15 @@ func (m *QueuedRelease) contextValidateTfVersion(ctx context.Context, formats st
 		}
 
 		if err := m.TfVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfVersion")
 			}
+
 			return err
 		}
 	}

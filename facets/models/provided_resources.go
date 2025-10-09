@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -85,11 +86,15 @@ func (m *ProvidedResources) validateProvidedAuthenticatedResources(formats strfm
 
 		if m.ProvidedAuthenticatedResources[i] != nil {
 			if err := m.ProvidedAuthenticatedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedAuthenticatedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedAuthenticatedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -115,11 +120,15 @@ func (m *ProvidedResources) validateProvidedCloudResources(formats strfmt.Regist
 
 		if m.ProvidedCloudResources[i] != nil {
 			if err := m.ProvidedCloudResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedCloudResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedCloudResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -145,11 +154,15 @@ func (m *ProvidedResources) validateProvidedShardedResources(formats strfmt.Regi
 
 		if m.ProvidedShardedResources[i] != nil {
 			if err := m.ProvidedShardedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedShardedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedShardedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -175,11 +188,15 @@ func (m *ProvidedResources) validateProvidedUnauthenticatedResources(formats str
 
 		if m.ProvidedUnauthenticatedResources[i] != nil {
 			if err := m.ProvidedUnauthenticatedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedUnauthenticatedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedUnauthenticatedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -226,11 +243,15 @@ func (m *ProvidedResources) contextValidateProvidedAuthenticatedResources(ctx co
 			}
 
 			if err := m.ProvidedAuthenticatedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedAuthenticatedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedAuthenticatedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -251,11 +272,15 @@ func (m *ProvidedResources) contextValidateProvidedCloudResources(ctx context.Co
 			}
 
 			if err := m.ProvidedCloudResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedCloudResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedCloudResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -276,11 +301,15 @@ func (m *ProvidedResources) contextValidateProvidedShardedResources(ctx context.
 			}
 
 			if err := m.ProvidedShardedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedShardedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedShardedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -301,11 +330,15 @@ func (m *ProvidedResources) contextValidateProvidedUnauthenticatedResources(ctx 
 			}
 
 			if err := m.ProvidedUnauthenticatedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providedUnauthenticatedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providedUnauthenticatedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

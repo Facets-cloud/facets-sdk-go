@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -111,11 +112,15 @@ func (m *PromotionWorkflow) validateHierarchies(formats strfmt.Registry) error {
 
 		if m.Hierarchies[i] != nil {
 			if err := m.Hierarchies[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hierarchies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hierarchies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -137,7 +142,7 @@ func (m *PromotionWorkflow) validateLastModifiedDate(formats strfmt.Registry) er
 	return nil
 }
 
-var promotionWorkflowTypeRegistrationTypePropEnum []interface{}
+var promotionWorkflowTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string
@@ -217,11 +222,15 @@ func (m *PromotionWorkflow) contextValidateHierarchies(ctx context.Context, form
 			}
 
 			if err := m.Hierarchies[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hierarchies" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hierarchies" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

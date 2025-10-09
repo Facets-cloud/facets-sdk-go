@@ -71,7 +71,7 @@ func (m *TemplateResponseDTO) validateClouds(formats strfmt.Registry) error {
 	return nil
 }
 
-var templateResponseDTOTypeTypePropEnum []interface{}
+var templateResponseDTOTypeTypePropEnum []any
 
 func init() {
 	var res []string

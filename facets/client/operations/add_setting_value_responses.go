@@ -7,6 +7,7 @@ package operations
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type AddSettingValueReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *AddSettingValueReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *AddSettingValueReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewAddSettingValueOK()
@@ -76,7 +77,7 @@ AddSettingValueOK describes a response with status code 200, with default header
 OK
 */
 type AddSettingValueOK struct {
-	Payload map[string]interface{}
+	Payload map[string]any
 }
 
 // IsSuccess returns true when this add setting value o k response has a 2xx status code
@@ -119,14 +120,14 @@ func (o *AddSettingValueOK) String() string {
 	return fmt.Sprintf("[PUT /cc-ui/v1/settings/value/{entityType}/{entityId}][%d] addSettingValueOK %s", 200, payload)
 }
 
-func (o *AddSettingValueOK) GetPayload() map[string]interface{} {
+func (o *AddSettingValueOK) GetPayload() map[string]any {
 	return o.Payload
 }
 
 func (o *AddSettingValueOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -196,7 +197,7 @@ func (o *AddSettingValueBadRequest) readResponse(response runtime.ClientResponse
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -264,7 +265,7 @@ func (o *AddSettingValueForbidden) GetPayload() string {
 func (o *AddSettingValueForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -334,7 +335,7 @@ func (o *AddSettingValueNotFound) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -404,7 +405,7 @@ func (o *AddSettingValueMethodNotAllowed) readResponse(response runtime.ClientRe
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -474,7 +475,7 @@ func (o *AddSettingValueInternalServerError) readResponse(response runtime.Clien
 	o.Payload = new(models.ErrorDetails)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

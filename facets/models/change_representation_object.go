@@ -29,10 +29,10 @@ type ChangeRepresentationObject struct {
 	ChangeType string `json:"changeType,omitempty"`
 
 	// new value
-	NewValue interface{} `json:"newValue,omitempty"`
+	NewValue any `json:"newValue,omitempty"`
 
 	// old value
-	OldValue interface{} `json:"oldValue,omitempty"`
+	OldValue any `json:"oldValue,omitempty"`
 }
 
 // Validate validates this change representation object
@@ -53,7 +53,7 @@ func (m *ChangeRepresentationObject) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var changeRepresentationObjectTypeActionPropEnum []interface{}
+var changeRepresentationObjectTypeActionPropEnum []any
 
 func init() {
 	var res []string
@@ -98,7 +98,7 @@ func (m *ChangeRepresentationObject) validateAction(formats strfmt.Registry) err
 	return nil
 }
 
-var changeRepresentationObjectTypeChangeTypePropEnum []interface{}
+var changeRepresentationObjectTypeChangeTypePropEnum []any
 
 func init() {
 	var res []string

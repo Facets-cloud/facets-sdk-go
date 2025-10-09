@@ -48,7 +48,7 @@ func (m *VCSOrganizationsRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var vCSOrganizationsRequestTypeVcsTypePropEnum []interface{}
+var vCSOrganizationsRequestTypeVcsTypePropEnum []any
 
 func init() {
 	var res []string

@@ -115,7 +115,7 @@ func (m *ArtifactCI) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactCITypeRegistrationTypePropEnum []interface{}
+var artifactCITypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string

@@ -20,7 +20,7 @@ import (
 type ResourceOutProperties struct {
 
 	// attributes
-	Attributes map[string]interface{} `json:"attributes,omitempty"`
+	Attributes map[string]any `json:"attributes,omitempty"`
 
 	// cluster Id
 	ClusterID string `json:"clusterId,omitempty"`
@@ -29,7 +29,7 @@ type ResourceOutProperties struct {
 	ID string `json:"id,omitempty"`
 
 	// interfaces
-	Interfaces map[string]interface{} `json:"interfaces,omitempty"`
+	Interfaces map[string]any `json:"interfaces,omitempty"`
 
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`

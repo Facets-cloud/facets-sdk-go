@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -85,11 +86,15 @@ func (m *ResourceHistory) validateArtifactVersion(formats strfmt.Registry) error
 
 	if m.ArtifactVersion != nil {
 		if err := m.ArtifactVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("artifactVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("artifactVersion")
 			}
+
 			return err
 		}
 	}
@@ -104,11 +109,15 @@ func (m *ResourceHistory) validateBlueprintVersion(formats strfmt.Registry) erro
 
 	if m.BlueprintVersion != nil {
 		if err := m.BlueprintVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintVersion")
 			}
+
 			return err
 		}
 	}
@@ -123,11 +132,15 @@ func (m *ResourceHistory) validateOverrideVersion(formats strfmt.Registry) error
 
 	if m.OverrideVersion != nil {
 		if err := m.OverrideVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideVersion")
 			}
+
 			return err
 		}
 	}
@@ -135,7 +148,7 @@ func (m *ResourceHistory) validateOverrideVersion(formats strfmt.Registry) error
 	return nil
 }
 
-var resourceHistoryTypeResourceStatusPropEnum []interface{}
+var resourceHistoryTypeResourceStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -208,11 +221,15 @@ func (m *ResourceHistory) contextValidateArtifactVersion(ctx context.Context, fo
 		}
 
 		if err := m.ArtifactVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("artifactVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("artifactVersion")
 			}
+
 			return err
 		}
 	}
@@ -229,11 +246,15 @@ func (m *ResourceHistory) contextValidateBlueprintVersion(ctx context.Context, f
 		}
 
 		if err := m.BlueprintVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintVersion")
 			}
+
 			return err
 		}
 	}
@@ -250,11 +271,15 @@ func (m *ResourceHistory) contextValidateOverrideVersion(ctx context.Context, fo
 		}
 
 		if err := m.OverrideVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideVersion")
 			}
+
 			return err
 		}
 	}

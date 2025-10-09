@@ -91,7 +91,7 @@ func (m *SaveAsTemplateRequest) validateAccountID(formats strfmt.Registry) error
 	return nil
 }
 
-var saveAsTemplateRequestCloudsItemsEnum []interface{}
+var saveAsTemplateRequestCloudsItemsEnum []any
 
 func init() {
 	var res []string
@@ -140,7 +140,7 @@ func (m *SaveAsTemplateRequest) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-var saveAsTemplateRequestTypeTypePropEnum []interface{}
+var saveAsTemplateRequestTypeTypePropEnum []any
 
 func init() {
 	var res []string

@@ -56,7 +56,7 @@ func (m *BlueprintValidationError) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var blueprintValidationErrorTypeCategoryPropEnum []interface{}
+var blueprintValidationErrorTypeCategoryPropEnum []any
 
 func init() {
 	var res []string
@@ -116,7 +116,7 @@ func (m *BlueprintValidationError) validateCategory(formats strfmt.Registry) err
 	return nil
 }
 
-var blueprintValidationErrorTypeSeverityPropEnum []interface{}
+var blueprintValidationErrorTypeSeverityPropEnum []any
 
 func init() {
 	var res []string

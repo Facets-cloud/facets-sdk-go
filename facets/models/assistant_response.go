@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -59,11 +60,15 @@ func (m *AssistantResponse) validateMessages(formats strfmt.Registry) error {
 
 		if m.Messages[i] != nil {
 			if err := m.Messages[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("messages" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("messages" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -85,11 +90,15 @@ func (m *AssistantResponse) validateNextActions(formats strfmt.Registry) error {
 
 		if m.NextActions[i] != nil {
 			if err := m.NextActions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("nextActions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("nextActions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -128,11 +137,15 @@ func (m *AssistantResponse) contextValidateMessages(ctx context.Context, formats
 			}
 
 			if err := m.Messages[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("messages" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("messages" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -153,11 +166,15 @@ func (m *AssistantResponse) contextValidateNextActions(ctx context.Context, form
 			}
 
 			if err := m.NextActions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("nextActions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("nextActions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

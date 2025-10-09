@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -53,11 +54,15 @@ func (m *EnvFromSource) validateConfigMapRef(formats strfmt.Registry) error {
 
 	if m.ConfigMapRef != nil {
 		if err := m.ConfigMapRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMapRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMapRef")
 			}
+
 			return err
 		}
 	}
@@ -72,11 +77,15 @@ func (m *EnvFromSource) validateSecretRef(formats strfmt.Registry) error {
 
 	if m.SecretRef != nil {
 		if err := m.SecretRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretRef")
 			}
+
 			return err
 		}
 	}
@@ -111,11 +120,15 @@ func (m *EnvFromSource) contextValidateConfigMapRef(ctx context.Context, formats
 		}
 
 		if err := m.ConfigMapRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMapRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMapRef")
 			}
+
 			return err
 		}
 	}
@@ -132,11 +145,15 @@ func (m *EnvFromSource) contextValidateSecretRef(ctx context.Context, formats st
 		}
 
 		if err := m.SecretRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretRef")
 			}
+
 			return err
 		}
 	}

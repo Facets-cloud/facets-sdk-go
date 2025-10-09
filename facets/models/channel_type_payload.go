@@ -42,7 +42,7 @@ func (m *ChannelTypePayload) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var channelTypePayloadTypeTypePropEnum []interface{}
+var channelTypePayloadTypeTypePropEnum []any
 
 func init() {
 	var res []string

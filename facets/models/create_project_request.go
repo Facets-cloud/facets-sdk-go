@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -83,7 +84,7 @@ func (m *CreateProjectRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var createProjectRequestAllowedCloudsItemsEnum []interface{}
+var createProjectRequestAllowedCloudsItemsEnum []any
 
 func init() {
 	var res []string
@@ -123,7 +124,7 @@ func (m *CreateProjectRequest) validateAllowedClouds(formats strfmt.Registry) er
 	return nil
 }
 
-var createProjectRequestTypeCloudPropEnum []interface{}
+var createProjectRequestTypeCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -189,11 +190,15 @@ func (m *CreateProjectRequest) validateDraftClusters(formats strfmt.Registry) er
 
 		if m.DraftClusters[i] != nil {
 			if err := m.DraftClusters[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("draftClusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("draftClusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -210,11 +215,15 @@ func (m *CreateProjectRequest) validateGitOpsRequest(formats strfmt.Registry) er
 
 	if m.GitOpsRequest != nil {
 		if err := m.GitOpsRequest.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gitOpsRequest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gitOpsRequest")
 			}
+
 			return err
 		}
 	}
@@ -251,11 +260,15 @@ func (m *CreateProjectRequest) contextValidateDraftClusters(ctx context.Context,
 			}
 
 			if err := m.DraftClusters[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("draftClusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("draftClusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -274,11 +287,15 @@ func (m *CreateProjectRequest) contextValidateGitOpsRequest(ctx context.Context,
 		}
 
 		if err := m.GitOpsRequest.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gitOpsRequest")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gitOpsRequest")
 			}
+
 			return err
 		}
 	}

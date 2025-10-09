@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,7 +47,7 @@ func (m *Change) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var changeTypeChangeTypePropEnum []interface{}
+var changeTypeChangeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -98,11 +99,15 @@ func (m *Change) validateChangedAttribute(formats strfmt.Registry) error {
 
 	if m.ChangedAttribute != nil {
 		if err := m.ChangedAttribute.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("changedAttribute")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("changedAttribute")
 			}
+
 			return err
 		}
 	}
@@ -133,11 +138,15 @@ func (m *Change) contextValidateChangedAttribute(ctx context.Context, formats st
 		}
 
 		if err := m.ChangedAttribute.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("changedAttribute")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("changedAttribute")
 			}
+
 			return err
 		}
 	}

@@ -106,7 +106,7 @@ func (m *UserAccessToken) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *UserAccessToken) contextValidateCreatedOn(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "createdOn", "body", strfmt.DateTime(m.CreatedOn)); err != nil {
+	if err := validate.ReadOnly(ctx, "createdOn", "body", m.CreatedOn); err != nil {
 		return err
 	}
 
@@ -115,7 +115,7 @@ func (m *UserAccessToken) contextValidateCreatedOn(ctx context.Context, formats 
 
 func (m *UserAccessToken) contextValidateTokenID(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "tokenId", "body", string(m.TokenID)); err != nil {
+	if err := validate.ReadOnly(ctx, "tokenId", "body", m.TokenID); err != nil {
 		return err
 	}
 
@@ -124,7 +124,7 @@ func (m *UserAccessToken) contextValidateTokenID(ctx context.Context, formats st
 
 func (m *UserAccessToken) contextValidateUserName(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "userName", "body", string(m.UserName)); err != nil {
+	if err := validate.ReadOnly(ctx, "userName", "body", m.UserName); err != nil {
 		return err
 	}
 

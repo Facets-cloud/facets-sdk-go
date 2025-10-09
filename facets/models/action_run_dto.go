@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -163,11 +164,15 @@ func (m *ActionRunDto) validateParams(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Params[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("params" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("params" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -189,7 +194,7 @@ func (m *ActionRunDto) validateStartTime(formats strfmt.Registry) error {
 	return nil
 }
 
-var actionRunDtoTypeStatusPropEnum []interface{}
+var actionRunDtoTypeStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -262,11 +267,15 @@ func (m *ActionRunDto) validateSteps(formats strfmt.Registry) error {
 
 		if m.Steps[i] != nil {
 			if err := m.Steps[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -320,11 +329,15 @@ func (m *ActionRunDto) contextValidateSteps(ctx context.Context, formats strfmt.
 			}
 
 			if err := m.Steps[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("steps" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("steps" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

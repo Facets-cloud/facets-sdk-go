@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,7 +20,7 @@ import (
 type ModuleDTO struct {
 
 	// facets yaml
-	FacetsYaml map[string]interface{} `json:"facetsYaml,omitempty"`
+	FacetsYaml map[string]any `json:"facetsYaml,omitempty"`
 
 	// tf module path
 	TfModulePath *TFModulePath `json:"tfModulePath,omitempty"`
@@ -46,11 +47,15 @@ func (m *ModuleDTO) validateTfModulePath(formats strfmt.Registry) error {
 
 	if m.TfModulePath != nil {
 		if err := m.TfModulePath.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfModulePath")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfModulePath")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *ModuleDTO) contextValidateTfModulePath(ctx context.Context, formats str
 		}
 
 		if err := m.TfModulePath.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfModulePath")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfModulePath")
 			}
+
 			return err
 		}
 	}

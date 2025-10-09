@@ -96,7 +96,7 @@ func (m *CreateBlueprintRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var createBlueprintRequestAllowedCloudsItemsEnum []interface{}
+var createBlueprintRequestAllowedCloudsItemsEnum []any
 
 func init() {
 	var res []string
@@ -136,7 +136,7 @@ func (m *CreateBlueprintRequest) validateAllowedClouds(formats strfmt.Registry) 
 	return nil
 }
 
-var createBlueprintRequestTypePrimaryCloudPropEnum []interface{}
+var createBlueprintRequestTypePrimaryCloudPropEnum []any
 
 func init() {
 	var res []string

@@ -57,7 +57,7 @@ func (m *NotificationChannel) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var notificationChannelTypeChannelTypePropEnum []interface{}
+var notificationChannelTypeChannelTypePropEnum []any
 
 func init() {
 	var res []string

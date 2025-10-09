@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -23,7 +24,7 @@ type AssistantMessage struct {
 	Assistant *Assistant `json:"assistant,omitempty"`
 
 	// context
-	Context interface{} `json:"context,omitempty"`
+	Context any `json:"context,omitempty"`
 
 	// created at
 	// Format: date-time
@@ -61,11 +62,15 @@ func (m *AssistantMessage) validateAssistant(formats strfmt.Registry) error {
 
 	if m.Assistant != nil {
 		if err := m.Assistant.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("assistant")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("assistant")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +113,15 @@ func (m *AssistantMessage) contextValidateAssistant(ctx context.Context, formats
 		}
 
 		if err := m.Assistant.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("assistant")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("assistant")
 			}
+
 			return err
 		}
 	}

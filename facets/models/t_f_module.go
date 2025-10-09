@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -258,7 +259,7 @@ func (m *TFModule) validateCreationDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleIacToolItemsEnum []interface{}
+var tFModuleIacToolItemsEnum []any
 
 func init() {
 	var res []string
@@ -310,11 +311,15 @@ func (m *TFModule) validateInputs(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Inputs[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inputs" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inputs" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -360,11 +365,15 @@ func (m *TFModule) validateOutputs(formats strfmt.Registry) error {
 
 		if m.Outputs[i] != nil {
 			if err := m.Outputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("outputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("outputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -381,11 +390,15 @@ func (m *TFModule) validatePath(formats strfmt.Registry) error {
 
 	if m.Path != nil {
 		if err := m.Path.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("path")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("path")
 			}
+
 			return err
 		}
 	}
@@ -393,7 +406,7 @@ func (m *TFModule) validatePath(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleTypeSourcePropEnum []interface{}
+var tFModuleTypeSourcePropEnum []any
 
 func init() {
 	var res []string
@@ -435,7 +448,7 @@ func (m *TFModule) validateSource(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleTypeStagePropEnum []interface{}
+var tFModuleTypeStagePropEnum []any
 
 func init() {
 	var res []string
@@ -489,7 +502,7 @@ func (m *TFModule) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleTypeTypePropEnum []interface{}
+var tFModuleTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -579,11 +592,15 @@ func (m *TFModule) contextValidateOutputs(ctx context.Context, formats strfmt.Re
 			}
 
 			if err := m.Outputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("outputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("outputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -602,11 +619,15 @@ func (m *TFModule) contextValidatePath(ctx context.Context, formats strfmt.Regis
 		}
 
 		if err := m.Path.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("path")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("path")
 			}
+
 			return err
 		}
 	}

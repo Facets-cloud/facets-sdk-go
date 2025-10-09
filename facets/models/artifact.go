@@ -170,7 +170,7 @@ func (m *Artifact) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactTypeRegistrationTypePropEnum []interface{}
+var artifactTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string
@@ -215,7 +215,7 @@ func (m *Artifact) validateRegistrationType(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactTypeReleaseTypePropEnum []interface{}
+var artifactTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string

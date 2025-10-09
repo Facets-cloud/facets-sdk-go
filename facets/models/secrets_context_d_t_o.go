@@ -57,7 +57,7 @@ func (m *SecretsContextDTO) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var secretsContextDTOTypeGcpSecretManagerModePropEnum []interface{}
+var secretsContextDTOTypeGcpSecretManagerModePropEnum []any
 
 func init() {
 	var res []string

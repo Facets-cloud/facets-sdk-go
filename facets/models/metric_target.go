@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -56,11 +57,15 @@ func (m *MetricTarget) validateAverageValue(formats strfmt.Registry) error {
 
 	if m.AverageValue != nil {
 		if err := m.AverageValue.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("averageValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("averageValue")
 			}
+
 			return err
 		}
 	}
@@ -75,11 +80,15 @@ func (m *MetricTarget) validateValue(formats strfmt.Registry) error {
 
 	if m.Value != nil {
 		if err := m.Value.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("value")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("value")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +123,15 @@ func (m *MetricTarget) contextValidateAverageValue(ctx context.Context, formats 
 		}
 
 		if err := m.AverageValue.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("averageValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("averageValue")
 			}
+
 			return err
 		}
 	}
@@ -135,11 +148,15 @@ func (m *MetricTarget) contextValidateValue(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Value.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("value")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("value")
 			}
+
 			return err
 		}
 	}

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *Metric) validateCPUUtilization(formats strfmt.Registry) error {
 
 	if m.CPUUtilization != nil {
 		if err := m.CPUUtilization.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cpuUtilization")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cpuUtilization")
 			}
+
 			return err
 		}
 	}
@@ -69,11 +74,15 @@ func (m *Metric) validateMemoryUtilization(formats strfmt.Registry) error {
 
 	if m.MemoryUtilization != nil {
 		if err := m.MemoryUtilization.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("memoryUtilization")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("memoryUtilization")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +117,15 @@ func (m *Metric) contextValidateCPUUtilization(ctx context.Context, formats strf
 		}
 
 		if err := m.CPUUtilization.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cpuUtilization")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cpuUtilization")
 			}
+
 			return err
 		}
 	}
@@ -129,11 +142,15 @@ func (m *Metric) contextValidateMemoryUtilization(ctx context.Context, formats s
 		}
 
 		if err := m.MemoryUtilization.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("memoryUtilization")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("memoryUtilization")
 			}
+
 			return err
 		}
 	}

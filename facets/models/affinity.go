@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -57,11 +58,15 @@ func (m *Affinity) validateNodeAffinity(formats strfmt.Registry) error {
 
 	if m.NodeAffinity != nil {
 		if err := m.NodeAffinity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nodeAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nodeAffinity")
 			}
+
 			return err
 		}
 	}
@@ -76,11 +81,15 @@ func (m *Affinity) validatePodAffinity(formats strfmt.Registry) error {
 
 	if m.PodAffinity != nil {
 		if err := m.PodAffinity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("podAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("podAffinity")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +104,15 @@ func (m *Affinity) validatePodAntiAffinity(formats strfmt.Registry) error {
 
 	if m.PodAntiAffinity != nil {
 		if err := m.PodAntiAffinity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("podAntiAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("podAntiAffinity")
 			}
+
 			return err
 		}
 	}
@@ -138,11 +151,15 @@ func (m *Affinity) contextValidateNodeAffinity(ctx context.Context, formats strf
 		}
 
 		if err := m.NodeAffinity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nodeAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nodeAffinity")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +176,15 @@ func (m *Affinity) contextValidatePodAffinity(ctx context.Context, formats strfm
 		}
 
 		if err := m.PodAffinity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("podAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("podAffinity")
 			}
+
 			return err
 		}
 	}
@@ -180,11 +201,15 @@ func (m *Affinity) contextValidatePodAntiAffinity(ctx context.Context, formats s
 		}
 
 		if err := m.PodAntiAffinity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("podAntiAffinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("podAntiAffinity")
 			}
+
 			return err
 		}
 	}

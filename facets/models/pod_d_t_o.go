@@ -59,7 +59,7 @@ func (m *PodDTO) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var podDTOTypeRolePropEnum []interface{}
+var podDTOTypeRolePropEnum []any
 
 func init() {
 	var res []string
@@ -104,7 +104,7 @@ func (m *PodDTO) validateRole(formats strfmt.Registry) error {
 	return nil
 }
 
-var podDTOTypeStatusPropEnum []interface{}
+var podDTOTypeStatusPropEnum []any
 
 func init() {
 	var res []string

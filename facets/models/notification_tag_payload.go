@@ -42,7 +42,7 @@ func (m *NotificationTagPayload) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var notificationTagPayloadTypeNotificationTagPropEnum []interface{}
+var notificationTagPayloadTypeNotificationTagPropEnum []any
 
 func init() {
 	var res []string

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -58,11 +59,15 @@ func (m *UpdateBlueprintRequest) validateAffectedFiles(formats strfmt.Registry) 
 
 		if m.AffectedFiles[i] != nil {
 			if err := m.AffectedFiles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("affectedFiles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("affectedFiles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -88,11 +93,15 @@ func (m *UpdateBlueprintRequest) validateFiles(formats strfmt.Registry) error {
 
 		if m.Files[i] != nil {
 			if err := m.Files[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("files" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -131,11 +140,15 @@ func (m *UpdateBlueprintRequest) contextValidateAffectedFiles(ctx context.Contex
 			}
 
 			if err := m.AffectedFiles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("affectedFiles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("affectedFiles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -156,11 +169,15 @@ func (m *UpdateBlueprintRequest) contextValidateFiles(ctx context.Context, forma
 			}
 
 			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("files" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("files" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

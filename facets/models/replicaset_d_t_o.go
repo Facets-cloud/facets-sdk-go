@@ -54,7 +54,7 @@ func (m *ReplicasetDTO) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var replicasetDTOTypeRolePropEnum []interface{}
+var replicasetDTOTypeRolePropEnum []any
 
 func init() {
 	var res []string

@@ -8,4 +8,4 @@ package models
 // StreamingResponseBody streaming response body
 //
 // swagger:model StreamingResponseBody
-type StreamingResponseBody interface{}
+type StreamingResponseBody any

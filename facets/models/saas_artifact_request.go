@@ -97,7 +97,7 @@ func (m *SaasArtifactRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var saasArtifactRequestTypeArtifactRegisterTypePropEnum []interface{}
+var saasArtifactRequestTypeArtifactRegisterTypePropEnum []any
 
 func init() {
 	var res []string

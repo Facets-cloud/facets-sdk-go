@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -56,11 +57,15 @@ func (m *DownwardAPIVolumeFile) validateFieldRef(formats strfmt.Registry) error 
 
 	if m.FieldRef != nil {
 		if err := m.FieldRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fieldRef")
 			}
+
 			return err
 		}
 	}
@@ -75,11 +80,15 @@ func (m *DownwardAPIVolumeFile) validateResourceFieldRef(formats strfmt.Registry
 
 	if m.ResourceFieldRef != nil {
 		if err := m.ResourceFieldRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resourceFieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resourceFieldRef")
 			}
+
 			return err
 		}
 	}
@@ -114,11 +123,15 @@ func (m *DownwardAPIVolumeFile) contextValidateFieldRef(ctx context.Context, for
 		}
 
 		if err := m.FieldRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fieldRef")
 			}
+
 			return err
 		}
 	}
@@ -135,11 +148,15 @@ func (m *DownwardAPIVolumeFile) contextValidateResourceFieldRef(ctx context.Cont
 		}
 
 		if err := m.ResourceFieldRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resourceFieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resourceFieldRef")
 			}
+
 			return err
 		}
 	}

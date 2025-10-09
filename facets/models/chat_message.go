@@ -53,7 +53,7 @@ func (m *ChatMessage) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var chatMessageTypeChatStatePropEnum []interface{}
+var chatMessageTypeChatStatePropEnum []any
 
 func init() {
 	var res []string
@@ -95,7 +95,7 @@ func (m *ChatMessage) validateChatState(formats strfmt.Registry) error {
 	return nil
 }
 
-var chatMessageTypeRolePropEnum []interface{}
+var chatMessageTypeRolePropEnum []any
 
 func init() {
 	var res []string

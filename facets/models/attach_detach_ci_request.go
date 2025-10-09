@@ -77,7 +77,7 @@ func (m *AttachDetachCiRequest) validateCiName(formats strfmt.Registry) error {
 	return nil
 }
 
-var attachDetachCiRequestTypeRegistrationTypePropEnum []interface{}
+var attachDetachCiRequestTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string

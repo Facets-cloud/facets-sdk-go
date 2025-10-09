@@ -76,7 +76,7 @@ func (m *Criterion) validateMetadataKey(formats strfmt.Registry) error {
 	return nil
 }
 
-var criterionTypeOperatorPropEnum []interface{}
+var criterionTypeOperatorPropEnum []any
 
 func init() {
 	var res []string

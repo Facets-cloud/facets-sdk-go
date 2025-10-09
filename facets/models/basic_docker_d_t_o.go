@@ -92,7 +92,7 @@ func (m *BasicDockerDTO) validateArtifactoryName(formats strfmt.Registry) error 
 	return nil
 }
 
-var basicDockerDTOTypeArtifactoryTypePropEnum []interface{}
+var basicDockerDTOTypeArtifactoryTypePropEnum []any
 
 func init() {
 	var res []string

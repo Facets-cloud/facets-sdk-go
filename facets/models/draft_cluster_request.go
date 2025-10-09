@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -88,7 +89,7 @@ func (m *DraftClusterRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var draftClusterRequestTypeCloudPropEnum []interface{}
+var draftClusterRequestTypeCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -149,11 +150,15 @@ func (m *DraftClusterRequest) validateTz(formats strfmt.Registry) error {
 
 	if m.Tz != nil {
 		if err := m.Tz.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tz")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tz")
 			}
+
 			return err
 		}
 	}
@@ -184,11 +189,15 @@ func (m *DraftClusterRequest) contextValidateTz(ctx context.Context, formats str
 		}
 
 		if err := m.Tz.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tz")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tz")
 			}
+
 			return err
 		}
 	}

@@ -84,7 +84,7 @@ func (m *ImageOverrideRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var imageOverrideRequestTypeArtifactTypePropEnum []interface{}
+var imageOverrideRequestTypeArtifactTypePropEnum []any
 
 func init() {
 	var res []string
@@ -126,7 +126,7 @@ func (m *ImageOverrideRequest) validateArtifactType(formats strfmt.Registry) err
 	return nil
 }
 
-var imageOverrideRequestTypeRegistrationTypePropEnum []interface{}
+var imageOverrideRequestTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string

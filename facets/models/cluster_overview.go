@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -73,11 +74,15 @@ func (m *ClusterOverview) validateBaseCluster(formats strfmt.Registry) error {
 
 	if m.BaseCluster != nil {
 		if err := m.BaseCluster.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseCluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseCluster")
 			}
+
 			return err
 		}
 	}
@@ -92,11 +97,15 @@ func (m *ClusterOverview) validateCluster(formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
 		if err := m.Cluster.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster")
 			}
+
 			return err
 		}
 	}
@@ -104,7 +113,7 @@ func (m *ClusterOverview) validateCluster(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterOverviewTypeClusterStatePropEnum []interface{}
+var clusterOverviewTypeClusterStatePropEnum []any
 
 func init() {
 	var res []string
@@ -183,11 +192,15 @@ func (m *ClusterOverview) validateLastRelease(formats strfmt.Registry) error {
 
 	if m.LastRelease != nil {
 		if err := m.LastRelease.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lastRelease")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lastRelease")
 			}
+
 			return err
 		}
 	}
@@ -226,11 +239,15 @@ func (m *ClusterOverview) contextValidateBaseCluster(ctx context.Context, format
 		}
 
 		if err := m.BaseCluster.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseCluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseCluster")
 			}
+
 			return err
 		}
 	}
@@ -247,11 +264,15 @@ func (m *ClusterOverview) contextValidateCluster(ctx context.Context, formats st
 		}
 
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster")
 			}
+
 			return err
 		}
 	}
@@ -268,11 +289,15 @@ func (m *ClusterOverview) contextValidateLastRelease(ctx context.Context, format
 		}
 
 		if err := m.LastRelease.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lastRelease")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lastRelease")
 			}
+
 			return err
 		}
 	}

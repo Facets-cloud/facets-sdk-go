@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -219,11 +220,15 @@ func (m *PodSpec) validateAffinity(formats strfmt.Registry) error {
 
 	if m.Affinity != nil {
 		if err := m.Affinity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("affinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("affinity")
 			}
+
 			return err
 		}
 	}
@@ -243,11 +248,15 @@ func (m *PodSpec) validateContainers(formats strfmt.Registry) error {
 
 		if m.Containers[i] != nil {
 			if err := m.Containers[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("containers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("containers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -264,11 +273,15 @@ func (m *PodSpec) validateDNSConfig(formats strfmt.Registry) error {
 
 	if m.DNSConfig != nil {
 		if err := m.DNSConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dnsConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dnsConfig")
 			}
+
 			return err
 		}
 	}
@@ -288,11 +301,15 @@ func (m *PodSpec) validateEphemeralContainers(formats strfmt.Registry) error {
 
 		if m.EphemeralContainers[i] != nil {
 			if err := m.EphemeralContainers[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ephemeralContainers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ephemeralContainers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -314,11 +331,15 @@ func (m *PodSpec) validateHostAliases(formats strfmt.Registry) error {
 
 		if m.HostAliases[i] != nil {
 			if err := m.HostAliases[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hostAliases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hostAliases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -340,11 +361,15 @@ func (m *PodSpec) validateImagePullSecrets(formats strfmt.Registry) error {
 
 		if m.ImagePullSecrets[i] != nil {
 			if err := m.ImagePullSecrets[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("imagePullSecrets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("imagePullSecrets" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -366,11 +391,15 @@ func (m *PodSpec) validateInitContainers(formats strfmt.Registry) error {
 
 		if m.InitContainers[i] != nil {
 			if err := m.InitContainers[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("initContainers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("initContainers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -387,11 +416,15 @@ func (m *PodSpec) validateOs(formats strfmt.Registry) error {
 
 	if m.Os != nil {
 		if err := m.Os.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("os")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("os")
 			}
+
 			return err
 		}
 	}
@@ -411,11 +444,15 @@ func (m *PodSpec) validateOverhead(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Overhead[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("overhead" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("overhead" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -437,11 +474,15 @@ func (m *PodSpec) validateReadinessGates(formats strfmt.Registry) error {
 
 		if m.ReadinessGates[i] != nil {
 			if err := m.ReadinessGates[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("readinessGates" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("readinessGates" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -463,11 +504,15 @@ func (m *PodSpec) validateResourceClaims(formats strfmt.Registry) error {
 
 		if m.ResourceClaims[i] != nil {
 			if err := m.ResourceClaims[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("resourceClaims" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("resourceClaims" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -489,11 +534,15 @@ func (m *PodSpec) validateSchedulingGates(formats strfmt.Registry) error {
 
 		if m.SchedulingGates[i] != nil {
 			if err := m.SchedulingGates[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("schedulingGates" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("schedulingGates" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -510,11 +559,15 @@ func (m *PodSpec) validateSecurityContext(formats strfmt.Registry) error {
 
 	if m.SecurityContext != nil {
 		if err := m.SecurityContext.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("securityContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("securityContext")
 			}
+
 			return err
 		}
 	}
@@ -534,11 +587,15 @@ func (m *PodSpec) validateTolerations(formats strfmt.Registry) error {
 
 		if m.Tolerations[i] != nil {
 			if err := m.Tolerations[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("tolerations" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("tolerations" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -560,11 +617,15 @@ func (m *PodSpec) validateTopologySpreadConstraints(formats strfmt.Registry) err
 
 		if m.TopologySpreadConstraints[i] != nil {
 			if err := m.TopologySpreadConstraints[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("topologySpreadConstraints" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("topologySpreadConstraints" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -586,11 +647,15 @@ func (m *PodSpec) validateVolumes(formats strfmt.Registry) error {
 
 		if m.Volumes[i] != nil {
 			if err := m.Volumes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -683,11 +748,15 @@ func (m *PodSpec) contextValidateAffinity(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Affinity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("affinity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("affinity")
 			}
+
 			return err
 		}
 	}
@@ -706,11 +775,15 @@ func (m *PodSpec) contextValidateContainers(ctx context.Context, formats strfmt.
 			}
 
 			if err := m.Containers[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("containers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("containers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -729,11 +802,15 @@ func (m *PodSpec) contextValidateDNSConfig(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.DNSConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("dnsConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("dnsConfig")
 			}
+
 			return err
 		}
 	}
@@ -752,11 +829,15 @@ func (m *PodSpec) contextValidateEphemeralContainers(ctx context.Context, format
 			}
 
 			if err := m.EphemeralContainers[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ephemeralContainers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ephemeralContainers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -777,11 +858,15 @@ func (m *PodSpec) contextValidateHostAliases(ctx context.Context, formats strfmt
 			}
 
 			if err := m.HostAliases[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hostAliases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hostAliases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -802,11 +887,15 @@ func (m *PodSpec) contextValidateImagePullSecrets(ctx context.Context, formats s
 			}
 
 			if err := m.ImagePullSecrets[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("imagePullSecrets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("imagePullSecrets" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -827,11 +916,15 @@ func (m *PodSpec) contextValidateInitContainers(ctx context.Context, formats str
 			}
 
 			if err := m.InitContainers[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("initContainers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("initContainers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -850,11 +943,15 @@ func (m *PodSpec) contextValidateOs(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Os.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("os")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("os")
 			}
+
 			return err
 		}
 	}
@@ -888,11 +985,15 @@ func (m *PodSpec) contextValidateReadinessGates(ctx context.Context, formats str
 			}
 
 			if err := m.ReadinessGates[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("readinessGates" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("readinessGates" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -913,11 +1014,15 @@ func (m *PodSpec) contextValidateResourceClaims(ctx context.Context, formats str
 			}
 
 			if err := m.ResourceClaims[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("resourceClaims" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("resourceClaims" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -938,11 +1043,15 @@ func (m *PodSpec) contextValidateSchedulingGates(ctx context.Context, formats st
 			}
 
 			if err := m.SchedulingGates[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("schedulingGates" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("schedulingGates" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -961,11 +1070,15 @@ func (m *PodSpec) contextValidateSecurityContext(ctx context.Context, formats st
 		}
 
 		if err := m.SecurityContext.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("securityContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("securityContext")
 			}
+
 			return err
 		}
 	}
@@ -984,11 +1097,15 @@ func (m *PodSpec) contextValidateTolerations(ctx context.Context, formats strfmt
 			}
 
 			if err := m.Tolerations[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("tolerations" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("tolerations" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -1009,11 +1126,15 @@ func (m *PodSpec) contextValidateTopologySpreadConstraints(ctx context.Context, 
 			}
 
 			if err := m.TopologySpreadConstraints[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("topologySpreadConstraints" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("topologySpreadConstraints" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -1034,11 +1155,15 @@ func (m *PodSpec) contextValidateVolumes(ctx context.Context, formats strfmt.Reg
 			}
 
 			if err := m.Volumes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

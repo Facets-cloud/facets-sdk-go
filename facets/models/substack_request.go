@@ -57,7 +57,7 @@ func (m *SubstackRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var substackRequestTypeVcsPropEnum []interface{}
+var substackRequestTypeVcsPropEnum []any
 
 func init() {
 	var res []string

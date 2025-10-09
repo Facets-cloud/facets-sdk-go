@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -64,11 +65,15 @@ func (m *VolumeProjection) validateConfigMap(formats strfmt.Registry) error {
 
 	if m.ConfigMap != nil {
 		if err := m.ConfigMap.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMap")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMap")
 			}
+
 			return err
 		}
 	}
@@ -83,11 +88,15 @@ func (m *VolumeProjection) validateDownwardAPI(formats strfmt.Registry) error {
 
 	if m.DownwardAPI != nil {
 		if err := m.DownwardAPI.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("downwardAPI")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("downwardAPI")
 			}
+
 			return err
 		}
 	}
@@ -102,11 +111,15 @@ func (m *VolumeProjection) validateSecret(formats strfmt.Registry) error {
 
 	if m.Secret != nil {
 		if err := m.Secret.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secret")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secret")
 			}
+
 			return err
 		}
 	}
@@ -121,11 +134,15 @@ func (m *VolumeProjection) validateServiceAccountToken(formats strfmt.Registry) 
 
 	if m.ServiceAccountToken != nil {
 		if err := m.ServiceAccountToken.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("serviceAccountToken")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("serviceAccountToken")
 			}
+
 			return err
 		}
 	}
@@ -168,11 +185,15 @@ func (m *VolumeProjection) contextValidateConfigMap(ctx context.Context, formats
 		}
 
 		if err := m.ConfigMap.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMap")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMap")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +210,15 @@ func (m *VolumeProjection) contextValidateDownwardAPI(ctx context.Context, forma
 		}
 
 		if err := m.DownwardAPI.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("downwardAPI")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("downwardAPI")
 			}
+
 			return err
 		}
 	}
@@ -210,11 +235,15 @@ func (m *VolumeProjection) contextValidateSecret(ctx context.Context, formats st
 		}
 
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secret")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secret")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +260,15 @@ func (m *VolumeProjection) contextValidateServiceAccountToken(ctx context.Contex
 		}
 
 		if err := m.ServiceAccountToken.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("serviceAccountToken")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("serviceAccountToken")
 			}
+
 			return err
 		}
 	}

@@ -43,7 +43,7 @@ type OverrideObject struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// overrides
-	Overrides map[string]interface{} `json:"overrides,omitempty"`
+	Overrides map[string]any `json:"overrides,omitempty"`
 
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`

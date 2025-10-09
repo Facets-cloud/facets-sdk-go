@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -77,11 +78,15 @@ func (m *DailyCloudCostDTO) validateDailyCost(formats strfmt.Registry) error {
 
 		if m.DailyCost[i] != nil {
 			if err := m.DailyCost[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dailyCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dailyCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -115,11 +120,15 @@ func (m *DailyCloudCostDTO) validateServiceCost(formats strfmt.Registry) error {
 
 		if m.ServiceCost[i] != nil {
 			if err := m.ServiceCost[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("serviceCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("serviceCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -158,11 +167,15 @@ func (m *DailyCloudCostDTO) contextValidateDailyCost(ctx context.Context, format
 			}
 
 			if err := m.DailyCost[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dailyCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dailyCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -183,11 +196,15 @@ func (m *DailyCloudCostDTO) contextValidateServiceCost(ctx context.Context, form
 			}
 
 			if err := m.ServiceCost[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("serviceCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("serviceCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -77,11 +78,15 @@ func (m *IntentResponseDTO) validateIntentOutputs(formats strfmt.Registry) error
 
 		if m.IntentOutputs[i] != nil {
 			if err := m.IntentOutputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -91,7 +96,7 @@ func (m *IntentResponseDTO) validateIntentOutputs(formats strfmt.Registry) error
 	return nil
 }
 
-var intentResponseDTOTypeSourcePropEnum []interface{}
+var intentResponseDTOTypeSourcePropEnum []any
 
 func init() {
 	var res []string
@@ -158,11 +163,15 @@ func (m *IntentResponseDTO) contextValidateIntentOutputs(ctx context.Context, fo
 			}
 
 			if err := m.IntentOutputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

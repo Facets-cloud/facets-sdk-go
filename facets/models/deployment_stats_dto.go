@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -56,11 +57,15 @@ func (m *DeploymentStatsDto) validateDateWiseCounts(formats strfmt.Registry) err
 
 		if m.DateWiseCounts[i] != nil {
 			if err := m.DateWiseCounts[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dateWiseCounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dateWiseCounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -77,11 +82,15 @@ func (m *DeploymentStatsDto) validateStats(formats strfmt.Registry) error {
 
 	if m.Stats != nil {
 		if err := m.Stats.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stats")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stats")
 			}
+
 			return err
 		}
 	}
@@ -118,11 +127,15 @@ func (m *DeploymentStatsDto) contextValidateDateWiseCounts(ctx context.Context, 
 			}
 
 			if err := m.DateWiseCounts[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dateWiseCounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dateWiseCounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -141,11 +154,15 @@ func (m *DeploymentStatsDto) contextValidateStats(ctx context.Context, formats s
 		}
 
 		if err := m.Stats.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stats")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stats")
 			}
+
 			return err
 		}
 	}

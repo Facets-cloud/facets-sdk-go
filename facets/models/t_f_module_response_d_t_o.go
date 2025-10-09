@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -254,7 +255,7 @@ func (m *TFModuleResponseDTO) validateCreationDate(formats strfmt.Registry) erro
 	return nil
 }
 
-var tFModuleResponseDTOIacToolItemsEnum []interface{}
+var tFModuleResponseDTOIacToolItemsEnum []any
 
 func init() {
 	var res []string
@@ -306,11 +307,15 @@ func (m *TFModuleResponseDTO) validateInputs(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Inputs[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inputs" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inputs" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -327,11 +332,15 @@ func (m *TFModuleResponseDTO) validateIntentDetails(formats strfmt.Registry) err
 
 	if m.IntentDetails != nil {
 		if err := m.IntentDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("intentDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("intentDetails")
 			}
+
 			return err
 		}
 	}
@@ -358,11 +367,15 @@ func (m *TFModuleResponseDTO) validateLatestVersion(formats strfmt.Registry) err
 
 	if m.LatestVersion != nil {
 		if err := m.LatestVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("latestVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("latestVersion")
 			}
+
 			return err
 		}
 	}
@@ -386,11 +399,15 @@ func (m *TFModuleResponseDTO) validateOtherVersions(formats strfmt.Registry) err
 
 		if m.OtherVersions[i] != nil {
 			if err := m.OtherVersions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("otherVersions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("otherVersions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -412,11 +429,15 @@ func (m *TFModuleResponseDTO) validateOutputs(formats strfmt.Registry) error {
 
 		if m.Outputs[i] != nil {
 			if err := m.Outputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("outputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("outputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -426,7 +447,7 @@ func (m *TFModuleResponseDTO) validateOutputs(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleResponseDTOTypeSourcePropEnum []interface{}
+var tFModuleResponseDTOTypeSourcePropEnum []any
 
 func init() {
 	var res []string
@@ -468,7 +489,7 @@ func (m *TFModuleResponseDTO) validateSource(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleResponseDTOTypeStagePropEnum []interface{}
+var tFModuleResponseDTOTypeStagePropEnum []any
 
 func init() {
 	var res []string
@@ -522,7 +543,7 @@ func (m *TFModuleResponseDTO) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleResponseDTOTypeTypePropEnum []interface{}
+var tFModuleResponseDTOTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -618,11 +639,15 @@ func (m *TFModuleResponseDTO) contextValidateIntentDetails(ctx context.Context, 
 		}
 
 		if err := m.IntentDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("intentDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("intentDetails")
 			}
+
 			return err
 		}
 	}
@@ -639,11 +664,15 @@ func (m *TFModuleResponseDTO) contextValidateLatestVersion(ctx context.Context, 
 		}
 
 		if err := m.LatestVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("latestVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("latestVersion")
 			}
+
 			return err
 		}
 	}
@@ -662,11 +691,15 @@ func (m *TFModuleResponseDTO) contextValidateOtherVersions(ctx context.Context, 
 			}
 
 			if err := m.OtherVersions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("otherVersions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("otherVersions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -687,11 +720,15 @@ func (m *TFModuleResponseDTO) contextValidateOutputs(ctx context.Context, format
 			}
 
 			if err := m.Outputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("outputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("outputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

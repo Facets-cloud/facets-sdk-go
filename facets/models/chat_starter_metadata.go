@@ -48,7 +48,7 @@ func (m *ChatStarterMetadata) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var chatStarterMetadataTypeStarterPropEnum []interface{}
+var chatStarterMetadataTypeStarterPropEnum []any
 
 func init() {
 	var res []string

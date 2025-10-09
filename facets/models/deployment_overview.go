@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -109,11 +110,15 @@ func (m *DeploymentOverview) validateCluster(formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
 		if err := m.Cluster.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster")
 			}
+
 			return err
 		}
 	}
@@ -128,11 +133,15 @@ func (m *DeploymentOverview) validateCurrentSignedOffDeployment(formats strfmt.R
 
 	if m.CurrentSignedOffDeployment != nil {
 		if err := m.CurrentSignedOffDeployment.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("currentSignedOffDeployment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("currentSignedOffDeployment")
 			}
+
 			return err
 		}
 	}
@@ -147,11 +156,15 @@ func (m *DeploymentOverview) validateDeploymentsStats(formats strfmt.Registry) e
 
 	if m.DeploymentsStats != nil {
 		if err := m.DeploymentsStats.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deploymentsStats")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deploymentsStats")
 			}
+
 			return err
 		}
 	}
@@ -171,11 +184,15 @@ func (m *DeploymentOverview) validateExecutionTime(formats strfmt.Registry) erro
 		}
 		if val, ok := m.ExecutionTime[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("executionTime" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("executionTime" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -197,11 +214,15 @@ func (m *DeploymentOverview) validateInProgressDeployments(formats strfmt.Regist
 
 		if m.InProgressDeployments[i] != nil {
 			if err := m.InProgressDeployments[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inProgressDeployments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inProgressDeployments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -218,11 +239,15 @@ func (m *DeploymentOverview) validateLatestDeployment(formats strfmt.Registry) e
 
 	if m.LatestDeployment != nil {
 		if err := m.LatestDeployment.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("latestDeployment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("latestDeployment")
 			}
+
 			return err
 		}
 	}
@@ -242,11 +267,15 @@ func (m *DeploymentOverview) validateQueuedReleases(formats strfmt.Registry) err
 
 		if m.QueuedReleases[i] != nil {
 			if err := m.QueuedReleases[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("queuedReleases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("queuedReleases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -263,11 +292,15 @@ func (m *DeploymentOverview) validateStack(formats strfmt.Registry) error {
 
 	if m.Stack != nil {
 		if err := m.Stack.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stack")
 			}
+
 			return err
 		}
 	}
@@ -326,11 +359,15 @@ func (m *DeploymentOverview) contextValidateCluster(ctx context.Context, formats
 		}
 
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cluster")
 			}
+
 			return err
 		}
 	}
@@ -347,11 +384,15 @@ func (m *DeploymentOverview) contextValidateCurrentSignedOffDeployment(ctx conte
 		}
 
 		if err := m.CurrentSignedOffDeployment.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("currentSignedOffDeployment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("currentSignedOffDeployment")
 			}
+
 			return err
 		}
 	}
@@ -368,11 +409,15 @@ func (m *DeploymentOverview) contextValidateDeploymentsStats(ctx context.Context
 		}
 
 		if err := m.DeploymentsStats.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("deploymentsStats")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("deploymentsStats")
 			}
+
 			return err
 		}
 	}
@@ -406,11 +451,15 @@ func (m *DeploymentOverview) contextValidateInProgressDeployments(ctx context.Co
 			}
 
 			if err := m.InProgressDeployments[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("inProgressDeployments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("inProgressDeployments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -429,11 +478,15 @@ func (m *DeploymentOverview) contextValidateLatestDeployment(ctx context.Context
 		}
 
 		if err := m.LatestDeployment.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("latestDeployment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("latestDeployment")
 			}
+
 			return err
 		}
 	}
@@ -452,11 +505,15 @@ func (m *DeploymentOverview) contextValidateQueuedReleases(ctx context.Context, 
 			}
 
 			if err := m.QueuedReleases[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("queuedReleases" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("queuedReleases" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -475,11 +532,15 @@ func (m *DeploymentOverview) contextValidateStack(ctx context.Context, formats s
 		}
 
 		if err := m.Stack.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("stack")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("stack")
 			}
+
 			return err
 		}
 	}

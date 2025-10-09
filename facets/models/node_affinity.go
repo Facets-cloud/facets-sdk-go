@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -56,11 +57,15 @@ func (m *NodeAffinity) validatePreferredDuringSchedulingIgnoredDuringExecution(f
 
 		if m.PreferredDuringSchedulingIgnoredDuringExecution[i] != nil {
 			if err := m.PreferredDuringSchedulingIgnoredDuringExecution[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("preferredDuringSchedulingIgnoredDuringExecution" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("preferredDuringSchedulingIgnoredDuringExecution" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -77,11 +82,15 @@ func (m *NodeAffinity) validateRequiredDuringSchedulingIgnoredDuringExecution(fo
 
 	if m.RequiredDuringSchedulingIgnoredDuringExecution != nil {
 		if err := m.RequiredDuringSchedulingIgnoredDuringExecution.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("requiredDuringSchedulingIgnoredDuringExecution")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("requiredDuringSchedulingIgnoredDuringExecution")
 			}
+
 			return err
 		}
 	}
@@ -118,11 +127,15 @@ func (m *NodeAffinity) contextValidatePreferredDuringSchedulingIgnoredDuringExec
 			}
 
 			if err := m.PreferredDuringSchedulingIgnoredDuringExecution[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("preferredDuringSchedulingIgnoredDuringExecution" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("preferredDuringSchedulingIgnoredDuringExecution" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -141,11 +154,15 @@ func (m *NodeAffinity) contextValidateRequiredDuringSchedulingIgnoredDuringExecu
 		}
 
 		if err := m.RequiredDuringSchedulingIgnoredDuringExecution.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("requiredDuringSchedulingIgnoredDuringExecution")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("requiredDuringSchedulingIgnoredDuringExecution")
 			}
+
 			return err
 		}
 	}

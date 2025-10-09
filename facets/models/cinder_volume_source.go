@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -52,11 +53,15 @@ func (m *CinderVolumeSource) validateSecretRef(formats strfmt.Registry) error {
 
 	if m.SecretRef != nil {
 		if err := m.SecretRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretRef")
 			}
+
 			return err
 		}
 	}
@@ -87,11 +92,15 @@ func (m *CinderVolumeSource) contextValidateSecretRef(ctx context.Context, forma
 		}
 
 		if err := m.SecretRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretRef")
 			}
+
 			return err
 		}
 	}

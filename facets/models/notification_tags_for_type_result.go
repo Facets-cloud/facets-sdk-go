@@ -45,7 +45,7 @@ func (m *NotificationTagsForTypeResult) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
-var notificationTagsForTypeResultTypeIDPropEnum []interface{}
+var notificationTagsForTypeResultTypeIDPropEnum []any
 
 func init() {
 	var res []string

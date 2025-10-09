@@ -126,7 +126,7 @@ func (m *ResourceStatus) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var resourceStatusTypeCurrentStatePropEnum []interface{}
+var resourceStatusTypeCurrentStatePropEnum []any
 
 func init() {
 	var res []string
@@ -168,7 +168,7 @@ func (m *ResourceStatus) validateCurrentState(formats strfmt.Registry) error {
 	return nil
 }
 
-var resourceStatusTypePreviousStatePropEnum []interface{}
+var resourceStatusTypePreviousStatePropEnum []any
 
 func init() {
 	var res []string
@@ -210,7 +210,7 @@ func (m *ResourceStatus) validatePreviousState(formats strfmt.Registry) error {
 	return nil
 }
 
-var resourceStatusTypeReleaseStatusPropEnum []interface{}
+var resourceStatusTypeReleaseStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -258,7 +258,7 @@ func (m *ResourceStatus) validateReleaseStatus(formats strfmt.Registry) error {
 	return nil
 }
 
-var resourceStatusTypeSyncStatusPropEnum []interface{}
+var resourceStatusTypeSyncStatusPropEnum []any
 
 func init() {
 	var res []string

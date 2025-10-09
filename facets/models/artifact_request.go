@@ -117,7 +117,7 @@ func (m *ArtifactRequest) validateArtifactURI(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactRequestTypeRegisteredForPropEnum []interface{}
+var artifactRequestTypeRegisteredForPropEnum []any
 
 func init() {
 	var res []string
@@ -159,7 +159,7 @@ func (m *ArtifactRequest) validateRegisteredFor(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactRequestTypeRegistrationTypePropEnum []interface{}
+var artifactRequestTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string

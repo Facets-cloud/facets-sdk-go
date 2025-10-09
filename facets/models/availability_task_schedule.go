@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -79,7 +80,7 @@ func (m *AvailabilityTaskSchedule) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var availabilityTaskScheduleByDayItemsEnum []interface{}
+var availabilityTaskScheduleByDayItemsEnum []any
 
 func init() {
 	var res []string
@@ -122,11 +123,15 @@ func (m *AvailabilityTaskSchedule) validateByTime(formats strfmt.Registry) error
 
 	if m.ByTime != nil {
 		if err := m.ByTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("byTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("byTime")
 			}
+
 			return err
 		}
 	}
@@ -134,7 +139,7 @@ func (m *AvailabilityTaskSchedule) validateByTime(formats strfmt.Registry) error
 	return nil
 }
 
-var availabilityTaskScheduleTypeFrequencyPropEnum []interface{}
+var availabilityTaskScheduleTypeFrequencyPropEnum []any
 
 func init() {
 	var res []string
@@ -182,7 +187,7 @@ func (m *AvailabilityTaskSchedule) validateFrequency(formats strfmt.Registry) er
 	return nil
 }
 
-var availabilityTaskScheduleTypeReleaseTypePropEnum []interface{}
+var availabilityTaskScheduleTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string
@@ -274,11 +279,15 @@ func (m *AvailabilityTaskSchedule) validateTimeZone(formats strfmt.Registry) err
 
 	if m.TimeZone != nil {
 		if err := m.TimeZone.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}
@@ -313,11 +322,15 @@ func (m *AvailabilityTaskSchedule) contextValidateByTime(ctx context.Context, fo
 		}
 
 		if err := m.ByTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("byTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("byTime")
 			}
+
 			return err
 		}
 	}
@@ -334,11 +347,15 @@ func (m *AvailabilityTaskSchedule) contextValidateTimeZone(ctx context.Context, 
 		}
 
 		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}

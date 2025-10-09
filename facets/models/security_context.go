@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -85,11 +86,15 @@ func (m *SecurityContext) validateCapabilities(formats strfmt.Registry) error {
 
 	if m.Capabilities != nil {
 		if err := m.Capabilities.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("capabilities")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("capabilities")
 			}
+
 			return err
 		}
 	}
@@ -104,11 +109,15 @@ func (m *SecurityContext) validateSeLinuxOptions(formats strfmt.Registry) error 
 
 	if m.SeLinuxOptions != nil {
 		if err := m.SeLinuxOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seLinuxOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seLinuxOptions")
 			}
+
 			return err
 		}
 	}
@@ -123,11 +132,15 @@ func (m *SecurityContext) validateSeccompProfile(formats strfmt.Registry) error 
 
 	if m.SeccompProfile != nil {
 		if err := m.SeccompProfile.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seccompProfile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seccompProfile")
 			}
+
 			return err
 		}
 	}
@@ -142,11 +155,15 @@ func (m *SecurityContext) validateWindowsOptions(formats strfmt.Registry) error 
 
 	if m.WindowsOptions != nil {
 		if err := m.WindowsOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("windowsOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("windowsOptions")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +206,15 @@ func (m *SecurityContext) contextValidateCapabilities(ctx context.Context, forma
 		}
 
 		if err := m.Capabilities.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("capabilities")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("capabilities")
 			}
+
 			return err
 		}
 	}
@@ -210,11 +231,15 @@ func (m *SecurityContext) contextValidateSeLinuxOptions(ctx context.Context, for
 		}
 
 		if err := m.SeLinuxOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seLinuxOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seLinuxOptions")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +256,15 @@ func (m *SecurityContext) contextValidateSeccompProfile(ctx context.Context, for
 		}
 
 		if err := m.SeccompProfile.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seccompProfile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seccompProfile")
 			}
+
 			return err
 		}
 	}
@@ -252,11 +281,15 @@ func (m *SecurityContext) contextValidateWindowsOptions(ctx context.Context, for
 		}
 
 		if err := m.WindowsOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("windowsOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("windowsOptions")
 			}
+
 			return err
 		}
 	}

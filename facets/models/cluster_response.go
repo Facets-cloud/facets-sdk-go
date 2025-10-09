@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -154,11 +155,15 @@ func (m *ClusterResponse) validateBaseCluster(formats strfmt.Registry) error {
 
 	if m.BaseCluster != nil {
 		if err := m.BaseCluster.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseCluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseCluster")
 			}
+
 			return err
 		}
 	}
@@ -166,7 +171,7 @@ func (m *ClusterResponse) validateBaseCluster(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterResponseTypeCloudPropEnum []interface{}
+var clusterResponseTypeCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -220,7 +225,7 @@ func (m *ClusterResponse) validateCloud(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterResponseTypeClusterStatePropEnum []interface{}
+var clusterResponseTypeClusterStatePropEnum []any
 
 func init() {
 	var res []string
@@ -316,11 +321,15 @@ func (m *ClusterResponse) validateDependentClusters(formats strfmt.Registry) err
 
 		if m.DependentClusters[i] != nil {
 			if err := m.DependentClusters[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dependentClusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dependentClusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -369,11 +378,15 @@ func (m *ClusterResponse) contextValidateBaseCluster(ctx context.Context, format
 		}
 
 		if err := m.BaseCluster.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseCluster")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseCluster")
 			}
+
 			return err
 		}
 	}
@@ -392,11 +405,15 @@ func (m *ClusterResponse) contextValidateDependentClusters(ctx context.Context, 
 			}
 
 			if err := m.DependentClusters[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("dependentClusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("dependentClusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

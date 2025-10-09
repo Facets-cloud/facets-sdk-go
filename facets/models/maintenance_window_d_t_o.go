@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -127,7 +128,7 @@ func (m *MaintenanceWindowDTO) validateCreationDate(formats strfmt.Registry) err
 	return nil
 }
 
-var maintenanceWindowDTOTypeDayOfWeekPropEnum []interface{}
+var maintenanceWindowDTOTypeDayOfWeekPropEnum []any
 
 func init() {
 	var res []string
@@ -193,11 +194,15 @@ func (m *MaintenanceWindowDTO) validateEndTime(formats strfmt.Registry) error {
 
 	if m.EndTime != nil {
 		if err := m.EndTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("endTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("endTime")
 			}
+
 			return err
 		}
 	}
@@ -225,11 +230,15 @@ func (m *MaintenanceWindowDTO) validateStartTime(formats strfmt.Registry) error 
 
 	if m.StartTime != nil {
 		if err := m.StartTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("startTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("startTime")
 			}
+
 			return err
 		}
 	}
@@ -245,11 +254,15 @@ func (m *MaintenanceWindowDTO) validateTimeZone(formats strfmt.Registry) error {
 
 	if m.TimeZone != nil {
 		if err := m.TimeZone.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}
@@ -284,11 +297,15 @@ func (m *MaintenanceWindowDTO) contextValidateEndTime(ctx context.Context, forma
 	if m.EndTime != nil {
 
 		if err := m.EndTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("endTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("endTime")
 			}
+
 			return err
 		}
 	}
@@ -301,11 +318,15 @@ func (m *MaintenanceWindowDTO) contextValidateStartTime(ctx context.Context, for
 	if m.StartTime != nil {
 
 		if err := m.StartTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("startTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("startTime")
 			}
+
 			return err
 		}
 	}
@@ -318,11 +339,15 @@ func (m *MaintenanceWindowDTO) contextValidateTimeZone(ctx context.Context, form
 	if m.TimeZone != nil {
 
 		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}

@@ -44,7 +44,7 @@ type FacetsAuditLogResponse struct {
 	ID string `json:"id,omitempty"`
 
 	// metadata
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
 
 	// performed at
 	// Format: date-time
@@ -82,7 +82,7 @@ func (m *FacetsAuditLogResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var facetsAuditLogResponseTypeEntityPropEnum []interface{}
+var facetsAuditLogResponseTypeEntityPropEnum []any
 
 func init() {
 	var res []string
@@ -202,7 +202,7 @@ func (m *FacetsAuditLogResponse) validateEntity(formats strfmt.Registry) error {
 	return nil
 }
 
-var facetsAuditLogResponseTypeEntityActionPropEnum []interface{}
+var facetsAuditLogResponseTypeEntityActionPropEnum []any
 
 func init() {
 	var res []string

@@ -52,7 +52,7 @@ func (m *ShortLivedTaskSchedule) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var shortLivedTaskScheduleTypeFrequencyPropEnum []interface{}
+var shortLivedTaskScheduleTypeFrequencyPropEnum []any
 
 func init() {
 	var res []string
@@ -101,7 +101,7 @@ func (m *ShortLivedTaskSchedule) validateFrequency(formats strfmt.Registry) erro
 	return nil
 }
 
-var shortLivedTaskScheduleTypeReleaseTypePropEnum []interface{}
+var shortLivedTaskScheduleTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string

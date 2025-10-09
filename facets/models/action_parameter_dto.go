@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -76,11 +77,15 @@ func (m *ActionParameterDto) validateDefaultValue(formats strfmt.Registry) error
 
 	if m.DefaultValue != nil {
 		if err := m.DefaultValue.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("defaultValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("defaultValue")
 			}
+
 			return err
 		}
 	}
@@ -109,7 +114,7 @@ func (m *ActionParameterDto) validateProperties(formats strfmt.Registry) error {
 	return nil
 }
 
-var actionParameterDtoTypeTypePropEnum []interface{}
+var actionParameterDtoTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -178,11 +183,15 @@ func (m *ActionParameterDto) contextValidateDefaultValue(ctx context.Context, fo
 		}
 
 		if err := m.DefaultValue.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("defaultValue")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("defaultValue")
 			}
+
 			return err
 		}
 	}

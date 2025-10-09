@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -68,11 +69,15 @@ func (m *HorizontalPodAutoscalerStatus) validateConditions(formats strfmt.Regist
 
 		if m.Conditions[i] != nil {
 			if err := m.Conditions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -94,11 +99,15 @@ func (m *HorizontalPodAutoscalerStatus) validateCurrentMetrics(formats strfmt.Re
 
 		if m.CurrentMetrics[i] != nil {
 			if err := m.CurrentMetrics[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("currentMetrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("currentMetrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -137,11 +146,15 @@ func (m *HorizontalPodAutoscalerStatus) contextValidateConditions(ctx context.Co
 			}
 
 			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -162,11 +175,15 @@ func (m *HorizontalPodAutoscalerStatus) contextValidateCurrentMetrics(ctx contex
 			}
 
 			if err := m.CurrentMetrics[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("currentMetrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("currentMetrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

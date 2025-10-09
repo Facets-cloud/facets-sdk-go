@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *HorizontalPodAutoscalerBehavior) validateScaleDown(formats strfmt.Regis
 
 	if m.ScaleDown != nil {
 		if err := m.ScaleDown.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleDown")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleDown")
 			}
+
 			return err
 		}
 	}
@@ -69,11 +74,15 @@ func (m *HorizontalPodAutoscalerBehavior) validateScaleUp(formats strfmt.Registr
 
 	if m.ScaleUp != nil {
 		if err := m.ScaleUp.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleUp")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleUp")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +117,15 @@ func (m *HorizontalPodAutoscalerBehavior) contextValidateScaleDown(ctx context.C
 		}
 
 		if err := m.ScaleDown.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleDown")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleDown")
 			}
+
 			return err
 		}
 	}
@@ -129,11 +142,15 @@ func (m *HorizontalPodAutoscalerBehavior) contextValidateScaleUp(ctx context.Con
 		}
 
 		if err := m.ScaleUp.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleUp")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleUp")
 			}
+
 			return err
 		}
 	}

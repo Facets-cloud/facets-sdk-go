@@ -106,7 +106,7 @@ func (m *BasicDockerArtifactory) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var basicDockerArtifactoryTypeArtifactoryTypePropEnum []interface{}
+var basicDockerArtifactoryTypeArtifactoryTypePropEnum []any
 
 func init() {
 	var res []string

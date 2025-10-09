@@ -48,7 +48,7 @@ func (m *ActionParameterValueDto) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var actionParameterValueDtoTypeTypePropEnum []interface{}
+var actionParameterValueDtoTypeTypePropEnum []any
 
 func init() {
 	var res []string

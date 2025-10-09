@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -73,11 +74,15 @@ func (m *CostDTO) validateServiceCost(formats strfmt.Registry) error {
 
 		if m.ServiceCost[i] != nil {
 			if err := m.ServiceCost[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("serviceCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("serviceCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -112,11 +117,15 @@ func (m *CostDTO) contextValidateServiceCost(ctx context.Context, formats strfmt
 			}
 
 			if err := m.ServiceCost[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("serviceCost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("serviceCost" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

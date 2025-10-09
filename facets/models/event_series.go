@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,11 +47,15 @@ func (m *EventSeries) validateLastObservedTime(formats strfmt.Registry) error {
 
 	if m.LastObservedTime != nil {
 		if err := m.LastObservedTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lastObservedTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lastObservedTime")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *EventSeries) contextValidateLastObservedTime(ctx context.Context, forma
 		}
 
 		if err := m.LastObservedTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lastObservedTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lastObservedTime")
 			}
+
 			return err
 		}
 	}

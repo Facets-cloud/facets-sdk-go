@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -83,11 +84,15 @@ func (m *PodSecurityContext) validateSeLinuxOptions(formats strfmt.Registry) err
 
 	if m.SeLinuxOptions != nil {
 		if err := m.SeLinuxOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seLinuxOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seLinuxOptions")
 			}
+
 			return err
 		}
 	}
@@ -102,11 +107,15 @@ func (m *PodSecurityContext) validateSeccompProfile(formats strfmt.Registry) err
 
 	if m.SeccompProfile != nil {
 		if err := m.SeccompProfile.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seccompProfile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seccompProfile")
 			}
+
 			return err
 		}
 	}
@@ -126,11 +135,15 @@ func (m *PodSecurityContext) validateSysctls(formats strfmt.Registry) error {
 
 		if m.Sysctls[i] != nil {
 			if err := m.Sysctls[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("sysctls" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("sysctls" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -147,11 +160,15 @@ func (m *PodSecurityContext) validateWindowsOptions(formats strfmt.Registry) err
 
 	if m.WindowsOptions != nil {
 		if err := m.WindowsOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("windowsOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("windowsOptions")
 			}
+
 			return err
 		}
 	}
@@ -194,11 +211,15 @@ func (m *PodSecurityContext) contextValidateSeLinuxOptions(ctx context.Context, 
 		}
 
 		if err := m.SeLinuxOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seLinuxOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seLinuxOptions")
 			}
+
 			return err
 		}
 	}
@@ -215,11 +236,15 @@ func (m *PodSecurityContext) contextValidateSeccompProfile(ctx context.Context, 
 		}
 
 		if err := m.SeccompProfile.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("seccompProfile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("seccompProfile")
 			}
+
 			return err
 		}
 	}
@@ -238,11 +263,15 @@ func (m *PodSecurityContext) contextValidateSysctls(ctx context.Context, formats
 			}
 
 			if err := m.Sysctls[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("sysctls" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("sysctls" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -261,11 +290,15 @@ func (m *PodSecurityContext) contextValidateWindowsOptions(ctx context.Context, 
 		}
 
 		if err := m.WindowsOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("windowsOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("windowsOptions")
 			}
+
 			return err
 		}
 	}

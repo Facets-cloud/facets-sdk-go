@@ -77,7 +77,7 @@ type Info struct {
 	TfModuleID string `json:"tfModuleId,omitempty"`
 
 	// ui
-	UI map[string]interface{} `json:"ui,omitempty"`
+	UI map[string]any `json:"ui,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -101,7 +101,7 @@ func (m *Info) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var infoTypeArtifactTypePropEnum []interface{}
+var infoTypeArtifactTypePropEnum []any
 
 func init() {
 	var res []string
@@ -143,7 +143,7 @@ func (m *Info) validateArtifactType(formats strfmt.Registry) error {
 	return nil
 }
 
-var infoTypeStrategyPropEnum []interface{}
+var infoTypeStrategyPropEnum []any
 
 func init() {
 	var res []string

@@ -45,7 +45,7 @@ func (m *TokenValidity) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var tokenValidityTypeMessagePropEnum []interface{}
+var tokenValidityTypeMessagePropEnum []any
 
 func init() {
 	var res []string

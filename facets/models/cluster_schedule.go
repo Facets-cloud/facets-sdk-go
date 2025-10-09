@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -115,7 +116,7 @@ func (m *ClusterSchedule) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterScheduleByDayItemsEnum []interface{}
+var clusterScheduleByDayItemsEnum []any
 
 func init() {
 	var res []string
@@ -158,11 +159,15 @@ func (m *ClusterSchedule) validateByTime(formats strfmt.Registry) error {
 
 	if m.ByTime != nil {
 		if err := m.ByTime.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("byTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("byTime")
 			}
+
 			return err
 		}
 	}
@@ -191,7 +196,7 @@ func (m *ClusterSchedule) validateCreationDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var clusterScheduleTypeFrequencyPropEnum []interface{}
+var clusterScheduleTypeFrequencyPropEnum []any
 
 func init() {
 	var res []string
@@ -251,7 +256,7 @@ func (m *ClusterSchedule) validateLastModifiedDate(formats strfmt.Registry) erro
 	return nil
 }
 
-var clusterScheduleTypeReleaseTypePropEnum []interface{}
+var clusterScheduleTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string
@@ -343,11 +348,15 @@ func (m *ClusterSchedule) validateTimeZone(formats strfmt.Registry) error {
 
 	if m.TimeZone != nil {
 		if err := m.TimeZone.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}
@@ -382,11 +391,15 @@ func (m *ClusterSchedule) contextValidateByTime(ctx context.Context, formats str
 		}
 
 		if err := m.ByTime.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("byTime")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("byTime")
 			}
+
 			return err
 		}
 	}
@@ -403,11 +416,15 @@ func (m *ClusterSchedule) contextValidateTimeZone(ctx context.Context, formats s
 		}
 
 		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("timeZone")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("timeZone")
 			}
+
 			return err
 		}
 	}

@@ -8,4 +8,4 @@ package models
 // JSONNode Json node
 //
 // swagger:model JsonNode
-type JSONNode interface{}
+type JSONNode any

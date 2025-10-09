@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -123,7 +124,7 @@ func (m *ProjectTypeResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var projectTypeResponseAllowedCloudsItemsEnum []interface{}
+var projectTypeResponseAllowedCloudsItemsEnum []any
 
 func init() {
 	var res []string
@@ -187,7 +188,7 @@ func (m *ProjectTypeResponse) validateCreationDate(formats strfmt.Registry) erro
 	return nil
 }
 
-var projectTypeResponseTypeIacToolPropEnum []interface{}
+var projectTypeResponseTypeIacToolPropEnum []any
 
 func init() {
 	var res []string
@@ -257,11 +258,15 @@ func (m *ProjectTypeResponse) validateMappedResources(formats strfmt.Registry) e
 
 		if m.MappedResources[i] != nil {
 			if err := m.MappedResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("mappedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("mappedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -278,11 +283,15 @@ func (m *ProjectTypeResponse) validateTemplateGitDetails(formats strfmt.Registry
 
 	if m.TemplateGitDetails != nil {
 		if err := m.TemplateGitDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("templateGitDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("templateGitDetails")
 			}
+
 			return err
 		}
 	}
@@ -319,11 +328,15 @@ func (m *ProjectTypeResponse) contextValidateMappedResources(ctx context.Context
 			}
 
 			if err := m.MappedResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("mappedResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("mappedResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -342,11 +355,15 @@ func (m *ProjectTypeResponse) contextValidateTemplateGitDetails(ctx context.Cont
 		}
 
 		if err := m.TemplateGitDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("templateGitDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("templateGitDetails")
 			}
+
 			return err
 		}
 	}

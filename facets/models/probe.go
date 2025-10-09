@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -82,11 +83,15 @@ func (m *Probe) validateExec(formats strfmt.Registry) error {
 
 	if m.Exec != nil {
 		if err := m.Exec.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("exec")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("exec")
 			}
+
 			return err
 		}
 	}
@@ -101,11 +106,15 @@ func (m *Probe) validateGrpc(formats strfmt.Registry) error {
 
 	if m.Grpc != nil {
 		if err := m.Grpc.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("grpc")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("grpc")
 			}
+
 			return err
 		}
 	}
@@ -120,11 +129,15 @@ func (m *Probe) validateHTTPGet(formats strfmt.Registry) error {
 
 	if m.HTTPGet != nil {
 		if err := m.HTTPGet.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("httpGet")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("httpGet")
 			}
+
 			return err
 		}
 	}
@@ -139,11 +152,15 @@ func (m *Probe) validateTCPSocket(formats strfmt.Registry) error {
 
 	if m.TCPSocket != nil {
 		if err := m.TCPSocket.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tcpSocket")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tcpSocket")
 			}
+
 			return err
 		}
 	}
@@ -186,11 +203,15 @@ func (m *Probe) contextValidateExec(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Exec.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("exec")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("exec")
 			}
+
 			return err
 		}
 	}
@@ -207,11 +228,15 @@ func (m *Probe) contextValidateGrpc(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Grpc.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("grpc")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("grpc")
 			}
+
 			return err
 		}
 	}
@@ -228,11 +253,15 @@ func (m *Probe) contextValidateHTTPGet(ctx context.Context, formats strfmt.Regis
 		}
 
 		if err := m.HTTPGet.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("httpGet")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("httpGet")
 			}
+
 			return err
 		}
 	}
@@ -249,11 +278,15 @@ func (m *Probe) contextValidateTCPSocket(ctx context.Context, formats strfmt.Reg
 		}
 
 		if err := m.TCPSocket.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tcpSocket")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tcpSocket")
 			}
+
 			return err
 		}
 	}

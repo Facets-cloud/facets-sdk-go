@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -166,7 +167,7 @@ func (m *TFModuleListResponseDTO) validateCreationDate(formats strfmt.Registry) 
 	return nil
 }
 
-var tFModuleListResponseDTOIacToolItemsEnum []interface{}
+var tFModuleListResponseDTOIacToolItemsEnum []any
 
 func init() {
 	var res []string
@@ -213,11 +214,15 @@ func (m *TFModuleListResponseDTO) validateIntentDetails(formats strfmt.Registry)
 
 	if m.IntentDetails != nil {
 		if err := m.IntentDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("intentDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("intentDetails")
 			}
+
 			return err
 		}
 	}
@@ -237,7 +242,7 @@ func (m *TFModuleListResponseDTO) validateLastModifiedDate(formats strfmt.Regist
 	return nil
 }
 
-var tFModuleListResponseDTOTypeSourcePropEnum []interface{}
+var tFModuleListResponseDTOTypeSourcePropEnum []any
 
 func init() {
 	var res []string
@@ -279,7 +284,7 @@ func (m *TFModuleListResponseDTO) validateSource(formats strfmt.Registry) error 
 	return nil
 }
 
-var tFModuleListResponseDTOTypeStagePropEnum []interface{}
+var tFModuleListResponseDTOTypeStagePropEnum []any
 
 func init() {
 	var res []string
@@ -333,7 +338,7 @@ func (m *TFModuleListResponseDTO) validateTags(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModuleListResponseDTOTypeTypePropEnum []interface{}
+var tFModuleListResponseDTOTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -398,11 +403,15 @@ func (m *TFModuleListResponseDTO) contextValidateIntentDetails(ctx context.Conte
 		}
 
 		if err := m.IntentDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("intentDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("intentDetails")
 			}
+
 			return err
 		}
 	}

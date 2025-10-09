@@ -18,7 +18,7 @@ import (
 type TokenPaginatedResponse struct {
 
 	// log event list
-	LogEventList []interface{} `json:"logEventList"`
+	LogEventList []any `json:"logEventList"`
 
 	// next token
 	NextToken string `json:"nextToken,omitempty"`

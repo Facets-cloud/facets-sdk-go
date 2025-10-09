@@ -51,7 +51,7 @@ func (m *Variables) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var variablesTypeStatusPropEnum []interface{}
+var variablesTypeStatusPropEnum []any
 
 func init() {
 	var res []string

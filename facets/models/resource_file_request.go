@@ -20,7 +20,7 @@ import (
 type ResourceFileRequest struct {
 
 	// content
-	Content map[string]interface{} `json:"content,omitempty"`
+	Content map[string]any `json:"content,omitempty"`
 
 	// directory
 	Directory string `json:"directory,omitempty"`
@@ -32,7 +32,7 @@ type ResourceFileRequest struct {
 	Flavor string `json:"flavor,omitempty"`
 
 	// merge content
-	MergeContent map[string]interface{} `json:"mergeContent,omitempty"`
+	MergeContent map[string]any `json:"mergeContent,omitempty"`
 
 	// resource name
 	// Required: true

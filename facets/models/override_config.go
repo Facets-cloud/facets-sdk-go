@@ -57,7 +57,7 @@ func (m *OverrideConfig) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var overrideConfigTypeOverridesMigrationStatusPropEnum []interface{}
+var overrideConfigTypeOverridesMigrationStatusPropEnum []any
 
 func init() {
 	var res []string

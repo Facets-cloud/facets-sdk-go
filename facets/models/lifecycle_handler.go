@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -57,11 +58,15 @@ func (m *LifecycleHandler) validateExec(formats strfmt.Registry) error {
 
 	if m.Exec != nil {
 		if err := m.Exec.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("exec")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("exec")
 			}
+
 			return err
 		}
 	}
@@ -76,11 +81,15 @@ func (m *LifecycleHandler) validateHTTPGet(formats strfmt.Registry) error {
 
 	if m.HTTPGet != nil {
 		if err := m.HTTPGet.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("httpGet")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("httpGet")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +104,15 @@ func (m *LifecycleHandler) validateTCPSocket(formats strfmt.Registry) error {
 
 	if m.TCPSocket != nil {
 		if err := m.TCPSocket.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tcpSocket")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tcpSocket")
 			}
+
 			return err
 		}
 	}
@@ -138,11 +151,15 @@ func (m *LifecycleHandler) contextValidateExec(ctx context.Context, formats strf
 		}
 
 		if err := m.Exec.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("exec")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("exec")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +176,15 @@ func (m *LifecycleHandler) contextValidateHTTPGet(ctx context.Context, formats s
 		}
 
 		if err := m.HTTPGet.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("httpGet")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("httpGet")
 			}
+
 			return err
 		}
 	}
@@ -180,11 +201,15 @@ func (m *LifecycleHandler) contextValidateTCPSocket(ctx context.Context, formats
 		}
 
 		if err := m.TCPSocket.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tcpSocket")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tcpSocket")
 			}
+
 			return err
 		}
 	}

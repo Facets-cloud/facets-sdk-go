@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -64,11 +65,15 @@ func (m *EnvVarSource) validateConfigMapKeyRef(formats strfmt.Registry) error {
 
 	if m.ConfigMapKeyRef != nil {
 		if err := m.ConfigMapKeyRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMapKeyRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMapKeyRef")
 			}
+
 			return err
 		}
 	}
@@ -83,11 +88,15 @@ func (m *EnvVarSource) validateFieldRef(formats strfmt.Registry) error {
 
 	if m.FieldRef != nil {
 		if err := m.FieldRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fieldRef")
 			}
+
 			return err
 		}
 	}
@@ -102,11 +111,15 @@ func (m *EnvVarSource) validateResourceFieldRef(formats strfmt.Registry) error {
 
 	if m.ResourceFieldRef != nil {
 		if err := m.ResourceFieldRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resourceFieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resourceFieldRef")
 			}
+
 			return err
 		}
 	}
@@ -121,11 +134,15 @@ func (m *EnvVarSource) validateSecretKeyRef(formats strfmt.Registry) error {
 
 	if m.SecretKeyRef != nil {
 		if err := m.SecretKeyRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretKeyRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretKeyRef")
 			}
+
 			return err
 		}
 	}
@@ -168,11 +185,15 @@ func (m *EnvVarSource) contextValidateConfigMapKeyRef(ctx context.Context, forma
 		}
 
 		if err := m.ConfigMapKeyRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMapKeyRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMapKeyRef")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +210,15 @@ func (m *EnvVarSource) contextValidateFieldRef(ctx context.Context, formats strf
 		}
 
 		if err := m.FieldRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fieldRef")
 			}
+
 			return err
 		}
 	}
@@ -210,11 +235,15 @@ func (m *EnvVarSource) contextValidateResourceFieldRef(ctx context.Context, form
 		}
 
 		if err := m.ResourceFieldRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resourceFieldRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resourceFieldRef")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +260,15 @@ func (m *EnvVarSource) contextValidateSecretKeyRef(ctx context.Context, formats 
 		}
 
 		if err := m.SecretKeyRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretKeyRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretKeyRef")
 			}
+
 			return err
 		}
 	}

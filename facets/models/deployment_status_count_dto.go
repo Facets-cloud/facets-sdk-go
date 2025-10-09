@@ -62,7 +62,7 @@ func (m *DeploymentStatusCountDto) validateDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var deploymentStatusCountDtoTypeStatusPropEnum []interface{}
+var deploymentStatusCountDtoTypeStatusPropEnum []any
 
 func init() {
 	var res []string

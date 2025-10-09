@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -101,7 +102,7 @@ func (m *GcpAccount) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var gcpAccountTypeAccountTypePropEnum []interface{}
+var gcpAccountTypeAccountTypePropEnum []any
 
 func init() {
 	var res []string
@@ -158,11 +159,15 @@ func (m *GcpAccount) validateAssociatedTo(formats strfmt.Registry) error {
 
 		if m.AssociatedTo[i] != nil {
 			if err := m.AssociatedTo[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("associatedTo" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("associatedTo" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -196,7 +201,7 @@ func (m *GcpAccount) validateLastModifiedDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var gcpAccountTypeProviderPropEnum []interface{}
+var gcpAccountTypeProviderPropEnum []any
 
 func init() {
 	var res []string
@@ -281,11 +286,15 @@ func (m *GcpAccount) contextValidateAssociatedTo(ctx context.Context, formats st
 			}
 
 			if err := m.AssociatedTo[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("associatedTo" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("associatedTo" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

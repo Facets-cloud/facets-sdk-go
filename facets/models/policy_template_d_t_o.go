@@ -24,7 +24,7 @@ type PolicyTemplateDTO struct {
 	Flavours []string `json:"flavours"`
 
 	// input data
-	InputData map[string]interface{} `json:"inputData,omitempty"`
+	InputData map[string]any `json:"inputData,omitempty"`
 
 	// resource types
 	ResourceTypes []string `json:"resourceTypes"`

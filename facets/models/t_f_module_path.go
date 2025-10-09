@@ -45,7 +45,7 @@ func (m *TFModulePath) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFModulePathTypePathTypePropEnum []interface{}
+var tFModulePathTypePathTypePropEnum []any
 
 func init() {
 	var res []string

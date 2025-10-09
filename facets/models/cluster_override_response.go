@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -49,11 +50,15 @@ func (m *ClusterOverrideResponse) validateOverrideObject(formats strfmt.Registry
 
 	if m.OverrideObject != nil {
 		if err := m.OverrideObject.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideObject")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideObject")
 			}
+
 			return err
 		}
 	}
@@ -84,11 +89,15 @@ func (m *ClusterOverrideResponse) contextValidateOverrideObject(ctx context.Cont
 		}
 
 		if err := m.OverrideObject.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideObject")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideObject")
 			}
+
 			return err
 		}
 	}

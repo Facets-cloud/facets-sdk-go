@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -113,11 +114,15 @@ func (m *ContentFile) validateSelectors(formats strfmt.Registry) error {
 
 	if m.Selectors != nil {
 		if err := m.Selectors.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("selectors")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("selectors")
 			}
+
 			return err
 		}
 	}
@@ -125,7 +130,7 @@ func (m *ContentFile) validateSelectors(formats strfmt.Registry) error {
 	return nil
 }
 
-var contentFileTypeTypePropEnum []interface{}
+var contentFileTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -187,13 +192,13 @@ func (m *ContentFile) ContextValidate(ctx context.Context, formats strfmt.Regist
 
 func (m *ContentFile) contextValidateRequiredPayload(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "requiredPayload", "body", []string(m.RequiredPayload)); err != nil {
+	if err := validate.ReadOnly(ctx, "requiredPayload", "body", m.RequiredPayload); err != nil {
 		return err
 	}
 
 	for i := 0; i < len(m.RequiredPayload); i++ {
 
-		if err := validate.ReadOnly(ctx, "requiredPayload"+"."+strconv.Itoa(i), "body", string(m.RequiredPayload[i])); err != nil {
+		if err := validate.ReadOnly(ctx, "requiredPayload"+"."+strconv.Itoa(i), "body", m.RequiredPayload[i]); err != nil {
 			return err
 		}
 
@@ -211,11 +216,15 @@ func (m *ContentFile) contextValidateSelectors(ctx context.Context, formats strf
 		}
 
 		if err := m.Selectors.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("selectors")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("selectors")
 			}
+
 			return err
 		}
 	}

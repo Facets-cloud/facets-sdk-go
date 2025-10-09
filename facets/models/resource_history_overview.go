@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -92,11 +93,15 @@ func (m *ResourceHistoryOverview) validateArtifactVersion(formats strfmt.Registr
 
 	if m.ArtifactVersion != nil {
 		if err := m.ArtifactVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("artifactVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("artifactVersion")
 			}
+
 			return err
 		}
 	}
@@ -111,11 +116,15 @@ func (m *ResourceHistoryOverview) validateBlueprintVersion(formats strfmt.Regist
 
 	if m.BlueprintVersion != nil {
 		if err := m.BlueprintVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintVersion")
 			}
+
 			return err
 		}
 	}
@@ -130,11 +139,15 @@ func (m *ResourceHistoryOverview) validateOverrideVersion(formats strfmt.Registr
 
 	if m.OverrideVersion != nil {
 		if err := m.OverrideVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideVersion")
 			}
+
 			return err
 		}
 	}
@@ -149,11 +162,15 @@ func (m *ResourceHistoryOverview) validateReleaseButtonStatus(formats strfmt.Reg
 
 	if m.ReleaseButtonStatus != nil {
 		if err := m.ReleaseButtonStatus.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("releaseButtonStatus")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("releaseButtonStatus")
 			}
+
 			return err
 		}
 	}
@@ -161,7 +178,7 @@ func (m *ResourceHistoryOverview) validateReleaseButtonStatus(formats strfmt.Reg
 	return nil
 }
 
-var resourceHistoryOverviewTypeResourceStatusPropEnum []interface{}
+var resourceHistoryOverviewTypeResourceStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -238,11 +255,15 @@ func (m *ResourceHistoryOverview) contextValidateArtifactVersion(ctx context.Con
 		}
 
 		if err := m.ArtifactVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("artifactVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("artifactVersion")
 			}
+
 			return err
 		}
 	}
@@ -259,11 +280,15 @@ func (m *ResourceHistoryOverview) contextValidateBlueprintVersion(ctx context.Co
 		}
 
 		if err := m.BlueprintVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintVersion")
 			}
+
 			return err
 		}
 	}
@@ -280,11 +305,15 @@ func (m *ResourceHistoryOverview) contextValidateOverrideVersion(ctx context.Con
 		}
 
 		if err := m.OverrideVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("overrideVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("overrideVersion")
 			}
+
 			return err
 		}
 	}
@@ -301,11 +330,15 @@ func (m *ResourceHistoryOverview) contextValidateReleaseButtonStatus(ctx context
 		}
 
 		if err := m.ReleaseButtonStatus.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("releaseButtonStatus")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("releaseButtonStatus")
 			}
+
 			return err
 		}
 	}

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -87,11 +88,15 @@ func (m *PageAbstractCluster) validateContent(formats strfmt.Registry) error {
 
 		if m.Content[i] != nil {
 			if err := m.Content[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("content" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("content" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -108,11 +113,15 @@ func (m *PageAbstractCluster) validatePageable(formats strfmt.Registry) error {
 
 	if m.Pageable != nil {
 		if err := m.Pageable.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("pageable")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("pageable")
 			}
+
 			return err
 		}
 	}
@@ -127,11 +136,15 @@ func (m *PageAbstractCluster) validateSort(formats strfmt.Registry) error {
 
 	if m.Sort != nil {
 		if err := m.Sort.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sort")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sort")
 			}
+
 			return err
 		}
 	}
@@ -172,11 +185,15 @@ func (m *PageAbstractCluster) contextValidateContent(ctx context.Context, format
 			}
 
 			if err := m.Content[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("content" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("content" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -195,11 +212,15 @@ func (m *PageAbstractCluster) contextValidatePageable(ctx context.Context, forma
 		}
 
 		if err := m.Pageable.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("pageable")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("pageable")
 			}
+
 			return err
 		}
 	}
@@ -216,11 +237,15 @@ func (m *PageAbstractCluster) contextValidateSort(ctx context.Context, formats s
 		}
 
 		if err := m.Sort.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sort")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sort")
 			}
+
 			return err
 		}
 	}

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -92,11 +93,15 @@ func (m *IntentRequestDTO) validateIntentOutputs(formats strfmt.Registry) error 
 
 		if m.IntentOutputs[i] != nil {
 			if err := m.IntentOutputs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -149,11 +154,15 @@ func (m *IntentRequestDTO) contextValidateIntentOutputs(ctx context.Context, for
 			}
 
 			if err := m.IntentOutputs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("intentOutputs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

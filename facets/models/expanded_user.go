@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -109,11 +110,15 @@ func (m *ExpandedUser) validateAccessibleAccounts(formats strfmt.Registry) error
 
 		if m.AccessibleAccounts[i] != nil {
 			if err := m.AccessibleAccounts[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("accessibleAccounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("accessibleAccounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -135,11 +140,15 @@ func (m *ExpandedUser) validateAccessibleEnvironments(formats strfmt.Registry) e
 
 		if m.AccessibleEnvironments[i] != nil {
 			if err := m.AccessibleEnvironments[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("accessibleEnvironments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("accessibleEnvironments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -173,11 +182,15 @@ func (m *ExpandedUser) validateAssociatedResourceGroups(formats strfmt.Registry)
 
 		if m.AssociatedResourceGroups[i] != nil {
 			if err := m.AssociatedResourceGroups[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("associatedResourceGroups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("associatedResourceGroups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -194,11 +207,15 @@ func (m *ExpandedUser) validateBaseRole(formats strfmt.Registry) error {
 
 	if m.BaseRole != nil {
 		if err := m.BaseRole.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseRole")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseRole")
 			}
+
 			return err
 		}
 	}
@@ -218,11 +235,15 @@ func (m *ExpandedUser) validateEnvSpecificRoles(formats strfmt.Registry) error {
 
 		if m.EnvSpecificRoles[i] != nil {
 			if err := m.EnvSpecificRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("envSpecificRoles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("envSpecificRoles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -244,11 +265,15 @@ func (m *ExpandedUser) validateGroups(formats strfmt.Registry) error {
 
 		if m.Groups[i] != nil {
 			if err := m.Groups[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("groups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("groups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -270,11 +295,15 @@ func (m *ExpandedUser) validateUserRoles(formats strfmt.Registry) error {
 
 		if m.UserRoles[i] != nil {
 			if err := m.UserRoles[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("userRoles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("userRoles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -333,11 +362,15 @@ func (m *ExpandedUser) contextValidateAccessibleAccounts(ctx context.Context, fo
 			}
 
 			if err := m.AccessibleAccounts[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("accessibleAccounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("accessibleAccounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -358,11 +391,15 @@ func (m *ExpandedUser) contextValidateAccessibleEnvironments(ctx context.Context
 			}
 
 			if err := m.AccessibleEnvironments[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("accessibleEnvironments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("accessibleEnvironments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -383,11 +420,15 @@ func (m *ExpandedUser) contextValidateAssociatedResourceGroups(ctx context.Conte
 			}
 
 			if err := m.AssociatedResourceGroups[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("associatedResourceGroups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("associatedResourceGroups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -406,11 +447,15 @@ func (m *ExpandedUser) contextValidateBaseRole(ctx context.Context, formats strf
 		}
 
 		if err := m.BaseRole.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("baseRole")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("baseRole")
 			}
+
 			return err
 		}
 	}
@@ -429,11 +474,15 @@ func (m *ExpandedUser) contextValidateEnvSpecificRoles(ctx context.Context, form
 			}
 
 			if err := m.EnvSpecificRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("envSpecificRoles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("envSpecificRoles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -454,11 +503,15 @@ func (m *ExpandedUser) contextValidateGroups(ctx context.Context, formats strfmt
 			}
 
 			if err := m.Groups[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("groups" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("groups" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -479,11 +532,15 @@ func (m *ExpandedUser) contextValidateUserRoles(ctx context.Context, formats str
 			}
 
 			if err := m.UserRoles[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("userRoles" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("userRoles" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

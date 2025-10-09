@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -184,7 +185,7 @@ func (m *Environment) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var environmentTypeCloudPropEnum []interface{}
+var environmentTypeCloudPropEnum []any
 
 func init() {
 	var res []string
@@ -238,7 +239,7 @@ func (m *Environment) validateCloud(formats strfmt.Registry) error {
 	return nil
 }
 
-var environmentTypeClusterStatePropEnum []interface{}
+var environmentTypeClusterStatePropEnum []any
 
 func init() {
 	var res []string
@@ -382,11 +383,15 @@ func (m *Environment) validateVariables(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Variables[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("variables" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("variables" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -416,7 +421,7 @@ func (m *Environment) ContextValidate(ctx context.Context, formats strfmt.Regist
 
 func (m *Environment) contextValidateClusterCode(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "clusterCode", "body", string(m.ClusterCode)); err != nil {
+	if err := validate.ReadOnly(ctx, "clusterCode", "body", m.ClusterCode); err != nil {
 		return err
 	}
 

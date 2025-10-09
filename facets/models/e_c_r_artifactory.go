@@ -135,7 +135,7 @@ func (m *ECRArtifactory) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var eCRArtifactoryTypeArtifactoryTypePropEnum []interface{}
+var eCRArtifactoryTypeArtifactoryTypePropEnum []any
 
 func init() {
 	var res []string
@@ -246,7 +246,7 @@ func (m *ECRArtifactory) validateCreationDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var eCRArtifactoryTypeImageTagMutabilityPropEnum []interface{}
+var eCRArtifactoryTypeImageTagMutabilityPropEnum []any
 
 func init() {
 	var res []string

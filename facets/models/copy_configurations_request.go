@@ -51,7 +51,7 @@ func (m *CopyConfigurationsRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var copyConfigurationsRequestConfigurationTypesItemsEnum []interface{}
+var copyConfigurationsRequestConfigurationTypesItemsEnum []any
 
 func init() {
 	var res []string
@@ -91,7 +91,7 @@ func (m *CopyConfigurationsRequest) validateConfigurationTypes(formats strfmt.Re
 	return nil
 }
 
-var copyConfigurationsRequestTypeSelectionModePropEnum []interface{}
+var copyConfigurationsRequestTypeSelectionModePropEnum []any
 
 func init() {
 	var res []string

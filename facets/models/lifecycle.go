@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *Lifecycle) validatePostStart(formats strfmt.Registry) error {
 
 	if m.PostStart != nil {
 		if err := m.PostStart.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("postStart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("postStart")
 			}
+
 			return err
 		}
 	}
@@ -69,11 +74,15 @@ func (m *Lifecycle) validatePreStop(formats strfmt.Registry) error {
 
 	if m.PreStop != nil {
 		if err := m.PreStop.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("preStop")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("preStop")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +117,15 @@ func (m *Lifecycle) contextValidatePostStart(ctx context.Context, formats strfmt
 		}
 
 		if err := m.PostStart.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("postStart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("postStart")
 			}
+
 			return err
 		}
 	}
@@ -129,11 +142,15 @@ func (m *Lifecycle) contextValidatePreStop(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.PreStop.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("preStop")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("preStop")
 			}
+
 			return err
 		}
 	}

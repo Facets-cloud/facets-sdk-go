@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -207,11 +208,15 @@ func (m *DeploymentLog) validateAppDeployments(formats strfmt.Registry) error {
 
 		if m.AppDeployments[i] != nil {
 			if err := m.AppDeployments[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("appDeployments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("appDeployments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -233,11 +238,15 @@ func (m *DeploymentLog) validateChangesApplied(formats strfmt.Registry) error {
 
 		if m.ChangesApplied[i] != nil {
 			if err := m.ChangesApplied[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changesApplied" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changesApplied" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -259,7 +268,7 @@ func (m *DeploymentLog) validateCreatedOn(formats strfmt.Registry) error {
 	return nil
 }
 
-var deploymentLogTypeDeploymentJobTypePropEnum []interface{}
+var deploymentLogTypeDeploymentJobTypePropEnum []any
 
 func init() {
 	var res []string
@@ -301,7 +310,7 @@ func (m *DeploymentLog) validateDeploymentJobType(formats strfmt.Registry) error
 	return nil
 }
 
-var deploymentLogTypeDeploymentTypePropEnum []interface{}
+var deploymentLogTypeDeploymentTypePropEnum []any
 
 func init() {
 	var res []string
@@ -358,11 +367,15 @@ func (m *DeploymentLog) validateErrorLogs(formats strfmt.Registry) error {
 
 		if m.ErrorLogs[i] != nil {
 			if err := m.ErrorLogs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("errorLogs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("errorLogs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -396,11 +409,15 @@ func (m *DeploymentLog) validateHotfixResources(formats strfmt.Registry) error {
 
 		if m.HotfixResources[i] != nil {
 			if err := m.HotfixResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -422,11 +439,15 @@ func (m *DeploymentLog) validateMigrationScriptsRun(formats strfmt.Registry) err
 
 		if m.MigrationScriptsRun[i] != nil {
 			if err := m.MigrationScriptsRun[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("migrationScriptsRun" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("migrationScriptsRun" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -436,7 +457,7 @@ func (m *DeploymentLog) validateMigrationScriptsRun(formats strfmt.Registry) err
 	return nil
 }
 
-var deploymentLogTypeReleaseTypePropEnum []interface{}
+var deploymentLogTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string
@@ -520,7 +541,7 @@ func (m *DeploymentLog) validateReleaseType(formats strfmt.Registry) error {
 	return nil
 }
 
-var deploymentLogTypeStatusPropEnum []interface{}
+var deploymentLogTypeStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -610,11 +631,15 @@ func (m *DeploymentLog) validateValidationResponses(formats strfmt.Registry) err
 
 		if m.ValidationResponses[i] != nil {
 			if err := m.ValidationResponses[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("validationResponses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("validationResponses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -631,11 +656,15 @@ func (m *DeploymentLog) validateValidationResult(formats strfmt.Registry) error 
 
 	if m.ValidationResult != nil {
 		if err := m.ValidationResult.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("validationResult")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("validationResult")
 			}
+
 			return err
 		}
 	}
@@ -692,11 +721,15 @@ func (m *DeploymentLog) contextValidateAppDeployments(ctx context.Context, forma
 			}
 
 			if err := m.AppDeployments[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("appDeployments" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("appDeployments" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -717,11 +750,15 @@ func (m *DeploymentLog) contextValidateChangesApplied(ctx context.Context, forma
 			}
 
 			if err := m.ChangesApplied[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changesApplied" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changesApplied" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -742,11 +779,15 @@ func (m *DeploymentLog) contextValidateErrorLogs(ctx context.Context, formats st
 			}
 
 			if err := m.ErrorLogs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("errorLogs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("errorLogs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -767,11 +808,15 @@ func (m *DeploymentLog) contextValidateHotfixResources(ctx context.Context, form
 			}
 
 			if err := m.HotfixResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("hotfixResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -792,11 +837,15 @@ func (m *DeploymentLog) contextValidateMigrationScriptsRun(ctx context.Context, 
 			}
 
 			if err := m.MigrationScriptsRun[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("migrationScriptsRun" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("migrationScriptsRun" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -817,11 +866,15 @@ func (m *DeploymentLog) contextValidateValidationResponses(ctx context.Context, 
 			}
 
 			if err := m.ValidationResponses[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("validationResponses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("validationResponses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -840,11 +893,15 @@ func (m *DeploymentLog) contextValidateValidationResult(ctx context.Context, for
 		}
 
 		if err := m.ValidationResult.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("validationResult")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("validationResult")
 			}
+
 			return err
 		}
 	}

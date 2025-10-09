@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -242,11 +243,15 @@ func (m *Volume) validateAwsElasticBlockStore(formats strfmt.Registry) error {
 
 	if m.AwsElasticBlockStore != nil {
 		if err := m.AwsElasticBlockStore.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("awsElasticBlockStore")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("awsElasticBlockStore")
 			}
+
 			return err
 		}
 	}
@@ -261,11 +266,15 @@ func (m *Volume) validateAzureDisk(formats strfmt.Registry) error {
 
 	if m.AzureDisk != nil {
 		if err := m.AzureDisk.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azureDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azureDisk")
 			}
+
 			return err
 		}
 	}
@@ -280,11 +289,15 @@ func (m *Volume) validateAzureFile(formats strfmt.Registry) error {
 
 	if m.AzureFile != nil {
 		if err := m.AzureFile.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azureFile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azureFile")
 			}
+
 			return err
 		}
 	}
@@ -299,11 +312,15 @@ func (m *Volume) validateCephfs(formats strfmt.Registry) error {
 
 	if m.Cephfs != nil {
 		if err := m.Cephfs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cephfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cephfs")
 			}
+
 			return err
 		}
 	}
@@ -318,11 +335,15 @@ func (m *Volume) validateCinder(formats strfmt.Registry) error {
 
 	if m.Cinder != nil {
 		if err := m.Cinder.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cinder")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cinder")
 			}
+
 			return err
 		}
 	}
@@ -337,11 +358,15 @@ func (m *Volume) validateConfigMap(formats strfmt.Registry) error {
 
 	if m.ConfigMap != nil {
 		if err := m.ConfigMap.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMap")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMap")
 			}
+
 			return err
 		}
 	}
@@ -356,11 +381,15 @@ func (m *Volume) validateCsi(formats strfmt.Registry) error {
 
 	if m.Csi != nil {
 		if err := m.Csi.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("csi")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("csi")
 			}
+
 			return err
 		}
 	}
@@ -375,11 +404,15 @@ func (m *Volume) validateDownwardAPI(formats strfmt.Registry) error {
 
 	if m.DownwardAPI != nil {
 		if err := m.DownwardAPI.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("downwardAPI")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("downwardAPI")
 			}
+
 			return err
 		}
 	}
@@ -394,11 +427,15 @@ func (m *Volume) validateEmptyDir(formats strfmt.Registry) error {
 
 	if m.EmptyDir != nil {
 		if err := m.EmptyDir.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("emptyDir")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("emptyDir")
 			}
+
 			return err
 		}
 	}
@@ -413,11 +450,15 @@ func (m *Volume) validateEphemeral(formats strfmt.Registry) error {
 
 	if m.Ephemeral != nil {
 		if err := m.Ephemeral.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ephemeral")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ephemeral")
 			}
+
 			return err
 		}
 	}
@@ -432,11 +473,15 @@ func (m *Volume) validateFc(formats strfmt.Registry) error {
 
 	if m.Fc != nil {
 		if err := m.Fc.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fc")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fc")
 			}
+
 			return err
 		}
 	}
@@ -451,11 +496,15 @@ func (m *Volume) validateFlexVolume(formats strfmt.Registry) error {
 
 	if m.FlexVolume != nil {
 		if err := m.FlexVolume.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flexVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flexVolume")
 			}
+
 			return err
 		}
 	}
@@ -470,11 +519,15 @@ func (m *Volume) validateFlocker(formats strfmt.Registry) error {
 
 	if m.Flocker != nil {
 		if err := m.Flocker.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flocker")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flocker")
 			}
+
 			return err
 		}
 	}
@@ -489,11 +542,15 @@ func (m *Volume) validateGcePersistentDisk(formats strfmt.Registry) error {
 
 	if m.GcePersistentDisk != nil {
 		if err := m.GcePersistentDisk.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gcePersistentDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gcePersistentDisk")
 			}
+
 			return err
 		}
 	}
@@ -508,11 +565,15 @@ func (m *Volume) validateGitRepo(formats strfmt.Registry) error {
 
 	if m.GitRepo != nil {
 		if err := m.GitRepo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gitRepo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gitRepo")
 			}
+
 			return err
 		}
 	}
@@ -527,11 +588,15 @@ func (m *Volume) validateGlusterfs(formats strfmt.Registry) error {
 
 	if m.Glusterfs != nil {
 		if err := m.Glusterfs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("glusterfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("glusterfs")
 			}
+
 			return err
 		}
 	}
@@ -546,11 +611,15 @@ func (m *Volume) validateHostPath(formats strfmt.Registry) error {
 
 	if m.HostPath != nil {
 		if err := m.HostPath.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hostPath")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hostPath")
 			}
+
 			return err
 		}
 	}
@@ -565,11 +634,15 @@ func (m *Volume) validateIscsi(formats strfmt.Registry) error {
 
 	if m.Iscsi != nil {
 		if err := m.Iscsi.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("iscsi")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("iscsi")
 			}
+
 			return err
 		}
 	}
@@ -584,11 +657,15 @@ func (m *Volume) validateNfs(formats strfmt.Registry) error {
 
 	if m.Nfs != nil {
 		if err := m.Nfs.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nfs")
 			}
+
 			return err
 		}
 	}
@@ -603,11 +680,15 @@ func (m *Volume) validatePersistentVolumeClaim(formats strfmt.Registry) error {
 
 	if m.PersistentVolumeClaim != nil {
 		if err := m.PersistentVolumeClaim.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("persistentVolumeClaim")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("persistentVolumeClaim")
 			}
+
 			return err
 		}
 	}
@@ -622,11 +703,15 @@ func (m *Volume) validatePhotonPersistentDisk(formats strfmt.Registry) error {
 
 	if m.PhotonPersistentDisk != nil {
 		if err := m.PhotonPersistentDisk.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("photonPersistentDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("photonPersistentDisk")
 			}
+
 			return err
 		}
 	}
@@ -641,11 +726,15 @@ func (m *Volume) validatePortworxVolume(formats strfmt.Registry) error {
 
 	if m.PortworxVolume != nil {
 		if err := m.PortworxVolume.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("portworxVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("portworxVolume")
 			}
+
 			return err
 		}
 	}
@@ -660,11 +749,15 @@ func (m *Volume) validateProjected(formats strfmt.Registry) error {
 
 	if m.Projected != nil {
 		if err := m.Projected.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("projected")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("projected")
 			}
+
 			return err
 		}
 	}
@@ -679,11 +772,15 @@ func (m *Volume) validateQuobyte(formats strfmt.Registry) error {
 
 	if m.Quobyte != nil {
 		if err := m.Quobyte.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("quobyte")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("quobyte")
 			}
+
 			return err
 		}
 	}
@@ -698,11 +795,15 @@ func (m *Volume) validateRbd(formats strfmt.Registry) error {
 
 	if m.Rbd != nil {
 		if err := m.Rbd.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("rbd")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("rbd")
 			}
+
 			return err
 		}
 	}
@@ -717,11 +818,15 @@ func (m *Volume) validateScaleIO(formats strfmt.Registry) error {
 
 	if m.ScaleIO != nil {
 		if err := m.ScaleIO.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleIO")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleIO")
 			}
+
 			return err
 		}
 	}
@@ -736,11 +841,15 @@ func (m *Volume) validateSecret(formats strfmt.Registry) error {
 
 	if m.Secret != nil {
 		if err := m.Secret.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secret")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secret")
 			}
+
 			return err
 		}
 	}
@@ -755,11 +864,15 @@ func (m *Volume) validateStorageos(formats strfmt.Registry) error {
 
 	if m.Storageos != nil {
 		if err := m.Storageos.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("storageos")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("storageos")
 			}
+
 			return err
 		}
 	}
@@ -774,11 +887,15 @@ func (m *Volume) validateVsphereVolume(formats strfmt.Registry) error {
 
 	if m.VsphereVolume != nil {
 		if err := m.VsphereVolume.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vsphereVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vsphereVolume")
 			}
+
 			return err
 		}
 	}
@@ -921,11 +1038,15 @@ func (m *Volume) contextValidateAwsElasticBlockStore(ctx context.Context, format
 		}
 
 		if err := m.AwsElasticBlockStore.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("awsElasticBlockStore")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("awsElasticBlockStore")
 			}
+
 			return err
 		}
 	}
@@ -942,11 +1063,15 @@ func (m *Volume) contextValidateAzureDisk(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.AzureDisk.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azureDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azureDisk")
 			}
+
 			return err
 		}
 	}
@@ -963,11 +1088,15 @@ func (m *Volume) contextValidateAzureFile(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.AzureFile.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("azureFile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("azureFile")
 			}
+
 			return err
 		}
 	}
@@ -984,11 +1113,15 @@ func (m *Volume) contextValidateCephfs(ctx context.Context, formats strfmt.Regis
 		}
 
 		if err := m.Cephfs.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cephfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cephfs")
 			}
+
 			return err
 		}
 	}
@@ -1005,11 +1138,15 @@ func (m *Volume) contextValidateCinder(ctx context.Context, formats strfmt.Regis
 		}
 
 		if err := m.Cinder.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cinder")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cinder")
 			}
+
 			return err
 		}
 	}
@@ -1026,11 +1163,15 @@ func (m *Volume) contextValidateConfigMap(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.ConfigMap.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("configMap")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("configMap")
 			}
+
 			return err
 		}
 	}
@@ -1047,11 +1188,15 @@ func (m *Volume) contextValidateCsi(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Csi.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("csi")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("csi")
 			}
+
 			return err
 		}
 	}
@@ -1068,11 +1213,15 @@ func (m *Volume) contextValidateDownwardAPI(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.DownwardAPI.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("downwardAPI")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("downwardAPI")
 			}
+
 			return err
 		}
 	}
@@ -1089,11 +1238,15 @@ func (m *Volume) contextValidateEmptyDir(ctx context.Context, formats strfmt.Reg
 		}
 
 		if err := m.EmptyDir.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("emptyDir")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("emptyDir")
 			}
+
 			return err
 		}
 	}
@@ -1110,11 +1263,15 @@ func (m *Volume) contextValidateEphemeral(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Ephemeral.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ephemeral")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ephemeral")
 			}
+
 			return err
 		}
 	}
@@ -1131,11 +1288,15 @@ func (m *Volume) contextValidateFc(ctx context.Context, formats strfmt.Registry)
 		}
 
 		if err := m.Fc.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("fc")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("fc")
 			}
+
 			return err
 		}
 	}
@@ -1152,11 +1313,15 @@ func (m *Volume) contextValidateFlexVolume(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.FlexVolume.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flexVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flexVolume")
 			}
+
 			return err
 		}
 	}
@@ -1173,11 +1338,15 @@ func (m *Volume) contextValidateFlocker(ctx context.Context, formats strfmt.Regi
 		}
 
 		if err := m.Flocker.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flocker")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flocker")
 			}
+
 			return err
 		}
 	}
@@ -1194,11 +1363,15 @@ func (m *Volume) contextValidateGcePersistentDisk(ctx context.Context, formats s
 		}
 
 		if err := m.GcePersistentDisk.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gcePersistentDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gcePersistentDisk")
 			}
+
 			return err
 		}
 	}
@@ -1215,11 +1388,15 @@ func (m *Volume) contextValidateGitRepo(ctx context.Context, formats strfmt.Regi
 		}
 
 		if err := m.GitRepo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("gitRepo")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("gitRepo")
 			}
+
 			return err
 		}
 	}
@@ -1236,11 +1413,15 @@ func (m *Volume) contextValidateGlusterfs(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Glusterfs.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("glusterfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("glusterfs")
 			}
+
 			return err
 		}
 	}
@@ -1257,11 +1438,15 @@ func (m *Volume) contextValidateHostPath(ctx context.Context, formats strfmt.Reg
 		}
 
 		if err := m.HostPath.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("hostPath")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("hostPath")
 			}
+
 			return err
 		}
 	}
@@ -1278,11 +1463,15 @@ func (m *Volume) contextValidateIscsi(ctx context.Context, formats strfmt.Regist
 		}
 
 		if err := m.Iscsi.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("iscsi")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("iscsi")
 			}
+
 			return err
 		}
 	}
@@ -1299,11 +1488,15 @@ func (m *Volume) contextValidateNfs(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Nfs.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nfs")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nfs")
 			}
+
 			return err
 		}
 	}
@@ -1320,11 +1513,15 @@ func (m *Volume) contextValidatePersistentVolumeClaim(ctx context.Context, forma
 		}
 
 		if err := m.PersistentVolumeClaim.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("persistentVolumeClaim")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("persistentVolumeClaim")
 			}
+
 			return err
 		}
 	}
@@ -1341,11 +1538,15 @@ func (m *Volume) contextValidatePhotonPersistentDisk(ctx context.Context, format
 		}
 
 		if err := m.PhotonPersistentDisk.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("photonPersistentDisk")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("photonPersistentDisk")
 			}
+
 			return err
 		}
 	}
@@ -1362,11 +1563,15 @@ func (m *Volume) contextValidatePortworxVolume(ctx context.Context, formats strf
 		}
 
 		if err := m.PortworxVolume.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("portworxVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("portworxVolume")
 			}
+
 			return err
 		}
 	}
@@ -1383,11 +1588,15 @@ func (m *Volume) contextValidateProjected(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Projected.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("projected")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("projected")
 			}
+
 			return err
 		}
 	}
@@ -1404,11 +1613,15 @@ func (m *Volume) contextValidateQuobyte(ctx context.Context, formats strfmt.Regi
 		}
 
 		if err := m.Quobyte.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("quobyte")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("quobyte")
 			}
+
 			return err
 		}
 	}
@@ -1425,11 +1638,15 @@ func (m *Volume) contextValidateRbd(ctx context.Context, formats strfmt.Registry
 		}
 
 		if err := m.Rbd.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("rbd")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("rbd")
 			}
+
 			return err
 		}
 	}
@@ -1446,11 +1663,15 @@ func (m *Volume) contextValidateScaleIO(ctx context.Context, formats strfmt.Regi
 		}
 
 		if err := m.ScaleIO.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleIO")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleIO")
 			}
+
 			return err
 		}
 	}
@@ -1467,11 +1688,15 @@ func (m *Volume) contextValidateSecret(ctx context.Context, formats strfmt.Regis
 		}
 
 		if err := m.Secret.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secret")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secret")
 			}
+
 			return err
 		}
 	}
@@ -1488,11 +1713,15 @@ func (m *Volume) contextValidateStorageos(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Storageos.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("storageos")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("storageos")
 			}
+
 			return err
 		}
 	}
@@ -1509,11 +1738,15 @@ func (m *Volume) contextValidateVsphereVolume(ctx context.Context, formats strfm
 		}
 
 		if err := m.VsphereVolume.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("vsphereVolume")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("vsphereVolume")
 			}
+
 			return err
 		}
 	}

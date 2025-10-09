@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -152,11 +153,15 @@ func (m *Container) validateEnv(formats strfmt.Registry) error {
 
 		if m.Env[i] != nil {
 			if err := m.Env[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("env" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("env" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -178,11 +183,15 @@ func (m *Container) validateEnvFrom(formats strfmt.Registry) error {
 
 		if m.EnvFrom[i] != nil {
 			if err := m.EnvFrom[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("envFrom" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("envFrom" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -199,11 +208,15 @@ func (m *Container) validateLifecycle(formats strfmt.Registry) error {
 
 	if m.Lifecycle != nil {
 		if err := m.Lifecycle.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lifecycle")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lifecycle")
 			}
+
 			return err
 		}
 	}
@@ -218,11 +231,15 @@ func (m *Container) validateLivenessProbe(formats strfmt.Registry) error {
 
 	if m.LivenessProbe != nil {
 		if err := m.LivenessProbe.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("livenessProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("livenessProbe")
 			}
+
 			return err
 		}
 	}
@@ -242,11 +259,15 @@ func (m *Container) validatePorts(formats strfmt.Registry) error {
 
 		if m.Ports[i] != nil {
 			if err := m.Ports[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ports" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ports" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -263,11 +284,15 @@ func (m *Container) validateReadinessProbe(formats strfmt.Registry) error {
 
 	if m.ReadinessProbe != nil {
 		if err := m.ReadinessProbe.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("readinessProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("readinessProbe")
 			}
+
 			return err
 		}
 	}
@@ -282,11 +307,15 @@ func (m *Container) validateResources(formats strfmt.Registry) error {
 
 	if m.Resources != nil {
 		if err := m.Resources.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resources")
 			}
+
 			return err
 		}
 	}
@@ -301,11 +330,15 @@ func (m *Container) validateSecurityContext(formats strfmt.Registry) error {
 
 	if m.SecurityContext != nil {
 		if err := m.SecurityContext.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("securityContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("securityContext")
 			}
+
 			return err
 		}
 	}
@@ -320,11 +353,15 @@ func (m *Container) validateStartupProbe(formats strfmt.Registry) error {
 
 	if m.StartupProbe != nil {
 		if err := m.StartupProbe.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("startupProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("startupProbe")
 			}
+
 			return err
 		}
 	}
@@ -344,11 +381,15 @@ func (m *Container) validateVolumeDevices(formats strfmt.Registry) error {
 
 		if m.VolumeDevices[i] != nil {
 			if err := m.VolumeDevices[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumeDevices" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumeDevices" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -370,11 +411,15 @@ func (m *Container) validateVolumeMounts(formats strfmt.Registry) error {
 
 		if m.VolumeMounts[i] != nil {
 			if err := m.VolumeMounts[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumeMounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumeMounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -449,11 +494,15 @@ func (m *Container) contextValidateEnv(ctx context.Context, formats strfmt.Regis
 			}
 
 			if err := m.Env[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("env" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("env" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -474,11 +523,15 @@ func (m *Container) contextValidateEnvFrom(ctx context.Context, formats strfmt.R
 			}
 
 			if err := m.EnvFrom[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("envFrom" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("envFrom" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -497,11 +550,15 @@ func (m *Container) contextValidateLifecycle(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Lifecycle.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("lifecycle")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("lifecycle")
 			}
+
 			return err
 		}
 	}
@@ -518,11 +575,15 @@ func (m *Container) contextValidateLivenessProbe(ctx context.Context, formats st
 		}
 
 		if err := m.LivenessProbe.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("livenessProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("livenessProbe")
 			}
+
 			return err
 		}
 	}
@@ -541,11 +602,15 @@ func (m *Container) contextValidatePorts(ctx context.Context, formats strfmt.Reg
 			}
 
 			if err := m.Ports[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ports" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ports" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -564,11 +629,15 @@ func (m *Container) contextValidateReadinessProbe(ctx context.Context, formats s
 		}
 
 		if err := m.ReadinessProbe.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("readinessProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("readinessProbe")
 			}
+
 			return err
 		}
 	}
@@ -585,11 +654,15 @@ func (m *Container) contextValidateResources(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Resources.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("resources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("resources")
 			}
+
 			return err
 		}
 	}
@@ -606,11 +679,15 @@ func (m *Container) contextValidateSecurityContext(ctx context.Context, formats 
 		}
 
 		if err := m.SecurityContext.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("securityContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("securityContext")
 			}
+
 			return err
 		}
 	}
@@ -627,11 +704,15 @@ func (m *Container) contextValidateStartupProbe(ctx context.Context, formats str
 		}
 
 		if err := m.StartupProbe.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("startupProbe")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("startupProbe")
 			}
+
 			return err
 		}
 	}
@@ -650,11 +731,15 @@ func (m *Container) contextValidateVolumeDevices(ctx context.Context, formats st
 			}
 
 			if err := m.VolumeDevices[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumeDevices" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumeDevices" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -675,11 +760,15 @@ func (m *Container) contextValidateVolumeMounts(ctx context.Context, formats str
 			}
 
 			if err := m.VolumeMounts[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("volumeMounts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("volumeMounts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

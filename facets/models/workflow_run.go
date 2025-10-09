@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -106,11 +107,15 @@ func (m *WorkflowRun) validateActor(formats strfmt.Registry) error {
 
 	if m.Actor != nil {
 		if err := m.Actor.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actor")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actor")
 			}
+
 			return err
 		}
 	}
@@ -137,11 +142,15 @@ func (m *WorkflowRun) validateHeadCommit(formats strfmt.Registry) error {
 
 	if m.HeadCommit != nil {
 		if err := m.HeadCommit.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("headCommit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("headCommit")
 			}
+
 			return err
 		}
 	}
@@ -168,11 +177,15 @@ func (m *WorkflowRun) validateTriggeringActor(formats strfmt.Registry) error {
 
 	if m.TriggeringActor != nil {
 		if err := m.TriggeringActor.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("triggeringActor")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("triggeringActor")
 			}
+
 			return err
 		}
 	}
@@ -223,11 +236,15 @@ func (m *WorkflowRun) contextValidateActor(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.Actor.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("actor")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("actor")
 			}
+
 			return err
 		}
 	}
@@ -244,11 +261,15 @@ func (m *WorkflowRun) contextValidateHeadCommit(ctx context.Context, formats str
 		}
 
 		if err := m.HeadCommit.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("headCommit")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("headCommit")
 			}
+
 			return err
 		}
 	}
@@ -265,11 +286,15 @@ func (m *WorkflowRun) contextValidateTriggeringActor(ctx context.Context, format
 		}
 
 		if err := m.TriggeringActor.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("triggeringActor")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("triggeringActor")
 			}
+
 			return err
 		}
 	}

@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -79,7 +80,7 @@ func (m *ArtifactRoutingRuleRequest) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var artifactRoutingRuleRequestTypeCiSystemPropEnum []interface{}
+var artifactRoutingRuleRequestTypeCiSystemPropEnum []any
 
 func init() {
 	var res []string
@@ -137,11 +138,15 @@ func (m *ArtifactRoutingRuleRequest) validateCriteria(formats strfmt.Registry) e
 
 		if m.Criteria[i] != nil {
 			if err := m.Criteria[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("criteria" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("criteria" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -151,7 +156,7 @@ func (m *ArtifactRoutingRuleRequest) validateCriteria(formats strfmt.Registry) e
 	return nil
 }
 
-var artifactRoutingRuleRequestTypeRegistrationTypePropEnum []interface{}
+var artifactRoutingRuleRequestTypeRegistrationTypePropEnum []any
 
 func init() {
 	var res []string
@@ -240,11 +245,15 @@ func (m *ArtifactRoutingRuleRequest) contextValidateCriteria(ctx context.Context
 			}
 
 			if err := m.Criteria[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("criteria" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("criteria" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

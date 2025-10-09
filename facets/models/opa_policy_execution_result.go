@@ -18,10 +18,10 @@ import (
 type OpaPolicyExecutionResult struct {
 
 	// error details
-	ErrorDetails map[string]interface{} `json:"errorDetails,omitempty"`
+	ErrorDetails map[string]any `json:"errorDetails,omitempty"`
 
 	// server response
-	ServerResponse interface{} `json:"serverResponse,omitempty"`
+	ServerResponse any `json:"serverResponse,omitempty"`
 
 	// status
 	Status bool `json:"status,omitempty"`

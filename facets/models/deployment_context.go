@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -63,7 +64,7 @@ type DeploymentContext struct {
 	SecretsContext *SecretsContextDTO `json:"secretsContext,omitempty"`
 
 	// settings
-	Settings map[string]map[string]interface{} `json:"settings,omitempty"`
+	Settings map[string]map[string]any `json:"settings,omitempty"`
 
 	// snapshots
 	Snapshots map[string]map[string]SnapshotInfo `json:"snapshots,omitempty"`
@@ -152,11 +153,15 @@ func (m *DeploymentContext) validateArtifactoryDetails(formats strfmt.Registry) 
 
 		if m.ArtifactoryDetails[i] != nil {
 			if err := m.ArtifactoryDetails[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("artifactoryDetails" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("artifactoryDetails" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -180,11 +185,15 @@ func (m *DeploymentContext) validateArtifacts(formats strfmt.Registry) error {
 			}
 			if val, ok := m.Artifacts[k][kk]; ok {
 				if err := val.Validate(formats); err != nil {
-					if ve, ok := err.(*errors.Validation); ok {
+					ve := new(errors.Validation)
+					if stderrors.As(err, &ve) {
 						return ve.ValidateName("artifacts" + "." + k + "." + kk)
-					} else if ce, ok := err.(*errors.CompositeError); ok {
+					}
+					ce := new(errors.CompositeError)
+					if stderrors.As(err, &ce) {
 						return ce.ValidateName("artifacts" + "." + k + "." + kk)
 					}
+
 					return err
 				}
 			}
@@ -203,11 +212,15 @@ func (m *DeploymentContext) validateMaintenanceWindow(formats strfmt.Registry) e
 
 	if m.MaintenanceWindow != nil {
 		if err := m.MaintenanceWindow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenanceWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenanceWindow")
 			}
+
 			return err
 		}
 	}
@@ -227,11 +240,15 @@ func (m *DeploymentContext) validateModules(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Modules[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("modules" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("modules" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -253,11 +270,15 @@ func (m *DeploymentContext) validateOverrides(formats strfmt.Registry) error {
 
 		if m.Overrides[i] != nil {
 			if err := m.Overrides[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("overrides" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("overrides" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -274,11 +295,15 @@ func (m *DeploymentContext) validateProjectType(formats strfmt.Registry) error {
 
 	if m.ProjectType != nil {
 		if err := m.ProjectType.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("projectType")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("projectType")
 			}
+
 			return err
 		}
 	}
@@ -293,11 +318,15 @@ func (m *DeploymentContext) validateProvidedResources(formats strfmt.Registry) e
 
 	if m.ProvidedResources != nil {
 		if err := m.ProvidedResources.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("providedResources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("providedResources")
 			}
+
 			return err
 		}
 	}
@@ -319,11 +348,15 @@ func (m *DeploymentContext) validateResourceMetadata(formats strfmt.Registry) er
 		for i := 0; i < len(m.ResourceMetadata[k]); i++ {
 
 			if err := m.ResourceMetadata[k][i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("resourceMetadata" + "." + k + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("resourceMetadata" + "." + k + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 
@@ -346,11 +379,15 @@ func (m *DeploymentContext) validateResources(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Resources[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("resources" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("resources" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -367,11 +404,15 @@ func (m *DeploymentContext) validateSecretsContext(formats strfmt.Registry) erro
 
 	if m.SecretsContext != nil {
 		if err := m.SecretsContext.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretsContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretsContext")
 			}
+
 			return err
 		}
 	}
@@ -393,11 +434,15 @@ func (m *DeploymentContext) validateSnapshots(formats strfmt.Registry) error {
 			}
 			if val, ok := m.Snapshots[k][kk]; ok {
 				if err := val.Validate(formats); err != nil {
-					if ve, ok := err.(*errors.Validation); ok {
+					ve := new(errors.Validation)
+					if stderrors.As(err, &ve) {
 						return ve.ValidateName("snapshots" + "." + k + "." + kk)
-					} else if ce, ok := err.(*errors.CompositeError); ok {
+					}
+					ce := new(errors.CompositeError)
+					if stderrors.As(err, &ce) {
 						return ce.ValidateName("snapshots" + "." + k + "." + kk)
 					}
+
 					return err
 				}
 			}
@@ -423,11 +468,15 @@ func (m *DeploymentContext) validateTemplateInputs(formats strfmt.Registry) erro
 		for i := 0; i < len(m.TemplateInputs[k]); i++ {
 
 			if err := m.TemplateInputs[k][i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("templateInputs" + "." + k + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("templateInputs" + "." + k + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 
@@ -445,11 +494,15 @@ func (m *DeploymentContext) validateTfVersion(formats strfmt.Registry) error {
 
 	if m.TfVersion != nil {
 		if err := m.TfVersion.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfVersion")
 			}
+
 			return err
 		}
 	}
@@ -530,11 +583,15 @@ func (m *DeploymentContext) contextValidateArtifactoryDetails(ctx context.Contex
 			}
 
 			if err := m.ArtifactoryDetails[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("artifactoryDetails" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("artifactoryDetails" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -572,11 +629,15 @@ func (m *DeploymentContext) contextValidateMaintenanceWindow(ctx context.Context
 		}
 
 		if err := m.MaintenanceWindow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenanceWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenanceWindow")
 			}
+
 			return err
 		}
 	}
@@ -610,11 +671,15 @@ func (m *DeploymentContext) contextValidateOverrides(ctx context.Context, format
 			}
 
 			if err := m.Overrides[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("overrides" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("overrides" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -633,11 +698,15 @@ func (m *DeploymentContext) contextValidateProjectType(ctx context.Context, form
 		}
 
 		if err := m.ProjectType.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("projectType")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("projectType")
 			}
+
 			return err
 		}
 	}
@@ -654,11 +723,15 @@ func (m *DeploymentContext) contextValidateProvidedResources(ctx context.Context
 		}
 
 		if err := m.ProvidedResources.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("providedResources")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("providedResources")
 			}
+
 			return err
 		}
 	}
@@ -677,11 +750,15 @@ func (m *DeploymentContext) contextValidateResourceMetadata(ctx context.Context,
 			}
 
 			if err := m.ResourceMetadata[k][i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("resourceMetadata" + "." + k + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("resourceMetadata" + "." + k + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 
@@ -716,11 +793,15 @@ func (m *DeploymentContext) contextValidateSecretsContext(ctx context.Context, f
 		}
 
 		if err := m.SecretsContext.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("secretsContext")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("secretsContext")
 			}
+
 			return err
 		}
 	}
@@ -758,11 +839,15 @@ func (m *DeploymentContext) contextValidateTemplateInputs(ctx context.Context, f
 			}
 
 			if err := m.TemplateInputs[k][i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("templateInputs" + "." + k + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("templateInputs" + "." + k + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 
@@ -782,11 +867,15 @@ func (m *DeploymentContext) contextValidateTfVersion(ctx context.Context, format
 		}
 
 		if err := m.TfVersion.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("tfVersion")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("tfVersion")
 			}
+
 			return err
 		}
 	}

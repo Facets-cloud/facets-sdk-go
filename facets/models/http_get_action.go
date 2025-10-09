@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -65,11 +66,15 @@ func (m *HTTPGetAction) validateHTTPHeaders(formats strfmt.Registry) error {
 
 		if m.HTTPHeaders[i] != nil {
 			if err := m.HTTPHeaders[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("httpHeaders" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("httpHeaders" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -86,11 +91,15 @@ func (m *HTTPGetAction) validatePort(formats strfmt.Registry) error {
 
 	if m.Port != nil {
 		if err := m.Port.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("port")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("port")
 			}
+
 			return err
 		}
 	}
@@ -127,11 +136,15 @@ func (m *HTTPGetAction) contextValidateHTTPHeaders(ctx context.Context, formats 
 			}
 
 			if err := m.HTTPHeaders[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("httpHeaders" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("httpHeaders" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -150,11 +163,15 @@ func (m *HTTPGetAction) contextValidatePort(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Port.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("port")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("port")
 			}
+
 			return err
 		}
 	}

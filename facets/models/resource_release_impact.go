@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -68,11 +69,15 @@ func (m *ResourceReleaseImpact) validateChanges(formats strfmt.Registry) error {
 
 		if m.Changes[i] != nil {
 			if err := m.Changes[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -89,11 +94,15 @@ func (m *ResourceReleaseImpact) validateReleaseDetails(formats strfmt.Registry) 
 
 	if m.ReleaseDetails != nil {
 		if err := m.ReleaseDetails.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("releaseDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("releaseDetails")
 			}
+
 			return err
 		}
 	}
@@ -130,11 +139,15 @@ func (m *ResourceReleaseImpact) contextValidateChanges(ctx context.Context, form
 			}
 
 			if err := m.Changes[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("changes" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("changes" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -153,11 +166,15 @@ func (m *ResourceReleaseImpact) contextValidateReleaseDetails(ctx context.Contex
 		}
 
 		if err := m.ReleaseDetails.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("releaseDetails")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("releaseDetails")
 			}
+
 			return err
 		}
 	}

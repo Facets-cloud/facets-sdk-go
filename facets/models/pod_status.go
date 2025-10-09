@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -101,11 +102,15 @@ func (m *PodStatus) validateConditions(formats strfmt.Registry) error {
 
 		if m.Conditions[i] != nil {
 			if err := m.Conditions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -127,11 +132,15 @@ func (m *PodStatus) validateContainerStatuses(formats strfmt.Registry) error {
 
 		if m.ContainerStatuses[i] != nil {
 			if err := m.ContainerStatuses[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("containerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("containerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -153,11 +162,15 @@ func (m *PodStatus) validateEphemeralContainerStatuses(formats strfmt.Registry) 
 
 		if m.EphemeralContainerStatuses[i] != nil {
 			if err := m.EphemeralContainerStatuses[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ephemeralContainerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ephemeralContainerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -179,11 +192,15 @@ func (m *PodStatus) validateInitContainerStatuses(formats strfmt.Registry) error
 
 		if m.InitContainerStatuses[i] != nil {
 			if err := m.InitContainerStatuses[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("initContainerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("initContainerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -205,11 +222,15 @@ func (m *PodStatus) validatePodIPs(formats strfmt.Registry) error {
 
 		if m.PodIPs[i] != nil {
 			if err := m.PodIPs[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("podIPs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("podIPs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -260,11 +281,15 @@ func (m *PodStatus) contextValidateConditions(ctx context.Context, formats strfm
 			}
 
 			if err := m.Conditions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("conditions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("conditions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -285,11 +310,15 @@ func (m *PodStatus) contextValidateContainerStatuses(ctx context.Context, format
 			}
 
 			if err := m.ContainerStatuses[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("containerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("containerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -310,11 +339,15 @@ func (m *PodStatus) contextValidateEphemeralContainerStatuses(ctx context.Contex
 			}
 
 			if err := m.EphemeralContainerStatuses[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("ephemeralContainerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("ephemeralContainerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -335,11 +368,15 @@ func (m *PodStatus) contextValidateInitContainerStatuses(ctx context.Context, fo
 			}
 
 			if err := m.InitContainerStatuses[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("initContainerStatuses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("initContainerStatuses" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -360,11 +397,15 @@ func (m *PodStatus) contextValidatePodIPs(ctx context.Context, formats strfmt.Re
 			}
 
 			if err := m.PodIPs[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("podIPs" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("podIPs" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

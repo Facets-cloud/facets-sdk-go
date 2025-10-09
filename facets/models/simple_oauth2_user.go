@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -36,7 +37,7 @@ type SimpleOauth2User struct {
 	AssociatedToResourceGroup bool `json:"associatedToResourceGroup,omitempty"`
 
 	// attributes
-	Attributes map[string]interface{} `json:"attributes,omitempty"`
+	Attributes map[string]any `json:"attributes,omitempty"`
 
 	// authorities
 	Authorities []*GrantedAuthority `json:"authorities"`
@@ -140,11 +141,15 @@ func (m *SimpleOauth2User) validateAuthorities(formats strfmt.Registry) error {
 
 		if m.Authorities[i] != nil {
 			if err := m.Authorities[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("authorities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("authorities" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -166,11 +171,15 @@ func (m *SimpleOauth2User) validateGrantedAuthorities(formats strfmt.Registry) e
 
 		if m.GrantedAuthorities[i] != nil {
 			if err := m.GrantedAuthorities[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -196,11 +205,15 @@ func (m *SimpleOauth2User) validateStackResources(formats strfmt.Registry) error
 
 		if m.StackResources[i] != nil {
 			if err := m.StackResources[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("stackResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("stackResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -243,11 +256,15 @@ func (m *SimpleOauth2User) contextValidateAuthorities(ctx context.Context, forma
 			}
 
 			if err := m.Authorities[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("authorities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("authorities" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -268,11 +285,15 @@ func (m *SimpleOauth2User) contextValidateGrantedAuthorities(ctx context.Context
 			}
 
 			if err := m.GrantedAuthorities[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("grantedAuthorities" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -293,11 +314,15 @@ func (m *SimpleOauth2User) contextValidateStackResources(ctx context.Context, fo
 			}
 
 			if err := m.StackResources[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("stackResources" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("stackResources" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

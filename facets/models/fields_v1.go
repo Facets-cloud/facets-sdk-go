@@ -8,4 +8,4 @@ package models
 // FieldsV1 fields v1
 //
 // swagger:model FieldsV1
-type FieldsV1 interface{}
+type FieldsV1 any

@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -57,11 +58,15 @@ func (m *ContainerState) validateRunning(formats strfmt.Registry) error {
 
 	if m.Running != nil {
 		if err := m.Running.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("running")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("running")
 			}
+
 			return err
 		}
 	}
@@ -76,11 +81,15 @@ func (m *ContainerState) validateTerminated(formats strfmt.Registry) error {
 
 	if m.Terminated != nil {
 		if err := m.Terminated.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terminated")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terminated")
 			}
+
 			return err
 		}
 	}
@@ -95,11 +104,15 @@ func (m *ContainerState) validateWaiting(formats strfmt.Registry) error {
 
 	if m.Waiting != nil {
 		if err := m.Waiting.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("waiting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("waiting")
 			}
+
 			return err
 		}
 	}
@@ -138,11 +151,15 @@ func (m *ContainerState) contextValidateRunning(ctx context.Context, formats str
 		}
 
 		if err := m.Running.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("running")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("running")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +176,15 @@ func (m *ContainerState) contextValidateTerminated(ctx context.Context, formats 
 		}
 
 		if err := m.Terminated.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("terminated")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("terminated")
 			}
+
 			return err
 		}
 	}
@@ -180,11 +201,15 @@ func (m *ContainerState) contextValidateWaiting(ctx context.Context, formats str
 		}
 
 		if err := m.Waiting.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("waiting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("waiting")
 			}
+
 			return err
 		}
 	}

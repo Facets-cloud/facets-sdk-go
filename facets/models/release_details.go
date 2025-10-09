@@ -56,7 +56,7 @@ func (m *ReleaseDetails) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var releaseDetailsTypeReleaseTypePropEnum []interface{}
+var releaseDetailsTypeReleaseTypePropEnum []any
 
 func init() {
 	var res []string

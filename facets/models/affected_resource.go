@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,11 +47,15 @@ func (m *AffectedResource) validateBlueprintFile(formats strfmt.Registry) error 
 
 	if m.BlueprintFile != nil {
 		if err := m.BlueprintFile.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintFile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintFile")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *AffectedResource) contextValidateBlueprintFile(ctx context.Context, for
 		}
 
 		if err := m.BlueprintFile.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("blueprintFile")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("blueprintFile")
 			}
+
 			return err
 		}
 	}

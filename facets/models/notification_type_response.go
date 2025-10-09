@@ -53,7 +53,7 @@ func (m *NotificationTypeResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var notificationTypeResponseTypeNotificationTypePropEnum []interface{}
+var notificationTypeResponseTypeNotificationTypePropEnum []any
 
 func init() {
 	var res []string
@@ -128,7 +128,7 @@ func (m *NotificationTypeResponse) validateNotificationType(formats strfmt.Regis
 	return nil
 }
 
-var notificationTypeResponseSupportedTagsItemsEnum []interface{}
+var notificationTypeResponseSupportedTagsItemsEnum []any
 
 func init() {
 	var res []string

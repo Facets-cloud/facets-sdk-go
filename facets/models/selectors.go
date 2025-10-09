@@ -48,7 +48,7 @@ func (m *Selectors) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-var selectorsTypeDisplayTypePropEnum []interface{}
+var selectorsTypeDisplayTypePropEnum []any
 
 func init() {
 	var res []string

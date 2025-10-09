@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -85,11 +86,15 @@ func (m *TFOutputResponseDTO) validateProviders(formats strfmt.Registry) error {
 
 		if m.Providers[i] != nil {
 			if err := m.Providers[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -99,7 +104,7 @@ func (m *TFOutputResponseDTO) validateProviders(formats strfmt.Registry) error {
 	return nil
 }
 
-var tFOutputResponseDTOTypeSourcePropEnum []interface{}
+var tFOutputResponseDTOTypeSourcePropEnum []any
 
 func init() {
 	var res []string
@@ -166,11 +171,15 @@ func (m *TFOutputResponseDTO) contextValidateProviders(ctx context.Context, form
 			}
 
 			if err := m.Providers[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

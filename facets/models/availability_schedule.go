@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -123,11 +124,15 @@ func (m *AvailabilitySchedule) validateSchedules(formats strfmt.Registry) error 
 
 		if m.Schedules[i] != nil {
 			if err := m.Schedules[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("schedules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("schedules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -149,11 +154,15 @@ func (m *AvailabilitySchedule) validateShortLivedSchedules(formats strfmt.Regist
 
 		if m.ShortLivedSchedules[i] != nil {
 			if err := m.ShortLivedSchedules[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -192,11 +201,15 @@ func (m *AvailabilitySchedule) contextValidateSchedules(ctx context.Context, for
 			}
 
 			if err := m.Schedules[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("schedules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("schedules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -217,11 +230,15 @@ func (m *AvailabilitySchedule) contextValidateShortLivedSchedules(ctx context.Co
 			}
 
 			if err := m.ShortLivedSchedules[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

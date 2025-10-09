@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -64,11 +65,15 @@ func (m *HorizontalPodAutoscalerSpec) validateBehavior(formats strfmt.Registry) 
 
 	if m.Behavior != nil {
 		if err := m.Behavior.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("behavior")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("behavior")
 			}
+
 			return err
 		}
 	}
@@ -88,11 +93,15 @@ func (m *HorizontalPodAutoscalerSpec) validateMetrics(formats strfmt.Registry) e
 
 		if m.Metrics[i] != nil {
 			if err := m.Metrics[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -109,11 +118,15 @@ func (m *HorizontalPodAutoscalerSpec) validateScaleTargetRef(formats strfmt.Regi
 
 	if m.ScaleTargetRef != nil {
 		if err := m.ScaleTargetRef.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleTargetRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleTargetRef")
 			}
+
 			return err
 		}
 	}
@@ -152,11 +165,15 @@ func (m *HorizontalPodAutoscalerSpec) contextValidateBehavior(ctx context.Contex
 		}
 
 		if err := m.Behavior.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("behavior")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("behavior")
 			}
+
 			return err
 		}
 	}
@@ -175,11 +192,15 @@ func (m *HorizontalPodAutoscalerSpec) contextValidateMetrics(ctx context.Context
 			}
 
 			if err := m.Metrics[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -198,11 +219,15 @@ func (m *HorizontalPodAutoscalerSpec) contextValidateScaleTargetRef(ctx context.
 		}
 
 		if err := m.ScaleTargetRef.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("scaleTargetRef")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("scaleTargetRef")
 			}
+
 			return err
 		}
 	}

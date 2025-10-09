@@ -142,7 +142,7 @@ func (m *OneTimeWebhook) validateLastModifiedDate(formats strfmt.Registry) error
 	return nil
 }
 
-var oneTimeWebhookTypeStatusPropEnum []interface{}
+var oneTimeWebhookTypeStatusPropEnum []any
 
 func init() {
 	var res []string
@@ -190,7 +190,7 @@ func (m *OneTimeWebhook) validateStatus(formats strfmt.Registry) error {
 	return nil
 }
 
-var oneTimeWebhookTypeTypePropEnum []interface{}
+var oneTimeWebhookTypeTypePropEnum []any
 
 func init() {
 	var res []string
@@ -277,7 +277,7 @@ func (m *OneTimeWebhook) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *OneTimeWebhook) contextValidateDeleteAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "deleteAt", "body", strfmt.DateTime(m.DeleteAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "deleteAt", "body", m.DeleteAt); err != nil {
 		return err
 	}
 
@@ -286,7 +286,7 @@ func (m *OneTimeWebhook) contextValidateDeleteAt(ctx context.Context, formats st
 
 func (m *OneTimeWebhook) contextValidateExpiresAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "expiresAt", "body", strfmt.DateTime(m.ExpiresAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "expiresAt", "body", m.ExpiresAt); err != nil {
 		return err
 	}
 
@@ -295,7 +295,7 @@ func (m *OneTimeWebhook) contextValidateExpiresAt(ctx context.Context, formats s
 
 func (m *OneTimeWebhook) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "status", "body", string(m.Status)); err != nil {
+	if err := validate.ReadOnly(ctx, "status", "body", m.Status); err != nil {
 		return err
 	}
 
