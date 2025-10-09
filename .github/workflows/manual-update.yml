@@ -1,0 +1,168 @@
+name: Manual SDK Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  update-sdk:
+    runs-on: ubuntu-latest
+
+    env:
+      FACETS_API_HOST: facetsdemo.console.facets.cloud
+      FACETS_USERNAME: vishnu.kv@facets.clud
+      FACETS_API_TOKEN: ${{ secrets.FACETS_API_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install swagger CLI
+        run: go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
+      - name: Download and clean OpenAPI spec
+        run: |
+          # Override Makefile SWAGGER_URL if FACETS_API_HOST is set
+          export SWAGGER_URL="https://${FACETS_API_HOST}/v3/api-docs"
+          echo "Downloading spec from: $SWAGGER_URL"
+          make clean-spec
+
+      - name: Generate SDK client
+        run: make generate-client
+
+      - name: Run integration test
+        if: env.FACETS_USERNAME != '' && env.FACETS_API_TOKEN != ''
+        run: |
+          echo "Running integration test..."
+          make build-example
+          cd examples && ./basic_client
+          echo "✓ Integration test passed"
+        continue-on-error: true
+
+      - name: Calculate new version
+        id: version
+        run: |
+          # Get the latest tag, default to v0.0.0 if no tags exist
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+
+          # Parse version
+          VERSION=${LATEST_TAG#v}
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+
+          # Bump version based on input
+          case "${{ github.event.inputs.version_bump }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+
+          NEW_VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION (was $LATEST_TAG)"
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add facets/client facets/models swagger/swagger_fixed.json go.mod go.sum
+          git commit -m "chore: manual SDK update (${{ github.event.inputs.version_bump }})
+
+          Manual SDK update triggered by @${{ github.actor }}
+
+          - Updated OpenAPI spec from endpoint
+          - Regenerated client and models
+          - Version bump: ${{ github.event.inputs.version_bump }}
+          - New version: ${{ steps.version.outputs.new_version }}
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>" || echo "No changes to commit"
+
+          git tag -a ${{ steps.version.outputs.new_version }} -m "Release ${{ steps.version.outputs.new_version }}
+
+          Manual SDK update (${{ github.event.inputs.version_bump }} bump)
+
+          Triggered by: @${{ github.actor }}
+          Generated on: $(date -u +%Y-%m-%d)"
+
+          git push origin main
+          git push origin ${{ steps.version.outputs.new_version }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.new_version }}
+          release_name: Release ${{ steps.version.outputs.new_version }}
+          body: |
+            ## Manual SDK Update
+
+            This is a manual SDK update triggered by @${{ github.actor }}.
+
+            ### Changes
+            - ✨ Updated client and models from latest API specification
+            - 📝 Synced with OpenAPI spec from: https://facetsdemo.console.facets.cloud/v3/api-docs
+            - 🔄 Version bump: **${{ github.event.inputs.version_bump }}**
+
+            ### Installation
+            ```bash
+            go get github.com/Facets-cloud/facets-sdk-go@${{ steps.version.outputs.new_version }}
+            ```
+
+            ### Version History
+            - Previous: ${{ steps.version.outputs.latest_tag }}
+            - Current: ${{ steps.version.outputs.new_version }}
+          draft: false
+          prerelease: false
+
+      - name: Summary
+        run: |
+          echo "✅ SDK updated successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Version Update" >> $GITHUB_STEP_SUMMARY
+          echo "- **Type**: ${{ github.event.inputs.version_bump }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Previous**: ${{ steps.version.outputs.latest_tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **New**: ${{ steps.version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by**: @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

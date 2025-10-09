@@ -1,0 +1,172 @@
+name: Update SDK from OpenAPI Spec
+
+on:
+  # Run every Monday at 9 AM UTC
+  schedule:
+    - cron: '0 9 * * 1'
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-sdk:
+    runs-on: ubuntu-latest
+
+    env:
+      FACETS_API_HOST: facetsdemo.console.facets.cloud
+      FACETS_USERNAME: vishnu.kv@facets.clud
+      FACETS_API_TOKEN: ${{ secrets.FACETS_API_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install swagger CLI
+        run: go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+
+      - name: Download and clean OpenAPI spec
+        run: |
+          # Override Makefile SWAGGER_URL if FACETS_API_HOST is set
+          export SWAGGER_URL="https://${FACETS_API_HOST}/v3/api-docs"
+          echo "Downloading spec from: $SWAGGER_URL"
+          make clean-spec
+
+      - name: Check for changes in spec
+        id: check_changes
+        run: |
+          if git diff --quiet swagger/swagger_fixed.json 2>/dev/null; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in OpenAPI spec"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in OpenAPI spec"
+          fi
+
+      - name: Generate SDK client
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          make generate-client
+          echo "SDK client generated successfully"
+
+      - name: Run integration test
+        if: steps.check_changes.outputs.has_changes == 'true' && env.FACETS_USERNAME != '' && env.FACETS_API_TOKEN != ''
+        run: |
+          echo "Running integration test..."
+          make build-example
+          cd examples && ./basic_client
+          echo "✓ Integration test passed"
+        continue-on-error: true
+
+      - name: Get current version
+        if: steps.check_changes.outputs.has_changes == 'true'
+        id: get_version
+        run: |
+          # Get the latest tag, default to v0.0.0 if no tags exist
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+
+          # Parse version and increment patch
+          VERSION=${LATEST_TAG#v}
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+
+          # Increment patch version
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version will be: $NEW_VERSION"
+
+      - name: Configure Git
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git add facets/client facets/models swagger/swagger_fixed.json go.mod go.sum
+          git commit -m "chore: update SDK from OpenAPI spec
+
+          Auto-generated SDK update from weekly OpenAPI spec poll
+
+          - Updated OpenAPI spec from endpoint
+          - Regenerated client and models
+          - Version: ${{ steps.get_version.outputs.new_version }}
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>" || echo "No changes to commit"
+
+      - name: Create and push tag
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git tag -a ${{ steps.get_version.outputs.new_version }} -m "Release ${{ steps.get_version.outputs.new_version }}
+
+          Auto-generated SDK update from OpenAPI spec
+
+          Changes:
+          - Updated client and models from latest OpenAPI specification
+          - Generated on $(date -u +%Y-%m-%d)"
+
+          git push origin main
+          git push origin ${{ steps.get_version.outputs.new_version }}
+
+      - name: Create GitHub Release
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_version.outputs.new_version }}
+          release_name: Release ${{ steps.get_version.outputs.new_version }}
+          body: |
+            ## SDK Update from OpenAPI Specification
+
+            This release contains automatically generated SDK updates from the latest OpenAPI specification.
+
+            ### Changes
+            - ✨ Updated client and models from latest API specification
+            - 📝 Synced with OpenAPI spec from: https://facetsdemo.console.facets.cloud/v3/api-docs
+            - 🔄 Generated on: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+            ### Installation
+            ```bash
+            go get github.com/Facets-cloud/facets-sdk-go@${{ steps.get_version.outputs.new_version }}
+            ```
+
+            ### Previous Version
+            Previous version: ${{ steps.get_version.outputs.latest_tag }}
+          draft: false
+          prerelease: false
+
+      - name: Summary
+        run: |
+          if [[ "${{ steps.check_changes.outputs.has_changes }}" == "true" ]]; then
+            echo "✅ SDK updated successfully to version ${{ steps.get_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Changes" >> $GITHUB_STEP_SUMMARY
+            echo "- Generated new SDK from latest OpenAPI spec" >> $GITHUB_STEP_SUMMARY
+            echo "- Created tag: ${{ steps.get_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Published release" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No changes detected in OpenAPI spec - SDK is up to date" >> $GITHUB_STEP_SUMMARY
+          fi

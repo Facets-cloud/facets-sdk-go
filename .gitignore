@@ -1,2 +1,20 @@
+# Environment variables
 .env
 
+# Build artifacts
+examples/basic_client
+
+# Swagger generation
+swagger/swagger.json
+swagger_generate.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
