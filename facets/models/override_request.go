@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -18,6 +19,9 @@ import (
 //
 // swagger:model OverrideRequest
 type OverrideRequest struct {
+
+	// affected resources
+	AffectedResources []*ResourceEnableDisableRequest `json:"affectedResources"`
 
 	// change log
 	ChangeLog string `json:"changeLog,omitempty"`
@@ -38,6 +42,10 @@ type OverrideRequest struct {
 func (m *OverrideRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAffectedResources(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateResourceName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -49,6 +57,32 @@ func (m *OverrideRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *OverrideRequest) validateAffectedResources(formats strfmt.Registry) error {
+	if swag.IsZero(m.AffectedResources) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AffectedResources); i++ {
+		if swag.IsZero(m.AffectedResources[i]) { // not required
+			continue
+		}
+
+		if m.AffectedResources[i] != nil {
+			if err := m.AffectedResources[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("affectedResources" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("affectedResources" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -70,8 +104,42 @@ func (m *OverrideRequest) validateResourceType(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this override request based on context it is used
+// ContextValidate validate this override request based on the context it is used
 func (m *OverrideRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAffectedResources(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *OverrideRequest) contextValidateAffectedResources(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AffectedResources); i++ {
+
+		if m.AffectedResources[i] != nil {
+
+			if swag.IsZero(m.AffectedResources[i]) { // not required
+				return nil
+			}
+
+			if err := m.AffectedResources[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("affectedResources" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("affectedResources" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

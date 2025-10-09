@@ -38,6 +38,12 @@ type ProjectType struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// dynamic launch
+	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
+
+	// enable no cloud environment
+	EnableNoCloudEnvironment bool `json:"enableNoCloudEnvironment,omitempty"`
+
 	// iac tool
 	// Enum: ["TERRAFORM","OPENTOFU"]
 	IacTool string `json:"iacTool,omitempty"`
@@ -48,12 +54,21 @@ type ProjectType struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// include cp k8s provider
+	IncludeCpK8sProvider bool `json:"includeCpK8sProvider,omitempty"`
+
+	// include tooling provider
+	IncludeToolingProvider bool `json:"includeToolingProvider,omitempty"`
+
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
 
 	// last modified date
 	// Format: date-time
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
+
+	// legacy
+	Legacy bool `json:"legacy,omitempty"`
 
 	// mapped resources
 	// Unique: true
@@ -104,7 +119,7 @@ var projectTypeAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

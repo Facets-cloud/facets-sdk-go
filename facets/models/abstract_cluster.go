@@ -39,7 +39,7 @@ type AbstractCluster struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -75,18 +75,14 @@ type AbstractCluster struct {
 	// deleted
 	Deleted bool `json:"deleted,omitempty"`
 
-	// dynamic launch
-	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
-
 	// enable auto sign off
 	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// global variables
 	GlobalVariables map[string]string `json:"globalVariables,omitempty"`
+
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -111,9 +107,6 @@ type AbstractCluster struct {
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
@@ -129,9 +122,6 @@ type AbstractCluster struct {
 
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// stack name
 	// Required: true
@@ -161,10 +151,6 @@ func (m *AbstractCluster) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -202,7 +188,7 @@ var abstractClusterTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -226,6 +212,9 @@ const (
 
 	// AbstractClusterCloudKUBERNETES captures enum value "KUBERNETES"
 	AbstractClusterCloudKUBERNETES string = "KUBERNETES"
+
+	// AbstractClusterCloudNOCLOUD captures enum value "NO_CLOUD"
+	AbstractClusterCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum
@@ -327,69 +316,6 @@ func (m *AbstractCluster) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var abstractClusterTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		abstractClusterTypeEntityTypePropEnum = append(abstractClusterTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// AbstractClusterEntityTypeCLUSTER captures enum value "CLUSTER"
-	AbstractClusterEntityTypeCLUSTER string = "CLUSTER"
-
-	// AbstractClusterEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	AbstractClusterEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// AbstractClusterEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	AbstractClusterEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// AbstractClusterEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	AbstractClusterEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// AbstractClusterEntityTypeIAC captures enum value "IAC"
-	AbstractClusterEntityTypeIAC string = "IAC"
-
-	// AbstractClusterEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	AbstractClusterEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// AbstractClusterEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	AbstractClusterEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// AbstractClusterEntityTypeACCOUNT captures enum value "ACCOUNT"
-	AbstractClusterEntityTypeACCOUNT string = "ACCOUNT"
-
-	// AbstractClusterEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	AbstractClusterEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *AbstractCluster) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, abstractClusterTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *AbstractCluster) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

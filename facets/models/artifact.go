@@ -77,9 +77,6 @@ type Artifact struct {
 	// metadata
 	Metadata map[string]string `json:"metadata,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// promoted
 	Promoted bool `json:"promoted,omitempty"`
 

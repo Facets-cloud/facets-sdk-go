@@ -61,7 +61,6 @@ DeleteTokenParams contains all the parameters to send to the API endpoint
 */
 type DeleteTokenParams struct {
 
-
 	/* TokenID.
 
 	   The unique identifier of the token

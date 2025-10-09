@@ -41,6 +41,12 @@ type ScheduleRequest struct {
 	// Enum: ["HOTFIX","RELEASE","LAUNCH","DESTROY","CUSTOM","UNLOCK_STATE","PLAN","HOTFIX_PLAN","APPLY_PLAN","APPLY_HOTFIX_PLAN","SCALE_UP","SCALE_DOWN","MAINTENANCE","TERRAFORM_EXPORT","ROLLBACK_PLAN","APPLY_ROLLBACK_PLAN"]
 	ReleaseType string `json:"releaseType,omitempty"`
 
+	// short lived
+	ShortLived bool `json:"shortLived,omitempty"`
+
+	// tear down after
+	TearDownAfter int32 `json:"tearDownAfter,omitempty"`
+
 	// time zone
 	TimeZone *ScheduleRequestTimeZone `json:"timeZone,omitempty"`
 }

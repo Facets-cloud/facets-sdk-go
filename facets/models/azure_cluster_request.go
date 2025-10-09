@@ -39,7 +39,7 @@ type AzureClusterRequest struct {
 	ClientSecret string `json:"clientSecret,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -122,7 +122,7 @@ var azureClusterRequestTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -146,6 +146,9 @@ const (
 
 	// AzureClusterRequestCloudKUBERNETES captures enum value "KUBERNETES"
 	AzureClusterRequestCloudKUBERNETES string = "KUBERNETES"
+
+	// AzureClusterRequestCloudNOCLOUD captures enum value "NO_CLOUD"
+	AzureClusterRequestCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

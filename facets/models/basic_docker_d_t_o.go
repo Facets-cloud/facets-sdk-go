@@ -24,9 +24,12 @@ type BasicDockerDTO struct {
 	// Required: true
 	ArtifactoryName *string `json:"artifactoryName"`
 
+	// artifactory project
+	ArtifactoryProject string `json:"artifactoryProject,omitempty"`
+
 	// artifactory type
 	// Required: true
-	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]
+	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]
 	ArtifactoryType *string `json:"artifactoryType"`
 
 	// password
@@ -93,7 +96,7 @@ var basicDockerDTOTypeArtifactoryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -123,6 +126,9 @@ const (
 
 	// BasicDockerDTOArtifactoryTypeJFROG captures enum value "JFROG"
 	BasicDockerDTOArtifactoryTypeJFROG string = "JFROG"
+
+	// BasicDockerDTOArtifactoryTypeHARBOR captures enum value "HARBOR"
+	BasicDockerDTOArtifactoryTypeHARBOR string = "HARBOR"
 
 	// BasicDockerDTOArtifactoryTypeOTHERS captures enum value "OTHERS"
 	BasicDockerDTOArtifactoryTypeOTHERS string = "OTHERS"

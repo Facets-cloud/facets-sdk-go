@@ -21,7 +21,7 @@ import (
 type ECRArtifactory struct {
 
 	// artifactory type
-	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]
+	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]
 	ArtifactoryType string `json:"artifactoryType,omitempty"`
 
 	// aws account Id
@@ -50,12 +50,12 @@ type ECRArtifactory struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
+
+	// image tag mutability
+	// Enum: ["MUTABLE","IMMUTABLE"]
+	ImageTagMutability string `json:"imageTagMutability,omitempty"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
@@ -64,12 +64,12 @@ type ECRArtifactory struct {
 	// Format: date-time
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
+	// max images
+	MaxImages int32 `json:"maxImages,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
-
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stacks associated
 	// Unique: true
@@ -113,7 +113,7 @@ func (m *ECRArtifactory) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
+	if err := m.validateImageTagMutability(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,7 +139,7 @@ var eCRArtifactoryTypeArtifactoryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -169,6 +169,9 @@ const (
 
 	// ECRArtifactoryArtifactoryTypeJFROG captures enum value "JFROG"
 	ECRArtifactoryArtifactoryTypeJFROG string = "JFROG"
+
+	// ECRArtifactoryArtifactoryTypeHARBOR captures enum value "HARBOR"
+	ECRArtifactoryArtifactoryTypeHARBOR string = "HARBOR"
 
 	// ECRArtifactoryArtifactoryTypeOTHERS captures enum value "OTHERS"
 	ECRArtifactoryArtifactoryTypeOTHERS string = "OTHERS"
@@ -243,63 +246,42 @@ func (m *ECRArtifactory) validateCreationDate(formats strfmt.Registry) error {
 	return nil
 }
 
-var eCRArtifactoryTypeEntityTypePropEnum []interface{}
+var eCRArtifactoryTypeImageTagMutabilityPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["MUTABLE","IMMUTABLE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
-		eCRArtifactoryTypeEntityTypePropEnum = append(eCRArtifactoryTypeEntityTypePropEnum, v)
+		eCRArtifactoryTypeImageTagMutabilityPropEnum = append(eCRArtifactoryTypeImageTagMutabilityPropEnum, v)
 	}
 }
 
 const (
 
-	// ECRArtifactoryEntityTypeCLUSTER captures enum value "CLUSTER"
-	ECRArtifactoryEntityTypeCLUSTER string = "CLUSTER"
+	// ECRArtifactoryImageTagMutabilityMUTABLE captures enum value "MUTABLE"
+	ECRArtifactoryImageTagMutabilityMUTABLE string = "MUTABLE"
 
-	// ECRArtifactoryEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	ECRArtifactoryEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// ECRArtifactoryEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	ECRArtifactoryEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// ECRArtifactoryEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	ECRArtifactoryEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// ECRArtifactoryEntityTypeIAC captures enum value "IAC"
-	ECRArtifactoryEntityTypeIAC string = "IAC"
-
-	// ECRArtifactoryEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	ECRArtifactoryEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// ECRArtifactoryEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	ECRArtifactoryEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// ECRArtifactoryEntityTypeACCOUNT captures enum value "ACCOUNT"
-	ECRArtifactoryEntityTypeACCOUNT string = "ACCOUNT"
-
-	// ECRArtifactoryEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	ECRArtifactoryEntityTypeARTIFACTORY string = "ARTIFACTORY"
+	// ECRArtifactoryImageTagMutabilityIMMUTABLE captures enum value "IMMUTABLE"
+	ECRArtifactoryImageTagMutabilityIMMUTABLE string = "IMMUTABLE"
 )
 
 // prop value enum
-func (m *ECRArtifactory) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, eCRArtifactoryTypeEntityTypePropEnum, true); err != nil {
+func (m *ECRArtifactory) validateImageTagMutabilityEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, eCRArtifactoryTypeImageTagMutabilityPropEnum, true); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (m *ECRArtifactory) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
+func (m *ECRArtifactory) validateImageTagMutability(formats strfmt.Registry) error {
+	if swag.IsZero(m.ImageTagMutability) { // not required
 		return nil
 	}
 
 	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
+	if err := m.validateImageTagMutabilityEnum("imageTagMutability", "body", m.ImageTagMutability); err != nil {
 		return err
 	}
 

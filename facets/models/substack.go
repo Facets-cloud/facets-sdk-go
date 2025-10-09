@@ -67,10 +67,6 @@ type Substack struct {
 	// description
 	Description string `json:"description,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// git ops enabled
 	GitOpsEnabled bool `json:"gitOpsEnabled,omitempty"`
 
@@ -102,9 +98,6 @@ type Substack struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// override config
 	OverrideConfig *OverrideConfig `json:"overrideConfig,omitempty"`
 
@@ -115,7 +108,7 @@ type Substack struct {
 	PreviewModulesAllowed bool `json:"previewModulesAllowed,omitempty"`
 
 	// primary cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	PrimaryCloud string `json:"primaryCloud,omitempty"`
 
 	// project type Id
@@ -178,10 +171,6 @@ func (m *Substack) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -212,7 +201,7 @@ var substackAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -274,69 +263,6 @@ func (m *Substack) validateClusterVariablesMeta(formats strfmt.Registry) error {
 	return nil
 }
 
-var substackTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		substackTypeEntityTypePropEnum = append(substackTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// SubstackEntityTypeCLUSTER captures enum value "CLUSTER"
-	SubstackEntityTypeCLUSTER string = "CLUSTER"
-
-	// SubstackEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	SubstackEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// SubstackEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	SubstackEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// SubstackEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	SubstackEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// SubstackEntityTypeIAC captures enum value "IAC"
-	SubstackEntityTypeIAC string = "IAC"
-
-	// SubstackEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	SubstackEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// SubstackEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	SubstackEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// SubstackEntityTypeACCOUNT captures enum value "ACCOUNT"
-	SubstackEntityTypeACCOUNT string = "ACCOUNT"
-
-	// SubstackEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	SubstackEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *Substack) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, substackTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Substack) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *Substack) validateLastModifiedDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastModifiedDate) { // not required
 		return nil
@@ -372,7 +298,7 @@ var substackTypePrimaryCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -396,6 +322,9 @@ const (
 
 	// SubstackPrimaryCloudKUBERNETES captures enum value "KUBERNETES"
 	SubstackPrimaryCloudKUBERNETES string = "KUBERNETES"
+
+	// SubstackPrimaryCloudNOCLOUD captures enum value "NO_CLOUD"
+	SubstackPrimaryCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

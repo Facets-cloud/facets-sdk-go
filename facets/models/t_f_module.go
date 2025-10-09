@@ -52,8 +52,14 @@ type TFModule struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
+	// critical resource
+	CriticalResource bool `json:"criticalResource,omitempty"`
+
 	// description
 	Description string `json:"description,omitempty"`
+
+	// enable kubernetes explorer
+	EnableKubernetesExplorer bool `json:"enableKubernetesExplorer,omitempty"`
 
 	// Facets YAML content
 	FacetsYaml string `json:"facetsYaml,omitempty"`
@@ -104,9 +110,6 @@ type TFModule struct {
 	// Example: 40
 	// Minimum: 1
 	NameLengthLimit int32 `json:"nameLengthLimit,omitempty"`
-
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// outputs
 	Outputs []*IntentOutput `json:"outputs"`

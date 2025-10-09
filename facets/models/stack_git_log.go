@@ -36,9 +36,6 @@ type StackGitLog struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// resource name
 	ResourceName string `json:"resourceName,omitempty"`
 

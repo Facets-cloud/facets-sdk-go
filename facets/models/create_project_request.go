@@ -32,7 +32,7 @@ type CreateProjectRequest struct {
 	BlueprintName string `json:"blueprintName,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// description
@@ -87,7 +87,7 @@ var createProjectRequestAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -127,7 +127,7 @@ var createProjectRequestTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -151,6 +151,9 @@ const (
 
 	// CreateProjectRequestCloudKUBERNETES captures enum value "KUBERNETES"
 	CreateProjectRequestCloudKUBERNETES string = "KUBERNETES"
+
+	// CreateProjectRequestCloudNOCLOUD captures enum value "NO_CLOUD"
+	CreateProjectRequestCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

@@ -29,6 +29,9 @@ type TFModuleResponseDTO struct {
 	// List of test projects where this module will be available. If absent, it is available globally.
 	AllowedTestProjects []string `json:"allowedTestProjects"`
 
+	// can download
+	CanDownload bool `json:"canDownload,omitempty"`
+
 	// Supported cloud providers
 	// Example: ["aws","azure"]
 	// Unique: true
@@ -40,6 +43,9 @@ type TFModuleResponseDTO struct {
 	// creation date
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
+
+	// critical resource
+	CriticalResource bool `json:"criticalResource,omitempty"`
 
 	// Module description
 	Description string `json:"description,omitempty"`
@@ -75,6 +81,9 @@ type TFModuleResponseDTO struct {
 
 	// intent details
 	IntentDetails *IntentResponseDTO `json:"intentDetails,omitempty"`
+
+	// kubernetes
+	Kubernetes bool `json:"kubernetes,omitempty"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`

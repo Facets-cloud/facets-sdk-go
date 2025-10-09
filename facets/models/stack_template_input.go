@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -28,10 +27,6 @@ type StackTemplateInput struct {
 	// Required: true
 	Data map[string]string `json:"data"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// input type
 	// Required: true
 	InputType *string `json:"inputType"`
@@ -50,10 +45,6 @@ func (m *StackTemplateInput) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateData(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,69 +74,6 @@ func (m *StackTemplateInput) validateClusterID(formats strfmt.Registry) error {
 func (m *StackTemplateInput) validateData(formats strfmt.Registry) error {
 
 	if err := validate.Required("data", "body", m.Data); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var stackTemplateInputTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		stackTemplateInputTypeEntityTypePropEnum = append(stackTemplateInputTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// StackTemplateInputEntityTypeCLUSTER captures enum value "CLUSTER"
-	StackTemplateInputEntityTypeCLUSTER string = "CLUSTER"
-
-	// StackTemplateInputEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	StackTemplateInputEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// StackTemplateInputEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	StackTemplateInputEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// StackTemplateInputEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	StackTemplateInputEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// StackTemplateInputEntityTypeIAC captures enum value "IAC"
-	StackTemplateInputEntityTypeIAC string = "IAC"
-
-	// StackTemplateInputEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	StackTemplateInputEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// StackTemplateInputEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	StackTemplateInputEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// StackTemplateInputEntityTypeACCOUNT captures enum value "ACCOUNT"
-	StackTemplateInputEntityTypeACCOUNT string = "ACCOUNT"
-
-	// StackTemplateInputEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	StackTemplateInputEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *StackTemplateInput) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, stackTemplateInputTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *StackTemplateInput) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

@@ -41,10 +41,6 @@ type KubernetesAccount struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// host
 	Host string `json:"host,omitempty"`
 
@@ -64,15 +60,9 @@ type KubernetesAccount struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// provider
 	// Enum: ["GITHUB","BITBUCKET","GITLAB","AWS","AZURE","GCP","KUBERNETES","CODER"]
 	Provider string `json:"provider,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// system defined
 	SystemDefined bool `json:"systemDefined,omitempty"`
@@ -97,10 +87,6 @@ func (m *KubernetesAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -195,69 +181,6 @@ func (m *KubernetesAccount) validateCreationDate(formats strfmt.Registry) error 
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var kubernetesAccountTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		kubernetesAccountTypeEntityTypePropEnum = append(kubernetesAccountTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// KubernetesAccountEntityTypeCLUSTER captures enum value "CLUSTER"
-	KubernetesAccountEntityTypeCLUSTER string = "CLUSTER"
-
-	// KubernetesAccountEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	KubernetesAccountEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// KubernetesAccountEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	KubernetesAccountEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// KubernetesAccountEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	KubernetesAccountEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// KubernetesAccountEntityTypeIAC captures enum value "IAC"
-	KubernetesAccountEntityTypeIAC string = "IAC"
-
-	// KubernetesAccountEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	KubernetesAccountEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// KubernetesAccountEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	KubernetesAccountEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// KubernetesAccountEntityTypeACCOUNT captures enum value "ACCOUNT"
-	KubernetesAccountEntityTypeACCOUNT string = "ACCOUNT"
-
-	// KubernetesAccountEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	KubernetesAccountEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *KubernetesAccount) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, kubernetesAccountTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *KubernetesAccount) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

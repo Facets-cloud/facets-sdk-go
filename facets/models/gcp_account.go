@@ -38,10 +38,6 @@ type GcpAccount struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -58,18 +54,12 @@ type GcpAccount struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// project
 	Project string `json:"project,omitempty"`
 
 	// provider
 	// Enum: ["GITHUB","BITBUCKET","GITLAB","AWS","AZURE","GCP","KUBERNETES","CODER"]
 	Provider string `json:"provider,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// service account key
 	ServiceAccountKey string `json:"serviceAccountKey,omitempty"`
@@ -94,10 +84,6 @@ func (m *GcpAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -192,69 +178,6 @@ func (m *GcpAccount) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var gcpAccountTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		gcpAccountTypeEntityTypePropEnum = append(gcpAccountTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// GcpAccountEntityTypeCLUSTER captures enum value "CLUSTER"
-	GcpAccountEntityTypeCLUSTER string = "CLUSTER"
-
-	// GcpAccountEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	GcpAccountEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// GcpAccountEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	GcpAccountEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// GcpAccountEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	GcpAccountEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// GcpAccountEntityTypeIAC captures enum value "IAC"
-	GcpAccountEntityTypeIAC string = "IAC"
-
-	// GcpAccountEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	GcpAccountEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// GcpAccountEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	GcpAccountEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// GcpAccountEntityTypeACCOUNT captures enum value "ACCOUNT"
-	GcpAccountEntityTypeACCOUNT string = "ACCOUNT"
-
-	// GcpAccountEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	GcpAccountEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *GcpAccount) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, gcpAccountTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *GcpAccount) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

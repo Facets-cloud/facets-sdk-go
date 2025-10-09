@@ -17,6 +17,9 @@ import (
 // swagger:model IntentOutput
 type IntentOutput struct {
 
+	// description
+	Description string `json:"description,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 

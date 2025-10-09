@@ -22,7 +22,7 @@ type ArtifactoryLinkingRequest struct {
 	ArtifactoryName string `json:"artifactoryName,omitempty"`
 
 	// webhook
-	Webhook *OneTimeWebhook `json:"webhook,omitempty"`
+	Webhook *ArtifactoryOneTimeWebhook `json:"webhook,omitempty"`
 }
 
 // Validate validates this artifactory linking request

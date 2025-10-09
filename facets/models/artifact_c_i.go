@@ -31,17 +31,8 @@ type ArtifactCI struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
-
-	// integration type
-	// Required: true
-	// Enum: ["EXTERNAL"]
-	IntegrationType *string `json:"integrationType"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
@@ -77,14 +68,6 @@ func (m *ArtifactCI) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateIntegrationType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -114,109 +97,6 @@ func (m *ArtifactCI) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var artifactCITypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		artifactCITypeEntityTypePropEnum = append(artifactCITypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// ArtifactCIEntityTypeCLUSTER captures enum value "CLUSTER"
-	ArtifactCIEntityTypeCLUSTER string = "CLUSTER"
-
-	// ArtifactCIEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	ArtifactCIEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// ArtifactCIEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	ArtifactCIEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// ArtifactCIEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	ArtifactCIEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// ArtifactCIEntityTypeIAC captures enum value "IAC"
-	ArtifactCIEntityTypeIAC string = "IAC"
-
-	// ArtifactCIEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	ArtifactCIEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// ArtifactCIEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	ArtifactCIEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// ArtifactCIEntityTypeACCOUNT captures enum value "ACCOUNT"
-	ArtifactCIEntityTypeACCOUNT string = "ACCOUNT"
-
-	// ArtifactCIEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	ArtifactCIEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *ArtifactCI) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, artifactCITypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *ArtifactCI) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var artifactCITypeIntegrationTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["EXTERNAL"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		artifactCITypeIntegrationTypePropEnum = append(artifactCITypeIntegrationTypePropEnum, v)
-	}
-}
-
-const (
-
-	// ArtifactCIIntegrationTypeEXTERNAL captures enum value "EXTERNAL"
-	ArtifactCIIntegrationTypeEXTERNAL string = "EXTERNAL"
-)
-
-// prop value enum
-func (m *ArtifactCI) validateIntegrationTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, artifactCITypeIntegrationTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *ArtifactCI) validateIntegrationType(formats strfmt.Registry) error {
-
-	if err := validate.Required("integrationType", "body", m.IntegrationType); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateIntegrationTypeEnum("integrationType", "body", *m.IntegrationType); err != nil {
 		return err
 	}
 

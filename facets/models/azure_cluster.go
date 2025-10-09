@@ -48,7 +48,7 @@ type AzureCluster struct {
 	ClientSecret string `json:"clientSecret,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -84,18 +84,14 @@ type AzureCluster struct {
 	// deleted
 	Deleted bool `json:"deleted,omitempty"`
 
-	// dynamic launch
-	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
-
 	// enable auto sign off
 	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// global variables
 	GlobalVariables map[string]string `json:"globalVariables,omitempty"`
+
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -123,9 +119,6 @@ type AzureCluster struct {
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
@@ -147,9 +140,6 @@ type AzureCluster struct {
 
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// stack name
 	// Required: true
@@ -194,10 +184,6 @@ func (m *AzureCluster) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -232,7 +218,7 @@ var azureClusterTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -256,6 +242,9 @@ const (
 
 	// AzureClusterCloudKUBERNETES captures enum value "KUBERNETES"
 	AzureClusterCloudKUBERNETES string = "KUBERNETES"
+
+	// AzureClusterCloudNOCLOUD captures enum value "NO_CLOUD"
+	AzureClusterCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum
@@ -357,69 +346,6 @@ func (m *AzureCluster) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var azureClusterTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		azureClusterTypeEntityTypePropEnum = append(azureClusterTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// AzureClusterEntityTypeCLUSTER captures enum value "CLUSTER"
-	AzureClusterEntityTypeCLUSTER string = "CLUSTER"
-
-	// AzureClusterEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	AzureClusterEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// AzureClusterEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	AzureClusterEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// AzureClusterEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	AzureClusterEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// AzureClusterEntityTypeIAC captures enum value "IAC"
-	AzureClusterEntityTypeIAC string = "IAC"
-
-	// AzureClusterEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	AzureClusterEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// AzureClusterEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	AzureClusterEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// AzureClusterEntityTypeACCOUNT captures enum value "ACCOUNT"
-	AzureClusterEntityTypeACCOUNT string = "ACCOUNT"
-
-	// AzureClusterEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	AzureClusterEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *AzureCluster) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, azureClusterTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *AzureCluster) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

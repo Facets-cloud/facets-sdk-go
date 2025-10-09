@@ -20,8 +20,17 @@ import (
 // swagger:model ResourceStatus
 type ResourceStatus struct {
 
+	// artifactory
+	Artifactory string `json:"artifactory,omitempty"`
+
+	// ci name
+	CiName string `json:"ciName,omitempty"`
+
 	// cluster Id
 	ClusterID string `json:"clusterId,omitempty"`
+
+	// current artifact build Id
+	CurrentArtifactBuildID string `json:"currentArtifactBuildId,omitempty"`
 
 	// current artifact Url
 	CurrentArtifactURL string `json:"currentArtifactUrl,omitempty"`
@@ -35,6 +44,9 @@ type ResourceStatus struct {
 	// current state
 	// Enum: ["ENABLED","DISABLED"]
 	CurrentState string `json:"currentState,omitempty"`
+
+	// deployed
+	Deployed bool `json:"deployed,omitempty"`
 
 	// disabled
 	Disabled bool `json:"disabled,omitempty"`
@@ -53,6 +65,9 @@ type ResourceStatus struct {
 
 	// is alpha
 	IsAlpha bool `json:"isAlpha,omitempty"`
+
+	// live artifact build Id
+	LiveArtifactBuildID string `json:"liveArtifactBuildId,omitempty"`
 
 	// live artifact Url
 	LiveArtifactURL string `json:"liveArtifactUrl,omitempty"`

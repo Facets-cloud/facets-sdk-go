@@ -17,6 +17,9 @@ import (
 // swagger:model OutputReference
 type OutputReference struct {
 
+	// output description
+	OutputDescription string `json:"outputDescription,omitempty"`
+
 	// output name
 	OutputName string `json:"outputName,omitempty"`
 

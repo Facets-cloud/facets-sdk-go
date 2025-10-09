@@ -50,10 +50,6 @@ type GitLabAccount struct {
 	// enterprise host name
 	EnterpriseHostName string `json:"enterpriseHostName,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// host
 	Host string `json:"host,omitempty"`
 
@@ -73,18 +69,12 @@ type GitLabAccount struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// org name
 	OrgName string `json:"orgName,omitempty"`
 
 	// provider
 	// Enum: ["GITHUB","BITBUCKET","GITLAB","AWS","AZURE","GCP","KUBERNETES","CODER"]
 	Provider string `json:"provider,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// system defined
 	SystemDefined bool `json:"systemDefined,omitempty"`
@@ -109,10 +99,6 @@ func (m *GitLabAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -207,69 +193,6 @@ func (m *GitLabAccount) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var gitLabAccountTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		gitLabAccountTypeEntityTypePropEnum = append(gitLabAccountTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// GitLabAccountEntityTypeCLUSTER captures enum value "CLUSTER"
-	GitLabAccountEntityTypeCLUSTER string = "CLUSTER"
-
-	// GitLabAccountEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	GitLabAccountEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// GitLabAccountEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	GitLabAccountEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// GitLabAccountEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	GitLabAccountEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// GitLabAccountEntityTypeIAC captures enum value "IAC"
-	GitLabAccountEntityTypeIAC string = "IAC"
-
-	// GitLabAccountEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	GitLabAccountEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// GitLabAccountEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	GitLabAccountEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// GitLabAccountEntityTypeACCOUNT captures enum value "ACCOUNT"
-	GitLabAccountEntityTypeACCOUNT string = "ACCOUNT"
-
-	// GitLabAccountEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	GitLabAccountEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *GitLabAccount) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, gitLabAccountTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *GitLabAccount) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

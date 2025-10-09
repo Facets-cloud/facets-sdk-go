@@ -30,8 +30,14 @@ type Info struct {
 	// ci name
 	CiName string `json:"ciName,omitempty"`
 
+	// critical resource
+	CriticalResource bool `json:"criticalResource,omitempty"`
+
 	// disabled
 	Disabled bool `json:"disabled,omitempty"`
+
+	// enable kubernetes explorer
+	EnableKubernetesExplorer bool `json:"enableKubernetesExplorer,omitempty"`
 
 	// flavour
 	Flavour string `json:"flavour,omitempty"`

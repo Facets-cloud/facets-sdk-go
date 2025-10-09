@@ -20,8 +20,11 @@ import (
 // swagger:model BasicDockerArtifactory
 type BasicDockerArtifactory struct {
 
+	// artifactory project
+	ArtifactoryProject string `json:"artifactoryProject,omitempty"`
+
 	// artifactory type
-	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]
+	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]
 	ArtifactoryType string `json:"artifactoryType,omitempty"`
 
 	// change log
@@ -33,10 +36,6 @@ type BasicDockerArtifactory struct {
 	// creation date
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
-
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -51,9 +50,6 @@ type BasicDockerArtifactory struct {
 	// name
 	// Required: true
 	Name *string `json:"name"`
-
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// password
 	// Required: true
@@ -88,10 +84,6 @@ func (m *BasicDockerArtifactory) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -118,7 +110,7 @@ var basicDockerArtifactoryTypeArtifactoryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -148,6 +140,9 @@ const (
 
 	// BasicDockerArtifactoryArtifactoryTypeJFROG captures enum value "JFROG"
 	BasicDockerArtifactoryArtifactoryTypeJFROG string = "JFROG"
+
+	// BasicDockerArtifactoryArtifactoryTypeHARBOR captures enum value "HARBOR"
+	BasicDockerArtifactoryArtifactoryTypeHARBOR string = "HARBOR"
 
 	// BasicDockerArtifactoryArtifactoryTypeOTHERS captures enum value "OTHERS"
 	BasicDockerArtifactoryArtifactoryTypeOTHERS string = "OTHERS"
@@ -180,69 +175,6 @@ func (m *BasicDockerArtifactory) validateCreationDate(formats strfmt.Registry) e
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var basicDockerArtifactoryTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		basicDockerArtifactoryTypeEntityTypePropEnum = append(basicDockerArtifactoryTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// BasicDockerArtifactoryEntityTypeCLUSTER captures enum value "CLUSTER"
-	BasicDockerArtifactoryEntityTypeCLUSTER string = "CLUSTER"
-
-	// BasicDockerArtifactoryEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	BasicDockerArtifactoryEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// BasicDockerArtifactoryEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	BasicDockerArtifactoryEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// BasicDockerArtifactoryEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	BasicDockerArtifactoryEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// BasicDockerArtifactoryEntityTypeIAC captures enum value "IAC"
-	BasicDockerArtifactoryEntityTypeIAC string = "IAC"
-
-	// BasicDockerArtifactoryEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	BasicDockerArtifactoryEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// BasicDockerArtifactoryEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	BasicDockerArtifactoryEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// BasicDockerArtifactoryEntityTypeACCOUNT captures enum value "ACCOUNT"
-	BasicDockerArtifactoryEntityTypeACCOUNT string = "ACCOUNT"
-
-	// BasicDockerArtifactoryEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	BasicDockerArtifactoryEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *BasicDockerArtifactory) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, basicDockerArtifactoryTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *BasicDockerArtifactory) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

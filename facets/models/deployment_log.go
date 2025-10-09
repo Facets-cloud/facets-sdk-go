@@ -111,7 +111,7 @@ type DeploymentLog struct {
 	StackVersion string `json:"stackVersion,omitempty"`
 
 	// status
-	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","REJECTED"]
+	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","ABORTED","REJECTED"]
 	Status string `json:"status,omitempty"`
 
 	// tf version
@@ -524,7 +524,7 @@ var deploymentLogTypeStatusPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","REJECTED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","ABORTED","REJECTED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -569,6 +569,9 @@ const (
 
 	// DeploymentLogStatusAPPROVED captures enum value "APPROVED"
 	DeploymentLogStatusAPPROVED string = "APPROVED"
+
+	// DeploymentLogStatusABORTED captures enum value "ABORTED"
+	DeploymentLogStatusABORTED string = "ABORTED"
 
 	// DeploymentLogStatusREJECTED captures enum value "REJECTED"
 	DeploymentLogStatusREJECTED string = "REJECTED"

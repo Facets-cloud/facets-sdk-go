@@ -7,36 +7,174 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
-// Environment Environment
+// Environment environment
 //
 // swagger:model Environment
 type Environment struct {
 
-	// environment configuration
-	EnvironmentConfiguration *EnvironmentConfiguration `json:"environmentConfiguration,omitempty"`
+	// auto sign off schedule
+	AutoSignOffSchedule string `json:"autoSignOffSchedule,omitempty"`
 
-	// environment meta data
-	EnvironmentMetaData *EnvironmentMetaData `json:"environmentMetaData,omitempty"`
+	// base cluster Id
+	BaseClusterID string `json:"baseClusterId,omitempty"`
+
+	// base cluster name
+	BaseClusterName string `json:"baseClusterName,omitempty"`
+
+	// branch
+	Branch string `json:"branch,omitempty"`
+
+	// cd pipeline parent
+	CdPipelineParent string `json:"cdPipelineParent,omitempty"`
+
+	// change log
+	ChangeLog string `json:"changeLog,omitempty"`
+
+	// cloud
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
+	Cloud string `json:"cloud,omitempty"`
+
+	// cloud account Id
+	CloudAccountID string `json:"cloudAccountId,omitempty"`
+
+	// cloud account secret Id
+	CloudAccountSecretID string `json:"cloudAccountSecretId,omitempty"`
+
+	// cluster code
+	// Read Only: true
+	ClusterCode string `json:"clusterCode,omitempty"`
+
+	// cluster state
+	// Enum: ["STOPPED","RUNNING","LAUNCHING","DESTROYING","LAUNCH_FAILED","DESTROY_FAILED","UNKNOWN","SCALE_DOWN","SCALING_DOWN","SCALE_DOWN_FAILED","SCALING_UP","SCALE_UP_FAILED"]
+	ClusterState string `json:"clusterState,omitempty"`
+
+	// common environment variables
+	CommonEnvironmentVariables map[string]string `json:"commonEnvironmentVariables,omitempty"`
+
+	// component versions
+	ComponentVersions map[string]string `json:"componentVersions,omitempty"`
+
+	// configured
+	Configured bool `json:"configured,omitempty"`
+
+	// created by
+	CreatedBy string `json:"createdBy,omitempty"`
+
+	// creation date
+	// Format: date-time
+	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
+
+	// deleted
+	Deleted bool `json:"deleted,omitempty"`
+
+	// enable auto sign off
+	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
+
+	// global variables
+	GlobalVariables map[string]string `json:"globalVariables,omitempty"`
+
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
+
+	// is ephemeral
+	IsEphemeral bool `json:"isEphemeral,omitempty"`
+
+	// k8s requests to limits ratio
+	K8sRequestsToLimitsRatio float64 `json:"k8sRequestsToLimitsRatio,omitempty"`
+
+	// last modified by
+	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
+
+	// last modified date
+	// Format: date-time
+	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
+
+	// name
+	// Required: true
+	Name *string `json:"name"`
+
+	// namespace
+	Namespace string `json:"namespace,omitempty"`
+
+	// pause releases
+	PauseReleases bool `json:"pauseReleases,omitempty"`
+
+	// release stream
+	// Required: true
+	ReleaseStream *string `json:"releaseStream"`
+
+	// require sign off
+	RequireSignOff bool `json:"requireSignOff,omitempty"`
+
+	// schedules
+	Schedules map[string]string `json:"schedules,omitempty"`
+
+	// secrets
+	Secrets map[string]string `json:"secrets,omitempty"`
+
+	// stack name
+	// Required: true
+	StackName *string `json:"stackName"`
+
+	// tz
+	// Required: true
+	Tz *string `json:"tz"`
+
+	// variables
+	Variables map[string]Variables `json:"variables,omitempty"`
+
+	// versioning key
+	VersioningKey string `json:"versioningKey,omitempty"`
 }
 
 // Validate validates this environment
 func (m *Environment) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateEnvironmentConfiguration(formats); err != nil {
+	if err := m.validateCloud(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateEnvironmentMetaData(formats); err != nil {
+	if err := m.validateClusterState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreationDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLastModifiedDate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReleaseStream(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTz(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariables(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -46,39 +184,213 @@ func (m *Environment) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Environment) validateEnvironmentConfiguration(formats strfmt.Registry) error {
-	if swag.IsZero(m.EnvironmentConfiguration) { // not required
+var environmentTypeCloudPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		environmentTypeCloudPropEnum = append(environmentTypeCloudPropEnum, v)
+	}
+}
+
+const (
+
+	// EnvironmentCloudAWS captures enum value "AWS"
+	EnvironmentCloudAWS string = "AWS"
+
+	// EnvironmentCloudAZURE captures enum value "AZURE"
+	EnvironmentCloudAZURE string = "AZURE"
+
+	// EnvironmentCloudLOCAL captures enum value "LOCAL"
+	EnvironmentCloudLOCAL string = "LOCAL"
+
+	// EnvironmentCloudGCP captures enum value "GCP"
+	EnvironmentCloudGCP string = "GCP"
+
+	// EnvironmentCloudKUBERNETES captures enum value "KUBERNETES"
+	EnvironmentCloudKUBERNETES string = "KUBERNETES"
+
+	// EnvironmentCloudNOCLOUD captures enum value "NO_CLOUD"
+	EnvironmentCloudNOCLOUD string = "NO_CLOUD"
+)
+
+// prop value enum
+func (m *Environment) validateCloudEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, environmentTypeCloudPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Environment) validateCloud(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cloud) { // not required
 		return nil
 	}
 
-	if m.EnvironmentConfiguration != nil {
-		if err := m.EnvironmentConfiguration.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("environmentConfiguration")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("environmentConfiguration")
-			}
-			return err
-		}
+	// value enum
+	if err := m.validateCloudEnum("cloud", "body", m.Cloud); err != nil {
+		return err
 	}
 
 	return nil
 }
 
-func (m *Environment) validateEnvironmentMetaData(formats strfmt.Registry) error {
-	if swag.IsZero(m.EnvironmentMetaData) { // not required
+var environmentTypeClusterStatePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["STOPPED","RUNNING","LAUNCHING","DESTROYING","LAUNCH_FAILED","DESTROY_FAILED","UNKNOWN","SCALE_DOWN","SCALING_DOWN","SCALE_DOWN_FAILED","SCALING_UP","SCALE_UP_FAILED"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		environmentTypeClusterStatePropEnum = append(environmentTypeClusterStatePropEnum, v)
+	}
+}
+
+const (
+
+	// EnvironmentClusterStateSTOPPED captures enum value "STOPPED"
+	EnvironmentClusterStateSTOPPED string = "STOPPED"
+
+	// EnvironmentClusterStateRUNNING captures enum value "RUNNING"
+	EnvironmentClusterStateRUNNING string = "RUNNING"
+
+	// EnvironmentClusterStateLAUNCHING captures enum value "LAUNCHING"
+	EnvironmentClusterStateLAUNCHING string = "LAUNCHING"
+
+	// EnvironmentClusterStateDESTROYING captures enum value "DESTROYING"
+	EnvironmentClusterStateDESTROYING string = "DESTROYING"
+
+	// EnvironmentClusterStateLAUNCHFAILED captures enum value "LAUNCH_FAILED"
+	EnvironmentClusterStateLAUNCHFAILED string = "LAUNCH_FAILED"
+
+	// EnvironmentClusterStateDESTROYFAILED captures enum value "DESTROY_FAILED"
+	EnvironmentClusterStateDESTROYFAILED string = "DESTROY_FAILED"
+
+	// EnvironmentClusterStateUNKNOWN captures enum value "UNKNOWN"
+	EnvironmentClusterStateUNKNOWN string = "UNKNOWN"
+
+	// EnvironmentClusterStateSCALEDOWN captures enum value "SCALE_DOWN"
+	EnvironmentClusterStateSCALEDOWN string = "SCALE_DOWN"
+
+	// EnvironmentClusterStateSCALINGDOWN captures enum value "SCALING_DOWN"
+	EnvironmentClusterStateSCALINGDOWN string = "SCALING_DOWN"
+
+	// EnvironmentClusterStateSCALEDOWNFAILED captures enum value "SCALE_DOWN_FAILED"
+	EnvironmentClusterStateSCALEDOWNFAILED string = "SCALE_DOWN_FAILED"
+
+	// EnvironmentClusterStateSCALINGUP captures enum value "SCALING_UP"
+	EnvironmentClusterStateSCALINGUP string = "SCALING_UP"
+
+	// EnvironmentClusterStateSCALEUPFAILED captures enum value "SCALE_UP_FAILED"
+	EnvironmentClusterStateSCALEUPFAILED string = "SCALE_UP_FAILED"
+)
+
+// prop value enum
+func (m *Environment) validateClusterStateEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, environmentTypeClusterStatePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Environment) validateClusterState(formats strfmt.Registry) error {
+	if swag.IsZero(m.ClusterState) { // not required
 		return nil
 	}
 
-	if m.EnvironmentMetaData != nil {
-		if err := m.EnvironmentMetaData.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("environmentMetaData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("environmentMetaData")
-			}
+	// value enum
+	if err := m.validateClusterStateEnum("clusterState", "body", m.ClusterState); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateCreationDate(formats strfmt.Registry) error {
+	if swag.IsZero(m.CreationDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateLastModifiedDate(formats strfmt.Registry) error {
+	if swag.IsZero(m.LastModifiedDate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("lastModifiedDate", "body", "date-time", m.LastModifiedDate.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateReleaseStream(formats strfmt.Registry) error {
+
+	if err := validate.Required("releaseStream", "body", m.ReleaseStream); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateStackName(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackName", "body", m.StackName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateTz(formats strfmt.Registry) error {
+
+	if err := validate.Required("tz", "body", m.Tz); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Environment) validateVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.Variables) { // not required
+		return nil
+	}
+
+	for k := range m.Variables {
+
+		if err := validate.Required("variables"+"."+k, "body", m.Variables[k]); err != nil {
 			return err
 		}
+		if val, ok := m.Variables[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables" + "." + k)
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -88,11 +400,11 @@ func (m *Environment) validateEnvironmentMetaData(formats strfmt.Registry) error
 func (m *Environment) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateEnvironmentConfiguration(ctx, formats); err != nil {
+	if err := m.contextValidateClusterCode(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateEnvironmentMetaData(ctx, formats); err != nil {
+	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -102,43 +414,25 @@ func (m *Environment) ContextValidate(ctx context.Context, formats strfmt.Regist
 	return nil
 }
 
-func (m *Environment) contextValidateEnvironmentConfiguration(ctx context.Context, formats strfmt.Registry) error {
+func (m *Environment) contextValidateClusterCode(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.EnvironmentConfiguration != nil {
-
-		if swag.IsZero(m.EnvironmentConfiguration) { // not required
-			return nil
-		}
-
-		if err := m.EnvironmentConfiguration.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("environmentConfiguration")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("environmentConfiguration")
-			}
-			return err
-		}
+	if err := validate.ReadOnly(ctx, "clusterCode", "body", string(m.ClusterCode)); err != nil {
+		return err
 	}
 
 	return nil
 }
 
-func (m *Environment) contextValidateEnvironmentMetaData(ctx context.Context, formats strfmt.Registry) error {
+func (m *Environment) contextValidateVariables(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.EnvironmentMetaData != nil {
+	for k := range m.Variables {
 
-		if swag.IsZero(m.EnvironmentMetaData) { // not required
-			return nil
-		}
-
-		if err := m.EnvironmentMetaData.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("environmentMetaData")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("environmentMetaData")
+		if val, ok := m.Variables[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
 			}
-			return err
 		}
+
 	}
 
 	return nil

@@ -42,7 +42,7 @@ type GCPCluster struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -78,18 +78,14 @@ type GCPCluster struct {
 	// deleted
 	Deleted bool `json:"deleted,omitempty"`
 
-	// dynamic launch
-	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
-
 	// enable auto sign off
 	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// global variables
 	GlobalVariables map[string]string `json:"globalVariables,omitempty"`
+
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -117,9 +113,6 @@ type GCPCluster struct {
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
@@ -144,9 +137,6 @@ type GCPCluster struct {
 
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// service account key
 	ServiceAccountKey string `json:"serviceAccountKey,omitempty"`
@@ -188,10 +178,6 @@ func (m *GCPCluster) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -226,7 +212,7 @@ var gCPClusterTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -250,6 +236,9 @@ const (
 
 	// GCPClusterCloudKUBERNETES captures enum value "KUBERNETES"
 	GCPClusterCloudKUBERNETES string = "KUBERNETES"
+
+	// GCPClusterCloudNOCLOUD captures enum value "NO_CLOUD"
+	GCPClusterCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum
@@ -351,69 +340,6 @@ func (m *GCPCluster) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var gCPClusterTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		gCPClusterTypeEntityTypePropEnum = append(gCPClusterTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// GCPClusterEntityTypeCLUSTER captures enum value "CLUSTER"
-	GCPClusterEntityTypeCLUSTER string = "CLUSTER"
-
-	// GCPClusterEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	GCPClusterEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// GCPClusterEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	GCPClusterEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// GCPClusterEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	GCPClusterEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// GCPClusterEntityTypeIAC captures enum value "IAC"
-	GCPClusterEntityTypeIAC string = "IAC"
-
-	// GCPClusterEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	GCPClusterEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// GCPClusterEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	GCPClusterEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// GCPClusterEntityTypeACCOUNT captures enum value "ACCOUNT"
-	GCPClusterEntityTypeACCOUNT string = "ACCOUNT"
-
-	// GCPClusterEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	GCPClusterEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *GCPCluster) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, gCPClusterTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *GCPCluster) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

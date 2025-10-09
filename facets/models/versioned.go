@@ -20,9 +20,6 @@ type Versioned struct {
 	// change log
 	ChangeLog string `json:"changeLog,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// versioning key
 	VersioningKey string `json:"versioningKey,omitempty"`
 }

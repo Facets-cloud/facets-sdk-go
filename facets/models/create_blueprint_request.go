@@ -53,7 +53,7 @@ type CreateBlueprintRequest struct {
 	Name string `json:"name,omitempty"`
 
 	// primary cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	PrimaryCloud string `json:"primaryCloud,omitempty"`
 
 	// project type Id
@@ -100,7 +100,7 @@ var createBlueprintRequestAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -140,7 +140,7 @@ var createBlueprintRequestTypePrimaryCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -164,6 +164,9 @@ const (
 
 	// CreateBlueprintRequestPrimaryCloudKUBERNETES captures enum value "KUBERNETES"
 	CreateBlueprintRequestPrimaryCloudKUBERNETES string = "KUBERNETES"
+
+	// CreateBlueprintRequestPrimaryCloudNOCLOUD captures enum value "NO_CLOUD"
+	CreateBlueprintRequestPrimaryCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

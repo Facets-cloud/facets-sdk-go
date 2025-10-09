@@ -21,7 +21,7 @@ import (
 type Artifactory struct {
 
 	// artifactory type
-	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]
+	// Enum: ["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]
 	ArtifactoryType string `json:"artifactoryType,omitempty"`
 
 	// change log
@@ -33,10 +33,6 @@ type Artifactory struct {
 	// creation date
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
-
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -51,9 +47,6 @@ type Artifactory struct {
 	// name
 	// Required: true
 	Name *string `json:"name"`
-
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stacks associated
 	// Unique: true
@@ -81,10 +74,6 @@ func (m *Artifactory) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -107,7 +96,7 @@ var artifactoryTypeArtifactoryTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","OTHERS"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["ECR","AZURE_CONTAINER_REGISTRY","GOOGLE_ARTIFACT_REGISTRY","GOOGLE_CONTAINER_REGISTRY","NEXUS","DOCKER_HUB","JFROG","HARBOR","OTHERS"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -137,6 +126,9 @@ const (
 
 	// ArtifactoryArtifactoryTypeJFROG captures enum value "JFROG"
 	ArtifactoryArtifactoryTypeJFROG string = "JFROG"
+
+	// ArtifactoryArtifactoryTypeHARBOR captures enum value "HARBOR"
+	ArtifactoryArtifactoryTypeHARBOR string = "HARBOR"
 
 	// ArtifactoryArtifactoryTypeOTHERS captures enum value "OTHERS"
 	ArtifactoryArtifactoryTypeOTHERS string = "OTHERS"
@@ -169,69 +161,6 @@ func (m *Artifactory) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var artifactoryTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		artifactoryTypeEntityTypePropEnum = append(artifactoryTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// ArtifactoryEntityTypeCLUSTER captures enum value "CLUSTER"
-	ArtifactoryEntityTypeCLUSTER string = "CLUSTER"
-
-	// ArtifactoryEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	ArtifactoryEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// ArtifactoryEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	ArtifactoryEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// ArtifactoryEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	ArtifactoryEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// ArtifactoryEntityTypeIAC captures enum value "IAC"
-	ArtifactoryEntityTypeIAC string = "IAC"
-
-	// ArtifactoryEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	ArtifactoryEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// ArtifactoryEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	ArtifactoryEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// ArtifactoryEntityTypeACCOUNT captures enum value "ACCOUNT"
-	ArtifactoryEntityTypeACCOUNT string = "ACCOUNT"
-
-	// ArtifactoryEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	ArtifactoryEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *Artifactory) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, artifactoryTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Artifactory) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

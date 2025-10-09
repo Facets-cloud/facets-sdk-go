@@ -64,10 +64,6 @@ type Stack struct {
 	// description
 	Description string `json:"description,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// git ops enabled
 	GitOpsEnabled bool `json:"gitOpsEnabled,omitempty"`
 
@@ -99,9 +95,6 @@ type Stack struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// override config
 	OverrideConfig *OverrideConfig `json:"overrideConfig,omitempty"`
 
@@ -112,7 +105,7 @@ type Stack struct {
 	PreviewModulesAllowed bool `json:"previewModulesAllowed,omitempty"`
 
 	// primary cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	PrimaryCloud string `json:"primaryCloud,omitempty"`
 
 	// project type Id
@@ -172,10 +165,6 @@ func (m *Stack) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateEntityType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLastModifiedDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -206,7 +195,7 @@ var stackAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -268,69 +257,6 @@ func (m *Stack) validateClusterVariablesMeta(formats strfmt.Registry) error {
 	return nil
 }
 
-var stackTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		stackTypeEntityTypePropEnum = append(stackTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// StackEntityTypeCLUSTER captures enum value "CLUSTER"
-	StackEntityTypeCLUSTER string = "CLUSTER"
-
-	// StackEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	StackEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// StackEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	StackEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// StackEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	StackEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// StackEntityTypeIAC captures enum value "IAC"
-	StackEntityTypeIAC string = "IAC"
-
-	// StackEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	StackEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// StackEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	StackEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// StackEntityTypeACCOUNT captures enum value "ACCOUNT"
-	StackEntityTypeACCOUNT string = "ACCOUNT"
-
-	// StackEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	StackEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *Stack) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, stackTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Stack) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *Stack) validateLastModifiedDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastModifiedDate) { // not required
 		return nil
@@ -366,7 +292,7 @@ var stackTypePrimaryCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -390,6 +316,9 @@ const (
 
 	// StackPrimaryCloudKUBERNETES captures enum value "KUBERNETES"
 	StackPrimaryCloudKUBERNETES string = "KUBERNETES"
+
+	// StackPrimaryCloudNOCLOUD captures enum value "NO_CLOUD"
+	StackPrimaryCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

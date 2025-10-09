@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -44,18 +43,11 @@ type UserGroup struct {
 	// cluster role bindings
 	ClusterRoleBindings map[string]string `json:"clusterRoleBindings,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// group name
 	GroupName string `json:"groupName,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
-
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
 
 	// stack names
 	// Unique: true
@@ -78,10 +70,6 @@ func (m *UserGroup) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateClusterIds(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,69 +113,6 @@ func (m *UserGroup) validateClusterIds(formats strfmt.Registry) error {
 	}
 
 	if err := validate.UniqueItems("clusterIds", "body", m.ClusterIds); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var userGroupTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		userGroupTypeEntityTypePropEnum = append(userGroupTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// UserGroupEntityTypeCLUSTER captures enum value "CLUSTER"
-	UserGroupEntityTypeCLUSTER string = "CLUSTER"
-
-	// UserGroupEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	UserGroupEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// UserGroupEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	UserGroupEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// UserGroupEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	UserGroupEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// UserGroupEntityTypeIAC captures enum value "IAC"
-	UserGroupEntityTypeIAC string = "IAC"
-
-	// UserGroupEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	UserGroupEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// UserGroupEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	UserGroupEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// UserGroupEntityTypeACCOUNT captures enum value "ACCOUNT"
-	UserGroupEntityTypeACCOUNT string = "ACCOUNT"
-
-	// UserGroupEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	UserGroupEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *UserGroup) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, userGroupTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *UserGroup) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

@@ -28,7 +28,7 @@ type DeploymentStatusCountDto struct {
 	Date strfmt.Date `json:"date,omitempty"`
 
 	// status
-	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","REJECTED"]
+	// Enum: ["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","ABORTED","REJECTED"]
 	Status string `json:"status,omitempty"`
 }
 
@@ -66,7 +66,7 @@ var deploymentStatusCountDtoTypeStatusPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","REJECTED"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["SUCCEEDED","FAILED","FAULT","TIMED_OUT","IN_PROGRESS","STOPPED","INVALID","STARTED","UNKNOWN","QUEUED","PENDING_APPROVAL","APPROVED","ABORTED","REJECTED"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -111,6 +111,9 @@ const (
 
 	// DeploymentStatusCountDtoStatusAPPROVED captures enum value "APPROVED"
 	DeploymentStatusCountDtoStatusAPPROVED string = "APPROVED"
+
+	// DeploymentStatusCountDtoStatusABORTED captures enum value "ABORTED"
+	DeploymentStatusCountDtoStatusABORTED string = "ABORTED"
 
 	// DeploymentStatusCountDtoStatusREJECTED captures enum value "REJECTED"
 	DeploymentStatusCountDtoStatusREJECTED string = "REJECTED"

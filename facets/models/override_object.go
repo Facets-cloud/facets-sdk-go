@@ -42,9 +42,6 @@ type OverrideObject struct {
 	// Format: date-time
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// overrides
 	Overrides map[string]interface{} `json:"overrides,omitempty"`
 

@@ -34,7 +34,7 @@ type ClusterResponse struct {
 	CdPipelineParent string `json:"cdPipelineParent,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -69,6 +69,9 @@ type ClusterResponse struct {
 	// enable auto sign off
 	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
 
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -99,6 +102,9 @@ type ClusterResponse struct {
 
 	// require sign off
 	RequireSignOff bool `json:"requireSignOff,omitempty"`
+
+	// show kubedebugger
+	ShowKubedebugger bool `json:"showKubedebugger,omitempty"`
 
 	// stack name
 	StackName string `json:"stackName,omitempty"`
@@ -164,7 +170,7 @@ var clusterResponseTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -188,6 +194,9 @@ const (
 
 	// ClusterResponseCloudKUBERNETES captures enum value "KUBERNETES"
 	ClusterResponseCloudKUBERNETES string = "KUBERNETES"
+
+	// ClusterResponseCloudNOCLOUD captures enum value "NO_CLOUD"
+	ClusterResponseCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

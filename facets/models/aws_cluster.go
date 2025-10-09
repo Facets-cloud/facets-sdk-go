@@ -48,7 +48,7 @@ type AwsCluster struct {
 	ChangeLog string `json:"changeLog,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -84,21 +84,17 @@ type AwsCluster struct {
 	// deleted
 	Deleted bool `json:"deleted,omitempty"`
 
-	// dynamic launch
-	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
-
 	// enable auto sign off
 	EnableAutoSignOff bool `json:"enableAutoSignOff,omitempty"`
-
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
 
 	// external Id
 	ExternalID string `json:"externalId,omitempty"`
 
 	// global variables
 	GlobalVariables map[string]string `json:"globalVariables,omitempty"`
+
+	// has k8s credentials
+	HasK8sCredentials bool `json:"hasK8sCredentials,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -126,9 +122,6 @@ type AwsCluster struct {
 	// namespace
 	Namespace string `json:"namespace,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// pause releases
 	PauseReleases bool `json:"pauseReleases,omitempty"`
 
@@ -153,9 +146,6 @@ type AwsCluster struct {
 
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// stack name
 	// Required: true
@@ -188,10 +178,6 @@ func (m *AwsCluster) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -229,7 +215,7 @@ var awsClusterTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -253,6 +239,9 @@ const (
 
 	// AwsClusterCloudKUBERNETES captures enum value "KUBERNETES"
 	AwsClusterCloudKUBERNETES string = "KUBERNETES"
+
+	// AwsClusterCloudNOCLOUD captures enum value "NO_CLOUD"
+	AwsClusterCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum
@@ -354,69 +343,6 @@ func (m *AwsCluster) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var awsClusterTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		awsClusterTypeEntityTypePropEnum = append(awsClusterTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// AwsClusterEntityTypeCLUSTER captures enum value "CLUSTER"
-	AwsClusterEntityTypeCLUSTER string = "CLUSTER"
-
-	// AwsClusterEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	AwsClusterEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// AwsClusterEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	AwsClusterEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// AwsClusterEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	AwsClusterEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// AwsClusterEntityTypeIAC captures enum value "IAC"
-	AwsClusterEntityTypeIAC string = "IAC"
-
-	// AwsClusterEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	AwsClusterEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// AwsClusterEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	AwsClusterEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// AwsClusterEntityTypeACCOUNT captures enum value "ACCOUNT"
-	AwsClusterEntityTypeACCOUNT string = "ACCOUNT"
-
-	// AwsClusterEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	AwsClusterEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *AwsCluster) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, awsClusterTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *AwsCluster) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

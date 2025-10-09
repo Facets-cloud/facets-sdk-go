@@ -44,10 +44,6 @@ type AzureAccount struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// id
 	ID string `json:"id,omitempty"`
 
@@ -64,15 +60,9 @@ type AzureAccount struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// provider
 	// Enum: ["GITHUB","BITBUCKET","GITLAB","AWS","AZURE","GCP","KUBERNETES","CODER"]
 	Provider string `json:"provider,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// subscription Id
 	SubscriptionID string `json:"subscriptionId,omitempty"`
@@ -100,10 +90,6 @@ func (m *AzureAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -198,69 +184,6 @@ func (m *AzureAccount) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var azureAccountTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		azureAccountTypeEntityTypePropEnum = append(azureAccountTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// AzureAccountEntityTypeCLUSTER captures enum value "CLUSTER"
-	AzureAccountEntityTypeCLUSTER string = "CLUSTER"
-
-	// AzureAccountEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	AzureAccountEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// AzureAccountEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	AzureAccountEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// AzureAccountEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	AzureAccountEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// AzureAccountEntityTypeIAC captures enum value "IAC"
-	AzureAccountEntityTypeIAC string = "IAC"
-
-	// AzureAccountEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	AzureAccountEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// AzureAccountEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	AzureAccountEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// AzureAccountEntityTypeACCOUNT captures enum value "ACCOUNT"
-	AzureAccountEntityTypeACCOUNT string = "ACCOUNT"
-
-	// AzureAccountEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	AzureAccountEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *AzureAccount) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, azureAccountTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *AzureAccount) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

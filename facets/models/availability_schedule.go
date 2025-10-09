@@ -43,6 +43,9 @@ type AvailabilitySchedule struct {
 
 	// schedules
 	Schedules []*AvailabilityTaskSchedule `json:"schedules"`
+
+	// short lived schedules
+	ShortLivedSchedules []*ShortLivedTaskSchedule `json:"shortLivedSchedules"`
 }
 
 // Validate validates this availability schedule
@@ -62,6 +65,10 @@ func (m *AvailabilitySchedule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSchedules(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateShortLivedSchedules(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,11 +137,41 @@ func (m *AvailabilitySchedule) validateSchedules(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *AvailabilitySchedule) validateShortLivedSchedules(formats strfmt.Registry) error {
+	if swag.IsZero(m.ShortLivedSchedules) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ShortLivedSchedules); i++ {
+		if swag.IsZero(m.ShortLivedSchedules[i]) { // not required
+			continue
+		}
+
+		if m.ShortLivedSchedules[i] != nil {
+			if err := m.ShortLivedSchedules[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this availability schedule based on the context it is used
 func (m *AvailabilitySchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSchedules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateShortLivedSchedules(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,6 +196,31 @@ func (m *AvailabilitySchedule) contextValidateSchedules(ctx context.Context, for
 					return ve.ValidateName("schedules" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("schedules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *AvailabilitySchedule) contextValidateShortLivedSchedules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ShortLivedSchedules); i++ {
+
+		if m.ShortLivedSchedules[i] != nil {
+
+			if swag.IsZero(m.ShortLivedSchedules[i]) { // not required
+				return nil
+			}
+
+			if err := m.ShortLivedSchedules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("shortLivedSchedules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

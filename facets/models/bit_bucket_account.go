@@ -44,10 +44,6 @@ type BitBucketAccount struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
-	// entity type
-	// Enum: ["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]
-	EntityType string `json:"entityType,omitempty"`
-
 	// host
 	Host string `json:"host,omitempty"`
 
@@ -67,9 +63,6 @@ type BitBucketAccount struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// number of versions
-	NumberOfVersions int32 `json:"numberOfVersions,omitempty"`
-
 	// org name
 	OrgName string `json:"orgName,omitempty"`
 
@@ -79,9 +72,6 @@ type BitBucketAccount struct {
 	// provider
 	// Enum: ["GITHUB","BITBUCKET","GITLAB","AWS","AZURE","GCP","KUBERNETES","CODER"]
 	Provider string `json:"provider,omitempty"`
-
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
 
 	// system defined
 	SystemDefined bool `json:"systemDefined,omitempty"`
@@ -106,10 +96,6 @@ func (m *BitBucketAccount) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCreationDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEntityType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -204,69 +190,6 @@ func (m *BitBucketAccount) validateCreationDate(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("creationDate", "body", "date-time", m.CreationDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var bitBucketAccountTypeEntityTypePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER","BLUE_PRINT","TEMPLATE_INPUT","CONTROL_PLANE","IAC","ARTIFACT_CI","USER_GROUP","ACCOUNT","ARTIFACTORY"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		bitBucketAccountTypeEntityTypePropEnum = append(bitBucketAccountTypeEntityTypePropEnum, v)
-	}
-}
-
-const (
-
-	// BitBucketAccountEntityTypeCLUSTER captures enum value "CLUSTER"
-	BitBucketAccountEntityTypeCLUSTER string = "CLUSTER"
-
-	// BitBucketAccountEntityTypeBLUEPRINT captures enum value "BLUE_PRINT"
-	BitBucketAccountEntityTypeBLUEPRINT string = "BLUE_PRINT"
-
-	// BitBucketAccountEntityTypeTEMPLATEINPUT captures enum value "TEMPLATE_INPUT"
-	BitBucketAccountEntityTypeTEMPLATEINPUT string = "TEMPLATE_INPUT"
-
-	// BitBucketAccountEntityTypeCONTROLPLANE captures enum value "CONTROL_PLANE"
-	BitBucketAccountEntityTypeCONTROLPLANE string = "CONTROL_PLANE"
-
-	// BitBucketAccountEntityTypeIAC captures enum value "IAC"
-	BitBucketAccountEntityTypeIAC string = "IAC"
-
-	// BitBucketAccountEntityTypeARTIFACTCI captures enum value "ARTIFACT_CI"
-	BitBucketAccountEntityTypeARTIFACTCI string = "ARTIFACT_CI"
-
-	// BitBucketAccountEntityTypeUSERGROUP captures enum value "USER_GROUP"
-	BitBucketAccountEntityTypeUSERGROUP string = "USER_GROUP"
-
-	// BitBucketAccountEntityTypeACCOUNT captures enum value "ACCOUNT"
-	BitBucketAccountEntityTypeACCOUNT string = "ACCOUNT"
-
-	// BitBucketAccountEntityTypeARTIFACTORY captures enum value "ARTIFACTORY"
-	BitBucketAccountEntityTypeARTIFACTORY string = "ARTIFACTORY"
-)
-
-// prop value enum
-func (m *BitBucketAccount) validateEntityTypeEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, bitBucketAccountTypeEntityTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *BitBucketAccount) validateEntityType(formats strfmt.Registry) error {
-	if swag.IsZero(m.EntityType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateEntityTypeEnum("entityType", "body", m.EntityType); err != nil {
 		return err
 	}
 

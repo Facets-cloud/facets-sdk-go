@@ -34,6 +34,12 @@ type ProjectTypeRequest struct {
 	// Example: This is a sample project type
 	Description string `json:"description,omitempty"`
 
+	// dynamic launch
+	DynamicLaunch bool `json:"dynamicLaunch,omitempty"`
+
+	// enable no cloud environment
+	EnableNoCloudEnvironment bool `json:"enableNoCloudEnvironment,omitempty"`
+
 	// IAC tool used for the project
 	// Required: true
 	// Enum: ["TERRAFORM","OPENTOFU"]
@@ -41,6 +47,18 @@ type ProjectTypeRequest struct {
 
 	// iac tool version
 	IacToolVersion string `json:"iacToolVersion,omitempty"`
+
+	// Whether to include CPK8s provider
+	// Example: false
+	IncludeCpK8sProvider bool `json:"includeCpK8sProvider,omitempty"`
+
+	// Whether to include tooling provider
+	// Example: false
+	IncludeToolingProvider bool `json:"includeToolingProvider,omitempty"`
+
+	// Whether this is a legacy project type
+	// Example: false
+	Legacy bool `json:"legacy,omitempty"`
 
 	// Allowed modules for the project
 	// Unique: true
@@ -94,7 +112,7 @@ var projectTypeRequestAllowedCloudsItemsEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

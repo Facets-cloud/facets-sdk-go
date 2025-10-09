@@ -36,7 +36,7 @@ type AwsClusterRequest struct {
 	CdPipelineParent string `json:"cdPipelineParent,omitempty"`
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cloud account Id
@@ -113,7 +113,7 @@ var awsClusterRequestTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -137,6 +137,9 @@ const (
 
 	// AwsClusterRequestCloudKUBERNETES captures enum value "KUBERNETES"
 	AwsClusterRequestCloudKUBERNETES string = "KUBERNETES"
+
+	// AwsClusterRequestCloudNOCLOUD captures enum value "NO_CLOUD"
+	AwsClusterRequestCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum

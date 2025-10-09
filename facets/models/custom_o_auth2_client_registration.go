@@ -52,9 +52,6 @@ type CustomOAuth2ClientRegistration struct {
 	// Required: true
 	Scope *string `json:"scope"`
 
-	// secrets Uid
-	SecretsUID string `json:"secretsUid,omitempty"`
-
 	// system configured
 	SystemConfigured bool `json:"systemConfigured,omitempty"`
 }

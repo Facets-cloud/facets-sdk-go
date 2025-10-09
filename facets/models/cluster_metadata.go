@@ -21,7 +21,7 @@ import (
 type ClusterMetadata struct {
 
 	// cloud
-	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES"]
+	// Enum: ["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]
 	Cloud string `json:"cloud,omitempty"`
 
 	// cluster Id
@@ -63,7 +63,7 @@ var clusterMetadataTypeCloudPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AWS","AZURE","LOCAL","GCP","KUBERNETES","NO_CLOUD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -87,6 +87,9 @@ const (
 
 	// ClusterMetadataCloudKUBERNETES captures enum value "KUBERNETES"
 	ClusterMetadataCloudKUBERNETES string = "KUBERNETES"
+
+	// ClusterMetadataCloudNOCLOUD captures enum value "NO_CLOUD"
+	ClusterMetadataCloudNOCLOUD string = "NO_CLOUD"
 )
 
 // prop value enum
