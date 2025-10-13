@@ -39090,16 +39090,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -41576,9 +41576,8 @@
         "tag": {
           "type": "string"
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
+        "promoted": {
+          "type": "boolean"
         },
         "classified": {
           "type": "boolean"
@@ -41594,8 +41593,9 @@
         "registrationValue": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
         "versioningKey": {
           "type": "string"
@@ -44702,16 +44702,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -47230,12 +47230,12 @@
     "Versioned": {
       "type": "object",
       "properties": {
-        "versioningKey": {
-          "type": "string"
-        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
+        },
+        "versioningKey": {
+          "type": "string"
         }
       }
     },
@@ -47250,11 +47250,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -47273,12 +47273,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48319,11 +48319,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -48342,12 +48342,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48486,10 +48486,10 @@
             "type": "string"
           }
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         }
       }
@@ -49984,11 +49984,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -50007,12 +50007,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54093,11 +54093,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -54116,12 +54116,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54208,11 +54208,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -54231,12 +54231,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54606,11 +54606,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -54629,12 +54629,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54704,10 +54704,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }
