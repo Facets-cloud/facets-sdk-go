@@ -10572,6 +10572,66 @@
         ]
       }
     },
+    "/cc-ui/v1/resource-groups/update-resource-groups-for-resource": {
+      "post": {
+        "tags": [
+          "ui-resource-group-controller"
+        ],
+        "operationId": "updateResourceGroupsForResource",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddResourceToGroupsRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/release-stream": {
       "get": {
         "tags": [
@@ -24056,6 +24116,84 @@
               "type": "object",
               "additionalProperties": {
                 "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/resource-groups/{stackName}/{resourceType}/{resourceName}": {
+      "get": {
+        "tags": [
+          "ui-resource-group-controller"
+        ],
+        "operationId": "getResourceGroupsForResource",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceGroup"
               }
             }
           },
@@ -40904,6 +41042,12 @@
         },
         "flavor": {
           "type": "string"
+        },
+        "resourceGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -41576,10 +41720,11 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
         "registrationType": {
@@ -41593,9 +41738,8 @@
         "registrationValue": {
           "type": "string"
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
+        "classified": {
+          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -44929,6 +45073,32 @@
         }
       }
     },
+    "AddResourceToGroupsRequest": {
+      "required": [
+        "resourceGroupIds",
+        "resourceName",
+        "resourceType",
+        "stackName"
+      ],
+      "type": "object",
+      "properties": {
+        "stackName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "resourceGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ReleaseStreamRequest": {
       "required": [
         "name"
@@ -47273,12 +47443,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48342,12 +48512,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48486,10 +48656,10 @@
             "type": "string"
           }
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         }
       }
@@ -50007,12 +50177,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54116,12 +54286,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54231,12 +54401,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54629,12 +54799,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
