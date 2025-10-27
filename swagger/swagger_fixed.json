@@ -15342,6 +15342,70 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/abort": {
+      "post": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "abortRelease",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/clusters/{clusterId}/deployments/terraform-export": {
       "post": {
         "tags": [
@@ -26859,6 +26923,7 @@
                   "RELEASE_SELECTIVE_ALLOW_DESTROY",
                   "RELEASE_CUSTOM_ALLOW_DESTROY",
                   "RELEASE_PAUSE",
+                  "RELEASE_ABORT",
                   "STACK_CONFIGURE",
                   "STACK_WRITE",
                   "STACK_DELETE",
@@ -27135,6 +27200,7 @@
                   "RELEASE_SELECTIVE_ALLOW_DESTROY",
                   "RELEASE_CUSTOM_ALLOW_DESTROY",
                   "RELEASE_PAUSE",
+                  "RELEASE_ABORT",
                   "STACK_CONFIGURE",
                   "STACK_WRITE",
                   "STACK_DELETE",
@@ -39228,16 +39294,16 @@
         "template": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -41234,6 +41300,7 @@
               "RELEASE_SELECTIVE_ALLOW_DESTROY",
               "RELEASE_CUSTOM_ALLOW_DESTROY",
               "RELEASE_PAUSE",
+              "RELEASE_ABORT",
               "STACK_CONFIGURE",
               "STACK_WRITE",
               "STACK_DELETE",
@@ -44846,16 +44913,16 @@
         "template": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -47462,16 +47529,16 @@
           "type": "integer",
           "format": "int32"
         },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
         "offset": {
           "type": "integer",
           "format": "int64"
         },
         "sort": {
           "$ref": "#/definitions/SortObject"
-        },
-        "pageSize": {
-          "type": "integer",
-          "format": "int32"
         },
         "paged": {
           "type": "boolean"
