@@ -64,7 +64,7 @@ AddIntegrationsParams contains all the parameters to send to the API endpoint
 type AddIntegrationsParams struct {
 
 	// Body.
-	Body *models.CustomOAuth2ClientRegistration
+	Body *models.CustomSamlRegistration
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,13 +120,13 @@ func (o *AddIntegrationsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the add integrations params
-func (o *AddIntegrationsParams) WithBody(body *models.CustomOAuth2ClientRegistration) *AddIntegrationsParams {
+func (o *AddIntegrationsParams) WithBody(body *models.CustomSamlRegistration) *AddIntegrationsParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the add integrations params
-func (o *AddIntegrationsParams) SetBody(body *models.CustomOAuth2ClientRegistration) {
+func (o *AddIntegrationsParams) SetBody(body *models.CustomSamlRegistration) {
 	o.Body = body
 }
 

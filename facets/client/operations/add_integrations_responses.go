@@ -62,7 +62,7 @@ func (o *AddIntegrationsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /cc-ui/v1/oauth] addIntegrations", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cc-ui/v1/saml] addIntegrations", response, response.Code())
 	}
 }
 
@@ -77,7 +77,7 @@ AddIntegrationsOK describes a response with status code 200, with default header
 OK
 */
 type AddIntegrationsOK struct {
-	Payload []*models.CustomOAuth2ClientRegistration
+	Payload []*models.CustomSamlRegistration
 }
 
 // IsSuccess returns true when this add integrations o k response has a 2xx status code
@@ -112,15 +112,15 @@ func (o *AddIntegrationsOK) Code() int {
 
 func (o *AddIntegrationsOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsOK %s", 200, payload)
 }
 
 func (o *AddIntegrationsOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsOK %s", 200, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsOK %s", 200, payload)
 }
 
-func (o *AddIntegrationsOK) GetPayload() []*models.CustomOAuth2ClientRegistration {
+func (o *AddIntegrationsOK) GetPayload() []*models.CustomSamlRegistration {
 	return o.Payload
 }
 
@@ -180,12 +180,12 @@ func (o *AddIntegrationsBadRequest) Code() int {
 
 func (o *AddIntegrationsBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsBadRequest %s", 400, payload)
 }
 
 func (o *AddIntegrationsBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsBadRequest %s", 400, payload)
 }
 
 func (o *AddIntegrationsBadRequest) GetPayload() *models.ErrorDetails {
@@ -250,12 +250,12 @@ func (o *AddIntegrationsForbidden) Code() int {
 
 func (o *AddIntegrationsForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsForbidden %s", 403, payload)
 }
 
 func (o *AddIntegrationsForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsForbidden %s", 403, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsForbidden %s", 403, payload)
 }
 
 func (o *AddIntegrationsForbidden) GetPayload() string {
@@ -318,12 +318,12 @@ func (o *AddIntegrationsNotFound) Code() int {
 
 func (o *AddIntegrationsNotFound) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsNotFound %s", 404, payload)
 }
 
 func (o *AddIntegrationsNotFound) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsNotFound %s", 404, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsNotFound %s", 404, payload)
 }
 
 func (o *AddIntegrationsNotFound) GetPayload() *models.ErrorDetails {
@@ -388,12 +388,12 @@ func (o *AddIntegrationsMethodNotAllowed) Code() int {
 
 func (o *AddIntegrationsMethodNotAllowed) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsMethodNotAllowed %s", 405, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsMethodNotAllowed %s", 405, payload)
 }
 
 func (o *AddIntegrationsMethodNotAllowed) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsMethodNotAllowed %s", 405, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsMethodNotAllowed %s", 405, payload)
 }
 
 func (o *AddIntegrationsMethodNotAllowed) GetPayload() *models.ErrorDetails {
@@ -458,12 +458,12 @@ func (o *AddIntegrationsInternalServerError) Code() int {
 
 func (o *AddIntegrationsInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsInternalServerError %s", 500, payload)
 }
 
 func (o *AddIntegrationsInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /cc-ui/v1/oauth][%d] addIntegrationsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /cc-ui/v1/saml][%d] addIntegrationsInternalServerError %s", 500, payload)
 }
 
 func (o *AddIntegrationsInternalServerError) GetPayload() *models.ErrorDetails {

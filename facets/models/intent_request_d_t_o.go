@@ -31,9 +31,6 @@ type IntentRequestDTO struct {
 	// icon Url
 	IconURL string `json:"iconUrl,omitempty"`
 
-	// inferred from module
-	InferredFromModule bool `json:"inferredFromModule,omitempty"`
-
 	// intent outputs
 	IntentOutputs []*IntentOutput `json:"intentOutputs"`
 

@@ -28,9 +28,6 @@ type TFOutputResponseDTO struct {
 	// id
 	ID string `json:"id,omitempty"`
 
-	// inferred from module
-	InferredFromModule bool `json:"inferredFromModule,omitempty"`
-
 	// lookup tree
 	LookupTree string `json:"lookupTree,omitempty"`
 
@@ -50,6 +47,9 @@ type TFOutputResponseDTO struct {
 	// source
 	// Enum: ["BUILT_IN","CUSTOM"]
 	Source string `json:"source,omitempty"`
+
+	// usage
+	Usage *TFOutputUsageDTO `json:"usage,omitempty"`
 }
 
 // Validate validates this t f output response d t o
@@ -61,6 +61,10 @@ func (m *TFOutputResponseDTO) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSource(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsage(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -146,11 +150,38 @@ func (m *TFOutputResponseDTO) validateSource(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *TFOutputResponseDTO) validateUsage(formats strfmt.Registry) error {
+	if swag.IsZero(m.Usage) { // not required
+		return nil
+	}
+
+	if m.Usage != nil {
+		if err := m.Usage.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("usage")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("usage")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this t f output response d t o based on the context it is used
 func (m *TFOutputResponseDTO) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUsage(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -184,6 +215,31 @@ func (m *TFOutputResponseDTO) contextValidateProviders(ctx context.Context, form
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *TFOutputResponseDTO) contextValidateUsage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Usage != nil {
+
+		if swag.IsZero(m.Usage) { // not required
+			return nil
+		}
+
+		if err := m.Usage.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("usage")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("usage")
+			}
+
+			return err
+		}
 	}
 
 	return nil

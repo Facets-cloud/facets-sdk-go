@@ -1540,6 +1540,140 @@
         ]
       }
     },
+    "/cc-ui/v1/saml/{registrationId}": {
+      "put": {
+        "tags": [
+          "ui-saml-controller"
+        ],
+        "operationId": "updateIntegrations",
+        "parameters": [
+          {
+            "name": "registrationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CustomSamlRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSamlRegistration"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ui-saml-controller"
+        ],
+        "operationId": "deleteIntegrations",
+        "parameters": [
+          {
+            "name": "registrationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSamlRegistration"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/resource-groups/{resourceGroupId}": {
       "get": {
         "tags": [
@@ -2312,7 +2446,7 @@
         "tags": [
           "ui-o-auth-controller"
         ],
-        "operationId": "updateIntegrations",
+        "operationId": "updateIntegrations_1",
         "parameters": [
           {
             "name": "registrationId",
@@ -2384,7 +2518,7 @@
         "tags": [
           "ui-o-auth-controller"
         ],
-        "operationId": "deleteIntegrations",
+        "operationId": "deleteIntegrations_1",
         "parameters": [
           {
             "name": "registrationId",
@@ -10396,6 +10530,122 @@
         ]
       }
     },
+    "/cc-ui/v1/saml": {
+      "get": {
+        "tags": [
+          "ui-saml-controller"
+        ],
+        "operationId": "getAllIntegrations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSamlRegistration"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "ui-saml-controller"
+        ],
+        "operationId": "addIntegrations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSamlRegistration"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CustomSamlRegistration"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/resources/sync": {
       "post": {
         "tags": [
@@ -11085,7 +11335,7 @@
         "tags": [
           "ui-o-auth-controller"
         ],
-        "operationId": "getAllIntegrations",
+        "operationId": "getAllIntegrations_1",
         "responses": {
           "200": {
             "description": "OK",
@@ -11135,7 +11385,7 @@
         "tags": [
           "ui-o-auth-controller"
         ],
-        "operationId": "addIntegrations",
+        "operationId": "addIntegrations_1",
         "responses": {
           "200": {
             "description": "OK",
@@ -20212,6 +20462,58 @@
         ]
       }
     },
+    "/public/v1/samlLoginOptions": {
+      "get": {
+        "tags": [
+          "public-ap-is"
+        ],
+        "operationId": "getSamlLoginOptions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomSamlRegistration"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/public/v1/module/{intent}/{flavor}/{version}/schema": {
       "get": {
         "tags": [
@@ -20241,6 +20543,102 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "allowPreview",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModuleSchemaResponseDTO"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/public/v1/module/{intent}/{flavor}/{version}/schema/{type}": {
+      "get": {
+        "tags": [
+          "public-ap-is"
+        ],
+        "operationId": "getModuleSchemaByType",
+        "parameters": [
+          {
+            "name": "intent",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flavor",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BLUEPRINT",
+                "OVERRIDES"
+              ]
             }
           },
           {
@@ -22208,11 +22606,14 @@
         "tags": [
           "TF Output Management"
         ],
+        "summary": "Delete a TF output by name and namespace",
+        "description": "Deletes a TF output. By default, deletion is blocked if the output is in use by any modules or intents. Use force=true to override this validation and delete anyway.",
         "operationId": "deleteOutput",
         "parameters": [
           {
             "name": "name",
             "in": "path",
+            "description": "Output name",
             "required": true,
             "schema": {
               "type": "string"
@@ -22221,9 +22622,20 @@
           {
             "name": "namespace",
             "in": "query",
+            "description": "Output namespace (e.g., @outputs, @custom)",
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Force deletion even if output is in use. Default: false. When false, deletion fails with 400 error if output is referenced by modules/intents.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           }
         ],
@@ -35175,6 +35587,7 @@
                   "NOTIFICATION_CHANNEL",
                   "NOTIFICATION_SUBSCRIPTION",
                   "OAUTH_INTEGRATION",
+                  "SAML_INTEGRATION",
                   "GUARDRAIL_POLICY",
                   "USER",
                   "USER_GROUP",
@@ -35264,6 +35677,9 @@
                   "OAUTH_INTEGRATION_CREATE",
                   "OAUTH_INTEGRATION_UPDATE",
                   "OAUTH_INTEGRATION_DELETE",
+                  "SAML_INTEGRATION_CREATE",
+                  "SAML_INTEGRATION_UPDATE",
+                  "SAML_INTEGRATION_DELETE",
                   "ENVIRONMENT_RESOURCE_DISABLE",
                   "ENVIRONMENT_RESOURCE_ENABLE",
                   "APPLICATION_ROLLOUT_RESTART",
@@ -39291,19 +39707,19 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -39390,6 +39806,47 @@
         },
         "relativePath": {
           "type": "string"
+        }
+      }
+    },
+    "CustomSamlRegistration": {
+      "required": [
+        "entityId",
+        "loginButtonText",
+        "provider",
+        "registrationId"
+      ],
+      "type": "object",
+      "properties": {
+        "registrationId": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string",
+          "enum": [
+            "GOOGLE_SAML",
+            "OKTA_SAML"
+          ]
+        },
+        "entityId": {
+          "type": "string"
+        },
+        "singleSignOnServiceLocation": {
+          "type": "string"
+        },
+        "verificationX509Certificate": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "isSystemConfigured": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "loginButtonText": {
+          "type": "string"
+        },
+        "systemConfigured": {
+          "type": "boolean"
         }
       }
     },
@@ -44475,9 +44932,6 @@
         "lookupTree": {
           "type": "string"
         },
-        "inferredFromModule": {
-          "type": "boolean"
-        },
         "properties": {
           "$ref": "#/definitions/JsonNode"
         },
@@ -44507,6 +44961,47 @@
         }
       }
     },
+    "OutputIntentUsageDTO": {
+      "type": "object",
+      "properties": {
+        "intentName": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "outputAlias": {
+          "type": "string"
+        }
+      }
+    },
+    "OutputModuleUsageDTO": {
+      "type": "object",
+      "properties": {
+        "moduleIdentifier": {
+          "type": "string"
+        },
+        "intent": {
+          "type": "string"
+        },
+        "flavor": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "usageType": {
+          "type": "string",
+          "enum": [
+            "INPUT",
+            "OUTPUT"
+          ]
+        },
+        "fieldName": {
+          "type": "string"
+        }
+      }
+    },
     "TFOutputResponseDTO": {
       "type": "object",
       "properties": {
@@ -44526,9 +45021,6 @@
             "CUSTOM"
           ]
         },
-        "inferredFromModule": {
-          "type": "boolean"
-        },
         "lookupTree": {
           "type": "string"
         },
@@ -44544,6 +45036,39 @@
           "items": {
             "$ref": "#/definitions/TFProvider"
           }
+        },
+        "usage": {
+          "$ref": "#/definitions/TFOutputUsageDTO"
+        }
+      }
+    },
+    "TFOutputUsageDTO": {
+      "type": "object",
+      "properties": {
+        "modulesConsuming": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputModuleUsageDTO"
+          }
+        },
+        "modulesProducing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputModuleUsageDTO"
+          }
+        },
+        "intentsReferencing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputIntentUsageDTO"
+          }
+        },
+        "inUse": {
+          "type": "boolean"
+        },
+        "totalUsageCount": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -44910,19 +45435,19 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45692,9 +46217,6 @@
           "items": {
             "$ref": "#/definitions/IntentOutput"
           }
-        },
-        "inferredFromModule": {
-          "type": "boolean"
         }
       }
     },
@@ -45728,9 +46250,6 @@
         },
         "iconUrl": {
           "type": "string"
-        },
-        "inferredFromModule": {
-          "type": "boolean"
         }
       }
     },
@@ -47540,10 +48059,10 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "paged": {
+        "unpaged": {
           "type": "boolean"
         },
-        "unpaged": {
+        "paged": {
           "type": "boolean"
         }
       }
@@ -54697,6 +55216,7 @@
             "NOTIFICATION_CHANNEL",
             "NOTIFICATION_SUBSCRIPTION",
             "OAUTH_INTEGRATION",
+            "SAML_INTEGRATION",
             "GUARDRAIL_POLICY",
             "USER",
             "USER_GROUP",
@@ -54781,6 +55301,9 @@
             "OAUTH_INTEGRATION_CREATE",
             "OAUTH_INTEGRATION_UPDATE",
             "OAUTH_INTEGRATION_DELETE",
+            "SAML_INTEGRATION_CREATE",
+            "SAML_INTEGRATION_UPDATE",
+            "SAML_INTEGRATION_DELETE",
             "ENVIRONMENT_RESOURCE_DISABLE",
             "ENVIRONMENT_RESOURCE_ENABLE",
             "APPLICATION_ROLLOUT_RESTART",

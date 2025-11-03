@@ -21,9 +21,6 @@ import (
 // swagger:model TFOutputRequestDTO
 type TFOutputRequestDTO struct {
 
-	// inferred from module
-	InferredFromModule bool `json:"inferredFromModule,omitempty"`
-
 	// lookup tree
 	LookupTree string `json:"lookupTree,omitempty"`
 
