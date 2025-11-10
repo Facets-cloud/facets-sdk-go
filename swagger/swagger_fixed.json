@@ -15086,82 +15086,6 @@
         ]
       }
     },
-    "/cc-ui/v1/clusters/{clusterId}/k8s-chat": {
-      "post": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Ask Questions about k8s operations",
-        "operationId": "getK8sChats",
-        "parameters": [
-          {
-            "name": "clusterId",
-            "in": "path",
-            "description": "Cluster ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChatContext"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Chats found",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Cluster not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/clusters/{clusterId}/deployments": {
       "get": {
         "tags": [
@@ -31723,76 +31647,6 @@
         ]
       }
     },
-    "/cc-ui/v1/clusters/{clusterId}/kubernetes/analyze": {
-      "get": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "operationId": "analyzeKubernetesCluster",
-        "parameters": [
-          {
-            "name": "clusterId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "filters",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/K8sAnalyzeResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/clusters/{clusterId}/kubeconfig": {
       "get": {
         "tags": [
@@ -39710,10 +39564,10 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
-        "template": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "template": {
           "type": "boolean"
         },
         "importedProject": {
@@ -42244,12 +42098,12 @@
         "tag": {
           "type": "string"
         },
+        "promoted": {
+          "type": "boolean"
+        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
-        },
-        "promoted": {
-          "type": "boolean"
         },
         "registrationType": {
           "type": "string",
@@ -45438,10 +45292,10 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
-        "template": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "template": {
           "type": "boolean"
         },
         "importedProject": {
@@ -46134,15 +45988,15 @@
           "format": "int32",
           "example": 40
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
-        },
         "featureBranch": {
           "type": "boolean"
         },
         "specModeled": {
           "type": "boolean"
+        },
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
         "versioningKey": {
           "type": "string"
@@ -46776,49 +46630,6 @@
         }
       }
     },
-    "ChatContext": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "type": "string",
-          "enum": [
-            "system",
-            "user",
-            "assistant"
-          ]
-        },
-        "content": {
-          "type": "string"
-        }
-      }
-    },
-    "ChatMessage": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "type": "string",
-          "enum": [
-            "system",
-            "user",
-            "assistant"
-          ]
-        },
-        "content": {
-          "type": "string"
-        },
-        "chatState": {
-          "type": "string",
-          "enum": [
-            "KEEP_ALIVE",
-            "COMPLETE"
-          ]
-        },
-        "token": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
     "DeploymentRequest": {
       "required": [
         "overrideBuildSteps"
@@ -46985,6 +46796,33 @@
           }
         },
         "totalTokens": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChatMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant"
+          ]
+        },
+        "content": {
+          "type": "string"
+        },
+        "chatState": {
+          "type": "string",
+          "enum": [
+            "KEEP_ALIVE",
+            "COMPLETE"
+          ]
+        },
+        "token": {
           "type": "integer",
           "format": "int64"
         }
@@ -54016,58 +53854,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/ModuleDTO"
           }
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "Text": {
-          "type": "string"
-        }
-      }
-    },
-    "K8sAnalyzeResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Result"
-          }
-        },
-        "problems": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "status": {
-          "type": "string"
-        },
-        "provider": {
-          "type": "string"
-        }
-      }
-    },
-    "Result": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
-        },
-        "kind": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "details": {
-          "type": "string"
-        },
-        "parentObject": {
-          "type": "string"
         }
       }
     },
