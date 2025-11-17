@@ -39561,10 +39561,10 @@
         "id": {
           "type": "string"
         },
-        "alphaBlueprint": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "template": {
@@ -45289,10 +45289,10 @@
         "id": {
           "type": "string"
         },
-        "alphaBlueprint": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "template": {
@@ -45731,6 +45731,21 @@
         }
       }
     },
+    "ControlPlaneUISettings": {
+      "type": "object",
+      "properties": {
+        "nameRegex": {
+          "type": "string",
+          "description": "Regular expression pattern for validating resource names",
+          "example": "^[a-z0-9-]+$"
+        },
+        "enableKubernetesExplorer": {
+          "type": "boolean",
+          "description": "Whether Kubernetes Explorer should be enabled for this resource"
+        }
+      },
+      "description": "Control Plane UI specific settings"
+    },
     "Input": {
       "type": "object",
       "properties": {
@@ -45988,15 +46003,18 @@
           "format": "int32",
           "example": 40
         },
-        "featureBranch": {
-          "type": "boolean"
-        },
-        "specModeled": {
-          "type": "boolean"
+        "controlPlaneUISettings": {
+          "$ref": "#/definitions/ControlPlaneUISettings"
         },
         "changeLog": {
           "type": "string",
           "writeOnly": true
+        },
+        "specModeled": {
+          "type": "boolean"
+        },
+        "featureBranch": {
+          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -47897,10 +47915,10 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "unpaged": {
+        "paged": {
           "type": "boolean"
         },
-        "paged": {
+        "unpaged": {
           "type": "boolean"
         }
       }
@@ -49356,6 +49374,9 @@
             ]
           }
         },
+        "controlPlaneUISettings": {
+          "$ref": "#/definitions/ControlPlaneUISettings"
+        },
         "featureBranch": {
           "type": "boolean"
         }
@@ -49459,6 +49480,11 @@
           "description": "Maximum allowed length for resource names using this module",
           "format": "int32",
           "example": 40
+        },
+        "nameRegex": {
+          "type": "string",
+          "description": "Regular expression pattern for validating resource names",
+          "example": "^[a-z0-9-]+$"
         }
       },
       "description": "Lightweight DTO for TF Modules providing minimal details"
@@ -49673,6 +49699,9 @@
           "description": "Maximum allowed length for resource names using this module",
           "format": "int32",
           "example": 40
+        },
+        "controlPlaneUISettings": {
+          "$ref": "#/definitions/ControlPlaneUISettings"
         },
         "canDownload": {
           "type": "boolean"

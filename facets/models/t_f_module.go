@@ -46,6 +46,9 @@ type TFModule struct {
 	// contains overridable fields
 	ContainsOverridableFields bool `json:"containsOverridableFields,omitempty"`
 
+	// control plane UI settings
+	ControlPlaneUISettings *ControlPlaneUISettings `json:"controlPlaneUISettings,omitempty"`
+
 	// created by
 	CreatedBy string `json:"createdBy,omitempty"`
 
@@ -173,6 +176,10 @@ func (m *TFModule) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateControlPlaneUISettings(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCreationDate(formats); err != nil {
 		res = append(res, err)
 	}
@@ -242,6 +249,29 @@ func (m *TFModule) validateClouds(formats strfmt.Registry) error {
 
 	if err := validate.UniqueItems("clouds", "body", m.Clouds); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *TFModule) validateControlPlaneUISettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.ControlPlaneUISettings) { // not required
+		return nil
+	}
+
+	if m.ControlPlaneUISettings != nil {
+		if err := m.ControlPlaneUISettings.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("controlPlaneUISettings")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("controlPlaneUISettings")
+			}
+
+			return err
+		}
 	}
 
 	return nil
@@ -548,6 +578,10 @@ func (m *TFModule) validateType(formats strfmt.Registry) error {
 func (m *TFModule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateControlPlaneUISettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInputs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -563,6 +597,31 @@ func (m *TFModule) ContextValidate(ctx context.Context, formats strfmt.Registry)
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *TFModule) contextValidateControlPlaneUISettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ControlPlaneUISettings != nil {
+
+		if swag.IsZero(m.ControlPlaneUISettings) { // not required
+			return nil
+		}
+
+		if err := m.ControlPlaneUISettings.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("controlPlaneUISettings")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("controlPlaneUISettings")
+			}
+
+			return err
+		}
+	}
+
 	return nil
 }
 

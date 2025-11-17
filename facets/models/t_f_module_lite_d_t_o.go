@@ -55,6 +55,10 @@ type TFModuleLiteDTO struct {
 	// Example: 40
 	NameLengthLimit int32 `json:"nameLengthLimit,omitempty"`
 
+	// Regular expression pattern for validating resource names
+	// Example: ^[a-z0-9-]+$
+	NameRegex string `json:"nameRegex,omitempty"`
+
 	// Source of the TF Module
 	// Enum: ["BUILT_IN","CUSTOM"]
 	Source string `json:"source,omitempty"`
