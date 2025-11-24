@@ -3225,6 +3225,197 @@
         ]
       }
     },
+    "/cc-ui/v1/labels/{labelId}": {
+      "get": {
+        "tags": [
+          "Label Management"
+        ],
+        "summary": "Get label by ID",
+        "description": "Retrieve a specific label by its ID. Returns 404 if not found.",
+        "operationId": "getLabelById",
+        "parameters": [
+          {
+            "name": "labelId",
+            "in": "path",
+            "description": "Label ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Label Management"
+        ],
+        "summary": "Update a label",
+        "description": "Update an existing label. Returns 404 if label not found, 400 if new name conflicts with another label.",
+        "operationId": "updateLabel",
+        "parameters": [
+          {
+            "name": "labelId",
+            "in": "path",
+            "description": "Label ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LabelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Label Management"
+        ],
+        "summary": "Delete a label",
+        "description": "Delete a label by its ID. Returns 404 if label not found.",
+        "operationId": "deleteLabel",
+        "parameters": [
+          {
+            "name": "labelId",
+            "in": "path",
+            "description": "Label ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/kubernetes/clusters/{clusterId}": {
       "get": {
         "tags": [
@@ -5862,6 +6053,85 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/attach-labels": {
+      "put": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "attachLabels",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AttachLabelsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLog"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ]
@@ -12123,6 +12393,123 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/labels": {
+      "get": {
+        "tags": [
+          "Label Management"
+        ],
+        "summary": "Get all labels",
+        "description": "Retrieve all labels from the system",
+        "operationId": "getAllLabels",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Label"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Label Management"
+        ],
+        "summary": "Create a new label",
+        "description": "Create a new label with the specified name and color code. Returns 400 if a label with the same name already exists.",
+        "operationId": "createLabel",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LabelRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ]
@@ -27226,6 +27613,7 @@
                   "ARTIFACT_ROUTING_RULE_DELETE",
                   "APPLICATION_ROLLING_RESTART",
                   "RUN_ACTION",
+                  "RUN_CLOUD_ACTION",
                   "APPLICATION_DEPLOYMENT_PROMOTE",
                   "APPLICATION_DEPLOYMENT_ABORT",
                   "BILLING_MANAGE",
@@ -27503,6 +27891,7 @@
                   "ARTIFACT_ROUTING_RULE_DELETE",
                   "APPLICATION_ROLLING_RESTART",
                   "RUN_ACTION",
+                  "RUN_CLOUD_ACTION",
                   "APPLICATION_DEPLOYMENT_PROMOTE",
                   "APPLICATION_DEPLOYMENT_ABORT",
                   "BILLING_MANAGE",
@@ -39567,13 +39956,13 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
-        "template": {
-          "type": "boolean"
-        },
         "importedProject": {
           "type": "boolean"
         },
         "monoRepo": {
+          "type": "boolean"
+        },
+        "template": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -40507,6 +40896,53 @@
           "format": "date-time"
         },
         "lastModifiedBy": {
+          "type": "string"
+        }
+      }
+    },
+    "LabelRequest": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Label name",
+          "example": "stable"
+        },
+        "colorCode": {
+          "type": "string",
+          "description": "Color code for the label in hex format",
+          "example": "#FF5733"
+        }
+      },
+      "description": "Label request with label name and optional color code"
+    },
+    "Label": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "colorCode": {
           "type": "string"
         }
       }
@@ -41578,6 +42014,7 @@
               "ARTIFACT_ROUTING_RULE_DELETE",
               "APPLICATION_ROLLING_RESTART",
               "RUN_ACTION",
+              "RUN_CLOUD_ACTION",
               "APPLICATION_DEPLOYMENT_PROMOTE",
               "APPLICATION_DEPLOYMENT_ABORT",
               "BILLING_MANAGE",
@@ -42098,13 +42535,6 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
-        },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
-        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42115,6 +42545,13 @@
         },
         "registrationValue": {
           "type": "string"
+        },
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "promoted": {
+          "type": "boolean"
         },
         "classified": {
           "type": "boolean"
@@ -42320,6 +42757,12 @@
             "$ref": "#/definitions/FacetsResource"
           }
         },
+        "labelIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "releaseReviewedBy": {
           "type": "string"
         },
@@ -42462,6 +42905,23 @@
           }
         }
       }
+    },
+    "AttachLabelsRequest": {
+      "required": [
+        "labelIds"
+      ],
+      "type": "object",
+      "properties": {
+        "labelIds": {
+          "type": "array",
+          "description": "List of label IDs to assign to the deployment. Replaces existing labels. Use empty list to clear all labels. Labels must be created beforehand using label management APIs.",
+          "items": {
+            "type": "string",
+            "description": "List of label IDs to assign to the deployment. Replaces existing labels. Use empty list to clear all labels. Labels must be created beforehand using label management APIs."
+          }
+        }
+      },
+      "description": "Request to attach labels to a deployment log"
     },
     "CopyConfigurationsRequest": {
       "type": "object",
@@ -45084,10 +45544,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         }
       }
@@ -45295,13 +45755,13 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
-        "template": {
-          "type": "boolean"
-        },
         "importedProject": {
           "type": "boolean"
         },
         "monoRepo": {
+          "type": "boolean"
+        },
+        "template": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -46010,10 +46470,10 @@
           "type": "string",
           "writeOnly": true
         },
-        "specModeled": {
+        "featureBranch": {
           "type": "boolean"
         },
-        "featureBranch": {
+        "specModeled": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -47904,16 +48364,16 @@
           "type": "integer",
           "format": "int32"
         },
-        "pageSize": {
-          "type": "integer",
-          "format": "int32"
-        },
         "offset": {
           "type": "integer",
           "format": "int64"
         },
         "sort": {
           "$ref": "#/definitions/SortObject"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
         },
         "paged": {
           "type": "boolean"
@@ -50703,6 +51163,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Change"
+          }
+        },
+        "labelIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -55461,6 +55927,10 @@
         "resourceName": {
           "type": "string",
           "description": "Resource name associated with the action"
+        },
+        "cloudAction": {
+          "type": "boolean",
+          "description": "Indicates if this is a cloud action requiring RUN_CLOUD_ACTION permission"
         }
       },
       "description": "Represents an action definition"
@@ -55750,6 +56220,10 @@
     }
   ],
   "tags": [
+    {
+      "name": "Label Management",
+      "description": "APIs for managing labels"
+    },
     {
       "name": "Variable Management",
       "description": "APIs for managing individual variables and secrets"

@@ -29,6 +29,9 @@ type ResourceReleaseImpact struct {
 	// id
 	ID string `json:"id,omitempty"`
 
+	// label ids
+	LabelIds []string `json:"labelIds"`
+
 	// release details
 	ReleaseDetails *ReleaseDetails `json:"releaseDetails,omitempty"`
 

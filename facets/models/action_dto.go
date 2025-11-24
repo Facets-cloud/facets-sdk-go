@@ -21,6 +21,9 @@ import (
 // swagger:model ActionDto
 type ActionDto struct {
 
+	// Indicates if this is a cloud action requiring RUN_CLOUD_ACTION permission
+	CloudAction bool `json:"cloudAction,omitempty"`
+
 	// Cluster ID associated with the action
 	ClusterID string `json:"clusterId,omitempty"`
 

@@ -80,6 +80,9 @@ type DeploymentLog struct {
 	// is destroy
 	IsDestroy bool `json:"isDestroy,omitempty"`
 
+	// label ids
+	LabelIds []string `json:"labelIds"`
+
 	// migration scripts run
 	MigrationScriptsRun []*MigrationScriptMetadata `json:"migrationScriptsRun"`
 
