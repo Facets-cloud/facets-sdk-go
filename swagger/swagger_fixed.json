@@ -11281,15 +11281,15 @@
           "ui-project-type-controller"
         ],
         "summary": "Get all project types",
-        "description": "- **Description:** Retrieve a list of all existing project types. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve a list of all existing project types. Supports filtering by legacy status and searching by name. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
         "operationId": "getAllProjectTypes",
         "parameters": [
           {
-            "name": "legacy",
+            "name": "filter",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "boolean"
+              "$ref": "#/definitions/ProjectTypeFilter"
             }
           }
         ],
@@ -39953,16 +39953,16 @@
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
-          "type": "boolean"
-        },
-        "importedProject": {
-          "type": "boolean"
-        },
         "monoRepo": {
           "type": "boolean"
         },
         "template": {
+          "type": "boolean"
+        },
+        "alphaBlueprint": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -42535,6 +42535,9 @@
         "tag": {
           "type": "string"
         },
+        "classified": {
+          "type": "boolean"
+        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42551,9 +42554,6 @@
           "writeOnly": true
         },
         "promoted": {
-          "type": "boolean"
-        },
-        "classified": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45752,16 +45752,16 @@
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
-          "type": "boolean"
-        },
-        "importedProject": {
-          "type": "boolean"
-        },
         "monoRepo": {
           "type": "boolean"
         },
         "template": {
+          "type": "boolean"
+        },
+        "alphaBlueprint": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -48345,12 +48345,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49414,12 +49414,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49563,6 +49563,17 @@
         },
         "builtIn": {
           "type": "boolean"
+        }
+      }
+    },
+    "ProjectTypeFilter": {
+      "type": "object",
+      "properties": {
+        "legacy": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -51090,12 +51101,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55153,12 +55164,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55268,12 +55279,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55670,12 +55681,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55745,10 +55756,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }
@@ -56145,14 +56156,14 @@
         "userId": {
           "type": "string"
         },
+        "associatedToResourceGroup": {
+          "type": "boolean"
+        },
         "authorities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/GrantedAuthority"
           }
-        },
-        "associatedToResourceGroup": {
-          "type": "boolean"
         }
       }
     },
