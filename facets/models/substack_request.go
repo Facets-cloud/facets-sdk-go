@@ -29,9 +29,6 @@ type SubstackRequest struct {
 	// relative path
 	RelativePath string `json:"relativePath,omitempty"`
 
-	// tf module
-	TfModule bool `json:"tfModule,omitempty"`
-
 	// vcs
 	// Enum: ["GITHUB","BITBUCKET","GITLAB"]
 	Vcs string `json:"vcs,omitempty"`

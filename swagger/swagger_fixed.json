@@ -13763,7 +13763,7 @@
           "application/json"
         ],
         "produces": [
-          "application/json"
+          "text/plain"
         ]
       }
     },
@@ -39950,13 +39950,13 @@
         "id": {
           "type": "string"
         },
-        "starterProject": {
-          "type": "boolean"
-        },
         "monoRepo": {
           "type": "boolean"
         },
         "template": {
+          "type": "boolean"
+        },
+        "starterProject": {
           "type": "boolean"
         },
         "alphaBlueprint": {
@@ -42535,9 +42535,6 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
-          "type": "boolean"
-        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42549,12 +42546,15 @@
         "registrationValue": {
           "type": "string"
         },
+        "promoted": {
+          "type": "boolean"
+        },
+        "classified": {
+          "type": "boolean"
+        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
-        },
-        "promoted": {
-          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -45577,9 +45577,6 @@
         },
         "versionControlAccountId": {
           "type": "string"
-        },
-        "tfModule": {
-          "type": "boolean"
         }
       }
     },
@@ -45743,19 +45740,16 @@
         "artifactPath": {
           "type": "string"
         },
-        "tfModule": {
-          "type": "boolean"
-        },
         "id": {
           "type": "string"
-        },
-        "starterProject": {
-          "type": "boolean"
         },
         "monoRepo": {
           "type": "boolean"
         },
         "template": {
+          "type": "boolean"
+        },
+        "starterProject": {
           "type": "boolean"
         },
         "alphaBlueprint": {
@@ -56156,14 +56150,14 @@
         "userId": {
           "type": "string"
         },
-        "associatedToResourceGroup": {
-          "type": "boolean"
-        },
         "authorities": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/GrantedAuthority"
           }
+        },
+        "associatedToResourceGroup": {
+          "type": "boolean"
         }
       }
     },

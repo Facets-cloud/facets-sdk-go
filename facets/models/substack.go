@@ -140,9 +140,6 @@ type Substack struct {
 	// template name
 	TemplateName string `json:"templateName,omitempty"`
 
-	// tf module
-	TfModule bool `json:"tfModule,omitempty"`
-
 	// user
 	User string `json:"user,omitempty"`
 
