@@ -21,7 +21,7 @@ import (
 type NotificationTagsForTypeResult struct {
 
 	// id
-	// Enum: ["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE"]
+	// Enum: ["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE","ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"]
 	ID string `json:"id,omitempty"`
 
 	// label
@@ -49,7 +49,7 @@ var notificationTagsForTypeResultTypeIDPropEnum []any
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE","ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -94,6 +94,9 @@ const (
 
 	// NotificationTagsForTypeResultIDRELEASETYPE captures enum value "RELEASE_TYPE"
 	NotificationTagsForTypeResultIDRELEASETYPE string = "RELEASE_TYPE"
+
+	// NotificationTagsForTypeResultIDENVIRONMENTTEARDOWNNOTIFYBEFORE captures enum value "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
+	NotificationTagsForTypeResultIDENVIRONMENTTEARDOWNNOTIFYBEFORE string = "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
 )
 
 // prop value enum

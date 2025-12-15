@@ -24,7 +24,7 @@ type NotificationTagPayload struct {
 	Name string `json:"name,omitempty"`
 
 	// notification tag
-	// Enum: ["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE"]
+	// Enum: ["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE","ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"]
 	NotificationTag string `json:"notificationTag,omitempty"`
 }
 
@@ -46,7 +46,7 @@ var notificationTagPayloadTypeNotificationTagPropEnum []any
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CLUSTER_NAME","CLUSTER_TYPE","QASUITE_RESULT","DR_ACTION","DR_STATUS","STACK_NAME","SEVERITY","ALERT_NAME","DEPLOYMENT_STATUS","APPLICATION_NAME","SEND_RESOLVED","RELEASE_TYPE","ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -91,6 +91,9 @@ const (
 
 	// NotificationTagPayloadNotificationTagRELEASETYPE captures enum value "RELEASE_TYPE"
 	NotificationTagPayloadNotificationTagRELEASETYPE string = "RELEASE_TYPE"
+
+	// NotificationTagPayloadNotificationTagENVIRONMENTTEARDOWNNOTIFYBEFORE captures enum value "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
+	NotificationTagPayloadNotificationTagENVIRONMENTTEARDOWNNOTIFYBEFORE string = "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
 )
 
 // prop value enum

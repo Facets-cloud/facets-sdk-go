@@ -11742,6 +11742,7 @@
                 "ENVIRONMENT_DELETE",
                 "ENVIRONMENT_LAUNCH",
                 "ENVIRONMENT_DESTROY",
+                "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
                 "ENVIRONMENT_CONFIGURE"
               ]
             }
@@ -11764,7 +11765,8 @@
                 "DEPLOYMENT_STATUS",
                 "APPLICATION_NAME",
                 "SEND_RESOLVED",
-                "RELEASE_TYPE"
+                "RELEASE_TYPE",
+                "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
               ]
             }
           },
@@ -25261,6 +25263,7 @@
                 "ENVIRONMENT_DELETE",
                 "ENVIRONMENT_LAUNCH",
                 "ENVIRONMENT_DESTROY",
+                "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
                 "ENVIRONMENT_CONFIGURE"
               ]
             }
@@ -25390,6 +25393,7 @@
                 "ENVIRONMENT_DELETE",
                 "ENVIRONMENT_LAUNCH",
                 "ENVIRONMENT_DESTROY",
+                "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
                 "ENVIRONMENT_CONFIGURE"
               ]
             }
@@ -39950,10 +39954,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -40735,6 +40739,7 @@
             "ENVIRONMENT_DELETE",
             "ENVIRONMENT_LAUNCH",
             "ENVIRONMENT_DESTROY",
+            "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
             "ENVIRONMENT_CONFIGURE"
           ]
         },
@@ -42535,6 +42540,16 @@
         "tag": {
           "type": "string"
         },
+        "classified": {
+          "type": "boolean"
+        },
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "promoted": {
+          "type": "boolean"
+        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42545,16 +42560,6 @@
         },
         "registrationValue": {
           "type": "string"
-        },
-        "promoted": {
-          "type": "boolean"
-        },
-        "classified": {
-          "type": "boolean"
-        },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
         },
         "versioningKey": {
           "type": "string"
@@ -42574,7 +42579,8 @@
             "Schema Compliance Error",
             "GuardRails Compliance Issues",
             "Overrides Syntax Error",
-            "Invalid Filename Error"
+            "Invalid Filename Error",
+            "Input Validation Error"
           ]
         },
         "severity": {
@@ -45544,10 +45550,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         }
       }
@@ -45743,10 +45749,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -46165,6 +46171,7 @@
             "ENVIRONMENT_DELETE",
             "ENVIRONMENT_LAUNCH",
             "ENVIRONMENT_DESTROY",
+            "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
             "ENVIRONMENT_CONFIGURE"
           ]
         },
@@ -48339,12 +48346,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49408,12 +49415,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49620,7 +49627,8 @@
             "DEPLOYMENT_STATUS",
             "APPLICATION_NAME",
             "SEND_RESOLVED",
-            "RELEASE_TYPE"
+            "RELEASE_TYPE",
+            "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
           ]
         },
         "label": {
@@ -49650,7 +49658,8 @@
               "DEPLOYMENT_STATUS",
               "APPLICATION_NAME",
               "SEND_RESOLVED",
-              "RELEASE_TYPE"
+              "RELEASE_TYPE",
+              "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
             ]
           }
         },
@@ -49675,6 +49684,7 @@
             "ENVIRONMENT_DELETE",
             "ENVIRONMENT_LAUNCH",
             "ENVIRONMENT_DESTROY",
+            "SHORT_LIVED_ENVIRONMENT_TEARDOWN",
             "ENVIRONMENT_CONFIGURE"
           ]
         }
@@ -49700,7 +49710,8 @@
             "DEPLOYMENT_STATUS",
             "APPLICATION_NAME",
             "SEND_RESOLVED",
-            "RELEASE_TYPE"
+            "RELEASE_TYPE",
+            "ENVIRONMENT_TEARDOWN_NOTIFY_BEFORE"
           ]
         }
       }
@@ -51095,12 +51106,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55158,12 +55169,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55273,12 +55284,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55675,12 +55686,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"

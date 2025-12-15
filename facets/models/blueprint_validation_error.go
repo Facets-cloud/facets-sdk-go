@@ -24,7 +24,7 @@ type BlueprintValidationError struct {
 	BlueprintErrorLines []int32 `json:"blueprintErrorLines"`
 
 	// category
-	// Enum: ["Syntax Error","Non-Existent Resource Reference","Disabled Resource References","Invalid Reference Expression","Schema Compliance Error","GuardRails Compliance Issues","Overrides Syntax Error","Invalid Filename Error"]
+	// Enum: ["Syntax Error","Non-Existent Resource Reference","Disabled Resource References","Invalid Reference Expression","Schema Compliance Error","GuardRails Compliance Issues","Overrides Syntax Error","Invalid Filename Error","Input Validation Error"]
 	Category string `json:"category,omitempty"`
 
 	// message
@@ -60,7 +60,7 @@ var blueprintValidationErrorTypeCategoryPropEnum []any
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["Syntax Error","Non-Existent Resource Reference","Disabled Resource References","Invalid Reference Expression","Schema Compliance Error","GuardRails Compliance Issues","Overrides Syntax Error","Invalid Filename Error"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["Syntax Error","Non-Existent Resource Reference","Disabled Resource References","Invalid Reference Expression","Schema Compliance Error","GuardRails Compliance Issues","Overrides Syntax Error","Invalid Filename Error","Input Validation Error"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -93,6 +93,9 @@ const (
 
 	// BlueprintValidationErrorCategoryInvalidFilenameError captures enum value "Invalid Filename Error"
 	BlueprintValidationErrorCategoryInvalidFilenameError string = "Invalid Filename Error"
+
+	// BlueprintValidationErrorCategoryInputValidationError captures enum value "Input Validation Error"
+	BlueprintValidationErrorCategoryInputValidationError string = "Input Validation Error"
 )
 
 // prop value enum
