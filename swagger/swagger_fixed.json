@@ -4876,6 +4876,84 @@
         ]
       }
     },
+    "/cc-ui/v1/designer/{stackName}/branch/{branch}/mustache": {
+      "put": {
+        "tags": [
+          "ui-blueprint-designer-controller"
+        ],
+        "summary": "Update resources with mustache templates",
+        "description": "Updates resource files with mustache template content. Replaces .json files with .mustache files.",
+        "operationId": "updateMustacheResources",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "branch",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateBlueprintRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/delivery-pipeline/{stackName}": {
       "get": {
         "tags": [
@@ -41846,6 +41924,9 @@
             "type": "object"
           }
         },
+        "rawContent": {
+          "type": "string"
+        },
         "directory": {
           "type": "string"
         },
@@ -42540,14 +42621,14 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
-          "type": "boolean"
-        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
         },
         "promoted": {
+          "type": "boolean"
+        },
+        "classified": {
           "type": "boolean"
         },
         "registrationType": {
@@ -48387,10 +48468,10 @@
     "SortObject": {
       "type": "object",
       "properties": {
-        "sorted": {
+        "empty": {
           "type": "boolean"
         },
-        "empty": {
+        "sorted": {
           "type": "boolean"
         },
         "unsorted": {
@@ -55761,10 +55842,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }
@@ -56097,6 +56178,24 @@
         }
       }
     },
+    "ClusterResourceBinding": {
+      "type": "object",
+      "properties": {
+        "clusterId": {
+          "type": "string"
+        },
+        "stackName": {
+          "type": "string"
+        },
+        "resources": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FacetsResource"
+          }
+        }
+      }
+    },
     "GrantedAuthority": {
       "type": "object",
       "properties": {
@@ -56149,6 +56248,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackResource"
+          }
+        },
+        "clusterResourceBindings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ClusterResourceBinding"
           }
         },
         "allowedAccounts": {

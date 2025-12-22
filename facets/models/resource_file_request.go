@@ -34,6 +34,9 @@ type ResourceFileRequest struct {
 	// merge content
 	MergeContent map[string]any `json:"mergeContent,omitempty"`
 
+	// raw content
+	RawContent string `json:"rawContent,omitempty"`
+
 	// resource group ids
 	ResourceGroupIds []string `json:"resourceGroupIds"`
 

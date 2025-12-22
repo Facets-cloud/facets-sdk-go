@@ -42,6 +42,9 @@ type SimpleOauth2User struct {
 	// authorities
 	Authorities []*GrantedAuthority `json:"authorities"`
 
+	// cluster resource bindings
+	ClusterResourceBindings map[string]ClusterResourceBinding `json:"clusterResourceBindings,omitempty"`
+
 	// cluster role binding
 	ClusterRoleBinding map[string]string `json:"clusterRoleBinding,omitempty"`
 
@@ -76,6 +79,10 @@ func (m *SimpleOauth2User) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAuthorities(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterResourceBindings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,6 +166,36 @@ func (m *SimpleOauth2User) validateAuthorities(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *SimpleOauth2User) validateClusterResourceBindings(formats strfmt.Registry) error {
+	if swag.IsZero(m.ClusterResourceBindings) { // not required
+		return nil
+	}
+
+	for k := range m.ClusterResourceBindings {
+
+		if err := validate.Required("clusterResourceBindings"+"."+k, "body", m.ClusterResourceBindings[k]); err != nil {
+			return err
+		}
+		if val, ok := m.ClusterResourceBindings[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("clusterResourceBindings" + "." + k)
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("clusterResourceBindings" + "." + k)
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *SimpleOauth2User) validateGrantedAuthorities(formats strfmt.Registry) error {
 	if swag.IsZero(m.GrantedAuthorities) { // not required
 		return nil
@@ -231,6 +268,10 @@ func (m *SimpleOauth2User) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateClusterResourceBindings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGrantedAuthorities(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -265,6 +306,21 @@ func (m *SimpleOauth2User) contextValidateAuthorities(ctx context.Context, forma
 					return ce.ValidateName("authorities" + "." + strconv.Itoa(i))
 				}
 
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *SimpleOauth2User) contextValidateClusterResourceBindings(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.ClusterResourceBindings {
+
+		if val, ok := m.ClusterResourceBindings[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
 				return err
 			}
 		}
