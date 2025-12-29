@@ -42621,15 +42621,12 @@
         "tag": {
           "type": "string"
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
-        },
         "promoted": {
           "type": "boolean"
         },
-        "classified": {
-          "type": "boolean"
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
         "registrationType": {
           "type": "string",
@@ -42641,6 +42638,9 @@
         },
         "registrationValue": {
           "type": "string"
+        },
+        "classified": {
+          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -55842,10 +55842,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }
