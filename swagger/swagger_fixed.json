@@ -40032,10 +40032,10 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
@@ -42621,7 +42621,7 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
         "changeLog": {
@@ -42639,7 +42639,7 @@
         "registrationValue": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45631,10 +45631,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         }
       }
@@ -45830,10 +45830,10 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
@@ -48404,11 +48404,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
@@ -48468,10 +48468,10 @@
     "SortObject": {
       "type": "object",
       "properties": {
-        "empty": {
+        "sorted": {
           "type": "boolean"
         },
-        "sorted": {
+        "empty": {
           "type": "boolean"
         },
         "unsorted": {
@@ -49473,11 +49473,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
@@ -51164,11 +51164,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
@@ -55227,11 +55227,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
@@ -55342,11 +55342,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
@@ -55744,11 +55744,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "first": {
-          "type": "boolean"
-        },
         "pageable": {
           "$ref": "#/definitions/PageableObject"
+        },
+        "first": {
+          "type": "boolean"
         },
         "size": {
           "type": "integer",
