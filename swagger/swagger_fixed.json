@@ -40022,9 +40022,6 @@
         "projectTypeId": {
           "type": "string"
         },
-        "projectTypeName": {
-          "type": "string"
-        },
         "previewModulesAllowed": {
           "type": "boolean",
           "description": "Alternatively called isTestProject"
@@ -40032,10 +40029,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -42621,12 +42618,8 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
-        },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
         },
         "registrationType": {
           "type": "string",
@@ -42639,7 +42632,11 @@
         "registrationValue": {
           "type": "string"
         },
-        "promoted": {
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "classified": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45631,10 +45628,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         }
       }
@@ -45817,9 +45814,6 @@
         "projectTypeId": {
           "type": "string"
         },
-        "projectTypeName": {
-          "type": "string"
-        },
         "previewModulesAllowed": {
           "type": "boolean",
           "description": "Alternatively called isTestProject"
@@ -45830,10 +45824,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -48404,11 +48398,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -49473,11 +49467,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -51164,11 +51158,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -55227,11 +55221,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -55342,11 +55336,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -55744,11 +55738,11 @@
           "type": "integer",
           "format": "int64"
         },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
         "first": {
           "type": "boolean"
+        },
+        "pageable": {
+          "$ref": "#/definitions/PageableObject"
         },
         "size": {
           "type": "integer",
@@ -55842,10 +55836,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }

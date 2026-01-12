@@ -112,9 +112,6 @@ type Stack struct {
 	// project type Id
 	ProjectTypeID string `json:"projectTypeId,omitempty"`
 
-	// project type name
-	ProjectTypeName string `json:"projectTypeName,omitempty"`
-
 	// provided resources
 	// Unique: true
 	ProvidedResources []*FacetsResource `json:"providedResources"`
