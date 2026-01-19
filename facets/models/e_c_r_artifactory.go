@@ -8,6 +8,8 @@ package models
 import (
 	"context"
 	"encoding/json"
+	stderrors "errors"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -56,6 +58,9 @@ type ECRArtifactory struct {
 	// image tag mutability
 	// Enum: ["MUTABLE","IMMUTABLE"]
 	ImageTagMutability string `json:"imageTagMutability,omitempty"`
+
+	// image tag mutability exclusion filters
+	ImageTagMutabilityExclusionFilters []*ExclusionFilter `json:"imageTagMutabilityExclusionFilters"`
 
 	// last modified by
 	LastModifiedBy string `json:"lastModifiedBy,omitempty"`
@@ -114,6 +119,10 @@ func (m *ECRArtifactory) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateImageTagMutability(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateImageTagMutabilityExclusionFilters(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -288,6 +297,36 @@ func (m *ECRArtifactory) validateImageTagMutability(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *ECRArtifactory) validateImageTagMutabilityExclusionFilters(formats strfmt.Registry) error {
+	if swag.IsZero(m.ImageTagMutabilityExclusionFilters) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ImageTagMutabilityExclusionFilters); i++ {
+		if swag.IsZero(m.ImageTagMutabilityExclusionFilters[i]) { // not required
+			continue
+		}
+
+		if m.ImageTagMutabilityExclusionFilters[i] != nil {
+			if err := m.ImageTagMutabilityExclusionFilters[i].Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("imageTagMutabilityExclusionFilters" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("imageTagMutabilityExclusionFilters" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ECRArtifactory) validateLastModifiedDate(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastModifiedDate) { // not required
 		return nil
@@ -321,8 +360,46 @@ func (m *ECRArtifactory) validateStacksAssociated(formats strfmt.Registry) error
 	return nil
 }
 
-// ContextValidate validates this e c r artifactory based on context it is used
+// ContextValidate validate this e c r artifactory based on the context it is used
 func (m *ECRArtifactory) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateImageTagMutabilityExclusionFilters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ECRArtifactory) contextValidateImageTagMutabilityExclusionFilters(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ImageTagMutabilityExclusionFilters); i++ {
+
+		if m.ImageTagMutabilityExclusionFilters[i] != nil {
+
+			if swag.IsZero(m.ImageTagMutabilityExclusionFilters[i]) { // not required
+				return nil
+			}
+
+			if err := m.ImageTagMutabilityExclusionFilters[i].ContextValidate(ctx, formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("imageTagMutabilityExclusionFilters" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("imageTagMutabilityExclusionFilters" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

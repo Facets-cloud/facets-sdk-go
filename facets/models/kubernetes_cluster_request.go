@@ -61,9 +61,6 @@ type KubernetesClusterRequest struct {
 	// require sign off
 	RequireSignOff bool `json:"requireSignOff,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 

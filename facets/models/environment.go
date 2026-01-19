@@ -118,9 +118,6 @@ type Environment struct {
 	// require sign off
 	RequireSignOff bool `json:"requireSignOff,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
 

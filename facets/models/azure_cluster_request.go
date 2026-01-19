@@ -79,9 +79,6 @@ type AzureClusterRequest struct {
 	// resource group name
 	ResourceGroupName string `json:"resourceGroupName,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 

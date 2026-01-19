@@ -139,9 +139,6 @@ type AwsCluster struct {
 	// role a r n
 	RoleARN string `json:"roleARN,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// secret access key
 	SecretAccessKey string `json:"secretAccessKey,omitempty"`
 

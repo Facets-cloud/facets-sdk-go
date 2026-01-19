@@ -136,9 +136,6 @@ type AzureCluster struct {
 	// resource group name
 	ResourceGroupName string `json:"resourceGroupName,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// secrets
 	Secrets map[string]string `json:"secrets,omitempty"`
 

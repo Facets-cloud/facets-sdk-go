@@ -9165,129 +9165,6 @@
         ]
       }
     },
-    "/cc-ui/v2/assistant/{threadId}/getChat": {
-      "post": {
-        "tags": [
-          "ui-assistant-controller"
-        ],
-        "operationId": "getChat",
-        "parameters": [
-          {
-            "name": "threadId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AssistantResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v2/assistant/chat": {
-      "post": {
-        "tags": [
-          "ui-assistant-controller"
-        ],
-        "summary": "Continue Chat",
-        "operationId": "continueChat",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AssistantResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/AssistantRequest"
-            }
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/workflow": {
       "get": {
         "tags": [
@@ -16307,138 +16184,6 @@
         ]
       }
     },
-    "/cc-ui/v1/clusters/{clusterId}/chat": {
-      "get": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Get chats by cluster ID",
-        "operationId": "getAllChats",
-        "parameters": [
-          {
-            "name": "clusterId",
-            "in": "path",
-            "description": "Cluster ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Chats found",
-            "schema": {
-              "$ref": "#/definitions/PageChat"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Cluster not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "post": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Create a new chat",
-        "operationId": "createChat",
-        "parameters": [
-          {
-            "name": "clusterId",
-            "in": "path",
-            "description": "Cluster ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/CreateChatRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Chat created successfully",
-            "schema": {
-              "$ref": "#/definitions/Chat"
-            }
-          },
-          "400": {
-            "description": "Invalid request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/clusters/{clusterId}/availability-schedule": {
       "get": {
         "tags": [
@@ -16690,138 +16435,6 @@
             }
           }
         ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v1/clusters/chat/{chatId}": {
-      "get": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Get chat by ID",
-        "operationId": "getChatById",
-        "parameters": [
-          {
-            "name": "chatId",
-            "in": "path",
-            "description": "Chat ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Chat found",
-            "schema": {
-              "$ref": "#/definitions/Chat"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Chat not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      },
-      "post": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Send a message to a chat",
-        "operationId": "chat",
-        "parameters": [
-          {
-            "name": "chatId",
-            "in": "path",
-            "description": "Chat ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ChatRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Message sent successfully",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          },
-          "400": {
-            "description": "Invalid request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Chat not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
         "consumes": [
           "application/json"
         ],
@@ -21371,55 +20984,6 @@
                 "KUBERNETES",
                 "NO_CLOUD"
               ]
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v2/assistant/thread": {
-      "get": {
-        "tags": [
-          "ui-assistant-controller"
-        ],
-        "operationId": "createThread",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AssistantResponse"
             }
           },
           "400": {
@@ -35380,59 +34944,6 @@
         ]
       }
     },
-    "/cc-ui/v1/clusters/chat/metadata": {
-      "get": {
-        "tags": [
-          "UI Chat GPT Controller"
-        ],
-        "summary": "Get chat starters metadata",
-        "operationId": "getAllStarters",
-        "responses": {
-          "200": {
-            "description": "Chat metadata found",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChatStarterMetadata"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/ci-cd/{stackName}": {
       "get": {
         "tags": [
@@ -41079,12 +40590,6 @@
           "type": "number",
           "format": "double"
         },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "autoSignOffSchedule": {
           "type": "string"
         },
@@ -41230,12 +40735,6 @@
             "SCALE_UP_FAILED"
           ]
         },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
@@ -41359,12 +40858,6 @@
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "autoSignOffSchedule": {
           "type": "string"
@@ -41541,12 +41034,6 @@
             "SCALE_UP_FAILED"
           ]
         },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
@@ -41667,12 +41154,6 @@
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "autoSignOffSchedule": {
           "type": "string"
@@ -41818,12 +41299,6 @@
             "SCALING_UP",
             "SCALE_UP_FAILED"
           ]
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
@@ -42618,9 +42093,6 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
-        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42632,12 +42104,15 @@
         "registrationValue": {
           "type": "string"
         },
+        "classified": {
+          "type": "boolean"
+        },
+        "promoted": {
+          "type": "boolean"
+        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
-        },
-        "classified": {
-          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -43158,12 +42633,6 @@
             "SCALE_UP_FAILED"
           ]
         },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
@@ -43254,12 +42723,6 @@
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "autoSignOffSchedule": {
           "type": "string"
@@ -43369,12 +42832,6 @@
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "autoSignOffSchedule": {
           "type": "string"
@@ -43557,12 +43014,6 @@
             "SCALE_UP_FAILED"
           ]
         },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
@@ -43689,12 +43140,6 @@
         "k8sRequestsToLimitsRatio": {
           "type": "number",
           "format": "double"
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "autoSignOffSchedule": {
           "type": "string"
@@ -43867,12 +43312,6 @@
             "SCALING_UP",
             "SCALE_UP_FAILED"
           ]
-        },
-        "schedules": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "k8sRequestsToLimitsRatio": {
           "type": "number",
@@ -44975,6 +44414,12 @@
             "IMMUTABLE"
           ]
         },
+        "imageTagMutabilityExclusionFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionFilter"
+          }
+        },
         "maxImages": {
           "type": "integer",
           "format": "int32"
@@ -44983,6 +44428,20 @@
           "type": "boolean"
         },
         "versioningKey": {
+          "type": "string"
+        }
+      }
+    },
+    "ExclusionFilter": {
+      "type": "object",
+      "properties": {
+        "filterType": {
+          "type": "string",
+          "enum": [
+            "WILDCARD"
+          ]
+        },
+        "filter": {
           "type": "string"
         }
       }
@@ -45181,92 +44640,6 @@
       "properties": {
         "email": {
           "type": "string"
-        }
-      }
-    },
-    "Assistant": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "prompt": {
-          "type": "string"
-        },
-        "ability": {
-          "type": "string"
-        },
-        "conversational": {
-          "type": "boolean"
-        }
-      }
-    },
-    "AssistantMessage": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "type": "string"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "assistant": {
-          "$ref": "#/definitions/Assistant"
-        },
-        "message": {
-          "type": "string"
-        },
-        "context": {
-          "type": "object"
-        }
-      }
-    },
-    "AssistantRequest": {
-      "type": "object",
-      "properties": {
-        "threadId": {
-          "type": "string"
-        },
-        "actionName": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "context": {
-          "$ref": "#/definitions/JSONObject"
-        }
-      }
-    },
-    "AssistantResponse": {
-      "type": "object",
-      "properties": {
-        "threadId": {
-          "type": "string"
-        },
-        "messages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssistantMessage"
-          }
-        },
-        "nextActions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssistantRequest"
-          }
-        }
-      }
-    },
-    "JSONObject": {
-      "type": "object",
-      "properties": {
-        "empty": {
-          "type": "boolean"
         }
       }
     },
@@ -47303,108 +46676,6 @@
         }
       }
     },
-    "CreateChatRequest": {
-      "type": "object",
-      "properties": {
-        "starter": {
-          "type": "string",
-          "enum": [
-            "ALERTS"
-          ]
-        }
-      }
-    },
-    "Chat": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "creationDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastModifiedDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastModifiedBy": {
-          "type": "string"
-        },
-        "clusterId": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "metadata": {
-          "$ref": "#/definitions/ChatStarterMetadata"
-        },
-        "context": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          }
-        },
-        "totalTokens": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "ChatMessage": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "type": "string",
-          "enum": [
-            "system",
-            "user",
-            "assistant"
-          ]
-        },
-        "content": {
-          "type": "string"
-        },
-        "chatState": {
-          "type": "string",
-          "enum": [
-            "KEEP_ALIVE",
-            "COMPLETE"
-          ]
-        },
-        "token": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "ChatStarterMetadata": {
-      "type": "object",
-      "properties": {
-        "starter": {
-          "type": "string",
-          "enum": [
-            "ALERTS"
-          ]
-        },
-        "description": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "suggestions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ImageOverrideRequest": {
       "required": [
         "resourceName",
@@ -47452,14 +46723,6 @@
           "type": "string"
         },
         "ciName": {
-          "type": "string"
-        }
-      }
-    },
-    "ChatRequest": {
-      "type": "object",
-      "properties": {
-        "question": {
           "type": "string"
         }
       }
@@ -55325,52 +54588,6 @@
         }
       }
     },
-    "PageChat": {
-      "type": "object",
-      "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "first": {
-          "type": "boolean"
-        },
-        "pageable": {
-          "$ref": "#/definitions/PageableObject"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Chat"
-          }
-        },
-        "number": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "sort": {
-          "$ref": "#/definitions/SortObject"
-        },
-        "numberOfElements": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
-        },
-        "empty": {
-          "type": "boolean"
-        }
-      }
-    },
     "AvailabilitySchedule": {
       "required": [
         "clusterId"
@@ -55836,10 +55053,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }
@@ -56342,10 +55559,6 @@
     {
       "name": "Variable Management",
       "description": "APIs for managing individual variables and secrets"
-    },
-    {
-      "name": "UI Chat GPT Controller",
-      "description": "Endpoints for Chat GPT operations"
     }
   ]
 }

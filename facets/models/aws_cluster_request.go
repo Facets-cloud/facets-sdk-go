@@ -76,9 +76,6 @@ type AwsClusterRequest struct {
 	// require sign off
 	RequireSignOff bool `json:"requireSignOff,omitempty"`
 
-	// schedules
-	Schedules map[string]string `json:"schedules,omitempty"`
-
 	// secret access key
 	SecretAccessKey string `json:"secretAccessKey,omitempty"`
 
