@@ -15983,6 +15983,80 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/release-changes/bulk": {
+      "post": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "getReleaseChangesBulk",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BulkReleaseChangesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReleaseChanges"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/clusters/{clusterId}/deployments/recipes/deployment/hotfix": {
       "post": {
         "tags": [
@@ -34944,6 +35018,74 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/stack/{stackName}/cluster/{clusterName}/info": {
+      "get": {
+        "tags": [
+          "ui-common-cluster-controller"
+        ],
+        "summary": "Get cluster info by stack name and cluster name",
+        "operationId": "getClusterInfoByName",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/ci-cd/{stackName}": {
       "get": {
         "tags": [
@@ -42093,6 +42235,13 @@
         "tag": {
           "type": "string"
         },
+        "promoted": {
+          "type": "boolean"
+        },
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
+        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42106,13 +42255,6 @@
         },
         "classified": {
           "type": "boolean"
-        },
-        "promoted": {
-          "type": "boolean"
-        },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
         },
         "versioningKey": {
           "type": "string"
@@ -46665,6 +46807,79 @@
         }
       }
     },
+    "BulkReleaseChangesRequest": {
+      "required": [
+        "deploymentIds"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChangedAttribute": {
+      "type": "object",
+      "properties": {
+        "attribute": {
+          "type": "string"
+        },
+        "newValue": {
+          "type": "string"
+        },
+        "oldValue": {
+          "type": "string"
+        }
+      }
+    },
+    "ReleaseChanges": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "deploymentId": {
+          "type": "string"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceChange"
+          }
+        }
+      }
+    },
+    "ResourceChange": {
+      "type": "object",
+      "properties": {
+        "changeType": {
+          "type": "string",
+          "enum": [
+            "ADDED",
+            "MODIFIED",
+            "REMOVED"
+          ]
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "changedAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChangedAttribute"
+          }
+        },
+        "flavor": {
+          "type": "string"
+        }
+      }
+    },
     "HotfixDeploymentRecipe": {
       "type": "object",
       "properties": {
@@ -50393,20 +50608,6 @@
             "MODIFIED",
             "REMOVED"
           ]
-        }
-      }
-    },
-    "ChangedAttribute": {
-      "type": "object",
-      "properties": {
-        "attribute": {
-          "type": "string"
-        },
-        "newValue": {
-          "type": "string"
-        },
-        "oldValue": {
-          "type": "string"
         }
       }
     },
@@ -54340,51 +54541,6 @@
         }
       }
     },
-    "ReleaseChanges": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "deploymentId": {
-          "type": "string"
-        },
-        "changes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceChange"
-          }
-        }
-      }
-    },
-    "ResourceChange": {
-      "type": "object",
-      "properties": {
-        "changeType": {
-          "type": "string",
-          "enum": [
-            "ADDED",
-            "MODIFIED",
-            "REMOVED"
-          ]
-        },
-        "resourceName": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        },
-        "changedAttributes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChangedAttribute"
-          }
-        },
-        "flavor": {
-          "type": "string"
-        }
-      }
-    },
     "TokenPaginatedResponse": {
       "type": "object",
       "properties": {
@@ -55053,10 +55209,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }
