@@ -11357,6 +11357,128 @@
         ]
       }
     },
+    "/cc-ui/v1/project-types/import/{projectTypeName}": {
+      "post": {
+        "tags": [
+          "Project Type Import"
+        ],
+        "summary": "Import a project type",
+        "description": "- **Description:** Imports a project type from the repository. This is a multi-phase operation that imports outputs, modules, and the project type itself. \n- **Restrictions:** Only users with PROJECT_TYPE_WRITE permission can import. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "operationId": "importProjectType",
+        "parameters": [
+          {
+            "name": "projectTypeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update even if the project type already exists",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import completed",
+            "schema": {
+              "$ref": "#/definitions/ImportProjectTypeResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request or project type already exists",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Project type not found in repository",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/project-types/import/sync": {
+      "post": {
+        "tags": [
+          "Project Type Import"
+        ],
+        "summary": "Sync repository",
+        "description": "- **Description:** Syncs the local repository clone with the remote. This pulls the latest changes from the facets-modules-redesign repository. \n- **Restrictions:** Only users with PROJECT_TYPE_WRITE permission can sync. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "operationId": "syncRepository",
+        "responses": {
+          "200": {
+            "description": "Sync completed",
+            "schema": {
+              "$ref": "#/definitions/SyncResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/opa/{policyName}/execute": {
       "post": {
         "tags": [
@@ -12287,6 +12409,89 @@
           },
           "500": {
             "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/modules/import/{intent}/{flavor}": {
+      "post": {
+        "tags": [
+          "Module Import"
+        ],
+        "summary": "Import a module",
+        "description": "- **Description:** Imports a module from the repository. This is a two-phase operation that imports outputs and then the module itself. \n- **Restrictions:** Only users with MODULE_WRITE permission can import. \n- **Permissions:** Requires `MODULE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "operationId": "importModule",
+        "parameters": [
+          {
+            "name": "intent",
+            "in": "path",
+            "description": "Intent of the module to import",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "mysql"
+          },
+          {
+            "name": "flavor",
+            "in": "path",
+            "description": "Flavor of the module to import",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "k8s"
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update even if the module already exists",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import completed",
+            "schema": {
+              "$ref": "#/definitions/ImportModuleResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request or module already exists",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Module not found in repository",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
@@ -24790,6 +24995,60 @@
         ]
       }
     },
+    "/cc-ui/v1/project-types/import/available": {
+      "get": {
+        "tags": [
+          "Project Type Import"
+        ],
+        "summary": "List available project types",
+        "description": "- **Description:** Lists all project types available in the facets-modules-redesign repository with their import status. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
+        "operationId": "listAvailableProjectTypes",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailableProjectTypeDTO"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/opa": {
       "get": {
         "tags": [
@@ -25919,6 +26178,60 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/TFModuleLiteDTO"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/modules/import/available": {
+      "get": {
+        "tags": [
+          "Module Import"
+        ],
+        "summary": "List available modules",
+        "description": "- **Description:** Lists all modules available in the facets-modules-redesign repository with their import status. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
+        "operationId": "listAvailableModules",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AvailableModuleDTO"
               }
             }
           },
@@ -42235,12 +42548,12 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
-        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
+        },
+        "classified": {
+          "type": "boolean"
         },
         "registrationType": {
           "type": "string",
@@ -42253,7 +42566,7 @@
         "registrationValue": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45637,6 +45950,122 @@
         }
       }
     },
+    "ImportPhaseResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of this phase",
+          "enum": [
+            "SUCCESS",
+            "PARTIAL_SUCCESS",
+            "FAILED",
+            "SKIPPED"
+          ]
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "Total number of items processed in this phase",
+          "format": "int32"
+        },
+        "successCount": {
+          "type": "integer",
+          "description": "Number of items successfully imported",
+          "format": "int32"
+        },
+        "failedCount": {
+          "type": "integer",
+          "description": "Number of items that failed to import",
+          "format": "int32"
+        },
+        "skippedCount": {
+          "type": "integer",
+          "description": "Number of items that were skipped (already exist)",
+          "format": "int32"
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of error messages for failed items",
+          "items": {
+            "type": "string",
+            "description": "List of error messages for failed items"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "List of warning messages",
+          "items": {
+            "type": "string",
+            "description": "List of warning messages"
+          }
+        }
+      },
+      "description": "Result of an import phase"
+    },
+    "ImportProjectTypeResponse": {
+      "type": "object",
+      "properties": {
+        "projectTypeName": {
+          "type": "string",
+          "description": "Name of the imported project type"
+        },
+        "projectTypeId": {
+          "type": "string",
+          "description": "MongoDB ID of the imported project type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Overall status of the import operation",
+          "enum": [
+            "SUCCESS",
+            "PARTIAL_SUCCESS",
+            "FAILED"
+          ]
+        },
+        "outputsPhase": {
+          "$ref": "#/definitions/ImportPhaseResult"
+        },
+        "modulesPhase": {
+          "$ref": "#/definitions/ImportPhaseResult"
+        },
+        "projectTypePhase": {
+          "$ref": "#/definitions/ImportPhaseResult"
+        },
+        "importedAt": {
+          "type": "string",
+          "description": "Timestamp when the import was completed",
+          "format": "date-time"
+        }
+      },
+      "description": "Response for project type import operation"
+    },
+    "SyncResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Whether the sync operation was successful"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message describing the result of the sync operation"
+        },
+        "previousCommit": {
+          "type": "string",
+          "description": "Commit SHA before the sync"
+        },
+        "currentCommit": {
+          "type": "string",
+          "description": "Commit SHA after the sync"
+        },
+        "syncedAt": {
+          "type": "string",
+          "description": "Timestamp when the sync was completed",
+          "format": "date-time"
+        }
+      },
+      "description": "Response for repository sync operation"
+    },
     "OpaPolicyExecutionResult": {
       "type": "object",
       "properties": {
@@ -46112,6 +46541,48 @@
         }
       }
     },
+    "ImportModuleResponse": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Intent of the imported module"
+        },
+        "flavor": {
+          "type": "string",
+          "description": "Flavor of the imported module"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the imported module"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "MongoDB ID of the imported module"
+        },
+        "status": {
+          "type": "string",
+          "description": "Overall status of the import operation",
+          "enum": [
+            "SUCCESS",
+            "PARTIAL_SUCCESS",
+            "FAILED"
+          ]
+        },
+        "outputsPhase": {
+          "$ref": "#/definitions/ImportPhaseResult"
+        },
+        "modulePhase": {
+          "$ref": "#/definitions/ImportPhaseResult"
+        },
+        "importedAt": {
+          "type": "string",
+          "description": "Timestamp when the import was completed",
+          "format": "date-time"
+        }
+      },
+      "description": "Response for module import operation"
+    },
     "IntentRequestDTO": {
       "required": [
         "displayName",
@@ -46294,10 +46765,10 @@
         "iconUrl": {
           "type": "string"
         },
-        "substack": {
+        "templatedResource": {
           "type": "boolean"
         },
-        "templatedResource": {
+        "substack": {
           "type": "boolean"
         }
       }
@@ -49131,6 +49602,70 @@
         }
       }
     },
+    "AvailableProjectTypeDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the project type",
+          "example": "AWS"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project type"
+        },
+        "imported": {
+          "type": "boolean",
+          "description": "Whether this project type has been imported into MongoDB"
+        },
+        "importedId": {
+          "type": "string",
+          "description": "MongoDB ID if the project type has been imported"
+        },
+        "modules": {
+          "type": "array",
+          "description": "List of modules defined in this project type",
+          "items": {
+            "$ref": "#/definitions/ModuleInfo"
+          }
+        },
+        "baseTemplatePath": {
+          "type": "string",
+          "description": "Base template path for the project type"
+        },
+        "iacTool": {
+          "type": "string",
+          "description": "Infrastructure as Code tool",
+          "example": "TERRAFORM",
+          "enum": [
+            "TERRAFORM",
+            "OPENTOFU"
+          ]
+        },
+        "iacToolVersion": {
+          "type": "string",
+          "description": "Version of the IaC tool",
+          "example": "1.5.7"
+        }
+      },
+      "description": "Available project type from the repository"
+    },
+    "ModuleInfo": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Module intent",
+          "example": "mysql"
+        },
+        "flavor": {
+          "type": "string",
+          "description": "Module flavor",
+          "example": "k8s"
+        }
+      },
+      "description": "Module information with intent and flavor"
+    },
     "PolicyTemplateDTO": {
       "type": "object",
       "properties": {
@@ -49841,6 +50376,72 @@
         }
       },
       "description": "Templates associated with the resources"
+    },
+    "AvailableModuleDTO": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "Intent of the module",
+          "example": "mysql"
+        },
+        "flavor": {
+          "type": "string",
+          "description": "Flavor of the module",
+          "example": "k8s"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the module",
+          "example": "1.0"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the module"
+        },
+        "repositoryPath": {
+          "type": "string",
+          "description": "Relative path of the module in the repository",
+          "example": "modules/mysql/k8s"
+        },
+        "clouds": {
+          "uniqueItems": true,
+          "type": "array",
+          "description": "Supported cloud providers for this module",
+          "example": [
+            "aws",
+            "gcp"
+          ],
+          "items": {
+            "type": "string",
+            "description": "Supported cloud providers for this module",
+            "example": "[\"aws\",\"gcp\"]"
+          }
+        },
+        "imported": {
+          "type": "boolean",
+          "description": "Whether this module has been imported into MongoDB"
+        },
+        "importedId": {
+          "type": "string",
+          "description": "MongoDB ID if the module has been imported"
+        },
+        "referencedOutputTypes": {
+          "uniqueItems": true,
+          "type": "array",
+          "description": "Output types referenced by this module",
+          "example": [
+            "@facets/aws_cloud_account",
+            "@facets/mysql"
+          ],
+          "items": {
+            "type": "string",
+            "description": "Output types referenced by this module",
+            "example": "[\"@facets/aws_cloud_account\",\"@facets/mysql\"]"
+          }
+        }
+      },
+      "description": "Available module from the repository"
     },
     "HistoryMetadata": {
       "type": "object",
@@ -55209,10 +55810,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }
@@ -55715,6 +56316,14 @@
     {
       "name": "Variable Management",
       "description": "APIs for managing individual variables and secrets"
+    },
+    {
+      "name": "Module Import",
+      "description": "APIs for importing modules from the public repository"
+    },
+    {
+      "name": "Project Type Import",
+      "description": "APIs for importing project types from the public repository"
     }
   ]
 }
