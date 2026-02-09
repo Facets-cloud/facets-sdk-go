@@ -31410,6 +31410,93 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/{clusterId}/resourceType/{resourceType}/resourceName/{resourceName}/add-ons": {
+      "get": {
+        "tags": [
+          "ui-common-cluster-controller"
+        ],
+        "summary": "Get add-ons for a resource in a cluster",
+        "operationId": "getAddOnModules_1",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cloud",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddOnDTO"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/clusters/{clusterId}/resourceName/{applicationName}/pods": {
       "get": {
         "tags": [
@@ -33987,6 +34074,93 @@
             "description": "OK",
             "schema": {
               "type": "object"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/clusters/{clusterId}/intent/{intent}/flavor/{flavor}/input": {
+      "get": {
+        "tags": [
+          "ui-common-cluster-controller"
+        ],
+        "summary": "Get module inputs for a cluster",
+        "operationId": "getModuleInputs_1",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intent",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flavor",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/ModuleInputDTO"
+              }
             }
           },
           "400": {
@@ -42552,9 +42726,6 @@
           "type": "string",
           "writeOnly": true
         },
-        "classified": {
-          "type": "boolean"
-        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42567,6 +42738,9 @@
           "type": "string"
         },
         "promoted": {
+          "type": "boolean"
+        },
+        "classified": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -46765,10 +46939,10 @@
         "iconUrl": {
           "type": "string"
         },
-        "templatedResource": {
+        "substack": {
           "type": "boolean"
         },
-        "substack": {
+        "templatedResource": {
           "type": "boolean"
         }
       }
@@ -48370,12 +48544,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48411,10 +48585,10 @@
     "SortObject": {
       "type": "object",
       "properties": {
-        "sorted": {
+        "empty": {
           "type": "boolean"
         },
-        "empty": {
+        "sorted": {
           "type": "boolean"
         },
         "unsorted": {
@@ -49439,12 +49613,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -51246,12 +51420,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55264,12 +55438,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55735,12 +55909,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55810,10 +55984,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }
