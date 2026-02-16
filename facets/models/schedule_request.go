@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 	"encoding/json"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -26,7 +25,8 @@ type ScheduleRequest struct {
 	ByDay []string `json:"byDay"`
 
 	// by time
-	ByTime *LocalTime `json:"byTime,omitempty"`
+	// Example: 14:30
+	ByTime string `json:"byTime,omitempty"`
 
 	// frequency
 	// Enum: ["PER_MINUTE","HOURLY","DAILY","WEEKLY"]
@@ -49,7 +49,8 @@ type ScheduleRequest struct {
 	TearDownAfter int32 `json:"tearDownAfter,omitempty"`
 
 	// time zone
-	TimeZone *ScheduleRequestTimeZone `json:"timeZone,omitempty"`
+	// Example: Asia/Kolkata
+	TimeZone string `json:"timeZone,omitempty"`
 }
 
 // Validate validates this schedule request
@@ -60,19 +61,11 @@ func (m *ScheduleRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateByTime(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFrequency(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateReleaseType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTimeZone(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -113,29 +106,6 @@ func (m *ScheduleRequest) validateByDay(formats strfmt.Registry) error {
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *ScheduleRequest) validateByTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.ByTime) { // not required
-		return nil
-	}
-
-	if m.ByTime != nil {
-		if err := m.ByTime.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
 	}
 
 	return nil
@@ -273,94 +243,8 @@ func (m *ScheduleRequest) validateReleaseType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ScheduleRequest) validateTimeZone(formats strfmt.Registry) error {
-	if swag.IsZero(m.TimeZone) { // not required
-		return nil
-	}
-
-	if m.TimeZone != nil {
-		if err := m.TimeZone.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this schedule request based on the context it is used
+// ContextValidate validates this schedule request based on context it is used
 func (m *ScheduleRequest) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateByTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTimeZone(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ScheduleRequest) contextValidateByTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ByTime != nil {
-
-		if swag.IsZero(m.ByTime) { // not required
-			return nil
-		}
-
-		if err := m.ByTime.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ScheduleRequest) contextValidateTimeZone(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TimeZone != nil {
-
-		if swag.IsZero(m.TimeZone) { // not required
-			return nil
-		}
-
-		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -375,52 +259,6 @@ func (m *ScheduleRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *ScheduleRequest) UnmarshalBinary(b []byte) error {
 	var res ScheduleRequest
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// ScheduleRequestTimeZone schedule request time zone
-//
-// swagger:model ScheduleRequestTimeZone
-type ScheduleRequestTimeZone struct {
-
-	// display name
-	DisplayName string `json:"displayName,omitempty"`
-
-	// dstsavings
-	Dstsavings int32 `json:"dstsavings,omitempty"`
-
-	// id
-	ID string `json:"id,omitempty"`
-
-	// raw offset
-	RawOffset int32 `json:"rawOffset,omitempty"`
-}
-
-// Validate validates this schedule request time zone
-func (m *ScheduleRequestTimeZone) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this schedule request time zone based on context it is used
-func (m *ScheduleRequestTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *ScheduleRequestTimeZone) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *ScheduleRequestTimeZone) UnmarshalBinary(b []byte) error {
-	var res ScheduleRequestTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

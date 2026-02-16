@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 	"encoding/json"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -44,8 +43,9 @@ type MaintenanceWindowDTO struct {
 	Disabled bool `json:"disabled,omitempty"`
 
 	// end time
+	// Example: 15:30
 	// Required: true
-	EndTime *LocalTime `json:"endTime"`
+	EndTime *string `json:"endTime"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -58,12 +58,14 @@ type MaintenanceWindowDTO struct {
 	LastModifiedDate strfmt.DateTime `json:"lastModifiedDate,omitempty"`
 
 	// start time
+	// Example: 14:30
 	// Required: true
-	StartTime *LocalTime `json:"startTime"`
+	StartTime *string `json:"startTime"`
 
 	// time zone
+	// Example: Asia/Kolkata
 	// Required: true
-	TimeZone *MaintenanceWindowDTOTimeZone `json:"timeZone"`
+	TimeZone *string `json:"timeZone"`
 
 	// triggered
 	Triggered bool `json:"triggered,omitempty"`
@@ -192,21 +194,6 @@ func (m *MaintenanceWindowDTO) validateEndTime(formats strfmt.Registry) error {
 		return err
 	}
 
-	if m.EndTime != nil {
-		if err := m.EndTime.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("endTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("endTime")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -228,21 +215,6 @@ func (m *MaintenanceWindowDTO) validateStartTime(formats strfmt.Registry) error 
 		return err
 	}
 
-	if m.StartTime != nil {
-		if err := m.StartTime.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("startTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("startTime")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -252,106 +224,11 @@ func (m *MaintenanceWindowDTO) validateTimeZone(formats strfmt.Registry) error {
 		return err
 	}
 
-	if m.TimeZone != nil {
-		if err := m.TimeZone.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
-// ContextValidate validate this maintenance window d t o based on the context it is used
+// ContextValidate validates this maintenance window d t o based on context it is used
 func (m *MaintenanceWindowDTO) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateEndTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateStartTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTimeZone(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *MaintenanceWindowDTO) contextValidateEndTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EndTime != nil {
-
-		if err := m.EndTime.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("endTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("endTime")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *MaintenanceWindowDTO) contextValidateStartTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.StartTime != nil {
-
-		if err := m.StartTime.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("startTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("startTime")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *MaintenanceWindowDTO) contextValidateTimeZone(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TimeZone != nil {
-
-		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -366,52 +243,6 @@ func (m *MaintenanceWindowDTO) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *MaintenanceWindowDTO) UnmarshalBinary(b []byte) error {
 	var res MaintenanceWindowDTO
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// MaintenanceWindowDTOTimeZone maintenance window d t o time zone
-//
-// swagger:model MaintenanceWindowDTOTimeZone
-type MaintenanceWindowDTOTimeZone struct {
-
-	// display name
-	DisplayName string `json:"displayName,omitempty"`
-
-	// dstsavings
-	Dstsavings int32 `json:"dstsavings,omitempty"`
-
-	// id
-	ID string `json:"id,omitempty"`
-
-	// raw offset
-	RawOffset int32 `json:"rawOffset,omitempty"`
-}
-
-// Validate validates this maintenance window d t o time zone
-func (m *MaintenanceWindowDTOTimeZone) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this maintenance window d t o time zone based on context it is used
-func (m *MaintenanceWindowDTOTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *MaintenanceWindowDTOTimeZone) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *MaintenanceWindowDTOTimeZone) UnmarshalBinary(b []byte) error {
-	var res MaintenanceWindowDTOTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

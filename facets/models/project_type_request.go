@@ -23,7 +23,6 @@ import (
 type ProjectTypeRequest struct {
 
 	// Set of allowed clouds
-	// Required: true
 	// Unique: true
 	AllowedClouds []string `json:"allowedClouds"`
 
@@ -129,9 +128,8 @@ func (m *ProjectTypeRequest) validateAllowedCloudsItemsEnum(path, location strin
 }
 
 func (m *ProjectTypeRequest) validateAllowedClouds(formats strfmt.Registry) error {
-
-	if err := validate.Required("allowedClouds", "body", m.AllowedClouds); err != nil {
-		return err
+	if swag.IsZero(m.AllowedClouds) { // not required
+		return nil
 	}
 
 	if err := validate.UniqueItems("allowedClouds", "body", m.AllowedClouds); err != nil {

@@ -23,6 +23,9 @@ type AccountAssociationInfo struct {
 	// clusters
 	Clusters []*ClusterInfo `json:"clusters"`
 
+	// project type name
+	ProjectTypeName string `json:"projectTypeName,omitempty"`
+
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 }

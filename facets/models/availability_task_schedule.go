@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 	"encoding/json"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -26,7 +25,8 @@ type AvailabilityTaskSchedule struct {
 	ByDay []string `json:"byDay"`
 
 	// by time
-	ByTime *LocalTime `json:"byTime,omitempty"`
+	// Example: 14:30
+	ByTime string `json:"byTime,omitempty"`
 
 	// cron expr
 	CronExpr string `json:"cronExpr,omitempty"`
@@ -47,7 +47,8 @@ type AvailabilityTaskSchedule struct {
 	ReleaseType *string `json:"releaseType"`
 
 	// time zone
-	TimeZone *AvailabilityTaskScheduleTimeZone `json:"timeZone,omitempty"`
+	// Example: Asia/Kolkata
+	TimeZone string `json:"timeZone,omitempty"`
 }
 
 // Validate validates this availability task schedule
@@ -58,19 +59,11 @@ func (m *AvailabilityTaskSchedule) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateByTime(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFrequency(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateReleaseType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTimeZone(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -111,29 +104,6 @@ func (m *AvailabilityTaskSchedule) validateByDay(formats strfmt.Registry) error 
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *AvailabilityTaskSchedule) validateByTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.ByTime) { // not required
-		return nil
-	}
-
-	if m.ByTime != nil {
-		if err := m.ByTime.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
 	}
 
 	return nil
@@ -272,94 +242,8 @@ func (m *AvailabilityTaskSchedule) validateReleaseType(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *AvailabilityTaskSchedule) validateTimeZone(formats strfmt.Registry) error {
-	if swag.IsZero(m.TimeZone) { // not required
-		return nil
-	}
-
-	if m.TimeZone != nil {
-		if err := m.TimeZone.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this availability task schedule based on the context it is used
+// ContextValidate validates this availability task schedule based on context it is used
 func (m *AvailabilityTaskSchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateByTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTimeZone(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *AvailabilityTaskSchedule) contextValidateByTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ByTime != nil {
-
-		if swag.IsZero(m.ByTime) { // not required
-			return nil
-		}
-
-		if err := m.ByTime.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *AvailabilityTaskSchedule) contextValidateTimeZone(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TimeZone != nil {
-
-		if swag.IsZero(m.TimeZone) { // not required
-			return nil
-		}
-
-		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -374,52 +258,6 @@ func (m *AvailabilityTaskSchedule) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *AvailabilityTaskSchedule) UnmarshalBinary(b []byte) error {
 	var res AvailabilityTaskSchedule
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// AvailabilityTaskScheduleTimeZone availability task schedule time zone
-//
-// swagger:model AvailabilityTaskScheduleTimeZone
-type AvailabilityTaskScheduleTimeZone struct {
-
-	// display name
-	DisplayName string `json:"displayName,omitempty"`
-
-	// dstsavings
-	Dstsavings int32 `json:"dstsavings,omitempty"`
-
-	// id
-	ID string `json:"id,omitempty"`
-
-	// raw offset
-	RawOffset int32 `json:"rawOffset,omitempty"`
-}
-
-// Validate validates this availability task schedule time zone
-func (m *AvailabilityTaskScheduleTimeZone) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this availability task schedule time zone based on context it is used
-func (m *AvailabilityTaskScheduleTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *AvailabilityTaskScheduleTimeZone) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *AvailabilityTaskScheduleTimeZone) UnmarshalBinary(b []byte) error {
-	var res AvailabilityTaskScheduleTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

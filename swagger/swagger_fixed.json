@@ -40169,19 +40169,19 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -40409,7 +40409,6 @@
     },
     "ProjectTypeRequest": {
       "required": [
-        "allowedClouds",
         "iacTool",
         "name",
         "templateGitDetails"
@@ -41020,27 +41019,6 @@
         }
       }
     },
-    "LocalTime": {
-      "type": "object",
-      "properties": {
-        "hour": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "minute": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "second": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "nano": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "MaintenanceWindowDTO": {
       "required": [
         "clusterId",
@@ -41070,29 +41048,18 @@
           ]
         },
         "startTime": {
-          "$ref": "#/definitions/LocalTime"
+          "type": "string",
+          "format": "time",
+          "example": "14:30"
         },
         "endTime": {
-          "$ref": "#/definitions/LocalTime"
+          "type": "string",
+          "format": "time",
+          "example": "15:30"
         },
         "timeZone": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "dstsavings": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "rawOffset": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "type": "string",
+          "example": "Asia/Kolkata"
         },
         "cron": {
           "type": "string"
@@ -42461,7 +42428,9 @@
           }
         },
         "byTime": {
-          "$ref": "#/definitions/LocalTime"
+          "type": "string",
+          "format": "time",
+          "example": "14:30"
         },
         "releaseType": {
           "type": "string",
@@ -42485,23 +42454,8 @@
           ]
         },
         "timeZone": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "dstsavings": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "rawOffset": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "type": "string",
+          "example": "Asia/Kolkata"
         },
         "pauseReleaseSchedule": {
           "type": "boolean"
@@ -42595,26 +42549,13 @@
           }
         },
         "byTime": {
-          "$ref": "#/definitions/LocalTime"
+          "type": "string",
+          "format": "time",
+          "example": "14:30"
         },
         "timeZone": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "dstsavings": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "rawOffset": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "type": "string",
+          "example": "Asia/Kolkata"
         },
         "serverTimeZone": {
           "type": "string"
@@ -42726,6 +42667,15 @@
           "type": "string",
           "writeOnly": true
         },
+        "registrationValue": {
+          "type": "string"
+        },
+        "classified": {
+          "type": "boolean"
+        },
+        "promoted": {
+          "type": "boolean"
+        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42733,15 +42683,6 @@
             "RELEASE_STREAM",
             "HYBRID"
           ]
-        },
-        "registrationValue": {
-          "type": "string"
-        },
-        "promoted": {
-          "type": "boolean"
-        },
-        "classified": {
-          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -44180,6 +44121,9 @@
       "type": "object",
       "properties": {
         "stackName": {
+          "type": "string"
+        },
+        "projectTypeName": {
           "type": "string"
         },
         "clusters": {
@@ -45630,10 +45574,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         }
       }
@@ -45826,19 +45770,19 @@
         "id": {
           "type": "string"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "importedProject": {
           "type": "boolean"
         },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -48544,12 +48488,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48585,10 +48529,10 @@
     "SortObject": {
       "type": "object",
       "properties": {
-        "empty": {
+        "sorted": {
           "type": "boolean"
         },
-        "sorted": {
+        "empty": {
           "type": "boolean"
         },
         "unsorted": {
@@ -49613,12 +49557,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49757,10 +49701,10 @@
             "type": "string"
           }
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         }
       }
@@ -51420,12 +51364,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55438,12 +55382,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55618,26 +55562,13 @@
           }
         },
         "byTime": {
-          "$ref": "#/definitions/LocalTime"
+          "type": "string",
+          "format": "time",
+          "example": "14:30"
         },
         "timeZone": {
-          "type": "object",
-          "properties": {
-            "displayName": {
-              "type": "string"
-            },
-            "id": {
-              "type": "string"
-            },
-            "dstsavings": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "rawOffset": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "type": "string",
+          "example": "Asia/Kolkata"
         },
         "cronExpr": {
           "type": "string"
@@ -55909,12 +55840,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55984,10 +55915,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }

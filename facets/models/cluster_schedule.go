@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 	"encoding/json"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -26,7 +25,8 @@ type ClusterSchedule struct {
 	ByDay []string `json:"byDay"`
 
 	// by time
-	ByTime *LocalTime `json:"byTime,omitempty"`
+	// Example: 14:30
+	ByTime string `json:"byTime,omitempty"`
 
 	// cluster Id
 	// Required: true
@@ -71,7 +71,8 @@ type ClusterSchedule struct {
 	ServerTimeZone string `json:"serverTimeZone,omitempty"`
 
 	// time zone
-	TimeZone *ClusterScheduleTimeZone `json:"timeZone,omitempty"`
+	// Example: Asia/Kolkata
+	TimeZone string `json:"timeZone,omitempty"`
 }
 
 // Validate validates this cluster schedule
@@ -79,10 +80,6 @@ func (m *ClusterSchedule) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateByDay(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateByTime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,10 +100,6 @@ func (m *ClusterSchedule) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateReleaseType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateTimeZone(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -147,29 +140,6 @@ func (m *ClusterSchedule) validateByDay(formats strfmt.Registry) error {
 			return err
 		}
 
-	}
-
-	return nil
-}
-
-func (m *ClusterSchedule) validateByTime(formats strfmt.Registry) error {
-	if swag.IsZero(m.ByTime) { // not required
-		return nil
-	}
-
-	if m.ByTime != nil {
-		if err := m.ByTime.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
 	}
 
 	return nil
@@ -341,94 +311,8 @@ func (m *ClusterSchedule) validateReleaseType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ClusterSchedule) validateTimeZone(formats strfmt.Registry) error {
-	if swag.IsZero(m.TimeZone) { // not required
-		return nil
-	}
-
-	if m.TimeZone != nil {
-		if err := m.TimeZone.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this cluster schedule based on the context it is used
+// ContextValidate validates this cluster schedule based on context it is used
 func (m *ClusterSchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateByTime(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTimeZone(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ClusterSchedule) contextValidateByTime(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ByTime != nil {
-
-		if swag.IsZero(m.ByTime) { // not required
-			return nil
-		}
-
-		if err := m.ByTime.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("byTime")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("byTime")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ClusterSchedule) contextValidateTimeZone(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.TimeZone != nil {
-
-		if swag.IsZero(m.TimeZone) { // not required
-			return nil
-		}
-
-		if err := m.TimeZone.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("timeZone")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("timeZone")
-			}
-
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -443,52 +327,6 @@ func (m *ClusterSchedule) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *ClusterSchedule) UnmarshalBinary(b []byte) error {
 	var res ClusterSchedule
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// ClusterScheduleTimeZone cluster schedule time zone
-//
-// swagger:model ClusterScheduleTimeZone
-type ClusterScheduleTimeZone struct {
-
-	// display name
-	DisplayName string `json:"displayName,omitempty"`
-
-	// dstsavings
-	Dstsavings int32 `json:"dstsavings,omitempty"`
-
-	// id
-	ID string `json:"id,omitempty"`
-
-	// raw offset
-	RawOffset int32 `json:"rawOffset,omitempty"`
-}
-
-// Validate validates this cluster schedule time zone
-func (m *ClusterScheduleTimeZone) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this cluster schedule time zone based on context it is used
-func (m *ClusterScheduleTimeZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *ClusterScheduleTimeZone) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *ClusterScheduleTimeZone) UnmarshalBinary(b []byte) error {
-	var res ClusterScheduleTimeZone
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
