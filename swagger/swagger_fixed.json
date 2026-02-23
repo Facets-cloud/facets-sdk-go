@@ -14718,6 +14718,8 @@
         "tags": [
           "ui-application-controller"
         ],
+        "summary": "Sync cluster with git.",
+        "description": "Api for cluster sync with git.",
         "operationId": "clusterSyncWithGit",
         "parameters": [
           {
@@ -23545,6 +23547,7 @@
             }
           }
         },
+        "deprecated": true,
         "produces": [
           "application/json"
         ]
@@ -42663,15 +42666,12 @@
         "tag": {
           "type": "string"
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
-        },
         "registrationValue": {
           "type": "string"
         },
-        "classified": {
-          "type": "boolean"
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
         "promoted": {
           "type": "boolean"
@@ -42683,6 +42683,9 @@
             "RELEASE_STREAM",
             "HYBRID"
           ]
+        },
+        "classified": {
+          "type": "boolean"
         },
         "versioningKey": {
           "type": "string"
@@ -45258,6 +45261,9 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "internal": {
+          "type": "boolean"
         }
       }
     },
@@ -49701,10 +49707,10 @@
             "type": "string"
           }
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         }
       }
@@ -55915,10 +55921,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }

@@ -27,6 +27,9 @@ type UserAccessToken struct {
 	// description
 	Description string `json:"description,omitempty"`
 
+	// internal
+	Internal bool `json:"internal,omitempty"`
+
 	// name
 	// Required: true
 	Name *string `json:"name"`
