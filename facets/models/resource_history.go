@@ -39,6 +39,9 @@ type ResourceHistory struct {
 	// disabled
 	Disabled bool `json:"disabled,omitempty"`
 
+	// overridden
+	Overridden bool `json:"overridden,omitempty"`
+
 	// override version
 	OverrideVersion *HistoryMetadata `json:"overrideVersion,omitempty"`
 

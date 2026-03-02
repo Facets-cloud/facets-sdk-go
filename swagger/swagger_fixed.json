@@ -36177,6 +36177,20 @@
                 ]
               }
             }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RAPTOR"
+                ]
+              }
+            }
           }
         ],
         "responses": {
@@ -42666,14 +42680,13 @@
         "tag": {
           "type": "string"
         },
+        "promoted": {
+          "type": "boolean"
+        },
         "registrationValue": {
           "type": "string"
         },
-        "changeLog": {
-          "type": "string",
-          "writeOnly": true
-        },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
         "registrationType": {
@@ -42684,8 +42697,9 @@
             "HYBRID"
           ]
         },
-        "classified": {
-          "type": "boolean"
+        "changeLog": {
+          "type": "string",
+          "writeOnly": true
         },
         "versioningKey": {
           "type": "string"
@@ -50596,6 +50610,9 @@
         "alpha": {
           "type": "boolean"
         },
+        "overridden": {
+          "type": "boolean"
+        },
         "resourceStatus": {
           "type": "string",
           "enum": [
@@ -52330,12 +52347,12 @@
         "value": {
           "type": "object"
         },
+        "strVal": {
+          "type": "string"
+        },
         "intVal": {
           "type": "integer",
           "format": "int32"
-        },
-        "strVal": {
-          "type": "string"
         }
       }
     },
@@ -55809,6 +55826,12 @@
         },
         "stackName": {
           "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "RAPTOR"
+          ]
         }
       }
     },

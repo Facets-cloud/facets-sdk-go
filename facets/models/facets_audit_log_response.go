@@ -53,6 +53,10 @@ type FacetsAuditLogResponse struct {
 	// performed by
 	PerformedBy string `json:"performedBy,omitempty"`
 
+	// source
+	// Enum: ["RAPTOR"]
+	Source string `json:"source,omitempty"`
+
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 
@@ -73,6 +77,10 @@ func (m *FacetsAuditLogResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePerformedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSource(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -535,6 +543,45 @@ func (m *FacetsAuditLogResponse) validatePerformedAt(formats strfmt.Registry) er
 	}
 
 	if err := validate.FormatOf("performedAt", "body", "date-time", m.PerformedAt.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var facetsAuditLogResponseTypeSourcePropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["RAPTOR"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		facetsAuditLogResponseTypeSourcePropEnum = append(facetsAuditLogResponseTypeSourcePropEnum, v)
+	}
+}
+
+const (
+
+	// FacetsAuditLogResponseSourceRAPTOR captures enum value "RAPTOR"
+	FacetsAuditLogResponseSourceRAPTOR string = "RAPTOR"
+)
+
+// prop value enum
+func (m *FacetsAuditLogResponse) validateSourceEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, facetsAuditLogResponseTypeSourcePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *FacetsAuditLogResponse) validateSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.Source) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateSourceEnum("source", "body", m.Source); err != nil {
 		return err
 	}
 
