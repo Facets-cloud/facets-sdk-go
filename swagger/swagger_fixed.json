@@ -2008,7 +2008,7 @@
           "ui-project-type-controller"
         ],
         "summary": "Get project type by ID",
-        "description": "- **Description:** Retrieve a specific project type by its ID. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve a specific project type by its ID.\n- **Restrictions:** None.\n- **Permissions:** No specific permissions required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getProjectTypeById",
         "parameters": [
           {
@@ -2067,7 +2067,7 @@
           "ui-project-type-controller"
         ],
         "summary": "Update an existing project type",
-        "description": "- **Description:** Updates details of a specified project type by its ID. \n- **Restrictions:** Only users with the correct permissions can update project types. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** This operation is logged for audit purposes.",
+        "description": "- **Description:** Updates details of a specified project type by its ID.\n- **Restrictions:** Only users with the correct permissions can update project types.\n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission.\n- **Audit Logging:** This operation is logged for audit purposes.",
         "operationId": "updateProjectType",
         "parameters": [
           {
@@ -2138,7 +2138,7 @@
           "ui-project-type-controller"
         ],
         "summary": "Delete a project type",
-        "description": "- **Description:** Deletes an existing project type based on its ID. \n- **Restrictions:** Only users with the correct RBAC permission can delete a project type. \n- **Permissions:** Requires `PROJECT_TYPE_DELETE` permission. \n- **Audit Logging:** This operation is logged for audit purposes.",
+        "description": "- **Description:** Deletes an existing project type based on its ID.\n- **Restrictions:** Only users with the correct RBAC permission can delete a project type.\n- **Permissions:** Requires `PROJECT_TYPE_DELETE` permission.\n- **Audit Logging:** This operation is logged for audit purposes.",
         "operationId": "deleteProjectType",
         "parameters": [
           {
@@ -6851,7 +6851,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Detach Rule and Workflow",
-        "description": "- **Description:** Detaches a rule and workflow from an artifact CI. \n- **Restrictions:** Existing CI registration required. \n- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Detaches a rule and workflow from an artifact CI.\n- **Restrictions:** Existing CI registration required.\n- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission.\n- **Audit Logging:** Not applicable.",
         "operationId": "detachRuleAndWorkflow",
         "responses": {
           "200": {
@@ -6913,7 +6913,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Attach Rule and Workflow",
-        "description": "- **Description:** Attaches a rule and workflow to an artifact CI. \n- **Restrictions:** CI must exist or will be created for the project. \n- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Attaches a rule and workflow to an artifact CI.\n- **Restrictions:** CI must exist or will be created for the project.\n- **Permissions:** Requires `ARTIFACT_CI_WRITE` permission.\n- **Audit Logging:** Not applicable.",
         "operationId": "attachRuleAndWorkflow",
         "responses": {
           "200": {
@@ -11236,7 +11236,7 @@
           "ui-project-type-controller"
         ],
         "summary": "Get all project types",
-        "description": "- **Description:** Retrieve a list of all existing project types. Supports filtering by legacy status and searching by name. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve a list of all existing project types. Supports filtering by legacy status and searching by name.\n- **Restrictions:** None.\n- **Permissions:** No specific permissions required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getAllProjectTypes",
         "parameters": [
           {
@@ -11298,7 +11298,7 @@
           "ui-project-type-controller"
         ],
         "summary": "Add a new project type",
-        "description": "- **Description:** Creates a new project type from the provided request details. \n- **Restrictions:** Only users with the appropriate permissions can add project types. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** This operation is logged for audit purposes.",
+        "description": "- **Description:** Creates a new project type from the provided request details.\n- **Restrictions:** Only users with the appropriate permissions can add project types.\n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission.\n- **Audit Logging:** This operation is logged for audit purposes.",
         "operationId": "addProjectType",
         "responses": {
           "200": {
@@ -12210,7 +12210,7 @@
           "Module Management"
         ],
         "summary": "Mark Module as Published",
-        "description": "- **Description:** Marks a specific module version as published.\n- **Permissions:** Requires MODULE_WRITE permission. \n- **Audit Logging:** Yes",
+        "description": "- **Description:** Marks a specific module version as published.\n- **Permissions:** Requires MODULE_WRITE permission.\n- **Audit Logging:** Yes",
         "operationId": "markAsPublishedById",
         "parameters": [
           {
@@ -12348,7 +12348,7 @@
           "Module Management"
         ],
         "summary": "Mark Module as Published",
-        "description": "- **Description:** Marks a specific module version as published.\n- **Permissions:** Requires MODULE_WRITE permission. \n- **Audit Logging:** Yes",
+        "description": "- **Description:** Marks a specific module version as published.\n- **Permissions:** Requires MODULE_WRITE permission.\n- **Audit Logging:** Yes",
         "operationId": "markAsPublished",
         "parameters": [
           {
@@ -16730,7 +16730,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Save CI/CD Details",
-        "description": "- **Description:** Saves CI/CD configuration details. \n- **Restrictions:** Cannot change registration type after initial configuration. \n- **Permissions:** Requires `CI_CD_CONFIGURE` permission. \n- **Audit Logging:** This operation is logged for audit purposes.",
+        "description": "- **Description:** Saves CI/CD configuration details.\n- **Restrictions:** Cannot change registration type after initial configuration.\n- **Permissions:** Requires `CI_CD_CONFIGURE` permission.\n- **Audit Logging:** This operation is logged for audit purposes.",
         "operationId": "saveCiCdDetails",
         "responses": {
           "200": {
@@ -16792,7 +16792,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Register Artifact SaaS",
-        "description": "- **Description:** Registers a new artifact within the system for SaaS. \n- **Restrictions:** Valid artifactory name and consistent registration type required. Blueprint must be CI/CD configured. \n- **Permissions:** Requires `ARTIFACTS_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Registers a new artifact within the system for SaaS.\n- **Restrictions:** Valid artifactory name and consistent registration type required. Blueprint must be CI/CD configured.\n- **Permissions:** Requires `ARTIFACTS_WRITE` permission.\n- **Audit Logging:** Not applicable.",
         "operationId": "registerArtifactSaas",
         "responses": {
           "200": {
@@ -16854,7 +16854,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Generate Artifact Push Credentials",
-        "description": "- **Description:** Generates push credentials for an artifact. \n- **Restrictions:** Only for supported artifactory types. \n- **Permissions:** Requires `ARTIFACTS_WRITE` permission. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Generates push credentials for an artifact.\n- **Restrictions:** Only for supported artifactory types.\n- **Permissions:** Requires `ARTIFACTS_WRITE` permission.\n- **Audit Logging:** Not applicable.",
         "operationId": "generateArtifactPushCredentials",
         "responses": {
           "200": {
@@ -19138,7 +19138,7 @@
           "ui-tekton-action-controller"
         ],
         "summary": "Run Multiple Actions",
-        "description": "- **Description:** Create and run Action Runs for multiple Actions with individual parameters. \n- **Restrictions:** None. \n- **Permissions:** Requires `RUN_ACTION` permission. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Create and run Action Runs for multiple Actions with individual parameters.\n- **Restrictions:** None.\n- **Permissions:** Requires `RUN_ACTION` permission.\n- **Audit Logging:** Not applicable.",
         "operationId": "runActions",
         "responses": {
           "200": {
@@ -25745,7 +25745,7 @@
           "Module Management"
         ],
         "summary": "Delete a Module",
-        "description": "- **Description:** Deletes a module by ID.\n- **Permissions:** Requires MODULE_DELETE permission. \n- **Audit Logging:** Yes",
+        "description": "- **Description:** Deletes a module by ID.\n- **Permissions:** Requires MODULE_DELETE permission.\n- **Audit Logging:** Yes",
         "operationId": "deleteTfModule",
         "parameters": [
           {
@@ -35582,7 +35582,7 @@
           "ui-ci-cd-controller"
         ],
         "summary": "Get CI/CD Details",
-        "description": "- **Description:** Retrieves CI/CD details for a specified project name. \n- **Restrictions:** Requires existing default artifact routing rule or promotion workflow. \n- **Permissions:** None required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieves CI/CD details for a specified project name.\n- **Restrictions:** Requires existing default artifact routing rule or promotion workflow.\n- **Permissions:** None required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getCiCdDetails",
         "parameters": [
           {
@@ -35615,6 +35615,70 @@
           },
           "404": {
             "description": "Project not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/ci-cd/ci-name/{ciName}/resources": {
+      "get": {
+        "tags": [
+          "ui-ci-cd-controller"
+        ],
+        "summary": "Get Resources by CI Name",
+        "description": "- **Description:** Returns all distinct resources (blueprint files) that reference the given CI name. A resource matches if its primary CI name or its ciNames set contains the given name. Results are deduplicated by (stackName, resourceType, resourceName).\n- **Permissions:** None required.\n- **Audit Logging:** Not applicable.",
+        "operationId": "getResourcesByCiName",
+        "parameters": [
+          {
+            "name": "ciName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved resources.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CiNameUsageDto"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
@@ -37450,7 +37514,7 @@
           "ui-tekton-action-controller"
         ],
         "summary": "Get Actions",
-        "description": "- **Description:** Retrieve Actions optionally filtered by cluster, resource type, and resource name. \n- **Restrictions:** Actions are filtered based on provided parameters. \n- **Permissions:** None required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve Actions optionally filtered by cluster, resource type, and resource name.\n- **Restrictions:** Actions are filtered based on provided parameters.\n- **Permissions:** None required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getActions",
         "parameters": [
           {
@@ -37530,7 +37594,7 @@
           "ui-tekton-action-controller"
         ],
         "summary": "Get Action Runs",
-        "description": "- **Description:** Retrieve Action Runs for a specific Action. \n- **Restrictions:** None. \n- **Permissions:** None required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve Action Runs for a specific Action.\n- **Restrictions:** None.\n- **Permissions:** None required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getActionRuns",
         "parameters": [
           {
@@ -37594,7 +37658,7 @@
           "ui-tekton-action-controller"
         ],
         "summary": "Download Upload for Action Run",
-        "description": "- **Description:** Download the file uploaded for a specific Action Run. \\n- **Restrictions:** User must have access to the associated task. \\n- **Permissions:** Requires task access permissions. \\n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Download the file uploaded for a specific Action Run.\n- **Restrictions:** User must have access to the associated task.\n- **Permissions:** Requires task access permissions.\n- **Audit Logging:** Not applicable.",
         "operationId": "downloadUpload",
         "parameters": [
           {
@@ -37656,7 +37720,7 @@
           "ui-tekton-action-controller"
         ],
         "summary": "Get Step Logs",
-        "description": "- **Description:** Retrieve logs for a specific step of an Action Run. \n- **Restrictions:** None. \n- **Permissions:** None required. \n- **Audit Logging:** Not applicable.",
+        "description": "- **Description:** Retrieve logs for a specific step of an Action Run.\n- **Restrictions:** None.\n- **Permissions:** None required.\n- **Audit Logging:** Not applicable.",
         "operationId": "getStepLogs",
         "parameters": [
           {
@@ -40186,10 +40250,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -42680,14 +42744,11 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
         "registrationValue": {
           "type": "string"
-        },
-        "classified": {
-          "type": "boolean"
         },
         "registrationType": {
           "type": "string",
@@ -42696,6 +42757,9 @@
             "RELEASE_STREAM",
             "HYBRID"
           ]
+        },
+        "promoted": {
+          "type": "boolean"
         },
         "changeLog": {
           "type": "string",
@@ -45051,7 +45115,6 @@
       "required": [
         "artifactoryName",
         "artifactoryType",
-        "password",
         "uri",
         "username"
       ],
@@ -45594,10 +45657,10 @@
         "projectTypeId": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         }
       }
@@ -45790,10 +45853,10 @@
         "id": {
           "type": "string"
         },
-        "monoRepo": {
+        "template": {
           "type": "boolean"
         },
-        "template": {
+        "monoRepo": {
           "type": "boolean"
         },
         "starterProject": {
@@ -46882,6 +46945,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RefExpression"
+          }
+        },
+        "secrets": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "variables": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ciNames": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "errors": {
@@ -55641,6 +55725,20 @@
         }
       }
     },
+    "CiNameUsageDto": {
+      "type": "object",
+      "properties": {
+        "stackName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      }
+    },
     "BillingMetadata": {
       "type": "object",
       "properties": {
@@ -55944,10 +56042,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }

@@ -33,8 +33,7 @@ type BasicDockerDTO struct {
 	ArtifactoryType *string `json:"artifactoryType"`
 
 	// password
-	// Required: true
-	Password *string `json:"password"`
+	Password string `json:"password,omitempty"`
 
 	// stacks associated
 	// Unique: true
@@ -58,10 +57,6 @@ func (m *BasicDockerDTO) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateArtifactoryType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validatePassword(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -150,15 +145,6 @@ func (m *BasicDockerDTO) validateArtifactoryType(formats strfmt.Registry) error 
 
 	// value enum
 	if err := m.validateArtifactoryTypeEnum("artifactoryType", "body", *m.ArtifactoryType); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *BasicDockerDTO) validatePassword(formats strfmt.Registry) error {
-
-	if err := validate.Required("password", "body", m.Password); err != nil {
 		return err
 	}
 

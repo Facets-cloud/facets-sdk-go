@@ -28,6 +28,10 @@ type BlueprintFile struct {
 	// Unique: true
 	ChildrenResourceIds []string `json:"childrenResourceIds"`
 
+	// ci names
+	// Unique: true
+	CiNames []string `json:"ciNames"`
+
 	// cluster Id
 	ClusterID string `json:"clusterId,omitempty"`
 
@@ -72,6 +76,10 @@ type BlueprintFile struct {
 	// resource type
 	ResourceType string `json:"resourceType,omitempty"`
 
+	// secrets
+	// Unique: true
+	Secrets []string `json:"secrets"`
+
 	// stack name
 	StackName string `json:"stackName,omitempty"`
 
@@ -87,6 +95,10 @@ type BlueprintFile struct {
 	// templated resource
 	TemplatedResource bool `json:"templatedResource,omitempty"`
 
+	// variables
+	// Unique: true
+	Variables []string `json:"variables"`
+
 	// version
 	Version string `json:"version,omitempty"`
 }
@@ -96,6 +108,10 @@ func (m *BlueprintFile) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateChildrenResourceIds(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCiNames(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,6 +131,14 @@ func (m *BlueprintFile) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSecrets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariables(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -127,6 +151,18 @@ func (m *BlueprintFile) validateChildrenResourceIds(formats strfmt.Registry) err
 	}
 
 	if err := validate.UniqueItems("childrenResourceIds", "body", m.ChildrenResourceIds); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BlueprintFile) validateCiNames(formats strfmt.Registry) error {
+	if swag.IsZero(m.CiNames) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("ciNames", "body", m.CiNames); err != nil {
 		return err
 	}
 
@@ -249,6 +285,30 @@ func (m *BlueprintFile) validateInfo(formats strfmt.Registry) error {
 
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *BlueprintFile) validateSecrets(formats strfmt.Registry) error {
+	if swag.IsZero(m.Secrets) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("secrets", "body", m.Secrets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *BlueprintFile) validateVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.Variables) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("variables", "body", m.Variables); err != nil {
+		return err
 	}
 
 	return nil
