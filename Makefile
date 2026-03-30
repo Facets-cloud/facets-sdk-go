@@ -40,13 +40,14 @@ validate-spec: clean-spec ## Validate the cleaned OpenAPI spec
 	@echo ""
 
 generate-client: clean-spec ## Generate Go client from OpenAPI spec
+	@echo "Cleaning previously generated client code..."
+	@rm -rf $(GENERATED_DIR)/client $(GENERATED_DIR)/models
 	@echo "Generating Go client from OpenAPI spec..."
-	@swagger generate client \
+	@set -o pipefail && swagger generate client \
 		-f $(SWAGGER_FIXED) \
 		-A facets \
 		-t $(GENERATED_DIR) \
-		--skip-validation \
-		--skip-tag-packages 2>&1 | tee swagger_generate.log || (echo "Generation failed. Check swagger_generate.log for details" && exit 1)
+		--skip-validation 2>&1 | tee swagger_generate.log || (echo "Generation failed. Check swagger_generate.log for details" && exit 1)
 	@echo "Client generated successfully in $(GENERATED_DIR)/"
 	@echo "Running go mod tidy..."
 	@go mod tidy

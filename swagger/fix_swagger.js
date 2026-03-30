@@ -88,8 +88,45 @@ if (spec.openapi && spec.openapi.startsWith('3.')) {
                     // Remove invalid parameters
                     if (!param.name || !param.in) return false;
 
-                    // Fix schema references in parameters
-                    if (param.schema) {
+                    // Convert non-body parameter schemas from OAS3 to Swagger 2.0 format
+                    // Swagger 2.0 requires type/format/enum/items directly on the parameter,
+                    // not nested in a schema object
+                    if (param.in !== 'body' && param.schema) {
+                        const schema = param.schema;
+
+                        if (schema.$ref) {
+                            // Non-body params can't use $ref in Swagger 2.0 - convert to string
+                            param.type = 'string';
+                        } else if (schema.type === 'array') {
+                            param.type = 'array';
+                            param.collectionFormat = 'multi';
+                            if (schema.items) {
+                                param.items = { ...schema.items };
+                                if (param.items.$ref) {
+                                    param.items = { type: 'string' };
+                                }
+                            } else {
+                                param.items = { type: 'string' };
+                            }
+                            if (schema.enum) param.enum = schema.enum;
+                        } else if (schema.type === 'object') {
+                            // Non-body params can't be object in Swagger 2.0 - convert to string
+                            param.type = 'string';
+                        } else if (schema.type) {
+                            param.type = schema.type;
+                            if (schema.format) param.format = schema.format;
+                            if (schema.enum) param.enum = schema.enum;
+                            if (schema.default !== undefined) param.default = schema.default;
+                        } else {
+                            // Fallback: default to string
+                            param.type = 'string';
+                        }
+
+                        delete param.schema;
+                    }
+
+                    // Fix schema references in body parameters
+                    if (param.in === 'body' && param.schema) {
                         if (param.schema.$ref) {
                             param.schema.$ref = param.schema.$ref.replace('#/components/schemas/', '#/definitions/');
                         }
