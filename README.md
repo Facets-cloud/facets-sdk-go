@@ -145,8 +145,37 @@ transportCfg := client.NewHTTPClientWithConfig(nil, cfg)
 
 ## Examples
 
-See the `examples/` directory for additional usage examples.
+Each example is a standalone runnable program in its own directory under `examples/`. Set the required environment variables and run any example:
+
+```bash
+export FACETS_API_HOST="your-instance.console.facets.cloud"
+export FACETS_USERNAME="your-email@example.com"
+export FACETS_API_TOKEN="your-api-token"
+
+go run ./examples/stacks/
+```
+
+### Available Examples
+
+| Example | Directory | Operations |
+|---------|-----------|------------|
+| **Stacks** | `examples/stacks/` | List all stacks, get stack by name |
+| **Environments** | `examples/environments/` | Get environment details, create environment |
+| **Deployments** | `examples/deployments/` | List deployments, get latest release, trigger release |
+| **Users** | `examples/users/` | Get current user, list all users |
+| **Accounts** | `examples/accounts/` | List all accounts, filter by type (AWS/GCP/Azure/etc.) |
+| **Clusters** | `examples/clusters/` | List clusters (paginated), get cluster details, get variables |
+| **Artifacts** | `examples/artifacts/` | List artifact CIs, get by name, register artifact |
+| **Blueprint** | `examples/blueprint/` | List resources, list branches, get autocomplete data |
+| **Labels** | `examples/labels/` | List labels, create label, get by ID |
+| **Modules** | `examples/modules/` | List modules, get by ID, get grouped modules |
+| **Variables** | `examples/variables/` | Add variable, get variable across environments |
+| **Notifications** | `examples/notifications/` | List channels, subscriptions, channel types |
+| **Policies** | `examples/policies/` | List OPA policies, get policy, list templates |
+| **Audit Logs** | `examples/audit_logs/` | Get recent logs, filter by stack |
+| **Release Streams** | `examples/release_streams/` | List all release streams |
+| **Project Types** | `examples/project_types/` | List project types, get by ID |
 
 ## License
 
-[License information] 
+[License information]
