@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 .PHONY: help download-spec clean-spec validate-spec generate-client build-example run-example test clean install-deps all
 
 # Variables
