@@ -14,6 +14,9 @@ import (
 // swagger:model MatchedResourceDTO
 type MatchedResourceDTO struct {
 
+	// content
+	Content string `json:"content,omitempty"`
+
 	// matched
 	Matched bool `json:"matched,omitempty"`
 

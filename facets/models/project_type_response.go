@@ -81,6 +81,9 @@ type ProjectTypeResponse struct {
 
 	// template git details
 	TemplateGitDetails *TemplateGitDetails `json:"templateGitDetails,omitempty"`
+
+	// use crd driven releases
+	UseCrdDrivenReleases bool `json:"useCrdDrivenReleases,omitempty"`
 }
 
 // Validate validates this project type response

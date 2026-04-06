@@ -4782,6 +4782,619 @@
         ]
       }
     },
+    "/cc-ui/v1/designer/v2/{stackName}/variables": {
+      "put": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Update variables",
+        "description": "Updates existing variables in stack.json's clusterVariablesMeta.",
+        "operationId": "updateVariables_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateVariablesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Variables updated successfully"
+          },
+          "400": {
+            "description": "Variable not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Add variables",
+        "description": "Adds variables to stack.json's clusterVariablesMeta.",
+        "operationId": "addVariables_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddVariablesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Variables added successfully"
+          },
+          "400": {
+            "description": "Variable already exists",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Delete variables",
+        "description": "Deletes variables from stack.json's clusterVariablesMeta.",
+        "operationId": "deleteVariables_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeleteVariablesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Variables deleted successfully"
+          },
+          "400": {
+            "description": "Variable not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/{stackName}/resources": {
+      "put": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Update resources",
+        "description": "Updates one or more resources. Supports both JSON and mustache content. If rawContent is set on a resource item, it is treated as mustache. Affected resources (enable/disable) are committed atomically in the same commit.",
+        "operationId": "updateResources_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resources updated successfully"
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Blueprint or resource not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Create resources",
+        "description": "Creates one or more resources in the blueprint. Branch defaults to stack's branch if not specified.",
+        "operationId": "createResources_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resources created successfully"
+          },
+          "400": {
+            "description": "Invalid request or resource already exists",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Blueprint not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Delete resources",
+        "description": "Deletes one or more resources. Automatically deletes add-on children and updates references in other resources.",
+        "operationId": "deleteResources_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DeleteResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resources deleted successfully"
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Blueprint or resource not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/{stackName}/resources/toggle": {
+      "put": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Bulk enable/disable resources",
+        "description": "Enables or disables multiple resources. Child resources are included automatically.",
+        "operationId": "bulkToggleResources",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BulkToggleResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resources toggled successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/{stackName}/resources/rename": {
+      "put": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Rename a resource",
+        "description": "Renames a resource and updates all references in other resources. All changes are committed atomically in a single commit.",
+        "operationId": "renameResource_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RenameResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource renamed successfully"
+          },
+          "400": {
+            "description": "Invalid new name or resource not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/{stackName}/resources/inherit-from-base": {
+      "put": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Bulk set inherit-from-base",
+        "description": "Sets the inherit_from_base flag for multiple resources.",
+        "operationId": "bulkInheritFromBase",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BulkInheritFromBaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inherit-from-base updated successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/delivery-pipeline/{stackName}": {
       "get": {
         "tags": [
@@ -11013,124 +11626,6 @@
         ]
       }
     },
-    "/cc-ui/v1/project-types/import/{projectTypeName}": {
-      "post": {
-        "tags": [
-          "Project Type Import"
-        ],
-        "summary": "Import a project type",
-        "description": "- **Description:** Imports a project type from the repository. This is a multi-phase operation that imports outputs, modules, and the project type itself. \n- **Restrictions:** Only users with PROJECT_TYPE_WRITE permission can import. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
-        "operationId": "importProjectType",
-        "parameters": [
-          {
-            "name": "projectTypeName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "forceUpdate",
-            "in": "query",
-            "description": "Force update even if the project type already exists",
-            "required": false,
-            "type": "boolean",
-            "default": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Import completed",
-            "schema": {
-              "$ref": "#/definitions/ImportProjectTypeResponse"
-            }
-          },
-          "400": {
-            "description": "Invalid request or project type already exists",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Project type not found in repository",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v1/project-types/import/sync": {
-      "post": {
-        "tags": [
-          "Project Type Import"
-        ],
-        "summary": "Sync repository",
-        "description": "- **Description:** Syncs the local repository clone with the remote. This pulls the latest changes from the facets-modules-redesign repository. \n- **Restrictions:** Only users with PROJECT_TYPE_WRITE permission can sync. \n- **Permissions:** Requires `PROJECT_TYPE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
-        "operationId": "syncRepository",
-        "responses": {
-          "200": {
-            "description": "Sync completed",
-            "schema": {
-              "$ref": "#/definitions/SyncResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
     "/cc-ui/v1/opa/{policyName}/execute": {
       "post": {
         "tags": [
@@ -12050,83 +12545,6 @@
           },
           "500": {
             "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v1/modules/import/{intent}/{flavor}": {
-      "post": {
-        "tags": [
-          "Module Import"
-        ],
-        "summary": "Import a module",
-        "description": "- **Description:** Imports a module from the repository. This is a two-phase operation that imports outputs and then the module itself. \n- **Restrictions:** Only users with MODULE_WRITE permission can import. \n- **Permissions:** Requires `MODULE_WRITE` permission. \n- **Audit Logging:** Not applicable.",
-        "operationId": "importModule",
-        "parameters": [
-          {
-            "name": "intent",
-            "in": "path",
-            "description": "Intent of the module to import",
-            "required": true,
-            "example": "mysql",
-            "type": "string"
-          },
-          {
-            "name": "flavor",
-            "in": "path",
-            "description": "Flavor of the module to import",
-            "required": true,
-            "example": "k8s",
-            "type": "string"
-          },
-          {
-            "name": "forceUpdate",
-            "in": "query",
-            "description": "Force update even if the module already exists",
-            "required": false,
-            "type": "boolean",
-            "default": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Import completed",
-            "schema": {
-              "$ref": "#/definitions/ImportModuleResponse"
-            }
-          },
-          "400": {
-            "description": "Invalid request or module already exists",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Module not found in repository",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
             "schema": {
               "$ref": "#/definitions/ErrorDetails"
             }
@@ -13277,6 +13695,155 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/{stackName}/templates/{templateName}/apply": {
+      "post": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Apply template",
+        "description": "Applies a template to the blueprint. Resources and variables are committed atomically in a single commit.",
+        "operationId": "applyTemplate_1",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "description": "Blueprint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "Template name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplyTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Template applied successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/designer/v2/templates/{templateName}/sync": {
+      "post": {
+        "tags": [
+          "Blueprint Designer V2"
+        ],
+        "summary": "Sync blueprints with template",
+        "description": "Syncs specified blueprints with the template's resources.",
+        "operationId": "syncSpecifiedBlueprintsWithTemplates_1",
+        "parameters": [
+          {
+            "name": "templateName",
+            "in": "path",
+            "description": "Template name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync completed successfully"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ]
@@ -23289,6 +23856,65 @@
         ]
       }
     },
+    "/cc-ui/v1/stacks/{stackName}/project-overview": {
+      "get": {
+        "tags": [
+          "ui-stack-controller"
+        ],
+        "summary": "Get project overview",
+        "description": "Returns project details, environment overview and blueprint resources in a single response",
+        "operationId": "getProjectOverview",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StackOverviewResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/stacks/{stackName}/localDeploymentContext": {
       "get": {
         "tags": [
@@ -24270,60 +24896,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ResourceGroup"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v1/project-types/import/available": {
-      "get": {
-        "tags": [
-          "Project Type Import"
-        ],
-        "summary": "List available project types",
-        "description": "- **Description:** Lists all project types available in the facets-modules-redesign repository with their import status. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
-        "operationId": "listAvailableProjectTypes",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AvailableProjectTypeDTO"
               }
             }
           },
@@ -25452,60 +26024,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/TFModuleLiteDTO"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "405": {
-            "description": "Method Not Allowed",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/cc-ui/v1/modules/import/available": {
-      "get": {
-        "tags": [
-          "Module Import"
-        ],
-        "summary": "List available modules",
-        "description": "- **Description:** Lists all modules available in the facets-modules-redesign repository with their import status. \n- **Restrictions:** None. \n- **Permissions:** No specific permissions required. \n- **Audit Logging:** Not applicable.",
-        "operationId": "listAvailableModules",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AvailableModuleDTO"
               }
             }
           },
@@ -33333,7 +33851,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/TokenPaginatedResponse"
+              "$ref": "#/definitions/TokenPaginatedResponseLogEvent"
             }
           },
           "400": {
@@ -33458,6 +33976,150 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/crd-logs": {
+      "get": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "getCrdDeploymentLogs",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nextToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TokenPaginatedResponseLogEvent"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/crd-logs/stream": {
+      "get": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "streamCrdDeploymentLogs",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phase",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StreamingResponseBody"
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -39038,10 +39700,10 @@
         "monoRepo": {
           "type": "boolean"
         },
-        "importedProject": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "importedProject": {
           "type": "boolean"
         },
         "alphaBlueprint": {
@@ -39357,6 +40019,11 @@
           "type": "boolean",
           "description": "Whether to include CPK8s provider",
           "example": false
+        },
+        "useCrdDrivenReleases": {
+          "type": "boolean",
+          "description": "Whether to use CRD-driven releases",
+          "example": false
         }
       },
       "description": "Request model for Project Type operations."
@@ -39477,6 +40144,9 @@
           "type": "boolean"
         },
         "includeCpK8sProvider": {
+          "type": "boolean"
+        },
+        "useCrdDrivenReleases": {
           "type": "boolean"
         }
       }
@@ -40945,6 +41615,257 @@
         }
       }
     },
+    "UpdateVariablesRequest": {
+      "required": [
+        "variables"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VariableItem"
+          },
+          "description": "Map of variable name to updated variable details"
+        }
+      },
+      "description": "Request to update variables in the blueprint"
+    },
+    "VariableItem": {
+      "type": "object",
+      "properties": {
+        "secret": {
+          "type": "boolean",
+          "description": "Whether this is a secret variable",
+          "example": false
+        },
+        "value": {
+          "type": "string",
+          "description": "The variable value. Null means the variable is required but has no default.",
+          "example": "my-value"
+        },
+        "global": {
+          "type": "boolean",
+          "description": "Whether this is a global variable",
+          "example": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description",
+          "example": "Database connection string"
+        }
+      },
+      "description": "Map of variable name to updated variable details"
+    },
+    "ResourceToggleItem": {
+      "required": [
+        "resourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name",
+          "example": "main-db"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the resource should be disabled",
+          "example": true
+        }
+      },
+      "description": "Optional list of resources to enable/disable as a side-effect of this update. All changes are committed atomically in a single commit."
+    },
+    "UpdateResourceItem": {
+      "required": [
+        "resourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name",
+          "example": "main-db"
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "JSON content for the resource. Mutually exclusive with rawContent."
+          },
+          "description": "JSON content for the resource. Mutually exclusive with rawContent."
+        },
+        "rawContent": {
+          "type": "string",
+          "description": "Raw string content for mustache templates. If set, content is ignored and this is written as-is."
+        }
+      }
+    },
+    "UpdateResourcesRequest": {
+      "required": [
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resources": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateResourceItem"
+          }
+        },
+        "affectedResources": {
+          "type": "array",
+          "description": "Optional list of resources to enable/disable as a side-effect of this update. All changes are committed atomically in a single commit.",
+          "items": {
+            "$ref": "#/definitions/ResourceToggleItem"
+          }
+        }
+      },
+      "description": "Request to update resources in the blueprint"
+    },
+    "BulkToggleResourcesRequest": {
+      "required": [
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceToggleItem"
+          }
+        }
+      },
+      "description": "Request to bulk enable/disable resources in the blueprint"
+    },
+    "RenameResourceRequest": {
+      "required": [
+        "newResourceName",
+        "oldResourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "oldResourceName": {
+          "type": "string",
+          "description": "Current resource name",
+          "example": "old-db"
+        },
+        "newResourceName": {
+          "type": "string",
+          "description": "New resource name",
+          "example": "new-db"
+        }
+      },
+      "description": "Request to rename a resource"
+    },
+    "BulkInheritFromBaseRequest": {
+      "required": [
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InheritFromBaseItem"
+          }
+        }
+      },
+      "description": "Request to bulk set inherit-from-base for resources in the blueprint"
+    },
+    "InheritFromBaseItem": {
+      "required": [
+        "resourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name",
+          "example": "main-db"
+        },
+        "inheritFromBase": {
+          "type": "boolean",
+          "description": "Whether the resource should inherit from base",
+          "example": true
+        }
+      }
+    },
     "Config": {
       "type": "object",
       "properties": {
@@ -41596,6 +42517,23 @@
         }
       }
     },
+    "CrdDeploymentDetails": {
+      "type": "object",
+      "properties": {
+        "releaseTemplateName": {
+          "type": "string"
+        },
+        "releaseNamespace": {
+          "type": "string"
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DeploymentLog": {
       "type": "object",
       "properties": {
@@ -41606,7 +42544,8 @@
           "type": "string",
           "enum": [
             "CODEBUILD",
-            "KUBERNETES_POD"
+            "KUBERNETES_POD",
+            "KUBERNETES_CRD"
           ]
         },
         "codebuildId": {
@@ -41773,6 +42712,9 @@
         },
         "rollbackDeploymentId": {
           "type": "string"
+        },
+        "crdDeploymentDetails": {
+          "$ref": "#/definitions/CrdDeploymentDetails"
         },
         "parallelRelease": {
           "type": "boolean"
@@ -44171,6 +45113,12 @@
         },
         "version": {
           "type": "string"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -44645,10 +45593,10 @@
         "monoRepo": {
           "type": "boolean"
         },
-        "importedProject": {
+        "starterProject": {
           "type": "boolean"
         },
-        "starterProject": {
+        "importedProject": {
           "type": "boolean"
         },
         "alphaBlueprint": {
@@ -44937,122 +45885,6 @@
         }
       }
     },
-    "ImportPhaseResult": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of this phase",
-          "enum": [
-            "SUCCESS",
-            "PARTIAL_SUCCESS",
-            "FAILED",
-            "SKIPPED"
-          ]
-        },
-        "totalItems": {
-          "type": "integer",
-          "description": "Total number of items processed in this phase",
-          "format": "int32"
-        },
-        "successCount": {
-          "type": "integer",
-          "description": "Number of items successfully imported",
-          "format": "int32"
-        },
-        "failedCount": {
-          "type": "integer",
-          "description": "Number of items that failed to import",
-          "format": "int32"
-        },
-        "skippedCount": {
-          "type": "integer",
-          "description": "Number of items that were skipped (already exist)",
-          "format": "int32"
-        },
-        "errors": {
-          "type": "array",
-          "description": "List of error messages for failed items",
-          "items": {
-            "type": "string",
-            "description": "List of error messages for failed items"
-          }
-        },
-        "warnings": {
-          "type": "array",
-          "description": "List of warning messages",
-          "items": {
-            "type": "string",
-            "description": "List of warning messages"
-          }
-        }
-      },
-      "description": "Result of an import phase"
-    },
-    "ImportProjectTypeResponse": {
-      "type": "object",
-      "properties": {
-        "projectTypeName": {
-          "type": "string",
-          "description": "Name of the imported project type"
-        },
-        "projectTypeId": {
-          "type": "string",
-          "description": "MongoDB ID of the imported project type"
-        },
-        "status": {
-          "type": "string",
-          "description": "Overall status of the import operation",
-          "enum": [
-            "SUCCESS",
-            "PARTIAL_SUCCESS",
-            "FAILED"
-          ]
-        },
-        "outputsPhase": {
-          "$ref": "#/definitions/ImportPhaseResult"
-        },
-        "modulesPhase": {
-          "$ref": "#/definitions/ImportPhaseResult"
-        },
-        "projectTypePhase": {
-          "$ref": "#/definitions/ImportPhaseResult"
-        },
-        "importedAt": {
-          "type": "string",
-          "description": "Timestamp when the import was completed",
-          "format": "date-time"
-        }
-      },
-      "description": "Response for project type import operation"
-    },
-    "SyncResponse": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean",
-          "description": "Whether the sync operation was successful"
-        },
-        "message": {
-          "type": "string",
-          "description": "Message describing the result of the sync operation"
-        },
-        "previousCommit": {
-          "type": "string",
-          "description": "Commit SHA before the sync"
-        },
-        "currentCommit": {
-          "type": "string",
-          "description": "Commit SHA after the sync"
-        },
-        "syncedAt": {
-          "type": "string",
-          "description": "Timestamp when the sync was completed",
-          "format": "date-time"
-        }
-      },
-      "description": "Response for repository sync operation"
-    },
     "OpaPolicyExecutionResult": {
       "type": "object",
       "properties": {
@@ -45237,6 +46069,12 @@
         },
         "blockEdits": {
           "type": "boolean"
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Input parameters for this module"
@@ -45272,6 +46110,13 @@
         },
         "description": {
           "type": "string"
+        },
+        "providers": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TFProvider"
+          }
         }
       }
     },
@@ -45528,48 +46373,6 @@
           "type": "boolean"
         }
       }
-    },
-    "ImportModuleResponse": {
-      "type": "object",
-      "properties": {
-        "intent": {
-          "type": "string",
-          "description": "Intent of the imported module"
-        },
-        "flavor": {
-          "type": "string",
-          "description": "Flavor of the imported module"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the imported module"
-        },
-        "moduleId": {
-          "type": "string",
-          "description": "MongoDB ID of the imported module"
-        },
-        "status": {
-          "type": "string",
-          "description": "Overall status of the import operation",
-          "enum": [
-            "SUCCESS",
-            "PARTIAL_SUCCESS",
-            "FAILED"
-          ]
-        },
-        "outputsPhase": {
-          "$ref": "#/definitions/ImportPhaseResult"
-        },
-        "modulePhase": {
-          "$ref": "#/definitions/ImportPhaseResult"
-        },
-        "importedAt": {
-          "type": "string",
-          "description": "Timestamp when the import was completed",
-          "format": "date-time"
-        }
-      },
-      "description": "Response for module import operation"
     },
     "IntentRequestDTO": {
       "required": [
@@ -45913,6 +46716,132 @@
           }
         }
       }
+    },
+    "AddVariablesRequest": {
+      "required": [
+        "variables"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VariableItem"
+          },
+          "description": "Map of variable name to variable details"
+        }
+      },
+      "description": "Request to add variables to the blueprint"
+    },
+    "ApplyTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Optional prefix to add to resource and variable names",
+          "example": "prod-"
+        },
+        "suffix": {
+          "type": "string",
+          "description": "Optional suffix to add to resource and variable names",
+          "example": "-v2"
+        }
+      },
+      "description": "Request to apply a template to a blueprint"
+    },
+    "CreateResourceItem": {
+      "required": [
+        "resourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The name for the new resource",
+          "example": "main-db"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Optional JSON content. If not provided, defaults from module template."
+          },
+          "description": "Optional JSON content. If not provided, defaults from module template."
+        },
+        "mergeContent": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Optional content to merge with module template. Only used when content is not provided."
+          },
+          "description": "Optional content to merge with module template. Only used when content is not provided."
+        },
+        "flavor": {
+          "type": "string",
+          "description": "Optional flavor for module template lookup",
+          "example": "default"
+        },
+        "resourceGroupIds": {
+          "type": "array",
+          "description": "Optional resource group IDs to attach this resource to",
+          "items": {
+            "type": "string",
+            "description": "Optional resource group IDs to attach this resource to"
+          }
+        }
+      }
+    },
+    "CreateResourcesRequest": {
+      "required": [
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resources": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateResourceItem"
+          }
+        }
+      },
+      "description": "Request to create resources in the blueprint"
     },
     "CreateWorkspaceNewBranchRequest": {
       "required": [
@@ -47510,12 +48439,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -47540,10 +48469,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "paged": {
+        "unpaged": {
           "type": "boolean"
         },
-        "unpaged": {
+        "paged": {
           "type": "boolean"
         }
       }
@@ -47939,6 +48868,77 @@
         }
       }
     },
+    "ClusterLite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "stackName": {
+          "type": "string"
+        }
+      }
+    },
+    "ClusterOverview": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/AbstractCluster"
+        },
+        "timeToNextRelease": {
+          "type": "string"
+        },
+        "clusterState": {
+          "type": "string",
+          "enum": [
+            "STOPPED",
+            "RUNNING",
+            "LAUNCHING",
+            "DESTROYING",
+            "LAUNCH_FAILED",
+            "DESTROY_FAILED",
+            "UNKNOWN",
+            "SCALE_DOWN",
+            "SCALING_DOWN",
+            "SCALE_DOWN_FAILED",
+            "SCALING_UP",
+            "SCALE_UP_FAILED"
+          ]
+        },
+        "lastRelease": {
+          "$ref": "#/definitions/DeploymentLog"
+        },
+        "id": {
+          "type": "string"
+        },
+        "baseCluster": {
+          "$ref": "#/definitions/ClusterLite"
+        }
+      }
+    },
+    "StackOverviewResponse": {
+      "type": "object",
+      "properties": {
+        "stack": {
+          "$ref": "#/definitions/Stack"
+        },
+        "clustersOverview": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterOverview"
+          }
+        },
+        "blueprintResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlueprintFile"
+          }
+        }
+      }
+    },
     "Artifactory": {
       "required": [
         "name"
@@ -48115,6 +49115,9 @@
         },
         "matched": {
           "type": "boolean"
+        },
+        "content": {
+          "type": "string"
         }
       }
     },
@@ -48210,6 +49213,9 @@
         },
         "includeCpK8sProvider": {
           "type": "boolean"
+        },
+        "useCrdDrivenReleases": {
+          "type": "boolean"
         }
       }
     },
@@ -48303,57 +49309,6 @@
         },
         "pinned": {
           "type": "boolean"
-        }
-      }
-    },
-    "ClusterLite": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "stackName": {
-          "type": "string"
-        }
-      }
-    },
-    "ClusterOverview": {
-      "type": "object",
-      "properties": {
-        "cluster": {
-          "$ref": "#/definitions/AbstractCluster"
-        },
-        "timeToNextRelease": {
-          "type": "string"
-        },
-        "clusterState": {
-          "type": "string",
-          "enum": [
-            "STOPPED",
-            "RUNNING",
-            "LAUNCHING",
-            "DESTROYING",
-            "LAUNCH_FAILED",
-            "DESTROY_FAILED",
-            "UNKNOWN",
-            "SCALE_DOWN",
-            "SCALING_DOWN",
-            "SCALE_DOWN_FAILED",
-            "SCALING_UP",
-            "SCALE_UP_FAILED"
-          ]
-        },
-        "lastRelease": {
-          "$ref": "#/definitions/DeploymentLog"
-        },
-        "id": {
-          "type": "string"
-        },
-        "baseCluster": {
-          "$ref": "#/definitions/ClusterLite"
         }
       }
     },
@@ -48579,12 +49534,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -48723,10 +49678,10 @@
             "type": "string"
           }
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         }
       }
@@ -48741,70 +49696,6 @@
           "type": "string"
         }
       }
-    },
-    "AvailableProjectTypeDTO": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the project type",
-          "example": "AWS"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the project type"
-        },
-        "imported": {
-          "type": "boolean",
-          "description": "Whether this project type has been imported into MongoDB"
-        },
-        "importedId": {
-          "type": "string",
-          "description": "MongoDB ID if the project type has been imported"
-        },
-        "modules": {
-          "type": "array",
-          "description": "List of modules defined in this project type",
-          "items": {
-            "$ref": "#/definitions/ModuleInfo"
-          }
-        },
-        "baseTemplatePath": {
-          "type": "string",
-          "description": "Base template path for the project type"
-        },
-        "iacTool": {
-          "type": "string",
-          "description": "Infrastructure as Code tool",
-          "example": "TERRAFORM",
-          "enum": [
-            "TERRAFORM",
-            "OPENTOFU"
-          ]
-        },
-        "iacToolVersion": {
-          "type": "string",
-          "description": "Version of the IaC tool",
-          "example": "1.5.7"
-        }
-      },
-      "description": "Available project type from the repository"
-    },
-    "ModuleInfo": {
-      "type": "object",
-      "properties": {
-        "intent": {
-          "type": "string",
-          "description": "Module intent",
-          "example": "mysql"
-        },
-        "flavor": {
-          "type": "string",
-          "description": "Module flavor",
-          "example": "k8s"
-        }
-      },
-      "description": "Module information with intent and flavor"
     },
     "PolicyTemplateDTO": {
       "type": "object",
@@ -49523,72 +50414,6 @@
         }
       },
       "description": "Templates associated with the resources"
-    },
-    "AvailableModuleDTO": {
-      "type": "object",
-      "properties": {
-        "intent": {
-          "type": "string",
-          "description": "Intent of the module",
-          "example": "mysql"
-        },
-        "flavor": {
-          "type": "string",
-          "description": "Flavor of the module",
-          "example": "k8s"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the module",
-          "example": "1.0"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the module"
-        },
-        "repositoryPath": {
-          "type": "string",
-          "description": "Relative path of the module in the repository",
-          "example": "modules/mysql/k8s"
-        },
-        "clouds": {
-          "uniqueItems": true,
-          "type": "array",
-          "description": "Supported cloud providers for this module",
-          "example": [
-            "aws",
-            "gcp"
-          ],
-          "items": {
-            "type": "string",
-            "description": "Supported cloud providers for this module",
-            "example": "[\"aws\",\"gcp\"]"
-          }
-        },
-        "imported": {
-          "type": "boolean",
-          "description": "Whether this module has been imported into MongoDB"
-        },
-        "importedId": {
-          "type": "string",
-          "description": "MongoDB ID if the module has been imported"
-        },
-        "referencedOutputTypes": {
-          "uniqueItems": true,
-          "type": "array",
-          "description": "Output types referenced by this module",
-          "example": [
-            "@facets/aws_cloud_account",
-            "@facets/mysql"
-          ],
-          "items": {
-            "type": "string",
-            "description": "Output types referenced by this module",
-            "example": "[\"@facets/aws_cloud_account\",\"@facets/mysql\"]"
-          }
-        }
-      },
-      "description": "Available module from the repository"
     },
     "HistoryMetadata": {
       "type": "object",
@@ -50469,12 +51294,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54365,7 +55190,19 @@
         }
       }
     },
-    "TokenPaginatedResponse": {
+    "LogEvent": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenPaginatedResponseLogEvent": {
       "type": "object",
       "properties": {
         "nextToken": {
@@ -54374,7 +55211,7 @@
         "logEventList": {
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/LogEvent"
           }
         }
       }
@@ -54487,12 +55324,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -54966,12 +55803,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55041,10 +55878,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }
@@ -55527,6 +56364,79 @@
           }
         }
       }
+    },
+    "DeleteVariablesRequest": {
+      "required": [
+        "variableNames"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "variableNames": {
+          "uniqueItems": true,
+          "type": "array",
+          "description": "Set of variable names to delete",
+          "items": {
+            "type": "string",
+            "description": "Set of variable names to delete"
+          }
+        }
+      },
+      "description": "Request to delete variables from the blueprint"
+    },
+    "DeleteResourcesRequest": {
+      "required": [
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Optional branch name. If not provided, uses the stack's default branch.",
+          "example": "feature/my-branch"
+        },
+        "commitMessage": {
+          "type": "string",
+          "description": "Optional custom commit message. If not provided, auto-generated.",
+          "example": "Added redis cache resource"
+        },
+        "resources": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceIdentifier"
+          }
+        }
+      },
+      "description": "Request to delete resources from the blueprint"
+    },
+    "ResourceIdentifier": {
+      "required": [
+        "resourceName",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (intent)",
+          "example": "mysql"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name",
+          "example": "main-db"
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -55549,12 +56459,8 @@
       "description": "APIs for managing individual variables and secrets"
     },
     {
-      "name": "Module Import",
-      "description": "APIs for importing modules from the public repository"
-    },
-    {
-      "name": "Project Type Import",
-      "description": "APIs for importing project types from the public repository"
+      "name": "Blueprint Designer V2",
+      "description": "V2 APIs for blueprint designer write operations"
     }
   ]
 }

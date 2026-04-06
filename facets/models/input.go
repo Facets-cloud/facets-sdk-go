@@ -34,6 +34,9 @@ type Input struct {
 	// optional
 	Optional bool `json:"optional,omitempty"`
 
+	// providers
+	Providers []string `json:"providers"`
+
 	// type
 	Type string `json:"type,omitempty"`
 }

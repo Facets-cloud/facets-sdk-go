@@ -34,6 +34,9 @@ type DeploymentLog struct {
 	// codebuild Id
 	CodebuildID string `json:"codebuildId,omitempty"`
 
+	// crd deployment details
+	CrdDeploymentDetails *CrdDeploymentDetails `json:"crdDeploymentDetails,omitempty"`
+
 	// created on
 	// Format: date-time
 	CreatedOn strfmt.DateTime `json:"createdOn,omitempty"`
@@ -45,7 +48,7 @@ type DeploymentLog struct {
 	DeploymentContextVersion string `json:"deploymentContextVersion,omitempty"`
 
 	// deployment job type
-	// Enum: ["CODEBUILD","KUBERNETES_POD"]
+	// Enum: ["CODEBUILD","KUBERNETES_POD","KUBERNETES_CRD"]
 	DeploymentJobType string `json:"deploymentJobType,omitempty"`
 
 	// deployment type
@@ -143,6 +146,10 @@ func (m *DeploymentLog) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateChangesApplied(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCrdDeploymentDetails(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -256,6 +263,29 @@ func (m *DeploymentLog) validateChangesApplied(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DeploymentLog) validateCrdDeploymentDetails(formats strfmt.Registry) error {
+	if swag.IsZero(m.CrdDeploymentDetails) { // not required
+		return nil
+	}
+
+	if m.CrdDeploymentDetails != nil {
+		if err := m.CrdDeploymentDetails.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("crdDeploymentDetails")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("crdDeploymentDetails")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *DeploymentLog) validateCreatedOn(formats strfmt.Registry) error {
 	if swag.IsZero(m.CreatedOn) { // not required
 		return nil
@@ -272,7 +302,7 @@ var deploymentLogTypeDeploymentJobTypePropEnum []any
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["CODEBUILD","KUBERNETES_POD"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["CODEBUILD","KUBERNETES_POD","KUBERNETES_CRD"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -287,6 +317,9 @@ const (
 
 	// DeploymentLogDeploymentJobTypeKUBERNETESPOD captures enum value "KUBERNETES_POD"
 	DeploymentLogDeploymentJobTypeKUBERNETESPOD string = "KUBERNETES_POD"
+
+	// DeploymentLogDeploymentJobTypeKUBERNETESCRD captures enum value "KUBERNETES_CRD"
+	DeploymentLogDeploymentJobTypeKUBERNETESCRD string = "KUBERNETES_CRD"
 )
 
 // prop value enum
@@ -684,6 +717,10 @@ func (m *DeploymentLog) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCrdDeploymentDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateErrorLogs(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -763,6 +800,31 @@ func (m *DeploymentLog) contextValidateChangesApplied(ctx context.Context, forma
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DeploymentLog) contextValidateCrdDeploymentDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CrdDeploymentDetails != nil {
+
+		if swag.IsZero(m.CrdDeploymentDetails) { // not required
+			return nil
+		}
+
+		if err := m.CrdDeploymentDetails.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("crdDeploymentDetails")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("crdDeploymentDetails")
+			}
+
+			return err
+		}
 	}
 
 	return nil

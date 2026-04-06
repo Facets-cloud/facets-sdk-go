@@ -74,7 +74,7 @@ GetDeploymentLogsOK describes a response with status code 200, with default head
 OK
 */
 type GetDeploymentLogsOK struct {
-	Payload *models.TokenPaginatedResponse
+	Payload *models.TokenPaginatedResponseLogEvent
 }
 
 // IsSuccess returns true when this get deployment logs o k response has a 2xx status code
@@ -117,13 +117,13 @@ func (o *GetDeploymentLogsOK) String() string {
 	return fmt.Sprintf("[GET /cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/logs][%d] getDeploymentLogsOK %s", 200, payload)
 }
 
-func (o *GetDeploymentLogsOK) GetPayload() *models.TokenPaginatedResponse {
+func (o *GetDeploymentLogsOK) GetPayload() *models.TokenPaginatedResponseLogEvent {
 	return o.Payload
 }
 
 func (o *GetDeploymentLogsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.TokenPaginatedResponse)
+	o.Payload = new(models.TokenPaginatedResponseLogEvent)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

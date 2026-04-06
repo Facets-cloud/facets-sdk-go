@@ -14,6 +14,9 @@ import (
 // swagger:model TFProvider
 type TFProvider struct {
 
+	// attributes
+	Attributes map[string]any `json:"attributes,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 

@@ -93,6 +93,8 @@ type ClientService interface {
 
 	GetOverrides(params *GetOverridesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOverridesOK, error)
 
+	GetProjectOverview(params *GetProjectOverviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOverviewOK, error)
+
 	GetResourceTypes(params *GetResourceTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceTypesOK, error)
 
 	GetResourcesByTypes(params *GetResourcesByTypesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesByTypesOK, error)
@@ -1009,6 +1011,52 @@ func (a *Client) GetOverrides(params *GetOverridesParams, authInfo runtime.Clien
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getOverrides: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectOverview gets project overview
+
+Returns project details, environment overview and blueprint resources in a single response
+*/
+func (a *Client) GetProjectOverview(params *GetProjectOverviewParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOverviewOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetProjectOverviewParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getProjectOverview",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/stacks/{stackName}/project-overview",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetProjectOverviewReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetProjectOverviewOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProjectOverview: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

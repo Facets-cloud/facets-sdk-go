@@ -69,6 +69,8 @@ type ClientService interface {
 
 	GetClusterState(params *GetClusterStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterStateOK, error)
 
+	GetCrdDeploymentLogs(params *GetCrdDeploymentLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCrdDeploymentLogsOK, error)
+
 	GetDeployment(params *GetDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDeploymentOK, error)
 
 	GetDeploymentByReleaseTraceID(params *GetDeploymentByReleaseTraceIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDeploymentByReleaseTraceIDOK, error)
@@ -106,6 +108,8 @@ type ClientService interface {
 	Simulate(params *SimulateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SimulateOK, error)
 
 	StateUnlock(params *StateUnlockParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StateUnlockOK, error)
+
+	StreamCrdDeploymentLogs(params *StreamCrdDeploymentLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamCrdDeploymentLogsOK, error)
 
 	StreamDeploymentLogs(params *StreamDeploymentLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamDeploymentLogsOK, error)
 
@@ -469,6 +473,50 @@ func (a *Client) GetClusterState(params *GetClusterStateParams, authInfo runtime
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getClusterState: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCrdDeploymentLogs get crd deployment logs API
+*/
+func (a *Client) GetCrdDeploymentLogs(params *GetCrdDeploymentLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCrdDeploymentLogsOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetCrdDeploymentLogsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getCrdDeploymentLogs",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/crd-logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetCrdDeploymentLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetCrdDeploymentLogsOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCrdDeploymentLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1305,6 +1353,50 @@ func (a *Client) StateUnlock(params *StateUnlockParams, authInfo runtime.ClientA
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for stateUnlock: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StreamCrdDeploymentLogs stream crd deployment logs API
+*/
+func (a *Client) StreamCrdDeploymentLogs(params *StreamCrdDeploymentLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StreamCrdDeploymentLogsOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewStreamCrdDeploymentLogsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "streamCrdDeploymentLogs",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/crd-logs/stream",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &StreamCrdDeploymentLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*StreamCrdDeploymentLogsOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for streamCrdDeploymentLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

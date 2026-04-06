@@ -73,6 +73,10 @@ type ProjectTypeRequest struct {
 	// Use branch flag
 	// Example: true
 	UseBranch bool `json:"useBranch,omitempty"`
+
+	// Whether to use CRD-driven releases
+	// Example: false
+	UseCrdDrivenReleases bool `json:"useCrdDrivenReleases,omitempty"`
 }
 
 // Validate validates this project type request

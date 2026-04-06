@@ -4,9 +4,13 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // IntentOutput intent output
@@ -20,6 +24,10 @@ type IntentOutput struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// providers
+	// Unique: true
+	Providers []*TFProvider `json:"providers"`
+
 	// title
 	Title string `json:"title,omitempty"`
 
@@ -29,11 +37,92 @@ type IntentOutput struct {
 
 // Validate validates this intent output
 func (m *IntentOutput) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateProviders(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this intent output based on context it is used
+func (m *IntentOutput) validateProviders(formats strfmt.Registry) error {
+	if swag.IsZero(m.Providers) { // not required
+		return nil
+	}
+
+	if err := validate.UniqueItems("providers", "body", m.Providers); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Providers); i++ {
+		if swag.IsZero(m.Providers[i]) { // not required
+			continue
+		}
+
+		if m.Providers[i] != nil {
+			if err := m.Providers[i].Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this intent output based on the context it is used
 func (m *IntentOutput) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *IntentOutput) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Providers); i++ {
+
+		if m.Providers[i] != nil {
+
+			if swag.IsZero(m.Providers[i]) { // not required
+				return nil
+			}
+
+			if err := m.Providers[i].ContextValidate(ctx, formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("providers" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

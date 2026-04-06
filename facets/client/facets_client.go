@@ -8,11 +8,10 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/application_controller"
+	"github.com/Facets-cloud/facets-sdk-go/facets/client/blueprint_designer_v2"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/intent_management"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/label_management"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/module_import"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/module_management"
-	"github.com/Facets-cloud/facets-sdk-go/facets/client/project_type_import"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/public_ap_is"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/t_f_output_management"
 	"github.com/Facets-cloud/facets-sdk-go/facets/client/ui_accounts_controller"
@@ -110,11 +109,10 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Facets {
 	cli := new(Facets)
 	cli.Transport = transport
 	cli.ApplicationController = application_controller.New(transport, formats)
+	cli.BlueprintDesignerV2 = blueprint_designer_v2.New(transport, formats)
 	cli.IntentManagement = intent_management.New(transport, formats)
 	cli.LabelManagement = label_management.New(transport, formats)
-	cli.ModuleImport = module_import.New(transport, formats)
 	cli.ModuleManagement = module_management.New(transport, formats)
-	cli.ProjectTypeImport = project_type_import.New(transport, formats)
 	cli.PublicApIs = public_ap_is.New(transport, formats)
 	cli.TfOutputManagement = t_f_output_management.New(transport, formats)
 	cli.UIAccountsController = ui_accounts_controller.New(transport, formats)
@@ -213,15 +211,13 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type Facets struct {
 	ApplicationController application_controller.ClientService
 
+	BlueprintDesignerV2 blueprint_designer_v2.ClientService
+
 	IntentManagement intent_management.ClientService
 
 	LabelManagement label_management.ClientService
 
-	ModuleImport module_import.ClientService
-
 	ModuleManagement module_management.ClientService
-
-	ProjectTypeImport project_type_import.ClientService
 
 	PublicApIs public_ap_is.ClientService
 
@@ -334,11 +330,10 @@ type Facets struct {
 func (c *Facets) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.ApplicationController.SetTransport(transport)
+	c.BlueprintDesignerV2.SetTransport(transport)
 	c.IntentManagement.SetTransport(transport)
 	c.LabelManagement.SetTransport(transport)
-	c.ModuleImport.SetTransport(transport)
 	c.ModuleManagement.SetTransport(transport)
-	c.ProjectTypeImport.SetTransport(transport)
 	c.PublicApIs.SetTransport(transport)
 	c.TfOutputManagement.SetTransport(transport)
 	c.UIAccountsController.SetTransport(transport)
