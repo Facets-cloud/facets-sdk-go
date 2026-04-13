@@ -35132,6 +35132,60 @@
         "produces": [
           "application/json"
         ]
+      },
+      "delete": {
+        "tags": [
+          "ui-ci-cd-controller"
+        ],
+        "summary": "Reset CI/CD Details",
+        "description": "- **Description:** Resets CI/CD configuration for a specified project by deleting the default artifact routing rule and promotion workflow. CI integrations referencing them will have their rule and workflow IDs cleared.\n- **Restrictions:** None.\n- **Permissions:** Requires `CI_CD_CONFIGURE` permission.\n- **Audit Logging:** This operation is logged for audit purposes.",
+        "operationId": "resetCiCdDetails",
+        "parameters": [
+          {
+            "name": "stackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully reset CI/CD details."
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/cc-ui/v1/ci-cd/ci/{ciName}": {
@@ -35745,6 +35799,7 @@
                 "CI_INTEGRATION_UPDATE",
                 "CI_INTEGRATION_DELETE",
                 "CI_CD_CONFIGURE",
+                "CI_CD_RESET",
                 "CI_CD_CUSTOM_CONFIGURE",
                 "CI_RULE_CREATE",
                 "CI_RULE_UPDATE",
@@ -39697,16 +39752,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "starterProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "importedProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "starterProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -42452,6 +42507,9 @@
           "type": "string",
           "writeOnly": true
         },
+        "registrationValue": {
+          "type": "string"
+        },
         "registrationType": {
           "type": "string",
           "enum": [
@@ -42459,9 +42517,6 @@
             "RELEASE_STREAM",
             "HYBRID"
           ]
-        },
-        "registrationValue": {
-          "type": "string"
         },
         "promoted": {
           "type": "boolean"
@@ -45590,16 +45645,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
-        "starterProject": {
+        "monoRepo": {
           "type": "boolean"
         },
         "importedProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "starterProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -48469,10 +48524,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "unpaged": {
+        "paged": {
           "type": "boolean"
         },
-        "paged": {
+        "unpaged": {
           "type": "boolean"
         }
       }
@@ -49678,10 +49733,10 @@
             "type": "string"
           }
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         }
       }
@@ -55667,6 +55722,7 @@
             "CI_INTEGRATION_UPDATE",
             "CI_INTEGRATION_DELETE",
             "CI_CD_CONFIGURE",
+            "CI_CD_RESET",
             "CI_CD_CUSTOM_CONFIGURE",
             "CI_RULE_CREATE",
             "CI_RULE_UPDATE",

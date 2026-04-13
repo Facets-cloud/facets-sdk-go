@@ -69,6 +69,8 @@ type ClientService interface {
 
 	RegisterArtifactSaas(params *RegisterArtifactSaasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegisterArtifactSaasOK, error)
 
+	ResetCiCdDetails(params *ResetCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetCiCdDetailsOK, error)
+
 	SaveCiCdDetails(params *SaveCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCiCdDetailsOK, error)
 
 	SaveCustomCiCd(params *SaveCustomCiCdParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SaveCustomCiCdOK, error)
@@ -472,6 +474,56 @@ func (a *Client) RegisterArtifactSaas(params *RegisterArtifactSaasParams, authIn
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for registerArtifactSaas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ResetCiCdDetails resets c i c d details
+
+	- **Description:** Resets CI/CD configuration for a specified project by deleting the default artifact routing rule and promotion workflow. CI integrations referencing them will have their rule and workflow IDs cleared.
+
+- **Restrictions:** None.
+- **Permissions:** Requires `CI_CD_CONFIGURE` permission.
+- **Audit Logging:** This operation is logged for audit purposes.
+*/
+func (a *Client) ResetCiCdDetails(params *ResetCiCdDetailsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetCiCdDetailsOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewResetCiCdDetailsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "resetCiCdDetails",
+		Method:             "DELETE",
+		PathPattern:        "/cc-ui/v1/ci-cd/{stackName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ResetCiCdDetailsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ResetCiCdDetailsOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for resetCiCdDetails: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
