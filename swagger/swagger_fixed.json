@@ -34013,6 +34013,72 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/download-plan": {
+      "get": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "downloadPlan",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/crd-logs": {
       "get": {
         "tags": [
@@ -39755,13 +39821,13 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
+        "starterProject": {
+          "type": "boolean"
+        },
         "monoRepo": {
           "type": "boolean"
         },
         "importedProject": {
-          "type": "boolean"
-        },
-        "starterProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -42503,6 +42569,9 @@
         "tag": {
           "type": "string"
         },
+        "promoted": {
+          "type": "boolean"
+        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
@@ -42517,9 +42586,6 @@
             "RELEASE_STREAM",
             "HYBRID"
           ]
-        },
-        "promoted": {
-          "type": "boolean"
         },
         "classified": {
           "type": "boolean"
@@ -44861,6 +44927,9 @@
           "type": "integer",
           "format": "int32"
         },
+        "customLifecyclePolicyText": {
+          "type": "string"
+        },
         "systemDefined": {
           "type": "boolean"
         },
@@ -45648,13 +45717,13 @@
         "alphaBlueprint": {
           "type": "boolean"
         },
+        "starterProject": {
+          "type": "boolean"
+        },
         "monoRepo": {
           "type": "boolean"
         },
         "importedProject": {
-          "type": "boolean"
-        },
-        "starterProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -48451,12 +48520,12 @@
     "Versioned": {
       "type": "object",
       "properties": {
+        "versioningKey": {
+          "type": "string"
+        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
-        },
-        "versioningKey": {
-          "type": "string"
         }
       }
     },
@@ -48494,12 +48563,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49589,12 +49658,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -51349,12 +51418,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55379,12 +55448,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55859,12 +55928,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
+        "last": {
+          "type": "boolean"
+        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
-        },
-        "last": {
-          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55934,10 +56003,10 @@
         "tag": {
           "type": "string"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         }
       }

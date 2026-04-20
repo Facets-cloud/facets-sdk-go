@@ -65,6 +65,8 @@ type ClientService interface {
 
 	DestroyCluster(params *DestroyClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyClusterOK, error)
 
+	DownloadPlan(params *DownloadPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadPlanOK, error)
+
 	DownloadTerraformExport(params *DownloadTerraformExportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadTerraformExportOK, error)
 
 	GetClusterState(params *GetClusterStateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterStateOK, error)
@@ -385,6 +387,50 @@ func (a *Client) DestroyCluster(params *DestroyClusterParams, authInfo runtime.C
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for destroyCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DownloadPlan download plan API
+*/
+func (a *Client) DownloadPlan(params *DownloadPlanParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DownloadPlanOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewDownloadPlanParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "downloadPlan",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/download-plan",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DownloadPlanReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*DownloadPlanOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for downloadPlan: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

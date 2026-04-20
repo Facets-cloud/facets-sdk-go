@@ -49,6 +49,9 @@ type ECRArtifactory struct {
 	// Format: date-time
 	CreationDate strfmt.DateTime `json:"creationDate,omitempty"`
 
+	// custom lifecycle policy text
+	CustomLifecyclePolicyText string `json:"customLifecyclePolicyText,omitempty"`
+
 	// id
 	ID string `json:"id,omitempty"`
 
