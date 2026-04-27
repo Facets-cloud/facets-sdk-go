@@ -33758,6 +33758,69 @@
         ]
       }
     },
+    "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/release-metadata": {
+      "get": {
+        "tags": [
+          "ui-deployment-controller"
+        ],
+        "operationId": "getReleaseMetadata",
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/release-changes": {
       "get": {
         "tags": [
@@ -39818,16 +39881,16 @@
         "template": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "monoRepo": {
-          "type": "boolean"
-        },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -42569,9 +42632,6 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
-          "type": "boolean"
-        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
@@ -42588,6 +42648,9 @@
           ]
         },
         "classified": {
+          "type": "boolean"
+        },
+        "promoted": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45348,12 +45411,12 @@
             "$ref": "#/definitions/OutputIntentUsageDTO"
           }
         },
-        "inUse": {
-          "type": "boolean"
-        },
         "totalUsageCount": {
           "type": "integer",
           "format": "int32"
+        },
+        "inUse": {
+          "type": "boolean"
         }
       }
     },
@@ -45714,16 +45777,16 @@
         "template": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "monoRepo": {
-          "type": "boolean"
-        },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -48507,38 +48570,38 @@
           "type": "string",
           "format": "date-time"
         },
-        "sequenceKey": {
-          "type": "string"
-        },
         "sequence": {
           "type": "integer",
           "format": "int64",
           "writeOnly": true
+        },
+        "sequenceKey": {
+          "type": "string"
         }
       }
     },
     "Versioned": {
       "type": "object",
       "properties": {
-        "versioningKey": {
-          "type": "string"
-        },
         "changeLog": {
           "type": "string",
           "writeOnly": true
+        },
+        "versioningKey": {
+          "type": "string"
         }
       }
     },
     "PageVersionVersioned": {
       "type": "object",
       "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
         "totalElements": {
           "type": "integer",
           "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
         },
         "first": {
           "type": "boolean"
@@ -48682,13 +48745,13 @@
           "type": "string",
           "format": "date-time"
         },
-        "sequenceKey": {
-          "type": "string"
-        },
         "sequence": {
           "type": "integer",
           "format": "int64",
           "writeOnly": true
+        },
+        "sequenceKey": {
+          "type": "string"
         }
       }
     },
@@ -49627,13 +49690,13 @@
     "PageAbstractCluster": {
       "type": "object",
       "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
         "totalElements": {
           "type": "integer",
           "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
         },
         "first": {
           "type": "boolean"
@@ -49802,10 +49865,10 @@
             "type": "string"
           }
         },
-        "prod": {
+        "builtIn": {
           "type": "boolean"
         },
-        "builtIn": {
+        "prod": {
           "type": "boolean"
         }
       }
@@ -51387,13 +51450,13 @@
     "PageResourceReleaseImpact": {
       "type": "object",
       "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
         "totalElements": {
           "type": "integer",
           "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
         },
         "first": {
           "type": "boolean"
@@ -55417,13 +55480,13 @@
     "PageDeploymentLog": {
       "type": "object",
       "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
         "totalElements": {
           "type": "integer",
           "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
         },
         "first": {
           "type": "boolean"
@@ -55897,13 +55960,13 @@
     "PageFacetsAuditLogResponse": {
       "type": "object",
       "properties": {
-        "totalPages": {
-          "type": "integer",
-          "format": "int32"
-        },
         "totalElements": {
           "type": "integer",
           "format": "int64"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
         },
         "first": {
           "type": "boolean"
@@ -56003,10 +56066,10 @@
         "tag": {
           "type": "string"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         }
       }

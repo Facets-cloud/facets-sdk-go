@@ -93,6 +93,8 @@ type ClientService interface {
 
 	GetReleaseChangesBulk(params *GetReleaseChangesBulkParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseChangesBulkOK, error)
 
+	GetReleaseMetadata(params *GetReleaseMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseMetadataOK, error)
+
 	LaunchCluster(params *LaunchClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LaunchClusterOK, error)
 
 	RejectRelease(params *RejectReleaseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RejectReleaseOK, error)
@@ -1003,6 +1005,50 @@ func (a *Client) GetReleaseChangesBulk(params *GetReleaseChangesBulkParams, auth
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getReleaseChangesBulk: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetReleaseMetadata get release metadata API
+*/
+func (a *Client) GetReleaseMetadata(params *GetReleaseMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetReleaseMetadataOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetReleaseMetadataParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getReleaseMetadata",
+		Method:             "GET",
+		PathPattern:        "/cc-ui/v1/clusters/{clusterId}/deployments/{deploymentId}/release-metadata",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetReleaseMetadataReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetReleaseMetadataOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getReleaseMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
