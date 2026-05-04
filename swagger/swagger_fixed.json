@@ -39881,16 +39881,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
-          "type": "boolean"
-        },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -42647,10 +42647,10 @@
             "HYBRID"
           ]
         },
-        "classified": {
+        "promoted": {
           "type": "boolean"
         },
-        "promoted": {
+        "classified": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -45411,12 +45411,12 @@
             "$ref": "#/definitions/OutputIntentUsageDTO"
           }
         },
+        "inUse": {
+          "type": "boolean"
+        },
         "totalUsageCount": {
           "type": "integer",
           "format": "int32"
-        },
-        "inUse": {
-          "type": "boolean"
         }
       }
     },
@@ -45777,16 +45777,16 @@
         "template": {
           "type": "boolean"
         },
-        "monoRepo": {
-          "type": "boolean"
-        },
-        "importedProject": {
+        "alphaBlueprint": {
           "type": "boolean"
         },
         "starterProject": {
           "type": "boolean"
         },
-        "alphaBlueprint": {
+        "monoRepo": {
+          "type": "boolean"
+        },
+        "importedProject": {
           "type": "boolean"
         },
         "versioningKey": {
@@ -46656,6 +46656,9 @@
       "properties": {
         "blueprintFile": {
           "$ref": "#/definitions/BlueprintFile"
+        },
+        "referenced": {
+          "type": "boolean"
         },
         "parent": {
           "type": "boolean"
@@ -48595,13 +48598,13 @@
     "PageVersionVersioned": {
       "type": "object",
       "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
         "totalPages": {
           "type": "integer",
           "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
         },
         "first": {
           "type": "boolean"
@@ -48626,12 +48629,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -49690,13 +49693,13 @@
     "PageAbstractCluster": {
       "type": "object",
       "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
         "totalPages": {
           "type": "integer",
           "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
         },
         "first": {
           "type": "boolean"
@@ -49721,12 +49724,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -51450,13 +51453,13 @@
     "PageResourceReleaseImpact": {
       "type": "object",
       "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
         "totalPages": {
           "type": "integer",
           "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
         },
         "first": {
           "type": "boolean"
@@ -51481,12 +51484,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55480,13 +55483,13 @@
     "PageDeploymentLog": {
       "type": "object",
       "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
         "totalPages": {
           "type": "integer",
           "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
         },
         "first": {
           "type": "boolean"
@@ -55511,12 +55514,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"
@@ -55960,13 +55963,13 @@
     "PageFacetsAuditLogResponse": {
       "type": "object",
       "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64"
-        },
         "totalPages": {
           "type": "integer",
           "format": "int32"
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
         },
         "first": {
           "type": "boolean"
@@ -55991,12 +55994,12 @@
         "sort": {
           "$ref": "#/definitions/SortObject"
         },
-        "last": {
-          "type": "boolean"
-        },
         "numberOfElements": {
           "type": "integer",
           "format": "int32"
+        },
+        "last": {
+          "type": "boolean"
         },
         "empty": {
           "type": "boolean"

@@ -21,6 +21,9 @@ type AffectedResource struct {
 
 	// parent
 	Parent bool `json:"parent,omitempty"`
+
+	// referenced
+	Referenced bool `json:"referenced,omitempty"`
 }
 
 // Validate validates this affected resource
